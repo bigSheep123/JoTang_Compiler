@@ -358,32 +358,45 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_ifWhile(){
 .0:
-  br i1 false, label %.7, label %.8
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 0, i32* %.1
+  store i32 3, i32* %.4
+  %.9 = load i32, i32* %.1
+  %.11 = icmp eq i32 %.9, 5
+  br i1 %.11, label %.7, label %.8
 .7:
   br label %.13wc 
 .8:
   br label %.31wc 
 .13wc:
-  %.52 = phi i32 [3, %.7], [%.22, %.14wloop.]
-  %.19 = icmp eq i32 %.52, 2
+  %.17 = load i32, i32* %.4
+  %.19 = icmp eq i32 %.17, 2
   br i1 %.19, label %.14wloop., label %.15wn
 .14wloop.:
-  %.22 = add i32 %.52, 2
+  %.21 = load i32, i32* %.4
+  %.22 = add i32 %.21, 2
+  store i32 %.22, i32* %.4
   br label %.13wc 
 .15wn:
-  %.27 = add i32 %.52, 25
+  %.25 = load i32, i32* %.4
+  %.27 = add i32 %.25, 25
+  store i32 %.27, i32* %.4
   br label %.29 
 .29:
-  %.53 = phi i32 [%.54, %.33wn], [%.27, %.15wn]
-  ret i32 %.53 
+  %.47 = load i32, i32* %.4
+  ret i32 %.47 
 .31wc:
-  %.55 = phi i32 [0, %.8], [%.43, %.32wloop.]
-  %.54 = phi i32 [3, %.8], [%.39, %.32wloop.]
-  %.36 = icmp slt i32 %.55, 5
+  %.35 = load i32, i32* %.1
+  %.36 = icmp slt i32 %.35, 5
   br i1 %.36, label %.32wloop., label %.33wn
 .32wloop.:
-  %.39 = mul i32 %.54, 2
-  %.43 = add i32 %.55, 1
+  %.38 = load i32, i32* %.4
+  %.39 = mul i32 %.38, 2
+  store i32 %.39, i32* %.4
+  %.41 = load i32, i32* %.1
+  %.43 = add i32 %.41, 1
+  store i32 %.43, i32* %.1
   br label %.31wc 
 .33wn:
   br label %.29 

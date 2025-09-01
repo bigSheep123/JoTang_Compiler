@@ -358,33 +358,56 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_ifElseIf(){
 .0:
-  br i1 false, label %.7, label %.9
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 5, i32* %.1
+  store i32 10, i32* %.4
+  %.10 = load i32, i32* %.1
+  %.12 = icmp eq i32 %.10, 6
+  br i1 %.12, label %.7, label %.9
 .7:
-  ret i32 5 
+  %.18 = load i32, i32* %.1
+  ret i32 %.18 
 .8:
-  br i1 true, label %.24, label %.21
+  %.22 = load i32, i32* %.4
+  %.23 = icmp eq i32 %.22, 10
+  br i1 %.23, label %.24, label %.21
 .9:
-  br i1 false, label %.7, label %.8
+  %.14 = load i32, i32* %.4
+  %.16 = icmp eq i32 %.14, 11
+  br i1 %.16, label %.7, label %.8
 .20:
+  store i32 25, i32* %.1
   br label %.32 
 .21:
-  br i1 true, label %.38, label %.35
+  %.36 = load i32, i32* %.4
+  %.37 = icmp eq i32 %.36, 10
+  br i1 %.37, label %.38, label %.35
 .24:
-  br i1 false, label %.20, label %.21
+  %.26 = load i32, i32* %.1
+  %.28 = icmp eq i32 %.26, 1
+  br i1 %.28, label %.20, label %.21
 .32:
-  %.65 = phi i32 [%.66, %.49], [25, %.20]
   br label %.56 
 .34:
+  %.45 = load i32, i32* %.1
+  %.47 = add i32 %.45, 15
+  store i32 %.47, i32* %.1
   br label %.49 
 .35:
+  %.51 = load i32, i32* %.1
+  %.52 = sub i32 0, %.51
+  store i32 %.52, i32* %.1
   br label %.49 
 .38:
-  br i1 false, label %.34, label %.35
+  %.40 = load i32, i32* %.1
+  %.43 = icmp eq i32 %.40, -5
+  br i1 %.43, label %.34, label %.35
 .49:
-  %.66 = phi i32 [-5, %.35], [20, %.34]
   br label %.32 
 .56:
-  ret i32 %.65 
+  %.58 = load i32, i32* %.1
+  ret i32 %.58 
 }
 define i32 @main(){
 .60:

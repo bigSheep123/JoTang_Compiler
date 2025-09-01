@@ -358,37 +358,62 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_deepWhileBr(i32 %.1, i32 %.4){
 .0:
-  %.10 = add i32 %.1, %.4
+  %.39 = alloca i32
+  %.20 = alloca i32
+  %.7 = alloca i32
+  %.5 = alloca i32
+  %.2 = alloca i32
+  store i32 %.1, i32* %.2
+  store i32 %.4, i32* %.5
+  %.8 = load i32, i32* %.2
+  %.9 = load i32, i32* %.5
+  %.10 = add i32 %.8, %.9
+  store i32 %.10, i32* %.7
   br label %.12wc 
 .12wc:
-  %.65 = phi i32 [%.10, %.0], [%.66, %.24]
-  %.18 = icmp slt i32 %.65, 75
+  %.16 = load i32, i32* %.7
+  %.18 = icmp slt i32 %.16, 75
   br i1 %.18, label %.13wloop., label %.14wn
 .13wloop.:
-  %.27 = icmp slt i32 %.65, 100
+  store i32 42, i32* %.20
+  %.25 = load i32, i32* %.7
+  %.27 = icmp slt i32 %.25, 100
   br i1 %.27, label %.23, label %.24
 .14wn:
-  ret i32 %.65 
+  %.56 = load i32, i32* %.7
+  ret i32 %.56 
 .23:
-  %.31 = add i32 %.65, 42
-  %.37 = icmp sgt i32 %.31, 99
+  %.29 = load i32, i32* %.7
+  %.30 = load i32, i32* %.20
+  %.31 = add i32 %.29, %.30
+  store i32 %.31, i32* %.7
+  %.35 = load i32, i32* %.7
+  %.37 = icmp sgt i32 %.35, 99
   br i1 %.37, label %.33, label %.34
 .24:
-  %.66 = phi i32 [%.65, %.13wloop.], [%.67, %.34]
   br label %.12wc 
 .33:
-  br i1 true, label %.44, label %.45
+  %.40 = load i32, i32* %.20
+  %.42 = mul i32 %.40, 2
+  store i32 %.42, i32* %.39
+  %.47 = icmp eq i32 1, 1
+  br i1 %.47, label %.44, label %.45
 .34:
-  %.67 = phi i32 [%.31, %.23], [%.68, %.45]
   br label %.24 
 .44:
+  %.49 = load i32, i32* %.39
+  %.50 = mul i32 %.49, 2
+  store i32 %.50, i32* %.7
   br label %.45 
 .45:
-  %.68 = phi i32 [%.31, %.33], [168, %.44]
   br label %.34 
 }
 define i32 @main(){
 .58:
-  %.63at0 = call i32 @_user_deepWhileBr(i32 2, i32 2)
+  %.59 = alloca i32
+  store i32 2, i32* %.59
+  %.61 = load i32, i32* %.59
+  %.62 = load i32, i32* %.59
+  %.63at0 = call i32 @_user_deepWhileBr(i32 %.61, i32 %.62)
   ret i32 %.63at0 
 }

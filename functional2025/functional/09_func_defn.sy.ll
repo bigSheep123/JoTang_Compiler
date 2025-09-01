@@ -359,13 +359,21 @@ attributes #7 = { cold }
 @.G.a = global i32 zeroinitializer
 define i32 @_user_func(i32 %.2){
 .1:
-  %.7 = sub i32 %.2, 1
-  ret i32 %.7 
+  %.3 = alloca i32
+  store i32 %.2, i32* %.3
+  %.5 = load i32, i32* %.3
+  %.7 = sub i32 %.5, 1
+  store i32 %.7, i32* %.3
+  %.9 = load i32, i32* %.3
+  ret i32 %.9 
 }
 define i32 @main(){
 .11:
+  %.12 = alloca i32
   store i32 10, i32* @.G.a
   %.15 = load i32, i32* @.G.a
   %.16at0 = call i32 @_user_func(i32 %.15)
-  ret i32 %.16at0 
+  store i32 %.16at0, i32* %.12
+  %.18 = load i32, i32* %.12
+  ret i32 %.18 
 }

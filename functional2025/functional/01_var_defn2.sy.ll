@@ -360,7 +360,10 @@ attributes #7 = { cold }
 @.G.b = global i32 5
 define i32 @main(){
 .4:
+  %.5 = alloca i32
+  store i32 5, i32* %.5
+  %.7 = load i32, i32* %.5
   %.8 = load i32, i32* @.G.b
-  %.9 = add i32 5, %.8
+  %.9 = add i32 %.7, %.8
   ret i32 %.9 
 }

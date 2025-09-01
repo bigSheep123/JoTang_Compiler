@@ -363,10 +363,14 @@ attributes #7 = { cold }
 @.G.buffer = global [50000000 x i32] zeroinitializer
 define i32 @_user_is_number(i32 %.3){
 .2:
-  %.10 = icmp sge i32 %.3, 48
+  %.4 = alloca i32
+  store i32 %.3, i32* %.4
+  %.8 = load i32, i32* %.4
+  %.10 = icmp sge i32 %.8, 48
   br i1 %.10, label %.6, label %.7
 .6:
-  %.16 = icmp sle i32 %.3, 57
+  %.14 = load i32, i32* %.4
+  %.16 = icmp sle i32 %.14, 57
   br i1 %.16, label %.12, label %.13
 .7:
   ret i32 0 
@@ -377,12 +381,18 @@ define i32 @_user_is_number(i32 %.3){
 }
 define void @_user_skip_space(i32* %.23, i32 %.26){
 .22:
+  %.27 = alloca i32
+  %.24 = alloca i32*
+  store i32* %.23, i32** %.24
+  store i32 %.26, i32* %.27
   br label %.29wc 
 .29wc:
-  br i1 true, label %.30wloop., label %.31wn
+  %.33 = icmp ne i32 1, 0
+  br i1 %.33, label %.30wloop., label %.31wn
 .30wloop.:
   %.37 = load i32, i32* @.G.pos
-  %.39 = icmp sge i32 %.37, %.26
+  %.38 = load i32, i32* %.27
+  %.39 = icmp sge i32 %.37, %.38
   br i1 %.39, label %.35, label %.36
 .31wn:
   ret void
@@ -390,7 +400,8 @@ define void @_user_skip_space(i32* %.23, i32 %.26){
   br label %.31wn 
 .36:
   %.44 = load i32, i32* @.G.pos
-  %.46 = getelementptr inbounds i32, i32* %.23, i32 %.44
+  %.45 = load i32*, i32** %.24
+  %.46 = getelementptr inbounds i32, i32* %.45, i32 %.44
   %.47 = load i32, i32* %.46
   %.49 = icmp eq i32 %.47, 32
   br i1 %.49, label %.42, label %.43
@@ -401,7 +412,8 @@ define void @_user_skip_space(i32* %.23, i32 %.26){
   br label %.54 
 .43:
   %.58 = load i32, i32* @.G.pos
-  %.60 = getelementptr inbounds i32, i32* %.23, i32 %.58
+  %.59 = load i32*, i32** %.24
+  %.60 = getelementptr inbounds i32, i32* %.59, i32 %.58
   %.61 = load i32, i32* %.60
   %.63 = icmp eq i32 %.61, 9
   br i1 %.63, label %.56, label %.57
@@ -414,7 +426,8 @@ define void @_user_skip_space(i32* %.23, i32 %.26){
   br label %.68 
 .57:
   %.72 = load i32, i32* @.G.pos
-  %.74 = getelementptr inbounds i32, i32* %.23, i32 %.72
+  %.73 = load i32*, i32** %.24
+  %.74 = getelementptr inbounds i32, i32* %.73, i32 %.72
   %.75 = load i32, i32* %.74
   %.77 = icmp eq i32 %.75, 10
   br i1 %.77, label %.70, label %.71
@@ -427,7 +440,8 @@ define void @_user_skip_space(i32* %.23, i32 %.26){
   br label %.82 
 .71:
   %.86 = load i32, i32* @.G.pos
-  %.88 = getelementptr inbounds i32, i32* %.23, i32 %.86
+  %.87 = load i32*, i32** %.24
+  %.88 = getelementptr inbounds i32, i32* %.87, i32 %.86
   %.89 = load i32, i32* %.88
   %.91 = icmp eq i32 %.89, 13
   br i1 %.91, label %.84, label %.85
@@ -448,110 +462,150 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.957 = alloca [4 x i32]
   %.862 = alloca [5 x i32]
   %.779 = alloca [4 x i32]
+  %.112 = alloca i32
+  %.109 = alloca i32*
+  %.106 = alloca i32
+  store i32 %.105, i32* %.106
+  store i32* %.108, i32** %.109
+  store i32 %.111, i32* %.112
   %.116 = load i32, i32* @.G.pos
-  %.118 = icmp sge i32 %.116, %.111
+  %.117 = load i32, i32* %.112
+  %.118 = icmp sge i32 %.116, %.117
   br i1 %.118, label %.114, label %.115
 .114:
   ret i32 0 
 .115:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
-  %.127 = icmp eq i32 %.105, 0
+  %.121 = load i32*, i32** %.109
+  %.122 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.121, i32 %.122)
+  %.126 = load i32, i32* %.106
+  %.127 = icmp eq i32 %.126, 0
   br i1 %.127, label %.124, label %.125
 .124:
   %.131 = load i32, i32* @.G.pos
-  %.133 = getelementptr inbounds i32, i32* %.108, i32 %.131
+  %.132 = load i32*, i32** %.109
+  %.133 = getelementptr inbounds i32, i32* %.132, i32 %.131
   %.134 = load i32, i32* %.133
   %.136 = icmp eq i32 %.134, 123
   br i1 %.136, label %.129, label %.130
 .125:
-  %.256 = icmp eq i32 %.105, 1
+  %.255 = load i32, i32* %.106
+  %.256 = icmp eq i32 %.255, 1
   br i1 %.256, label %.253, label %.254
 .129:
-  %.141at1 = call i32 @_user_detect_item(i32 4, i32* %.108, i32 %.111)
+  %.139 = load i32*, i32** %.109
+  %.140 = load i32, i32* %.112
+  %.141at1 = call i32 @_user_detect_item(i32 4, i32* %.139, i32 %.140)
   ret i32 %.141at1 
 .130:
   %.145 = load i32, i32* @.G.pos
-  %.147 = getelementptr inbounds i32, i32* %.108, i32 %.145
+  %.146 = load i32*, i32** %.109
+  %.147 = getelementptr inbounds i32, i32* %.146, i32 %.145
   %.148 = load i32, i32* %.147
   %.150 = icmp eq i32 %.148, 91
   br i1 %.150, label %.143, label %.144
 .143:
-  %.155at2 = call i32 @_user_detect_item(i32 3, i32* %.108, i32 %.111)
+  %.153 = load i32*, i32** %.109
+  %.154 = load i32, i32* %.112
+  %.155at2 = call i32 @_user_detect_item(i32 3, i32* %.153, i32 %.154)
   ret i32 %.155at2 
 .144:
   %.159 = load i32, i32* @.G.pos
-  %.161 = getelementptr inbounds i32, i32* %.108, i32 %.159
+  %.160 = load i32*, i32** %.109
+  %.161 = getelementptr inbounds i32, i32* %.160, i32 %.159
   %.162 = load i32, i32* %.161
   %.164 = icmp eq i32 %.162, 34
   br i1 %.164, label %.157, label %.158
 .157:
-  %.169at3 = call i32 @_user_detect_item(i32 2, i32* %.108, i32 %.111)
+  %.167 = load i32*, i32** %.109
+  %.168 = load i32, i32* %.112
+  %.169at3 = call i32 @_user_detect_item(i32 2, i32* %.167, i32 %.168)
   ret i32 %.169at3 
 .158:
   %.173 = load i32, i32* @.G.pos
-  %.175 = getelementptr inbounds i32, i32* %.108, i32 %.173
+  %.174 = load i32*, i32** %.109
+  %.175 = getelementptr inbounds i32, i32* %.174, i32 %.173
   %.176 = load i32, i32* %.175
   %.177at4 = call i32 @_user_is_number(i32 %.176)
   %.178 = icmp eq i32 %.177at4, 1
   br i1 %.178, label %.171, label %.172
 .171:
-  %.182at5 = call i32 @_user_detect_item(i32 1, i32* %.108, i32 %.111)
+  %.180 = load i32*, i32** %.109
+  %.181 = load i32, i32* %.112
+  %.182at5 = call i32 @_user_detect_item(i32 1, i32* %.180, i32 %.181)
   ret i32 %.182at5 
 .172:
   %.186 = load i32, i32* @.G.pos
-  %.188 = getelementptr inbounds i32, i32* %.108, i32 %.186
+  %.187 = load i32*, i32** %.109
+  %.188 = getelementptr inbounds i32, i32* %.187, i32 %.186
   %.189 = load i32, i32* %.188
   %.191 = icmp eq i32 %.189, 43
   br i1 %.191, label %.184, label %.185
 .184:
-  %.195at6 = call i32 @_user_detect_item(i32 1, i32* %.108, i32 %.111)
+  %.193 = load i32*, i32** %.109
+  %.194 = load i32, i32* %.112
+  %.195at6 = call i32 @_user_detect_item(i32 1, i32* %.193, i32 %.194)
   ret i32 %.195at6 
 .185:
   %.199 = load i32, i32* @.G.pos
-  %.201 = getelementptr inbounds i32, i32* %.108, i32 %.199
+  %.200 = load i32*, i32** %.109
+  %.201 = getelementptr inbounds i32, i32* %.200, i32 %.199
   %.202 = load i32, i32* %.201
   %.204 = icmp eq i32 %.202, 45
   br i1 %.204, label %.197, label %.198
 .197:
-  %.208at7 = call i32 @_user_detect_item(i32 1, i32* %.108, i32 %.111)
+  %.206 = load i32*, i32** %.109
+  %.207 = load i32, i32* %.112
+  %.208at7 = call i32 @_user_detect_item(i32 1, i32* %.206, i32 %.207)
   ret i32 %.208at7 
 .198:
   %.212 = load i32, i32* @.G.pos
-  %.214 = getelementptr inbounds i32, i32* %.108, i32 %.212
+  %.213 = load i32*, i32** %.109
+  %.214 = getelementptr inbounds i32, i32* %.213, i32 %.212
   %.215 = load i32, i32* %.214
   %.217 = icmp eq i32 %.215, 116
   br i1 %.217, label %.210, label %.211
 .210:
-  %.222at8 = call i32 @_user_detect_item(i32 5, i32* %.108, i32 %.111)
+  %.220 = load i32*, i32** %.109
+  %.221 = load i32, i32* %.112
+  %.222at8 = call i32 @_user_detect_item(i32 5, i32* %.220, i32 %.221)
   ret i32 %.222at8 
 .211:
   %.226 = load i32, i32* @.G.pos
-  %.228 = getelementptr inbounds i32, i32* %.108, i32 %.226
+  %.227 = load i32*, i32** %.109
+  %.228 = getelementptr inbounds i32, i32* %.227, i32 %.226
   %.229 = load i32, i32* %.228
   %.231 = icmp eq i32 %.229, 102
   br i1 %.231, label %.224, label %.225
 .224:
-  %.236at9 = call i32 @_user_detect_item(i32 6, i32* %.108, i32 %.111)
+  %.234 = load i32*, i32** %.109
+  %.235 = load i32, i32* %.112
+  %.236at9 = call i32 @_user_detect_item(i32 6, i32* %.234, i32 %.235)
   ret i32 %.236at9 
 .225:
   %.240 = load i32, i32* @.G.pos
-  %.242 = getelementptr inbounds i32, i32* %.108, i32 %.240
+  %.241 = load i32*, i32** %.109
+  %.242 = getelementptr inbounds i32, i32* %.241, i32 %.240
   %.243 = load i32, i32* %.242
   %.245 = icmp eq i32 %.243, 110
   br i1 %.245, label %.238, label %.239
 .238:
-  %.250at10 = call i32 @_user_detect_item(i32 7, i32* %.108, i32 %.111)
+  %.248 = load i32*, i32** %.109
+  %.249 = load i32, i32* %.112
+  %.250at10 = call i32 @_user_detect_item(i32 7, i32* %.248, i32 %.249)
   ret i32 %.250at10 
 .239:
   ret i32 0 
 .253:
   %.260 = load i32, i32* @.G.pos
-  %.262 = getelementptr inbounds i32, i32* %.108, i32 %.260
+  %.261 = load i32*, i32** %.109
+  %.262 = getelementptr inbounds i32, i32* %.261, i32 %.260
   %.263 = load i32, i32* %.262
   %.264 = icmp eq i32 %.263, 43
   br i1 %.264, label %.258, label %.259
 .254:
-  %.452 = icmp eq i32 %.105, 2
+  %.451 = load i32, i32* %.106
+  %.452 = icmp eq i32 %.451, 2
   br i1 %.452, label %.449, label %.450
 .258:
   %.266 = load i32, i32* @.G.pos
@@ -560,13 +614,15 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   br label %.269 
 .259:
   %.273 = load i32, i32* @.G.pos
-  %.275 = getelementptr inbounds i32, i32* %.108, i32 %.273
+  %.274 = load i32*, i32** %.109
+  %.275 = getelementptr inbounds i32, i32* %.274, i32 %.273
   %.276 = load i32, i32* %.275
   %.277 = icmp eq i32 %.276, 45
   br i1 %.277, label %.271, label %.272
 .269:
   %.286 = load i32, i32* @.G.pos
-  %.288 = icmp sge i32 %.286, %.111
+  %.287 = load i32, i32* %.112
+  %.288 = icmp sge i32 %.286, %.287
   br i1 %.288, label %.284, label %.285
 .271:
   %.279 = load i32, i32* @.G.pos
@@ -579,7 +635,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   ret i32 0 
 .285:
   %.293 = load i32, i32* @.G.pos
-  %.295 = getelementptr inbounds i32, i32* %.108, i32 %.293
+  %.294 = load i32*, i32** %.109
+  %.295 = getelementptr inbounds i32, i32* %.294, i32 %.293
   %.296 = load i32, i32* %.295
   %.297at11 = call i32 @_user_is_number(i32 %.296)
   %.298 = icmp eq i32 %.297at11, 0
@@ -592,18 +649,21 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   br label %.303wc 
 .303wc:
   %.307 = load i32, i32* @.G.pos
-  %.309 = icmp slt i32 %.307, %.111
+  %.308 = load i32, i32* %.112
+  %.309 = icmp slt i32 %.307, %.308
   br i1 %.309, label %.304wloop., label %.305wn
 .304wloop.:
   %.313 = load i32, i32* @.G.pos
-  %.315 = getelementptr inbounds i32, i32* %.108, i32 %.313
+  %.314 = load i32*, i32** %.109
+  %.315 = getelementptr inbounds i32, i32* %.314, i32 %.313
   %.316 = load i32, i32* %.315
   %.317at12 = call i32 @_user_is_number(i32 %.316)
   %.318 = icmp ne i32 %.317at12, 1
   br i1 %.318, label %.311, label %.312
 .305wn:
   %.327 = load i32, i32* @.G.pos
-  %.329 = icmp slt i32 %.327, %.111
+  %.328 = load i32, i32* %.112
+  %.329 = icmp slt i32 %.327, %.328
   br i1 %.329, label %.325, label %.326
 .311:
   br label %.305wn 
@@ -614,13 +674,15 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   br label %.303wc 
 .325:
   %.333 = load i32, i32* @.G.pos
-  %.335 = getelementptr inbounds i32, i32* %.108, i32 %.333
+  %.334 = load i32*, i32** %.109
+  %.335 = getelementptr inbounds i32, i32* %.334, i32 %.333
   %.336 = load i32, i32* %.335
   %.338 = icmp eq i32 %.336, 46
   br i1 %.338, label %.331, label %.332
 .326:
   %.369 = load i32, i32* @.G.pos
-  %.371 = icmp slt i32 %.369, %.111
+  %.370 = load i32, i32* %.112
+  %.371 = icmp slt i32 %.369, %.370
   br i1 %.371, label %.367, label %.368
 .331:
   %.340 = load i32, i32* @.G.pos
@@ -631,11 +693,13 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   br label %.326 
 .343wc:
   %.347 = load i32, i32* @.G.pos
-  %.349 = icmp slt i32 %.347, %.111
+  %.348 = load i32, i32* %.112
+  %.349 = icmp slt i32 %.347, %.348
   br i1 %.349, label %.344wloop., label %.345wn
 .344wloop.:
   %.353 = load i32, i32* @.G.pos
-  %.355 = getelementptr inbounds i32, i32* %.108, i32 %.353
+  %.354 = load i32*, i32** %.109
+  %.355 = getelementptr inbounds i32, i32* %.354, i32 %.353
   %.356 = load i32, i32* %.355
   %.357at13 = call i32 @_user_is_number(i32 %.356)
   %.358 = icmp ne i32 %.357at13, 1
@@ -651,7 +715,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   br label %.343wc 
 .367:
   %.375 = load i32, i32* @.G.pos
-  %.377 = getelementptr inbounds i32, i32* %.108, i32 %.375
+  %.376 = load i32*, i32** %.109
+  %.377 = getelementptr inbounds i32, i32* %.376, i32 %.375
   %.378 = load i32, i32* %.377
   %.380 = icmp eq i32 %.378, 101
   br i1 %.380, label %.373, label %.374
@@ -662,19 +727,22 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.383 = add i32 %.382, 1
   store i32 %.383, i32* @.G.pos
   %.387 = load i32, i32* @.G.pos
-  %.389 = icmp slt i32 %.387, %.111
+  %.388 = load i32, i32* %.112
+  %.389 = icmp slt i32 %.387, %.388
   br i1 %.389, label %.385, label %.386
 .374:
   br label %.368 
 .385:
   %.393 = load i32, i32* @.G.pos
-  %.395 = getelementptr inbounds i32, i32* %.108, i32 %.393
+  %.394 = load i32*, i32** %.109
+  %.395 = getelementptr inbounds i32, i32* %.394, i32 %.393
   %.396 = load i32, i32* %.395
   %.397 = icmp eq i32 %.396, 43
   br i1 %.397, label %.391, label %.392
 .386:
   %.406 = load i32, i32* @.G.pos
-  %.408 = icmp slt i32 %.406, %.111
+  %.407 = load i32, i32* %.112
+  %.408 = icmp slt i32 %.406, %.407
   br i1 %.408, label %.404, label %.405
 .391:
   %.399 = load i32, i32* @.G.pos
@@ -685,7 +753,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   br label %.386 
 .404:
   %.412 = load i32, i32* @.G.pos
-  %.414 = getelementptr inbounds i32, i32* %.108, i32 %.412
+  %.413 = load i32*, i32** %.109
+  %.414 = getelementptr inbounds i32, i32* %.413, i32 %.412
   %.415 = load i32, i32* %.414
   %.416 = icmp eq i32 %.415, 45
   br i1 %.416, label %.410, label %.411
@@ -700,11 +769,13 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   br label %.405 
 .423wc:
   %.427 = load i32, i32* @.G.pos
-  %.429 = icmp slt i32 %.427, %.111
+  %.428 = load i32, i32* %.112
+  %.429 = icmp slt i32 %.427, %.428
   br i1 %.429, label %.424wloop., label %.425wn
 .424wloop.:
   %.433 = load i32, i32* @.G.pos
-  %.435 = getelementptr inbounds i32, i32* %.108, i32 %.433
+  %.434 = load i32*, i32** %.109
+  %.435 = getelementptr inbounds i32, i32* %.434, i32 %.433
   %.436 = load i32, i32* %.435
   %.437at14 = call i32 @_user_is_number(i32 %.436)
   %.438 = icmp ne i32 %.437at14, 1
@@ -726,27 +797,32 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   store i32 %.455, i32* @.G.pos
   br label %.457wc 
 .450:
-  %.519 = icmp eq i32 %.105, 3
+  %.518 = load i32, i32* %.106
+  %.519 = icmp eq i32 %.518, 3
   br i1 %.519, label %.516, label %.517
 .457wc:
   %.461 = load i32, i32* @.G.pos
-  %.463 = icmp slt i32 %.461, %.111
+  %.462 = load i32, i32* %.112
+  %.463 = icmp slt i32 %.461, %.462
   br i1 %.463, label %.458wloop., label %.459wn
 .458wloop.:
   %.467 = load i32, i32* @.G.pos
-  %.469 = getelementptr inbounds i32, i32* %.108, i32 %.467
+  %.468 = load i32*, i32** %.109
+  %.469 = getelementptr inbounds i32, i32* %.468, i32 %.467
   %.470 = load i32, i32* %.469
   %.471 = icmp eq i32 %.470, 34
   br i1 %.471, label %.465, label %.466
 .459wn:
   %.495 = load i32, i32* @.G.pos
-  %.497 = icmp sge i32 %.495, %.111
+  %.496 = load i32, i32* %.112
+  %.497 = icmp sge i32 %.495, %.496
   br i1 %.497, label %.493, label %.494
 .465:
   br label %.459wn 
 .466:
   %.476 = load i32, i32* @.G.pos
-  %.478 = getelementptr inbounds i32, i32* %.108, i32 %.476
+  %.477 = load i32*, i32** %.109
+  %.478 = getelementptr inbounds i32, i32* %.477, i32 %.476
   %.479 = load i32, i32* %.478
   %.481 = icmp eq i32 %.479, 92
   br i1 %.481, label %.474, label %.475
@@ -766,7 +842,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   ret i32 0 
 .494:
   %.502 = load i32, i32* @.G.pos
-  %.504 = getelementptr inbounds i32, i32* %.108, i32 %.502
+  %.503 = load i32*, i32** %.109
+  %.504 = getelementptr inbounds i32, i32* %.503, i32 %.502
   %.505 = load i32, i32* %.504
   %.506 = icmp ne i32 %.505, 34
   br i1 %.506, label %.500, label %.501
@@ -785,21 +862,28 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.521 = load i32, i32* @.G.pos
   %.522 = add i32 %.521, 1
   store i32 %.522, i32* @.G.pos
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.524 = load i32*, i32** %.109
+  %.525 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.524, i32 %.525)
   %.529 = load i32, i32* @.G.pos
-  %.531 = icmp slt i32 %.529, %.111
+  %.530 = load i32, i32* %.112
+  %.531 = icmp slt i32 %.529, %.530
   br i1 %.531, label %.527, label %.528
 .517:
-  %.614 = icmp eq i32 %.105, 4
+  %.613 = load i32, i32* %.106
+  %.614 = icmp eq i32 %.613, 4
   br i1 %.614, label %.611, label %.612
 .527:
   %.535 = load i32, i32* @.G.pos
-  %.537 = getelementptr inbounds i32, i32* %.108, i32 %.535
+  %.536 = load i32*, i32** %.109
+  %.537 = getelementptr inbounds i32, i32* %.536, i32 %.535
   %.538 = load i32, i32* %.537
   %.540 = icmp eq i32 %.538, 93
   br i1 %.540, label %.533, label %.534
 .528:
-  %.551at16 = call i32 @_user_detect_item(i32 0, i32* %.108, i32 %.111)
+  %.549 = load i32*, i32** %.109
+  %.550 = load i32, i32* %.112
+  %.551at16 = call i32 @_user_detect_item(i32 0, i32* %.549, i32 %.550)
   %.552 = icmp eq i32 %.551at16, 0
   br i1 %.552, label %.547, label %.548
 .533:
@@ -812,11 +896,14 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .547:
   ret i32 0 
 .548:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.555 = load i32*, i32** %.109
+  %.556 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.555, i32 %.556)
   br label %.558wc 
 .558wc:
   %.562 = load i32, i32* @.G.pos
-  %.564 = getelementptr inbounds i32, i32* %.108, i32 %.562
+  %.563 = load i32*, i32** %.109
+  %.564 = getelementptr inbounds i32, i32* %.563, i32 %.562
   %.565 = load i32, i32* %.564
   %.567 = icmp eq i32 %.565, 44
   br i1 %.567, label %.559wloop., label %.560wn
@@ -824,25 +911,35 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.569 = load i32, i32* @.G.pos
   %.570 = add i32 %.569, 1
   store i32 %.570, i32* @.G.pos
-  call void @_user_skip_space(i32* %.108, i32 %.111)
-  %.579at19 = call i32 @_user_detect_item(i32 0, i32* %.108, i32 %.111)
+  %.572 = load i32*, i32** %.109
+  %.573 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.572, i32 %.573)
+  %.577 = load i32*, i32** %.109
+  %.578 = load i32, i32* %.112
+  %.579at19 = call i32 @_user_detect_item(i32 0, i32* %.577, i32 %.578)
   %.580 = icmp eq i32 %.579at19, 0
   br i1 %.580, label %.575, label %.576
 .560wn:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.587 = load i32*, i32** %.109
+  %.588 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.587, i32 %.588)
   %.592 = load i32, i32* @.G.pos
-  %.594 = icmp sge i32 %.592, %.111
+  %.593 = load i32, i32* %.112
+  %.594 = icmp sge i32 %.592, %.593
   br i1 %.594, label %.590, label %.591
 .575:
   ret i32 0 
 .576:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.583 = load i32*, i32** %.109
+  %.584 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.583, i32 %.584)
   br label %.558wc 
 .590:
   ret i32 0 
 .591:
   %.599 = load i32, i32* @.G.pos
-  %.601 = getelementptr inbounds i32, i32* %.108, i32 %.599
+  %.600 = load i32*, i32** %.109
+  %.601 = getelementptr inbounds i32, i32* %.600, i32 %.599
   %.602 = load i32, i32* %.601
   %.603 = icmp ne i32 %.602, 93
   br i1 %.603, label %.597, label %.598
@@ -859,21 +956,28 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.616 = load i32, i32* @.G.pos
   %.617 = add i32 %.616, 1
   store i32 %.617, i32* @.G.pos
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.619 = load i32*, i32** %.109
+  %.620 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.619, i32 %.620)
   %.624 = load i32, i32* @.G.pos
-  %.626 = icmp slt i32 %.624, %.111
+  %.625 = load i32, i32* %.112
+  %.626 = icmp slt i32 %.624, %.625
   br i1 %.626, label %.622, label %.623
 .612:
-  %.777 = icmp eq i32 %.105, 5
+  %.776 = load i32, i32* %.106
+  %.777 = icmp eq i32 %.776, 5
   br i1 %.777, label %.774, label %.775
 .622:
   %.630 = load i32, i32* @.G.pos
-  %.632 = getelementptr inbounds i32, i32* %.108, i32 %.630
+  %.631 = load i32*, i32** %.109
+  %.632 = getelementptr inbounds i32, i32* %.631, i32 %.630
   %.633 = load i32, i32* %.632
   %.635 = icmp eq i32 %.633, 125
   br i1 %.635, label %.628, label %.629
 .623:
-  %.646at23 = call i32 @_user_detect_item(i32 2, i32* %.108, i32 %.111)
+  %.644 = load i32*, i32** %.109
+  %.645 = load i32, i32* %.112
+  %.646at23 = call i32 @_user_detect_item(i32 2, i32* %.644, i32 %.645)
   %.647 = icmp eq i32 %.646at23, 0
   br i1 %.647, label %.642, label %.643
 .628:
@@ -886,15 +990,19 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .642:
   ret i32 0 
 .643:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.650 = load i32*, i32** %.109
+  %.651 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.650, i32 %.651)
   %.655 = load i32, i32* @.G.pos
-  %.657 = icmp sge i32 %.655, %.111
+  %.656 = load i32, i32* %.112
+  %.657 = icmp sge i32 %.655, %.656
   br i1 %.657, label %.653, label %.654
 .653:
   ret i32 0 
 .654:
   %.662 = load i32, i32* @.G.pos
-  %.664 = getelementptr inbounds i32, i32* %.108, i32 %.662
+  %.663 = load i32*, i32** %.109
+  %.664 = getelementptr inbounds i32, i32* %.663, i32 %.662
   %.665 = load i32, i32* %.664
   %.667 = icmp ne i32 %.665, 58
   br i1 %.667, label %.660, label %.661
@@ -904,18 +1012,25 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.670 = load i32, i32* @.G.pos
   %.671 = add i32 %.670, 1
   store i32 %.671, i32* @.G.pos
-  call void @_user_skip_space(i32* %.108, i32 %.111)
-  %.680at26 = call i32 @_user_detect_item(i32 0, i32* %.108, i32 %.111)
+  %.673 = load i32*, i32** %.109
+  %.674 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.673, i32 %.674)
+  %.678 = load i32*, i32** %.109
+  %.679 = load i32, i32* %.112
+  %.680at26 = call i32 @_user_detect_item(i32 0, i32* %.678, i32 %.679)
   %.681 = icmp eq i32 %.680at26, 0
   br i1 %.681, label %.676, label %.677
 .676:
   ret i32 0 
 .677:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.684 = load i32*, i32** %.109
+  %.685 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.684, i32 %.685)
   br label %.687wc 
 .687wc:
   %.691 = load i32, i32* @.G.pos
-  %.693 = getelementptr inbounds i32, i32* %.108, i32 %.691
+  %.692 = load i32*, i32** %.109
+  %.693 = getelementptr inbounds i32, i32* %.692, i32 %.691
   %.694 = load i32, i32* %.693
   %.695 = icmp eq i32 %.694, 44
   br i1 %.695, label %.688wloop., label %.689wn
@@ -923,27 +1038,38 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.697 = load i32, i32* @.G.pos
   %.698 = add i32 %.697, 1
   store i32 %.698, i32* @.G.pos
-  call void @_user_skip_space(i32* %.108, i32 %.111)
-  %.707at29 = call i32 @_user_detect_item(i32 2, i32* %.108, i32 %.111)
+  %.700 = load i32*, i32** %.109
+  %.701 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.700, i32 %.701)
+  %.705 = load i32*, i32** %.109
+  %.706 = load i32, i32* %.112
+  %.707at29 = call i32 @_user_detect_item(i32 2, i32* %.705, i32 %.706)
   %.708 = icmp eq i32 %.707at29, 0
   br i1 %.708, label %.703, label %.704
 .689wn:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.748 = load i32*, i32** %.109
+  %.749 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.748, i32 %.749)
   %.753 = load i32, i32* @.G.pos
-  %.755 = icmp sge i32 %.753, %.111
+  %.754 = load i32, i32* %.112
+  %.755 = icmp sge i32 %.753, %.754
   br i1 %.755, label %.751, label %.752
 .703:
   ret i32 0 
 .704:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.711 = load i32*, i32** %.109
+  %.712 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.711, i32 %.712)
   %.716 = load i32, i32* @.G.pos
-  %.718 = icmp sge i32 %.716, %.111
+  %.717 = load i32, i32* %.112
+  %.718 = icmp sge i32 %.716, %.717
   br i1 %.718, label %.714, label %.715
 .714:
   ret i32 0 
 .715:
   %.723 = load i32, i32* @.G.pos
-  %.725 = getelementptr inbounds i32, i32* %.108, i32 %.723
+  %.724 = load i32*, i32** %.109
+  %.725 = getelementptr inbounds i32, i32* %.724, i32 %.723
   %.726 = load i32, i32* %.725
   %.727 = icmp ne i32 %.726, 58
   br i1 %.727, label %.721, label %.722
@@ -953,20 +1079,27 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   %.730 = load i32, i32* @.G.pos
   %.731 = add i32 %.730, 1
   store i32 %.731, i32* @.G.pos
-  call void @_user_skip_space(i32* %.108, i32 %.111)
-  %.740at32 = call i32 @_user_detect_item(i32 0, i32* %.108, i32 %.111)
+  %.733 = load i32*, i32** %.109
+  %.734 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.733, i32 %.734)
+  %.738 = load i32*, i32** %.109
+  %.739 = load i32, i32* %.112
+  %.740at32 = call i32 @_user_detect_item(i32 0, i32* %.738, i32 %.739)
   %.741 = icmp eq i32 %.740at32, 0
   br i1 %.741, label %.736, label %.737
 .736:
   ret i32 0 
 .737:
-  call void @_user_skip_space(i32* %.108, i32 %.111)
+  %.744 = load i32*, i32** %.109
+  %.745 = load i32, i32* %.112
+  call void @_user_skip_space(i32* %.744, i32 %.745)
   br label %.687wc 
 .751:
   ret i32 0 
 .752:
   %.760 = load i32, i32* @.G.pos
-  %.762 = getelementptr inbounds i32, i32* %.108, i32 %.760
+  %.761 = load i32*, i32** %.109
+  %.762 = getelementptr inbounds i32, i32* %.761, i32 %.760
   %.763 = load i32, i32* %.762
   %.764 = icmp ne i32 %.763, 125
   br i1 %.764, label %.758, label %.759
@@ -985,16 +1118,19 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   call void @llvm.memcpy.p0.p0.i32([4 x i32]* %.779, [4 x i32]* @.C..783, i32 16, i1 false)
   %.791 = load i32, i32* @.G.pos
   %.792 = add i32 %.791, 3
-  %.794 = icmp sge i32 %.792, %.111
+  %.793 = load i32, i32* %.112
+  %.794 = icmp sge i32 %.792, %.793
   br i1 %.794, label %.789, label %.790
 .775:
-  %.860 = icmp eq i32 %.105, 6
+  %.859 = load i32, i32* %.106
+  %.860 = icmp eq i32 %.859, 6
   br i1 %.860, label %.857, label %.858
 .789:
   ret i32 0 
 .790:
   %.799 = load i32, i32* @.G.pos
-  %.801 = getelementptr inbounds i32, i32* %.108, i32 %.799
+  %.800 = load i32*, i32** %.109
+  %.801 = getelementptr inbounds i32, i32* %.800, i32 %.799
   %.802 = load i32, i32* %.801
   %.803 = getelementptr inbounds [4 x i32], [4 x i32]* %.779, i32 0, i32 0
   %.804 = load i32, i32* %.803
@@ -1005,7 +1141,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .798:
   %.810 = load i32, i32* @.G.pos
   %.811 = add i32 %.810, 1
-  %.813 = getelementptr inbounds i32, i32* %.108, i32 %.811
+  %.812 = load i32*, i32** %.109
+  %.813 = getelementptr inbounds i32, i32* %.812, i32 %.811
   %.814 = load i32, i32* %.813
   %.815 = getelementptr inbounds [4 x i32], [4 x i32]* %.779, i32 0, i32 1
   %.816 = load i32, i32* %.815
@@ -1016,7 +1153,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .809:
   %.822 = load i32, i32* @.G.pos
   %.823 = add i32 %.822, 2
-  %.825 = getelementptr inbounds i32, i32* %.108, i32 %.823
+  %.824 = load i32*, i32** %.109
+  %.825 = getelementptr inbounds i32, i32* %.824, i32 %.823
   %.826 = load i32, i32* %.825
   %.827 = getelementptr inbounds [4 x i32], [4 x i32]* %.779, i32 0, i32 2
   %.828 = load i32, i32* %.827
@@ -1027,7 +1165,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .821:
   %.834 = load i32, i32* @.G.pos
   %.835 = add i32 %.834, 3
-  %.837 = getelementptr inbounds i32, i32* %.108, i32 %.835
+  %.836 = load i32*, i32** %.109
+  %.837 = getelementptr inbounds i32, i32* %.836, i32 %.835
   %.838 = load i32, i32* %.837
   %.839 = getelementptr inbounds [4 x i32], [4 x i32]* %.779, i32 0, i32 3
   %.840 = load i32, i32* %.839
@@ -1054,16 +1193,19 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   call void @llvm.memcpy.p0.p0.i32([5 x i32]* %.862, [5 x i32]* @.C..867, i32 20, i1 false)
   %.872 = load i32, i32* @.G.pos
   %.873 = add i32 %.872, 4
-  %.875 = icmp sge i32 %.873, %.111
+  %.874 = load i32, i32* %.112
+  %.875 = icmp sge i32 %.873, %.874
   br i1 %.875, label %.870, label %.871
 .858:
-  %.955 = icmp eq i32 %.105, 7
+  %.954 = load i32, i32* %.106
+  %.955 = icmp eq i32 %.954, 7
   br i1 %.955, label %.952, label %.953
 .870:
   ret i32 0 
 .871:
   %.880 = load i32, i32* @.G.pos
-  %.882 = getelementptr inbounds i32, i32* %.108, i32 %.880
+  %.881 = load i32*, i32** %.109
+  %.882 = getelementptr inbounds i32, i32* %.881, i32 %.880
   %.883 = load i32, i32* %.882
   %.884 = getelementptr inbounds [5 x i32], [5 x i32]* %.862, i32 0, i32 0
   %.885 = load i32, i32* %.884
@@ -1074,7 +1216,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .879:
   %.891 = load i32, i32* @.G.pos
   %.892 = add i32 %.891, 1
-  %.894 = getelementptr inbounds i32, i32* %.108, i32 %.892
+  %.893 = load i32*, i32** %.109
+  %.894 = getelementptr inbounds i32, i32* %.893, i32 %.892
   %.895 = load i32, i32* %.894
   %.896 = getelementptr inbounds [5 x i32], [5 x i32]* %.862, i32 0, i32 1
   %.897 = load i32, i32* %.896
@@ -1085,7 +1228,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .890:
   %.903 = load i32, i32* @.G.pos
   %.904 = add i32 %.903, 2
-  %.906 = getelementptr inbounds i32, i32* %.108, i32 %.904
+  %.905 = load i32*, i32** %.109
+  %.906 = getelementptr inbounds i32, i32* %.905, i32 %.904
   %.907 = load i32, i32* %.906
   %.908 = getelementptr inbounds [5 x i32], [5 x i32]* %.862, i32 0, i32 2
   %.909 = load i32, i32* %.908
@@ -1096,7 +1240,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .902:
   %.915 = load i32, i32* @.G.pos
   %.916 = add i32 %.915, 3
-  %.918 = getelementptr inbounds i32, i32* %.108, i32 %.916
+  %.917 = load i32*, i32** %.109
+  %.918 = getelementptr inbounds i32, i32* %.917, i32 %.916
   %.919 = load i32, i32* %.918
   %.920 = getelementptr inbounds [5 x i32], [5 x i32]* %.862, i32 0, i32 3
   %.921 = load i32, i32* %.920
@@ -1107,7 +1252,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .914:
   %.927 = load i32, i32* @.G.pos
   %.928 = add i32 %.927, 4
-  %.930 = getelementptr inbounds i32, i32* %.108, i32 %.928
+  %.929 = load i32*, i32** %.109
+  %.930 = getelementptr inbounds i32, i32* %.929, i32 %.928
   %.931 = load i32, i32* %.930
   %.932 = getelementptr inbounds [5 x i32], [5 x i32]* %.862, i32 0, i32 4
   %.933 = load i32, i32* %.932
@@ -1136,7 +1282,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   call void @llvm.memcpy.p0.p0.i32([4 x i32]* %.957, [4 x i32]* @.C..959, i32 16, i1 false)
   %.963 = load i32, i32* @.G.pos
   %.964 = add i32 %.963, 3
-  %.966 = icmp sge i32 %.964, %.111
+  %.965 = load i32, i32* %.112
+  %.966 = icmp sge i32 %.964, %.965
   br i1 %.966, label %.961, label %.962
 .953:
   ret i32 0 
@@ -1144,7 +1291,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
   ret i32 0 
 .962:
   %.971 = load i32, i32* @.G.pos
-  %.973 = getelementptr inbounds i32, i32* %.108, i32 %.971
+  %.972 = load i32*, i32** %.109
+  %.973 = getelementptr inbounds i32, i32* %.972, i32 %.971
   %.974 = load i32, i32* %.973
   %.975 = getelementptr inbounds [4 x i32], [4 x i32]* %.957, i32 0, i32 0
   %.976 = load i32, i32* %.975
@@ -1155,7 +1303,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .970:
   %.982 = load i32, i32* @.G.pos
   %.983 = add i32 %.982, 1
-  %.985 = getelementptr inbounds i32, i32* %.108, i32 %.983
+  %.984 = load i32*, i32** %.109
+  %.985 = getelementptr inbounds i32, i32* %.984, i32 %.983
   %.986 = load i32, i32* %.985
   %.987 = getelementptr inbounds [4 x i32], [4 x i32]* %.957, i32 0, i32 1
   %.988 = load i32, i32* %.987
@@ -1166,7 +1315,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .981:
   %.994 = load i32, i32* @.G.pos
   %.995 = add i32 %.994, 2
-  %.997 = getelementptr inbounds i32, i32* %.108, i32 %.995
+  %.996 = load i32*, i32** %.109
+  %.997 = getelementptr inbounds i32, i32* %.996, i32 %.995
   %.998 = load i32, i32* %.997
   %.999 = getelementptr inbounds [4 x i32], [4 x i32]* %.957, i32 0, i32 2
   %.1000 = load i32, i32* %.999
@@ -1177,7 +1327,8 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 .993:
   %.1006 = load i32, i32* @.G.pos
   %.1007 = add i32 %.1006, 3
-  %.1009 = getelementptr inbounds i32, i32* %.108, i32 %.1007
+  %.1008 = load i32*, i32** %.109
+  %.1009 = getelementptr inbounds i32, i32* %.1008, i32 %.1007
   %.1010 = load i32, i32* %.1009
   %.1011 = getelementptr inbounds [4 x i32], [4 x i32]* %.957, i32 0, i32 3
   %.1012 = load i32, i32* %.1011
@@ -1205,27 +1356,41 @@ define i32 @_user_detect_item(i32 %.105, i32* %.108, i32 %.111){
 }
 define i32 @main(){
 .1042:
+  %.1070 = alloca i32
+  %.1047 = alloca i32
+  %.1043 = alloca i32
   %.1045at35 = call i32 @getch()
+  store i32 %.1045at35, i32* %.1043
+  store i32 0, i32* %.1047
   br label %.1049wc 
 .1049wc:
-  %.1101 = phi i32 [0, %.1042], [%.1062, %.1050wloop.]
-  %.1100 = phi i32 [%.1045at35, %.1042], [%.1064at36, %.1050wloop.]
-  %.1055 = icmp ne i32 %.1100, 35
+  %.1053 = load i32, i32* %.1043
+  %.1055 = icmp ne i32 %.1053, 35
   br i1 %.1055, label %.1050wloop., label %.1051wn
 .1050wloop.:
-  %.1059 = getelementptr inbounds [50000000 x i32], [50000000 x i32]* @.G.buffer, i32 0, i32 %.1101
-  store i32 %.1100, i32* %.1059
-  %.1062 = add i32 %.1101, 1
+  %.1057 = load i32, i32* %.1043
+  %.1058 = load i32, i32* %.1047
+  %.1059 = getelementptr inbounds [50000000 x i32], [50000000 x i32]* @.G.buffer, i32 0, i32 %.1058
+  store i32 %.1057, i32* %.1059
+  %.1061 = load i32, i32* %.1047
+  %.1062 = add i32 %.1061, 1
+  store i32 %.1062, i32* %.1047
   %.1064at36 = call i32 @getch()
+  store i32 %.1064at36, i32* %.1043
   br label %.1049wc 
 .1051wn:
   %.1067 = getelementptr inbounds [50000000 x i32], [50000000 x i32]* @.G.buffer, i32 0, i32 0
-  call void @_user_skip_space(i32* %.1067, i32 %.1101)
+  %.1068 = load i32, i32* %.1047
+  call void @_user_skip_space(i32* %.1067, i32 %.1068)
   %.1071 = getelementptr inbounds [50000000 x i32], [50000000 x i32]* @.G.buffer, i32 0, i32 0
-  %.1073at38 = call i32 @_user_detect_item(i32 0, i32* %.1071, i32 %.1101)
+  %.1072 = load i32, i32* %.1047
+  %.1073at38 = call i32 @_user_detect_item(i32 0, i32* %.1071, i32 %.1072)
+  store i32 %.1073at38, i32* %.1070
   %.1075 = getelementptr inbounds [50000000 x i32], [50000000 x i32]* @.G.buffer, i32 0, i32 0
-  call void @_user_skip_space(i32* %.1075, i32 %.1101)
-  %.1081 = icmp ne i32 %.1073at38, 0
+  %.1076 = load i32, i32* %.1047
+  call void @_user_skip_space(i32* %.1075, i32 %.1076)
+  %.1080 = load i32, i32* %.1070
+  %.1081 = icmp ne i32 %.1080, 0
   br i1 %.1081, label %.1078, label %.1079
 .1078:
   call void @putch(i32 111)

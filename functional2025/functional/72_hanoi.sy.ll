@@ -358,43 +358,74 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define void @_user_move(i32 %.1, i32 %.4){
 .0:
-  call void @putint(i32 %.1)
+  %.5 = alloca i32
+  %.2 = alloca i32
+  store i32 %.1, i32* %.2
+  store i32 %.4, i32* %.5
+  %.7 = load i32, i32* %.2
+  call void @putint(i32 %.7)
   call void @putch(i32 32)
-  call void @putint(i32 %.4)
+  %.13 = load i32, i32* %.5
+  call void @putint(i32 %.13)
   call void @putch(i32 44)
   call void @putch(i32 32)
   ret void
 }
 define void @_user_hanoi(i32 %.20, i32 %.23, i32 %.26, i32 %.29){
 .19:
-  %.36 = icmp eq i32 %.20, 1
+  %.30 = alloca i32
+  %.27 = alloca i32
+  %.24 = alloca i32
+  %.21 = alloca i32
+  store i32 %.20, i32* %.21
+  store i32 %.23, i32* %.24
+  store i32 %.26, i32* %.27
+  store i32 %.29, i32* %.30
+  %.34 = load i32, i32* %.21
+  %.36 = icmp eq i32 %.34, 1
   br i1 %.36, label %.32, label %.33
 .32:
-  call void @_user_move(i32 %.23, i32 %.29)
+  %.38 = load i32, i32* %.24
+  %.39 = load i32, i32* %.30
+  call void @_user_move(i32 %.38, i32 %.39)
   br label %.41 
 .33:
-  %.44 = sub i32 %.20, 1
-  call void @_user_hanoi(i32 %.44, i32 %.23, i32 %.29, i32 %.26)
-  call void @_user_move(i32 %.23, i32 %.29)
-  %.53 = sub i32 %.20, 1
-  call void @_user_hanoi(i32 %.53, i32 %.26, i32 %.23, i32 %.29)
+  %.43 = load i32, i32* %.21
+  %.44 = sub i32 %.43, 1
+  %.45 = load i32, i32* %.24
+  %.46 = load i32, i32* %.30
+  %.47 = load i32, i32* %.27
+  call void @_user_hanoi(i32 %.44, i32 %.45, i32 %.46, i32 %.47)
+  %.49 = load i32, i32* %.24
+  %.50 = load i32, i32* %.30
+  call void @_user_move(i32 %.49, i32 %.50)
+  %.52 = load i32, i32* %.21
+  %.53 = sub i32 %.52, 1
+  %.54 = load i32, i32* %.27
+  %.55 = load i32, i32* %.24
+  %.56 = load i32, i32* %.30
+  call void @_user_hanoi(i32 %.53, i32 %.54, i32 %.55, i32 %.56)
   br label %.41 
 .41:
   ret void
 }
 define i32 @main(){
 .60:
+  %.61 = alloca i32
   %.63at9 = call i32 @getint()
+  store i32 %.63at9, i32* %.61
   br label %.65wc 
 .65wc:
-  %.84 = phi i32 [%.63at9, %.60], [%.80, %.66wloop.]
-  %.71 = icmp sgt i32 %.84, 0
+  %.69 = load i32, i32* %.61
+  %.71 = icmp sgt i32 %.69, 0
   br i1 %.71, label %.66wloop., label %.67wn
 .66wloop.:
   %.73at10 = call i32 @getint()
   call void @_user_hanoi(i32 %.73at10, i32 1, i32 2, i32 3)
   call void @putch(i32 10)
-  %.80 = sub i32 %.84, 1
+  %.79 = load i32, i32* %.61
+  %.80 = sub i32 %.79, 1
+  store i32 %.80, i32* %.61
   br label %.65wc 
 .67wn:
   ret i32 0 

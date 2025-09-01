@@ -358,23 +358,60 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
-  br i1 true, label %.16, label %.18
+  %.5 = alloca i32
+  %.4 = alloca i32
+  %.3 = alloca i32
+  %.2 = alloca i32
+  %.1 = alloca i32
+  store i32 5, i32* %.1
+  store i32 5, i32* %.2
+  store i32 1, i32* %.3
+  store i32 -2, i32* %.4
+  store i32 2, i32* %.5
+  %.19 = load i32, i32* %.4
+  %.20 = mul i32 %.19, 1
+  %.21 = sdiv i32 %.20, 2
+  %.22 = icmp slt i32 %.21, 0
+  br i1 %.22, label %.16, label %.18
 .16:
-  call void @putint(i32 2)
+  %.36 = load i32, i32* %.5
+  call void @putint(i32 %.36)
   br label %.17 
 .17:
-  br i1 false, label %.40, label %.42
+  %.43 = load i32, i32* %.4
+  %.44 = srem i32 %.43, 2
+  %.46 = add i32 %.44, 67
+  %.47 = icmp slt i32 %.46, 0
+  br i1 %.47, label %.40, label %.42
 .18:
-  br i1 false, label %.28, label %.17
+  %.24 = load i32, i32* %.1
+  %.25 = load i32, i32* %.2
+  %.26 = sub i32 %.24, %.25
+  %.27 = icmp ne i32 %.26, 0
+  br i1 %.27, label %.28, label %.17
 .28:
-  br i1 false, label %.16, label %.17
+  %.30 = load i32, i32* %.3
+  %.32 = add i32 %.30, 3
+  %.33 = srem i32 %.32, 2
+  %.34 = icmp ne i32 %.33, 0
+  br i1 %.34, label %.16, label %.17
 .40:
-  call void @putint(i32 4)
+  store i32 4, i32* %.5
+  %.62 = load i32, i32* %.5
+  call void @putint(i32 %.62)
   br label %.41 
 .41:
   ret i32 0 
 .42:
-  br i1 false, label %.53, label %.41
+  %.49 = load i32, i32* %.1
+  %.50 = load i32, i32* %.2
+  %.51 = sub i32 %.49, %.50
+  %.52 = icmp ne i32 %.51, 0
+  br i1 %.52, label %.53, label %.41
 .53:
-  br i1 true, label %.40, label %.41
+  %.55 = load i32, i32* %.3
+  %.56 = add i32 %.55, 2
+  %.57 = srem i32 %.56, 2
+  %.58 = icmp ne i32 %.57, 0
+  br i1 %.58, label %.40, label %.41
 }

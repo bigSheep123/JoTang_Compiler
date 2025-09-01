@@ -1,5 +1,4 @@
 #pragma once
-#include "GVN.hpp"
 #include "Passbase.hpp"
 #include "Mem2reg.hpp"
 #include "../../lib/CoreClass.hpp"
@@ -8,7 +7,7 @@
 #include "DCE.hpp"
 #include "AnalysisManager.hpp"
 #include "ConstantProp.hpp"
-
+#include "Tail_Elimination.hpp"
 
 enum OptLevel
 {
@@ -66,6 +65,7 @@ public:
                 "LoopRotate",
                 // //"LoopUnroll",
                 "LoopDeletion",
+                "Tail"
                 // "SSR",
 
                 // 数据流优化
@@ -135,18 +135,7 @@ public:
                     ConstantProp(fun).run();
                 }
             }
-            if (tag == "GVN")
-            {
-                for (auto &function : funcVec)
-                {
-                    // Function;
-                    auto fun = function.get();
-                    DominantTree tree(fun);
-                    tree.BuildDominantTree();
-                    AM.add<DominantTree>(fun, &tree);
-                    GVN(fun, AM).run();
-                }
-            }
+
             if (tag == "DCE")
             {
                 for (auto &function : funcVec)
@@ -155,6 +144,15 @@ public:
                     AnalysisManager *AM;
                     DCE(fun, AM).run();
                 }
+            }
+
+            if (tag == "Tail")
+            {
+                for (auto &function : funcVec)
+                {
+                    auto fun = function.get();
+                    TailElimation(fun).run();
+                }   
             }
         }
     }

@@ -364,120 +364,171 @@ attributes #7 = { cold }
 @.G.graph = global [30 x [30 x i32]] zeroinitializer
 define i32 @_user_is_clique(i32 %.9){
 .8:
+  %.23 = alloca i32
+  %.12 = alloca i32
+  %.10 = alloca i32
+  store i32 %.9, i32* %.10
+  store i32 1, i32* %.12
   br label %.15wc 
 .15wc:
-  %.184 = phi i32 [1, %.8], [%.54, %.29wn]
-  %.21 = icmp slt i32 %.184, %.9
+  %.19 = load i32, i32* %.12
+  %.20 = load i32, i32* %.10
+  %.21 = icmp slt i32 %.19, %.20
   br i1 %.21, label %.16wloop., label %.17wn
 .16wloop.:
-  %.25 = add i32 %.184, 1
+  %.24 = load i32, i32* %.12
+  %.25 = add i32 %.24, 1
+  store i32 %.25, i32* %.23
   br label %.27wc 
 .17wn:
   ret i32 1 
 .27wc:
-  %.183 = phi i32 [%.25, %.16wloop.], [%.50, %.36]
-  %.33 = icmp slt i32 %.183, %.9
+  %.31 = load i32, i32* %.23
+  %.32 = load i32, i32* %.10
+  %.33 = icmp slt i32 %.31, %.32
   br i1 %.33, label %.28wloop., label %.29wn
 .28wloop.:
-  %.38 = getelementptr inbounds [30 x i32], [30 x i32]* @.G.store, i32 0, i32 %.184
+  %.37 = load i32, i32* %.12
+  %.38 = getelementptr inbounds [30 x i32], [30 x i32]* @.G.store, i32 0, i32 %.37
   %.40 = load i32, i32* %.38
-  %.42 = getelementptr inbounds [30 x i32], [30 x i32]* @.G.store, i32 0, i32 %.183
+  %.41 = load i32, i32* %.23
+  %.42 = getelementptr inbounds [30 x i32], [30 x i32]* @.G.store, i32 0, i32 %.41
   %.43 = load i32, i32* %.42
   %.44 = getelementptr inbounds [30 x [30 x i32]], [30 x [30 x i32]]* @.G.graph, i32 0, i32 %.40, i32 %.43
   %.45 = load i32, i32* %.44
   %.46 = icmp eq i32 %.45, 0
   br i1 %.46, label %.35, label %.36
 .29wn:
-  %.54 = add i32 %.184, 1
+  %.53 = load i32, i32* %.12
+  %.54 = add i32 %.53, 1
+  store i32 %.54, i32* %.12
   br label %.15wc 
 .35:
   ret i32 0 
 .36:
-  %.50 = add i32 %.183, 1
+  %.49 = load i32, i32* %.23
+  %.50 = add i32 %.49, 1
+  store i32 %.50, i32* %.23
   br label %.27wc 
 }
 define i32 @_user_maxCliques(i32 %.59, i32 %.62){
 .58:
+  %.98 = alloca i32
+  %.67 = alloca i32
+  %.65 = alloca i32
+  %.63 = alloca i32
+  %.60 = alloca i32
+  store i32 %.59, i32* %.60
+  store i32 %.62, i32* %.63
+  store i32 0, i32* %.65
+  store i32 1, i32* %.67
+  store i32 1, i32* %.60
   br label %.70wc 
 .70wc:
-  %.187 = phi i32 [0, %.58], [%.188, %.83]
-  %.186 = phi i32 [1, %.58], [%.115, %.83]
+  %.74 = load i32, i32* %.67
   %.75 = load i32, i32* @.G.n
-  %.76 = icmp sle i32 %.186, %.75
+  %.76 = icmp sle i32 %.74, %.75
   br i1 %.76, label %.71wloop., label %.72wn
 .71wloop.:
-  %.80 = getelementptr inbounds [30 x i32], [30 x i32]* @.G.store, i32 0, i32 %.62
-  store i32 %.186, i32* %.80
-  %.85 = add i32 %.62, 1
+  %.78 = load i32, i32* %.67
+  %.79 = load i32, i32* %.63
+  %.80 = getelementptr inbounds [30 x i32], [30 x i32]* @.G.store, i32 0, i32 %.79
+  store i32 %.78, i32* %.80
+  %.84 = load i32, i32* %.63
+  %.85 = add i32 %.84, 1
   %.86at0 = call i32 @_user_is_clique(i32 %.85)
   %.87 = icmp ne i32 %.86at0, 0
   br i1 %.87, label %.82, label %.83
 .72wn:
-  ret i32 %.187 
+  %.118 = load i32, i32* %.65
+  ret i32 %.118 
 .82:
-  %.93 = icmp sgt i32 %.62, %.187
+  %.91 = load i32, i32* %.63
+  %.92 = load i32, i32* %.65
+  %.93 = icmp sgt i32 %.91, %.92
   br i1 %.93, label %.89, label %.90
 .83:
-  %.188 = phi i32 [%.187, %.71wloop.], [%.190, %.105]
-  %.115 = add i32 %.186, 1
+  %.114 = load i32, i32* %.67
+  %.115 = add i32 %.114, 1
+  store i32 %.115, i32* %.67
   br label %.70wc 
 .89:
+  %.95 = load i32, i32* %.63
+  store i32 %.95, i32* %.65
   br label %.90 
 .90:
-  %.189 = phi i32 [%.187, %.82], [%.62, %.89]
-  %.101 = add i32 %.62, 1
-  %.102at1 = call i32 @_user_maxCliques(i32 %.186, i32 %.101)
-  %.108 = icmp sgt i32 %.102at1, %.189
+  %.99 = load i32, i32* %.67
+  %.100 = load i32, i32* %.63
+  %.101 = add i32 %.100, 1
+  %.102at1 = call i32 @_user_maxCliques(i32 %.99, i32 %.101)
+  store i32 %.102at1, i32* %.98
+  %.106 = load i32, i32* %.98
+  %.107 = load i32, i32* %.65
+  %.108 = icmp sgt i32 %.106, %.107
   br i1 %.108, label %.104, label %.105
 .104:
+  %.110 = load i32, i32* %.98
+  store i32 %.110, i32* %.65
   br label %.105 
 .105:
-  %.190 = phi i32 [%.189, %.90], [%.102at1, %.104]
   br label %.83 
 }
 define i32 @main(){
 .120:
+  %.128 = alloca i32
   %.127 = alloca [600 x [2 x i32]]
   %.122at2 = call i32 @getint()
   store i32 %.122at2, i32* @.G.n
   %.124at3 = call i32 @getint()
   store i32 %.124at3, i32* @.G.m
+  store i32 0, i32* %.128
   br label %.130wc 
 .130wc:
-  %.191 = phi i32 [0, %.120], [%.147, %.131wloop.]
+  %.134 = load i32, i32* %.128
   %.135 = load i32, i32* @.G.m
-  %.136 = icmp slt i32 %.191, %.135
+  %.136 = icmp slt i32 %.134, %.135
   br i1 %.136, label %.131wloop., label %.132wn
 .131wloop.:
   %.138at4 = call i32 @getint()
-  %.140 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.191, i32 0
+  %.139 = load i32, i32* %.128
+  %.140 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.139, i32 0
   store i32 %.138at4, i32* %.140
   %.142at5 = call i32 @getint()
-  %.144 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.191, i32 1
+  %.143 = load i32, i32* %.128
+  %.144 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.143, i32 1
   store i32 %.142at5, i32* %.144
-  %.147 = add i32 %.191, 1
+  %.146 = load i32, i32* %.128
+  %.147 = add i32 %.146, 1
+  store i32 %.147, i32* %.128
   br label %.130wc 
 .132wn:
+  store i32 0, i32* %.128
   br label %.151wc 
 .151wc:
-  %.192 = phi i32 [0, %.132wn], [%.176, %.152wloop.]
+  %.155 = load i32, i32* %.128
   %.156 = load i32, i32* @.G.m
-  %.157 = icmp slt i32 %.192, %.156
+  %.157 = icmp slt i32 %.155, %.156
   br i1 %.157, label %.152wloop., label %.153wn
 .152wloop.:
-  %.160 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.192, i32 0
+  %.159 = load i32, i32* %.128
+  %.160 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.159, i32 0
   %.161 = load i32, i32* %.160
-  %.163 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.192, i32 1
+  %.162 = load i32, i32* %.128
+  %.163 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.162, i32 1
   %.164 = load i32, i32* %.163
   %.165 = getelementptr inbounds [30 x [30 x i32]], [30 x [30 x i32]]* @.G.graph, i32 0, i32 %.161, i32 %.164
   store i32 1, i32* %.165
-  %.168 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.192, i32 1
+  %.167 = load i32, i32* %.128
+  %.168 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.167, i32 1
   %.169 = load i32, i32* %.168
-  %.171 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.192, i32 0
+  %.170 = load i32, i32* %.128
+  %.171 = getelementptr inbounds [600 x [2 x i32]], [600 x [2 x i32]]* %.127, i32 0, i32 %.170, i32 0
   %.172 = load i32, i32* %.171
   %.173 = getelementptr inbounds [30 x [30 x i32]], [30 x [30 x i32]]* @.G.graph, i32 0, i32 %.169, i32 %.172
   store i32 1, i32* %.173
-  %.176 = add i32 %.192, 1
+  %.175 = load i32, i32* %.128
+  %.176 = add i32 %.175, 1
+  store i32 %.176, i32* %.128
   br label %.151wc 
 .153wn:
   %.179at6 = call i32 @_user_maxCliques(i32 0, i32 1)

@@ -363,22 +363,42 @@ attributes #7 = { cold }
 define i32 @main(){
 .9:
   %.71 = alloca [7 x [1 x [5 x i32]]]
+  %.63 = alloca i32
   %.53 = alloca [2 x [8 x i32]]
-  call void @putint(i32 3)
-  call void @putint(i32 3)
-  call void @putint(i32 1)
+  %.35 = alloca i32
+  %.13 = alloca i32
+  %.10 = alloca i32
+  store i32 1, i32* %.10
+  store i32 2, i32* %.13
+  store i32 3, i32* %.13
+  %.18 = load i32, i32* %.13
+  call void @putint(i32 %.18)
+  %.21 = load i32, i32* %.13
+  call void @putint(i32 %.21)
+  %.23 = load i32, i32* %.10
+  call void @putint(i32 %.23)
   call void @putch(i32 10)
   br label %.28wc 
 .28wc:
-  br i1 true, label %.29wloop., label %.30wn
+  %.32 = load i32, i32* %.10
+  %.33 = icmp slt i32 %.32, 5
+  br i1 %.33, label %.29wloop., label %.30wn
 .29wloop.:
-  br i1 true, label %.41, label %.42
+  store i32 0, i32* %.35
+  %.38 = load i32, i32* %.35
+  %.39 = add i32 %.38, 1
+  store i32 %.39, i32* %.35
+  %.43 = load i32, i32* %.35
+  %.44 = icmp ne i32 %.43, 0
+  br i1 %.44, label %.41, label %.42
 .30wn:
-  call void @putint(i32 1)
+  %.48 = load i32, i32* %.10
+  call void @putint(i32 %.48)
   call void @putch(i32 10)
   %.51 = getelementptr inbounds [4 x i32], [4 x i32]* @.G.c, i32 0, i32 2
   store i32 1, i32* %.51
   call void @llvm.memcpy.p0.p0.i32([2 x [8 x i32]]* %.53, [2 x [8 x i32]]* @.C..57, i32 64, i1 false)
+  store i32 2, i32* %.63
   %.67 = getelementptr inbounds [4 x i32], [4 x i32]* @.G.c, i32 0, i32 2
   %.68 = load i32, i32* %.67
   %.69 = icmp ne i32 %.68, 0
@@ -389,13 +409,16 @@ define i32 @main(){
   br label %.28wc 
 .65:
   call void @llvm.memcpy.p0.p0.i32([7 x [1 x [5 x i32]]]* %.71, [7 x [1 x [5 x i32]]]* @.C..79, i32 140, i1 false)
-  %.83 = getelementptr inbounds [7 x [1 x [5 x i32]]], [7 x [1 x [5 x i32]]]* %.71, i32 0, i32 2, i32 0, i32 0
+  %.82 = load i32, i32* %.63
+  %.83 = getelementptr inbounds [7 x [1 x [5 x i32]]], [7 x [1 x [5 x i32]]]* %.71, i32 0, i32 %.82, i32 0, i32 0
   %.84 = load i32, i32* %.83
   call void @putint(i32 %.84)
-  %.87 = getelementptr inbounds [7 x [1 x [5 x i32]]], [7 x [1 x [5 x i32]]]* %.71, i32 0, i32 2, i32 0, i32 1
+  %.86 = load i32, i32* %.63
+  %.87 = getelementptr inbounds [7 x [1 x [5 x i32]]], [7 x [1 x [5 x i32]]]* %.71, i32 0, i32 %.86, i32 0, i32 1
   %.88 = load i32, i32* %.87
   call void @putint(i32 %.88)
-  %.91 = getelementptr inbounds [7 x [1 x [5 x i32]]], [7 x [1 x [5 x i32]]]* %.71, i32 0, i32 2, i32 0, i32 2
+  %.90 = load i32, i32* %.63
+  %.91 = getelementptr inbounds [7 x [1 x [5 x i32]]], [7 x [1 x [5 x i32]]]* %.71, i32 0, i32 %.90, i32 0, i32 2
   %.92 = load i32, i32* %.91
   call void @putint(i32 %.92)
   br label %.66 

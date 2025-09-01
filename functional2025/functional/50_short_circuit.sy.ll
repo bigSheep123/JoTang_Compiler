@@ -359,8 +359,11 @@ attributes #7 = { cold }
 @.G.g = global i32 0
 define i32 @_user_func(i32 %.3){
 .2:
+  %.4 = alloca i32
+  store i32 %.3, i32* %.4
   %.6 = load i32, i32* @.G.g
-  %.8 = add i32 %.6, %.3
+  %.7 = load i32, i32* %.4
+  %.8 = add i32 %.6, %.7
   store i32 %.8, i32* @.G.g
   %.10 = load i32, i32* @.G.g
   call void @putint(i32 %.10)
@@ -369,51 +372,72 @@ define i32 @_user_func(i32 %.3){
 }
 define i32 @main(){
 .15:
+  %.16 = alloca i32
   %.18at1 = call i32 @getint()
-  %.24 = icmp sgt i32 %.18at1, 10
+  store i32 %.18at1, i32* %.16
+  %.22 = load i32, i32* %.16
+  %.24 = icmp sgt i32 %.22, 10
   br i1 %.24, label %.25, label %.21
 .20:
+  store i32 1, i32* %.16
   br label %.33 
 .21:
+  store i32 0, i32* %.16
   br label %.33 
 .25:
-  %.28at2 = call i32 @_user_func(i32 %.18at1)
+  %.27 = load i32, i32* %.16
+  %.28at2 = call i32 @_user_func(i32 %.27)
   %.29 = icmp ne i32 %.28at2, 0
   br i1 %.29, label %.20, label %.21
 .33:
   %.37at3 = call i32 @getint()
-  %.43 = icmp sgt i32 %.37at3, 11
+  store i32 %.37at3, i32* %.16
+  %.41 = load i32, i32* %.16
+  %.43 = icmp sgt i32 %.41, 11
   br i1 %.43, label %.44, label %.40
 .39:
+  store i32 1, i32* %.16
   br label %.51 
 .40:
+  store i32 0, i32* %.16
   br label %.51 
 .44:
-  %.47at4 = call i32 @_user_func(i32 %.37at3)
+  %.46 = load i32, i32* %.16
+  %.47at4 = call i32 @_user_func(i32 %.46)
   %.48 = icmp ne i32 %.47at4, 0
   br i1 %.48, label %.39, label %.40
 .51:
   %.55at5 = call i32 @getint()
-  %.62 = icmp sle i32 %.55at5, 99
+  store i32 %.55at5, i32* %.16
+  %.60 = load i32, i32* %.16
+  %.62 = icmp sle i32 %.60, 99
   br i1 %.62, label %.57, label %.59
 .57:
+  store i32 1, i32* %.16
   br label %.69 
 .58:
+  store i32 0, i32* %.16
   br label %.69 
 .59:
-  %.65at6 = call i32 @_user_func(i32 %.55at5)
+  %.64 = load i32, i32* %.16
+  %.65at6 = call i32 @_user_func(i32 %.64)
   %.66 = icmp ne i32 %.65at6, 0
   br i1 %.66, label %.57, label %.58
 .69:
   %.73at7 = call i32 @getint()
-  %.80 = icmp sle i32 %.73at7, 100
+  store i32 %.73at7, i32* %.16
+  %.78 = load i32, i32* %.16
+  %.80 = icmp sle i32 %.78, 100
   br i1 %.80, label %.75, label %.77
 .75:
+  store i32 1, i32* %.16
   br label %.87 
 .76:
+  store i32 0, i32* %.16
   br label %.87 
 .77:
-  %.83at8 = call i32 @_user_func(i32 %.73at7)
+  %.82 = load i32, i32* %.16
+  %.83at8 = call i32 @_user_func(i32 %.82)
   %.84 = icmp ne i32 %.83at8, 0
   br i1 %.84, label %.75, label %.76
 .87:
@@ -421,8 +445,10 @@ define i32 @main(){
   %.94 = icmp eq i32 %.93at9, 0
   br i1 %.94, label %.95, label %.92
 .91:
+  store i32 1, i32* %.16
   br label %.101 
 .92:
+  store i32 0, i32* %.16
   br label %.101 
 .95:
   %.97at10 = call i32 @_user_func(i32 100)

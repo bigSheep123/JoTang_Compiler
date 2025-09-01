@@ -361,12 +361,18 @@ attributes #7 = { cold }
 @.G.array = global [20 x [100 x i32]] zeroinitializer
 define i32 @main(){
 .5:
+  %.18 = alloca i32
+  %.9 = alloca i32
+  %.6 = alloca i32
+  store i32 0, i32* %.6
+  store i32 0, i32* %.9
   br label %.11wc 
 .11wc:
-  %.148 = phi i32 [0, %.5], [%.38, %.22wn]
-  %.16 = icmp slt i32 %.148, 20
+  %.15 = load i32, i32* %.6
+  %.16 = icmp slt i32 %.15, 20
   br i1 %.16, label %.12wloop., label %.13wn
 .12wloop.:
+  store i32 0, i32* %.18
   br label %.20wc 
 .13wn:
   %.60 = getelementptr inbounds [20 x [100 x i32]], [20 x [100 x i32]]* @.G.array, i32 0, i32 19, i32 23
@@ -450,18 +456,27 @@ define i32 @main(){
   %.139 = getelementptr inbounds [20 x [100 x i32]], [20 x [100 x i32]]* @.G.array, i32 0, i32 %.137, i32 56
   %.140 = load i32, i32* %.139
   %.141 = add i32 %.99, %.140
-  call void @putint(i32 %.141)
+  store i32 %.141, i32* %.9
+  %.143 = load i32, i32* %.9
+  call void @putint(i32 %.143)
   ret i32 0 
 .20wc:
-  %.147 = phi i32 [0, %.12wloop.], [%.34, %.21wloop.]
-  %.25 = icmp slt i32 %.147, 100
+  %.24 = load i32, i32* %.18
+  %.25 = icmp slt i32 %.24, 100
   br i1 %.25, label %.21wloop., label %.22wn
 .21wloop.:
-  %.30 = getelementptr inbounds [20 x [100 x i32]], [20 x [100 x i32]]* @.G.array, i32 0, i32 %.148, i32 %.147
-  store i32 %.147, i32* %.30
-  %.34 = add i32 %.147, 1
+  %.27 = load i32, i32* %.18
+  %.28 = load i32, i32* %.6
+  %.29 = load i32, i32* %.18
+  %.30 = getelementptr inbounds [20 x [100 x i32]], [20 x [100 x i32]]* @.G.array, i32 0, i32 %.28, i32 %.29
+  store i32 %.27, i32* %.30
+  %.32 = load i32, i32* %.18
+  %.34 = add i32 %.32, 1
+  store i32 %.34, i32* %.18
   br label %.20wc 
 .22wn:
-  %.38 = add i32 %.148, 1
+  %.37 = load i32, i32* %.6
+  %.38 = add i32 %.37, 1
+  store i32 %.38, i32* %.6
   br label %.11wc 
 }

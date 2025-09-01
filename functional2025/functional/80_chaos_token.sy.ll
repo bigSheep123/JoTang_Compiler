@@ -362,52 +362,77 @@ attributes #7 = { cold }
 @.G.RET = global [5 x i32]  [i32 10, i32 zeroinitializer, i32 zeroinitializer, i32 zeroinitializer, i32 zeroinitializer]
 define i32 @_user_putstr(i32* %.50){
 .49:
+  %.53 = alloca i32
+  %.51 = alloca i32*
+  store i32* %.50, i32** %.51
+  store i32 0, i32* %.53
   br label %.56wc 
 .56wc:
-  %.130 = phi i32 [0, %.49], [%.74, %.57wloop.]
-  %.62 = getelementptr inbounds i32, i32* %.50, i32 %.130
+  %.60 = load i32, i32* %.53
+  %.61 = load i32*, i32** %.51
+  %.62 = getelementptr inbounds i32, i32* %.61, i32 %.60
   %.63 = load i32, i32* %.62
   %.64 = icmp ne i32 %.63, 0
   br i1 %.64, label %.57wloop., label %.58wn
 .57wloop.:
-  %.68 = getelementptr inbounds i32, i32* %.50, i32 %.130
+  %.66 = load i32, i32* %.53
+  %.67 = load i32*, i32** %.51
+  %.68 = getelementptr inbounds i32, i32* %.67, i32 %.66
   %.69 = load i32, i32* %.68
   call void @putch(i32 %.69)
-  %.74 = add i32 %.130, 1
+  %.72 = load i32, i32* %.53
+  %.74 = add i32 %.72, 1
+  store i32 %.74, i32* %.53
   br label %.56wc 
 .58wn:
-  ret i32 %.130 
+  %.77 = load i32, i32* %.53
+  ret i32 %.77 
 }
 define i32 @main(){
 .79:
+  %.94 = alloca i32
+  %.90 = alloca i32
+  %.82 = alloca i32
   %.80 = getelementptr inbounds [100 x i32], [100 x i32]* @.G.__HELLO, i32 0, i32 0
   %.81at1 = call i32 @_user_putstr(i32* %.80)
+  store i32 0, i32* %.82
   br label %.84wc 
 .84wc:
-  %.133 = phi i32 [0, %.79], [%.120, %.123]
-  br i1 true, label %.85wloop., label %.86wn
+  %.88 = icmp ne i32 1, 0
+  br i1 %.88, label %.85wloop., label %.86wn
 .85wloop.:
-  %.92 = sdiv i32 %.133, 6
-  %.96 = srem i32 %.133, 6
-  %.102 = icmp ne i32 %.92, %.96
+  %.91 = load i32, i32* %.82
+  %.92 = sdiv i32 %.91, 6
+  store i32 %.92, i32* %.90
+  %.95 = load i32, i32* %.82
+  %.96 = srem i32 %.95, 6
+  store i32 %.96, i32* %.94
+  %.100 = load i32, i32* %.90
+  %.101 = load i32, i32* %.94
+  %.102 = icmp ne i32 %.100, %.101
   br i1 %.102, label %.98, label %.99
 .86wn:
   ret i32 0 
 .98:
-  %.105 = getelementptr inbounds [6 x [50 x i32]], [6 x [50 x i32]]* @.G.N4__mE___, i32 0, i32 %.92, i32 0
+  %.104 = load i32, i32* %.90
+  %.105 = getelementptr inbounds [6 x [50 x i32]], [6 x [50 x i32]]* @.G.N4__mE___, i32 0, i32 %.104, i32 0
   %.106at2 = call i32 @_user_putstr(i32* %.105)
   %.107 = getelementptr inbounds [40 x i32], [40 x i32]* @.G.saY_HeI10_To, i32 0, i32 0
   %.108at3 = call i32 @_user_putstr(i32* %.107)
-  %.110 = getelementptr inbounds [6 x [50 x i32]], [6 x [50 x i32]]* @.G.N4__mE___, i32 0, i32 %.96, i32 0
+  %.109 = load i32, i32* %.94
+  %.110 = getelementptr inbounds [6 x [50 x i32]], [6 x [50 x i32]]* @.G.N4__mE___, i32 0, i32 %.109, i32 0
   %.111at4 = call i32 @_user_putstr(i32* %.110)
   %.112 = getelementptr inbounds [5 x i32], [5 x i32]* @.G.RET, i32 0, i32 0
   %.113at5 = call i32 @_user_putstr(i32* %.112)
   br label %.99 
 .99:
-  %.117 = mul i32 %.133, 17
+  %.115 = load i32, i32* %.82
+  %.117 = mul i32 %.115, 17
   %.119 = add i32 %.117, 23
   %.120 = srem i32 %.119, 32
-  %.125 = icmp eq i32 %.120, 0
+  store i32 %.120, i32* %.82
+  %.124 = load i32, i32* %.82
+  %.125 = icmp eq i32 %.124, 0
   br i1 %.125, label %.122, label %.123
 .122:
   br label %.86wn 

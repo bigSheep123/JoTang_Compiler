@@ -361,24 +361,38 @@ attributes #7 = { cold }
 @.G.d = global i32 zeroinitializer
 define i32 @_user_set_a(i32 %.4){
 .3:
-  store i32 %.4, i32* @.G.a
+  %.5 = alloca i32
+  store i32 %.4, i32* %.5
+  %.7 = load i32, i32* %.5
+  store i32 %.7, i32* @.G.a
   %.9 = load i32, i32* @.G.a
   ret i32 %.9 
 }
 define i32 @_user_set_b(i32 %.12){
 .11:
-  store i32 %.12, i32* @.G.b
+  %.13 = alloca i32
+  store i32 %.12, i32* %.13
+  %.15 = load i32, i32* %.13
+  store i32 %.15, i32* @.G.b
   %.17 = load i32, i32* @.G.b
   ret i32 %.17 
 }
 define i32 @_user_set_d(i32 %.20){
 .19:
-  store i32 %.20, i32* @.G.d
+  %.21 = alloca i32
+  store i32 %.20, i32* %.21
+  %.23 = load i32, i32* %.21
+  store i32 %.23, i32* @.G.d
   %.25 = load i32, i32* @.G.d
   ret i32 %.25 
 }
 define i32 @main(){
 .27:
+  %.159 = alloca i32
+  %.157 = alloca i32
+  %.155 = alloca i32
+  %.153 = alloca i32
+  %.151 = alloca i32
   store i32 2, i32* @.G.a
   store i32 3, i32* @.G.b
   %.35at0 = call i32 @_user_set_a(i32 0)
@@ -437,72 +451,121 @@ define i32 @main(){
   call void @putch(i32 65)
   br label %.99 
 .99:
-  br i1 false, label %.101, label %.102
+  %.108 = icmp ne i32 18, 18
+  br i1 %.108, label %.101, label %.102
 .101:
   call void @putch(i32 66)
   br label %.102 
 .102:
-  br i1 false, label %.113, label %.114
+  %.116 = zext i1 true to i32
+  %.117 = icmp ne i32 %.116, 1
+  br i1 %.117, label %.113, label %.114
 .113:
   call void @putch(i32 67)
   br label %.114 
 .114:
-  br i1 true, label %.122, label %.123
+  %.125 = zext i1 false to i32
+  %.126 = icmp eq i32 %.125, 0
+  br i1 %.126, label %.122, label %.123
 .122:
   call void @putch(i32 68)
   br label %.123 
 .123:
-  br i1 false, label %.131, label %.132
+  %.135 = zext i1 false to i32
+  %.136 = icmp eq i32 1, %.135
+  br i1 %.136, label %.131, label %.132
 .131:
   call void @putch(i32 69)
   br label %.132 
 .132:
-  br i1 true, label %.141, label %.142
+  %.145 = icmp eq i32 -1, -1
+  br i1 %.145, label %.141, label %.142
 .141:
   call void @putch(i32 70)
   br label %.142 
 .142:
   call void @putch(i32 10)
+  store i32 0, i32* %.151
+  store i32 1, i32* %.153
+  store i32 2, i32* %.155
+  store i32 3, i32* %.157
+  store i32 4, i32* %.159
   br label %.161wc 
 .161wc:
-  br i1 false, label %.167, label %.163wn
+  %.165 = load i32, i32* %.151
+  %.166 = icmp ne i32 %.165, 0
+  br i1 %.166, label %.167, label %.163wn
 .162wloop.:
   call void @putch(i32 32)
   br label %.161wc 
 .163wn:
-  br i1 false, label %.174, label %.176
+  %.177 = load i32, i32* %.151
+  %.178 = icmp ne i32 %.177, 0
+  br i1 %.178, label %.174, label %.176
 .167:
-  br i1 true, label %.162wloop., label %.163wn
+  %.169 = load i32, i32* %.153
+  %.170 = icmp ne i32 %.169, 0
+  br i1 %.170, label %.162wloop., label %.163wn
 .174:
   call void @putch(i32 67)
   br label %.175 
 .175:
-  br i1 false, label %.185, label %.187
+  %.188 = load i32, i32* %.151
+  %.189 = load i32, i32* %.153
+  %.190 = icmp sge i32 %.188, %.189
+  br i1 %.190, label %.185, label %.187
 .176:
-  br i1 true, label %.174, label %.175
+  %.180 = load i32, i32* %.153
+  %.181 = icmp ne i32 %.180, 0
+  br i1 %.181, label %.174, label %.175
 .185:
   call void @putch(i32 72)
   br label %.186 
 .186:
-  br i1 true, label %.204, label %.200
+  %.201 = load i32, i32* %.155
+  %.202 = load i32, i32* %.153
+  %.203 = icmp sge i32 %.201, %.202
+  br i1 %.203, label %.204, label %.200
 .187:
-  br i1 false, label %.185, label %.186
+  %.192 = load i32, i32* %.153
+  %.193 = load i32, i32* %.151
+  %.194 = icmp sle i32 %.192, %.193
+  br i1 %.194, label %.185, label %.186
 .199:
   call void @putch(i32 73)
   br label %.200 
 .200:
-  br i1 true, label %.221, label %.215
+  %.216 = load i32, i32* %.151
+  %.217 = load i32, i32* %.153
+  %.218 = icmp eq i32 %.217, 0
+  %.219 = zext i1 %.218 to i32
+  %.220 = icmp eq i32 %.216, %.219
+  br i1 %.220, label %.221, label %.215
 .204:
-  br i1 true, label %.199, label %.200
+  %.206 = load i32, i32* %.159
+  %.207 = load i32, i32* %.157
+  %.208 = icmp ne i32 %.206, %.207
+  br i1 %.208, label %.199, label %.200
 .213:
   call void @putch(i32 74)
   br label %.214 
 .214:
-  br i1 true, label %.234, label %.236
+  %.237 = load i32, i32* %.151
+  %.238 = load i32, i32* %.153
+  %.239 = icmp eq i32 %.238, 0
+  %.240 = zext i1 %.239 to i32
+  %.241 = icmp eq i32 %.237, %.240
+  br i1 %.241, label %.234, label %.236
 .215:
-  br i1 true, label %.213, label %.214
+  %.227 = load i32, i32* %.159
+  %.228 = load i32, i32* %.159
+  %.229 = icmp sge i32 %.227, %.228
+  br i1 %.229, label %.213, label %.214
 .221:
-  br i1 false, label %.213, label %.215
+  %.223 = load i32, i32* %.157
+  %.224 = load i32, i32* %.157
+  %.225 = icmp slt i32 %.223, %.224
+  br i1 %.225, label %.213, label %.215
 .234:
   call void @putch(i32 75)
   br label %.235 
@@ -510,7 +573,13 @@ define i32 @main(){
   call void @putch(i32 10)
   ret i32 0 
 .236:
-  br i1 false, label %.246, label %.235
+  %.243 = load i32, i32* %.157
+  %.244 = load i32, i32* %.157
+  %.245 = icmp slt i32 %.243, %.244
+  br i1 %.245, label %.246, label %.235
 .246:
-  br i1 true, label %.234, label %.235
+  %.248 = load i32, i32* %.159
+  %.249 = load i32, i32* %.159
+  %.250 = icmp sge i32 %.248, %.249
+  br i1 %.250, label %.234, label %.235
 }

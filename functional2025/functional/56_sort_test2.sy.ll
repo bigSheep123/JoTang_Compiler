@@ -359,45 +359,72 @@ attributes #7 = { cold }
 @.G.n = global i32 zeroinitializer
 define i32 @_user_insertsort(i32* %.2){
 .1:
+  %.22 = alloca i32
+  %.16 = alloca i32
+  %.5 = alloca i32
+  %.3 = alloca i32*
+  store i32* %.2, i32** %.3
+  store i32 1, i32* %.5
   br label %.8wc 
 .8wc:
-  %.129 = phi i32 [1, %.1], [%.63, %.28wn]
+  %.12 = load i32, i32* %.5
   %.13 = load i32, i32* @.G.n
-  %.14 = icmp slt i32 %.129, %.13
+  %.14 = icmp slt i32 %.12, %.13
   br i1 %.14, label %.9wloop., label %.10wn
 .9wloop.:
-  %.19 = getelementptr inbounds i32, i32* %.2, i32 %.129
+  %.17 = load i32, i32* %.5
+  %.18 = load i32*, i32** %.3
+  %.19 = getelementptr inbounds i32, i32* %.18, i32 %.17
   %.20 = load i32, i32* %.19
-  %.24 = sub i32 %.129, 1
+  store i32 %.20, i32* %.16
+  %.23 = load i32, i32* %.5
+  %.24 = sub i32 %.23, 1
+  store i32 %.24, i32* %.22
   br label %.26wc 
 .10wn:
   ret i32 0 
 .26wc:
-  %.128 = phi i32 [%.24, %.9wloop.], [%.53, %.27wloop.]
-  %.33 = icmp sgt i32 %.128, -1
+  %.30 = load i32, i32* %.22
+  %.33 = icmp sgt i32 %.30, -1
   br i1 %.33, label %.34, label %.28wn
 .27wloop.:
-  %.45 = getelementptr inbounds i32, i32* %.2, i32 %.128
+  %.43 = load i32, i32* %.22
+  %.44 = load i32*, i32** %.3
+  %.45 = getelementptr inbounds i32, i32* %.44, i32 %.43
   %.46 = load i32, i32* %.45
-  %.48 = add i32 %.128, 1
-  %.50 = getelementptr inbounds i32, i32* %.2, i32 %.48
+  %.47 = load i32, i32* %.22
+  %.48 = add i32 %.47, 1
+  %.49 = load i32*, i32** %.3
+  %.50 = getelementptr inbounds i32, i32* %.49, i32 %.48
   store i32 %.46, i32* %.50
-  %.53 = sub i32 %.128, 1
+  %.52 = load i32, i32* %.22
+  %.53 = sub i32 %.52, 1
+  store i32 %.53, i32* %.22
   br label %.26wc 
 .28wn:
-  %.58 = add i32 %.128, 1
-  %.60 = getelementptr inbounds i32, i32* %.2, i32 %.58
-  store i32 %.20, i32* %.60
-  %.63 = add i32 %.129, 1
+  %.56 = load i32, i32* %.16
+  %.57 = load i32, i32* %.22
+  %.58 = add i32 %.57, 1
+  %.59 = load i32*, i32** %.3
+  %.60 = getelementptr inbounds i32, i32* %.59, i32 %.58
+  store i32 %.56, i32* %.60
+  %.62 = load i32, i32* %.5
+  %.63 = add i32 %.62, 1
+  store i32 %.63, i32* %.5
   br label %.8wc 
 .34:
-  %.39 = getelementptr inbounds i32, i32* %.2, i32 %.128
+  %.36 = load i32, i32* %.16
+  %.37 = load i32, i32* %.22
+  %.38 = load i32*, i32** %.3
+  %.39 = getelementptr inbounds i32, i32* %.38, i32 %.37
   %.40 = load i32, i32* %.39
-  %.41 = icmp slt i32 %.20, %.40
+  %.41 = icmp slt i32 %.36, %.40
   br i1 %.41, label %.27wloop., label %.28wn
 }
 define i32 @main(){
 .67:
+  %.111 = alloca i32
+  %.99 = alloca i32
   %.70 = alloca [10 x i32]
   store i32 10, i32* @.G.n
   %.72 = getelementptr inbounds [10 x i32], [10 x i32]* %.70, i32 0, i32 0
@@ -422,18 +449,26 @@ define i32 @main(){
   store i32 8, i32* %.97
   %.100 = getelementptr inbounds [10 x i32], [10 x i32]* %.70, i32 0, i32 0
   %.101at0 = call i32 @_user_insertsort(i32* %.100)
+  store i32 %.101at0, i32* %.99
   br label %.103wc 
 .103wc:
-  %.132 = phi i32 [%.101at0, %.67], [%.124, %.104wloop.]
+  %.107 = load i32, i32* %.99
   %.108 = load i32, i32* @.G.n
-  %.109 = icmp slt i32 %.132, %.108
+  %.109 = icmp slt i32 %.107, %.108
   br i1 %.109, label %.104wloop., label %.105wn
 .104wloop.:
-  %.113 = getelementptr inbounds [10 x i32], [10 x i32]* %.70, i32 0, i32 %.132
+  %.112 = load i32, i32* %.99
+  %.113 = getelementptr inbounds [10 x i32], [10 x i32]* %.70, i32 0, i32 %.112
   %.114 = load i32, i32* %.113
-  call void @putint(i32 %.114)
-  call void @putch(i32 10)
-  %.124 = add i32 %.132, 1
+  store i32 %.114, i32* %.111
+  %.116 = load i32, i32* %.111
+  call void @putint(i32 %.116)
+  store i32 10, i32* %.111
+  %.120 = load i32, i32* %.111
+  call void @putch(i32 %.120)
+  %.123 = load i32, i32* %.99
+  %.124 = add i32 %.123, 1
+  store i32 %.124, i32* %.99
   br label %.103wc 
 .105wn:
   ret i32 0 

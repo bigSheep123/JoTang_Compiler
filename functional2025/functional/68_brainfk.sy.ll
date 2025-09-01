@@ -363,36 +363,56 @@ attributes #7 = { cold }
 @.G.ptr11 = global i32 0
 define void @_user_read_program(){
 .8:
+  %.11 = alloca i32
+  %.9 = alloca i32
+  store i32 0, i32* %.9
   %.13at0 = call i32 @getint()
+  store i32 %.13at0, i32* %.11
   br label %.15wc 
 .15wc:
-  %.204 = phi i32 [0, %.8], [%.30, %.16wloop.]
-  %.21 = icmp slt i32 %.204, %.13at0
+  %.19 = load i32, i32* %.9
+  %.20 = load i32, i32* %.11
+  %.21 = icmp slt i32 %.19, %.20
   br i1 %.21, label %.16wloop., label %.17wn
 .16wloop.:
   %.24at1 = call i32 @getch()
-  %.26 = getelementptr inbounds [32768 x i32], [32768 x i32]* @.G.program, i32 0, i32 %.204
+  %.25 = load i32, i32* %.9
+  %.26 = getelementptr inbounds [32768 x i32], [32768 x i32]* @.G.program, i32 0, i32 %.25
   store i32 %.24at1, i32* %.26
-  %.30 = add i32 %.204, 1
+  %.28 = load i32, i32* %.9
+  %.30 = add i32 %.28, 1
+  store i32 %.30, i32* %.9
   br label %.15wc 
 .17wn:
-  %.34 = getelementptr inbounds [32768 x i32], [32768 x i32]* @.G.program, i32 0, i32 %.204
+  %.33 = load i32, i32* %.9
+  %.34 = getelementptr inbounds [32768 x i32], [32768 x i32]* @.G.program, i32 0, i32 %.33
   store i32 0, i32* %.34
   ret void
 }
 define void @_user_interpret(i32* %.38){
 .37:
+  %.43 = alloca i32
+  %.42 = alloca i32
+  %.41 = alloca i32
+  %.39 = alloca i32*
+  store i32* %.38, i32** %.39
+  store i32 0, i32* %.43
   br label %.45wc 
 .45wc:
-  %.206 = phi i32 [0, %.37], [%.195, %.69]
-  %.51 = getelementptr inbounds i32, i32* %.38, i32 %.206
+  %.49 = load i32, i32* %.43
+  %.50 = load i32*, i32** %.39
+  %.51 = getelementptr inbounds i32, i32* %.50, i32 %.49
   %.52 = load i32, i32* %.51
   %.53 = icmp ne i32 %.52, 0
   br i1 %.53, label %.46wloop., label %.47wn
 .46wloop.:
-  %.57 = getelementptr inbounds i32, i32* %.38, i32 %.206
+  %.55 = load i32, i32* %.43
+  %.56 = load i32*, i32** %.39
+  %.57 = getelementptr inbounds i32, i32* %.56, i32 %.55
   %.58 = load i32, i32* %.57
-  %.64 = icmp eq i32 %.58, 62
+  store i32 %.58, i32* %.41
+  %.62 = load i32, i32* %.41
+  %.64 = icmp eq i32 %.62, 62
   br i1 %.64, label %.60, label %.61
 .47wn:
   ret void
@@ -402,11 +422,13 @@ define void @_user_interpret(i32* %.38){
   store i32 %.67, i32* @.G.ptr11
   br label %.69 
 .61:
-  %.75 = icmp eq i32 %.58, 60
+  %.73 = load i32, i32* %.41
+  %.75 = icmp eq i32 %.73, 60
   br i1 %.75, label %.71, label %.72
 .69:
-  %.207 = phi i32 [%.208, %.80], [%.206, %.60]
-  %.195 = add i32 %.207, 1
+  %.194 = load i32, i32* %.43
+  %.195 = add i32 %.194, 1
+  store i32 %.195, i32* %.43
   br label %.45wc 
 .71:
   %.77 = load i32, i32* @.G.ptr11
@@ -414,10 +436,10 @@ define void @_user_interpret(i32* %.38){
   store i32 %.78, i32* @.G.ptr11
   br label %.80 
 .72:
-  %.86 = icmp eq i32 %.58, 43
+  %.84 = load i32, i32* %.41
+  %.86 = icmp eq i32 %.84, 43
   br i1 %.86, label %.82, label %.83
 .80:
-  %.208 = phi i32 [%.209, %.95], [%.206, %.71]
   br label %.69 
 .82:
   %.88 = load i32, i32* @.G.ptr11
@@ -429,10 +451,10 @@ define void @_user_interpret(i32* %.38){
   store i32 %.91, i32* %.93
   br label %.95 
 .83:
-  %.101 = icmp eq i32 %.58, 45
+  %.99 = load i32, i32* %.41
+  %.101 = icmp eq i32 %.99, 45
   br i1 %.101, label %.97, label %.98
 .95:
-  %.209 = phi i32 [%.210, %.110], [%.206, %.82]
   br label %.80 
 .97:
   %.103 = load i32, i32* @.G.ptr11
@@ -444,10 +466,10 @@ define void @_user_interpret(i32* %.38){
   store i32 %.106, i32* %.108
   br label %.110 
 .98:
-  %.116 = icmp eq i32 %.58, 46
+  %.114 = load i32, i32* %.41
+  %.116 = icmp eq i32 %.114, 46
   br i1 %.116, label %.112, label %.113
 .110:
-  %.210 = phi i32 [%.211, %.123], [%.206, %.97]
   br label %.95 
 .112:
   %.118 = load i32, i32* @.G.ptr11
@@ -456,10 +478,10 @@ define void @_user_interpret(i32* %.38){
   call void @putch(i32 %.120)
   br label %.123 
 .113:
-  %.129 = icmp eq i32 %.58, 44
+  %.127 = load i32, i32* %.41
+  %.129 = icmp eq i32 %.127, 44
   br i1 %.129, label %.125, label %.126
 .123:
-  %.211 = phi i32 [%.212, %.135], [%.206, %.112]
   br label %.110 
 .125:
   %.131at3 = call i32 @getch()
@@ -468,15 +490,15 @@ define void @_user_interpret(i32* %.38){
   store i32 %.131at3, i32* %.133
   br label %.135 
 .126:
-  %.141 = icmp eq i32 %.58, 93
+  %.139 = load i32, i32* %.41
+  %.141 = icmp eq i32 %.139, 93
   br i1 %.141, label %.142, label %.138
 .135:
-  %.212 = phi i32 [%.213, %.138], [%.206, %.125]
   br label %.123 
 .137:
+  store i32 1, i32* %.42
   br label %.150wc 
 .138:
-  %.213 = phi i32 [%.206, %.126], [%.206, %.142], [%.214, %.152wn]
   br label %.135 
 .142:
   %.144 = load i32, i32* @.G.ptr11
@@ -485,32 +507,40 @@ define void @_user_interpret(i32* %.38){
   %.147 = icmp ne i32 %.146, 0
   br i1 %.147, label %.137, label %.138
 .150wc:
-  %.215 = phi i32 [1, %.137], [%.216, %.174]
-  %.214 = phi i32 [%.206, %.137], [%.158, %.174]
-  %.155 = icmp sgt i32 %.215, 0
+  %.154 = load i32, i32* %.42
+  %.155 = icmp sgt i32 %.154, 0
   br i1 %.155, label %.151wloop., label %.152wn
 .151wloop.:
-  %.158 = sub i32 %.214, 1
-  %.162 = getelementptr inbounds i32, i32* %.38, i32 %.158
+  %.157 = load i32, i32* %.43
+  %.158 = sub i32 %.157, 1
+  store i32 %.158, i32* %.43
+  %.160 = load i32, i32* %.43
+  %.161 = load i32*, i32** %.39
+  %.162 = getelementptr inbounds i32, i32* %.161, i32 %.160
   %.163 = load i32, i32* %.162
-  %.169 = icmp eq i32 %.163, 91
+  store i32 %.163, i32* %.41
+  %.167 = load i32, i32* %.41
+  %.169 = icmp eq i32 %.167, 91
   br i1 %.169, label %.165, label %.166
 .152wn:
   br label %.138 
 .165:
-  %.172 = sub i32 %.215, 1
+  %.171 = load i32, i32* %.42
+  %.172 = sub i32 %.171, 1
+  store i32 %.172, i32* %.42
   br label %.174 
 .166:
-  %.179 = icmp eq i32 %.163, 93
+  %.178 = load i32, i32* %.41
+  %.179 = icmp eq i32 %.178, 93
   br i1 %.179, label %.176, label %.177
 .174:
-  %.216 = phi i32 [%.217, %.177], [%.172, %.165]
   br label %.150wc 
 .176:
-  %.182 = add i32 %.215, 1
+  %.181 = load i32, i32* %.42
+  %.182 = add i32 %.181, 1
+  store i32 %.182, i32* %.42
   br label %.177 
 .177:
-  %.217 = phi i32 [%.215, %.166], [%.182, %.176]
   br label %.174 
 }
 define i32 @main(){

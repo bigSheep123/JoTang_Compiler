@@ -364,21 +364,25 @@ attributes #7 = { cold }
 @.G.line2 = global [100 x i32] zeroinitializer
 define void @_user_printans(){
 .9:
+  %.14 = alloca i32
   %.10 = load i32, i32* @.G.sum
   %.12 = add i32 %.10, 1
   store i32 %.12, i32* @.G.sum
+  store i32 1, i32* %.14
   br label %.16wc 
 .16wc:
-  %.159 = phi i32 [1, %.9], [%.44, %.41]
+  %.20 = load i32, i32* %.14
   %.21 = load i32, i32* @.G.n
-  %.22 = icmp sle i32 %.159, %.21
+  %.22 = icmp sle i32 %.20, %.21
   br i1 %.22, label %.17wloop., label %.18wn
 .17wloop.:
-  %.25 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.ans, i32 0, i32 %.159
+  %.24 = load i32, i32* %.14
+  %.25 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.ans, i32 0, i32 %.24
   %.26 = load i32, i32* %.25
   call void @putint(i32 %.26)
+  %.31 = load i32, i32* %.14
   %.32 = load i32, i32* @.G.n
-  %.33 = icmp eq i32 %.159, %.32
+  %.33 = icmp eq i32 %.31, %.32
   br i1 %.33, label %.29, label %.30
 .18wn:
   ret void
@@ -389,43 +393,59 @@ define void @_user_printans(){
   call void @putch(i32 32)
   br label %.41 
 .41:
-  %.44 = add i32 %.159, 1
+  %.43 = load i32, i32* %.14
+  %.44 = add i32 %.43, 1
+  store i32 %.44, i32* %.14
   br label %.16wc 
 }
 define void @_user_f(i32 %.49){
 .48:
+  %.52 = alloca i32
+  %.50 = alloca i32
+  store i32 %.49, i32* %.50
+  store i32 1, i32* %.52
   br label %.54wc 
 .54wc:
-  %.161 = phi i32 [1, %.48], [%.134, %.63]
+  %.58 = load i32, i32* %.52
   %.59 = load i32, i32* @.G.n
-  %.60 = icmp sle i32 %.161, %.59
+  %.60 = icmp sle i32 %.58, %.59
   br i1 %.60, label %.55wloop., label %.56wn
 .55wloop.:
-  %.65 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.row, i32 0, i32 %.161
+  %.64 = load i32, i32* %.52
+  %.65 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.row, i32 0, i32 %.64
   %.66 = load i32, i32* %.65
   %.67 = icmp ne i32 %.66, 1
   br i1 %.67, label %.68, label %.63
 .56wn:
   ret void
 .62:
-  %.89 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.ans, i32 0, i32 %.49
-  store i32 %.161, i32* %.89
+  %.87 = load i32, i32* %.52
+  %.88 = load i32, i32* %.50
+  %.89 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.ans, i32 0, i32 %.88
+  store i32 %.87, i32* %.89
+  %.93 = load i32, i32* %.50
   %.94 = load i32, i32* @.G.n
-  %.95 = icmp eq i32 %.49, %.94
+  %.95 = icmp eq i32 %.93, %.94
   br i1 %.95, label %.91, label %.92
 .63:
-  %.134 = add i32 %.161, 1
+  %.133 = load i32, i32* %.52
+  %.134 = add i32 %.133, 1
+  store i32 %.134, i32* %.52
   br label %.54wc 
 .68:
-  %.72 = add i32 %.49, %.161
+  %.70 = load i32, i32* %.50
+  %.71 = load i32, i32* %.52
+  %.72 = add i32 %.70, %.71
   %.73 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.line1, i32 0, i32 %.72
   %.74 = load i32, i32* %.73
   %.75 = icmp eq i32 %.74, 0
   br i1 %.75, label %.76, label %.63
 .76:
   %.78 = load i32, i32* @.G.n
-  %.80 = add i32 %.78, %.49
-  %.82 = sub i32 %.80, %.161
+  %.79 = load i32, i32* %.50
+  %.80 = add i32 %.78, %.79
+  %.81 = load i32, i32* %.52
+  %.82 = sub i32 %.80, %.81
   %.83 = getelementptr inbounds [100 x i32], [100 x i32]* @.G.line2, i32 0, i32 %.82
   %.84 = load i32, i32* %.83
   %.85 = icmp eq i32 %.84, 0
@@ -434,43 +454,58 @@ define void @_user_f(i32 %.49){
   call void @_user_printans()
   br label %.92 
 .92:
-  %.100 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.row, i32 0, i32 %.161
+  %.99 = load i32, i32* %.52
+  %.100 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.row, i32 0, i32 %.99
   store i32 1, i32* %.100
-  %.104 = add i32 %.49, %.161
+  %.102 = load i32, i32* %.50
+  %.103 = load i32, i32* %.52
+  %.104 = add i32 %.102, %.103
   %.105 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.line1, i32 0, i32 %.104
   store i32 1, i32* %.105
   %.107 = load i32, i32* @.G.n
-  %.109 = add i32 %.107, %.49
-  %.111 = sub i32 %.109, %.161
+  %.108 = load i32, i32* %.50
+  %.109 = add i32 %.107, %.108
+  %.110 = load i32, i32* %.52
+  %.111 = sub i32 %.109, %.110
   %.112 = getelementptr inbounds [100 x i32], [100 x i32]* @.G.line2, i32 0, i32 %.111
   store i32 1, i32* %.112
-  %.115 = add i32 %.49, 1
+  %.114 = load i32, i32* %.50
+  %.115 = add i32 %.114, 1
   call void @_user_f(i32 %.115)
-  %.118 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.row, i32 0, i32 %.161
+  %.117 = load i32, i32* %.52
+  %.118 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.row, i32 0, i32 %.117
   store i32 0, i32* %.118
-  %.122 = add i32 %.49, %.161
+  %.120 = load i32, i32* %.50
+  %.121 = load i32, i32* %.52
+  %.122 = add i32 %.120, %.121
   %.123 = getelementptr inbounds [50 x i32], [50 x i32]* @.G.line1, i32 0, i32 %.122
   store i32 0, i32* %.123
   %.125 = load i32, i32* @.G.n
-  %.127 = add i32 %.125, %.49
-  %.129 = sub i32 %.127, %.161
+  %.126 = load i32, i32* %.50
+  %.127 = add i32 %.125, %.126
+  %.128 = load i32, i32* %.52
+  %.129 = sub i32 %.127, %.128
   %.130 = getelementptr inbounds [100 x i32], [100 x i32]* @.G.line2, i32 0, i32 %.129
   store i32 0, i32* %.130
   br label %.63 
 }
 define i32 @main(){
 .138:
+  %.139 = alloca i32
   %.141at5 = call i32 @getint()
+  store i32 %.141at5, i32* %.139
   br label %.143wc 
 .143wc:
-  %.162 = phi i32 [%.141at5, %.138], [%.154, %.144wloop.]
-  %.148 = icmp sgt i32 %.162, 0
+  %.147 = load i32, i32* %.139
+  %.148 = icmp sgt i32 %.147, 0
   br i1 %.148, label %.144wloop., label %.145wn
 .144wloop.:
   %.150at6 = call i32 @getint()
   store i32 %.150at6, i32* @.G.n
   call void @_user_f(i32 1)
-  %.154 = sub i32 %.162, 1
+  %.153 = load i32, i32* %.139
+  %.154 = sub i32 %.153, 1
+  store i32 %.154, i32* %.139
   br label %.143wc 
 .145wn:
   %.157 = load i32, i32* @.G.sum

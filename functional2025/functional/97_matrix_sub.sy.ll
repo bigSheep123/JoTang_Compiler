@@ -361,40 +361,82 @@ attributes #7 = { cold }
 @.G.L = global i32 zeroinitializer
 define i32 @_user_sub(float* %.4, float* %.7, float* %.10, float* %.13, float* %.16, float* %.19, float* %.22, float* %.25, float* %.28){
 .3:
+  %.31 = alloca i32
+  %.29 = alloca float*
+  %.26 = alloca float*
+  %.23 = alloca float*
+  %.20 = alloca float*
+  %.17 = alloca float*
+  %.14 = alloca float*
+  %.11 = alloca float*
+  %.8 = alloca float*
+  %.5 = alloca float*
+  store float* %.4, float** %.5
+  store float* %.7, float** %.8
+  store float* %.10, float** %.11
+  store float* %.13, float** %.14
+  store float* %.16, float** %.17
+  store float* %.19, float** %.20
+  store float* %.22, float** %.23
+  store float* %.25, float** %.26
+  store float* %.28, float** %.29
+  store i32 0, i32* %.31
   br label %.34wc 
 .34wc:
-  %.225 = phi i32 [0, %.3], [%.83, %.35wloop.]
-  %.40 = icmp slt i32 %.225, 3
+  %.38 = load i32, i32* %.31
+  %.40 = icmp slt i32 %.38, 3
   br i1 %.40, label %.35wloop., label %.36wn
 .35wloop.:
-  %.44 = getelementptr inbounds float, float* %.4, i32 %.225
+  %.42 = load i32, i32* %.31
+  %.43 = load float*, float** %.5
+  %.44 = getelementptr inbounds float, float* %.43, i32 %.42
   %.45 = load float, float* %.44
-  %.48 = getelementptr inbounds float, float* %.13, i32 %.225
+  %.46 = load i32, i32* %.31
+  %.47 = load float*, float** %.14
+  %.48 = getelementptr inbounds float, float* %.47, i32 %.46
   %.49 = load float, float* %.48
   %.50 = fsub float %.45, %.49
-  %.53 = getelementptr inbounds float, float* %.22, i32 %.225
+  %.51 = load i32, i32* %.31
+  %.52 = load float*, float** %.23
+  %.53 = getelementptr inbounds float, float* %.52, i32 %.51
   store float %.50, float* %.53
-  %.57 = getelementptr inbounds float, float* %.7, i32 %.225
+  %.55 = load i32, i32* %.31
+  %.56 = load float*, float** %.8
+  %.57 = getelementptr inbounds float, float* %.56, i32 %.55
   %.58 = load float, float* %.57
-  %.61 = getelementptr inbounds float, float* %.16, i32 %.225
+  %.59 = load i32, i32* %.31
+  %.60 = load float*, float** %.17
+  %.61 = getelementptr inbounds float, float* %.60, i32 %.59
   %.62 = load float, float* %.61
   %.63 = fsub float %.58, %.62
-  %.66 = getelementptr inbounds float, float* %.25, i32 %.225
+  %.64 = load i32, i32* %.31
+  %.65 = load float*, float** %.26
+  %.66 = getelementptr inbounds float, float* %.65, i32 %.64
   store float %.63, float* %.66
-  %.70 = getelementptr inbounds float, float* %.10, i32 %.225
+  %.68 = load i32, i32* %.31
+  %.69 = load float*, float** %.11
+  %.70 = getelementptr inbounds float, float* %.69, i32 %.68
   %.71 = load float, float* %.70
-  %.74 = getelementptr inbounds float, float* %.19, i32 %.225
+  %.72 = load i32, i32* %.31
+  %.73 = load float*, float** %.20
+  %.74 = getelementptr inbounds float, float* %.73, i32 %.72
   %.75 = load float, float* %.74
   %.76 = fsub float %.71, %.75
-  %.79 = getelementptr inbounds float, float* %.28, i32 %.225
+  %.77 = load i32, i32* %.31
+  %.78 = load float*, float** %.29
+  %.79 = getelementptr inbounds float, float* %.78, i32 %.77
   store float %.76, float* %.79
-  %.83 = add i32 %.225, 1
+  %.81 = load i32, i32* %.31
+  %.83 = add i32 %.81, 1
+  store i32 %.83, i32* %.31
   br label %.34wc 
 .36wn:
   ret i32 0 
 }
 define i32 @main(){
 .87:
+  %.155 = alloca i32
+  %.101 = alloca i32
   %.100 = alloca [3 x float]
   %.99 = alloca [3 x float]
   %.98 = alloca [6 x float]
@@ -407,31 +449,46 @@ define i32 @main(){
   store i32 3, i32* @.G.N
   store i32 3, i32* @.G.M
   store i32 3, i32* @.G.L
+  store i32 0, i32* %.101
   br label %.103wc 
 .103wc:
-  %.228 = phi i32 [0, %.87], [%.141, %.104wloop.]
-  %.108 = icmp slt i32 %.228, 3
+  %.107 = load i32, i32* %.101
+  %.108 = icmp slt i32 %.107, 3
   br i1 %.108, label %.104wloop., label %.105wn
 .104wloop.:
-  %.112 = getelementptr inbounds [3 x float], [3 x float]* %.91, i32 0, i32 %.228
-  %.113 = sitofp i32 %.228 to float
+  %.110 = load i32, i32* %.101
+  %.111 = load i32, i32* %.101
+  %.112 = getelementptr inbounds [3 x float], [3 x float]* %.91, i32 0, i32 %.111
+  %.113 = sitofp i32 %.110 to float
   store float %.113, float* %.112
-  %.117 = getelementptr inbounds [3 x float], [3 x float]* %.92, i32 0, i32 %.228
-  %.118 = sitofp i32 %.228 to float
+  %.115 = load i32, i32* %.101
+  %.116 = load i32, i32* %.101
+  %.117 = getelementptr inbounds [3 x float], [3 x float]* %.92, i32 0, i32 %.116
+  %.118 = sitofp i32 %.115 to float
   store float %.118, float* %.117
-  %.122 = getelementptr inbounds [3 x float], [3 x float]* %.93, i32 0, i32 %.228
-  %.123 = sitofp i32 %.228 to float
+  %.120 = load i32, i32* %.101
+  %.121 = load i32, i32* %.101
+  %.122 = getelementptr inbounds [3 x float], [3 x float]* %.93, i32 0, i32 %.121
+  %.123 = sitofp i32 %.120 to float
   store float %.123, float* %.122
-  %.127 = getelementptr inbounds [3 x float], [3 x float]* %.94, i32 0, i32 %.228
-  %.128 = sitofp i32 %.228 to float
+  %.125 = load i32, i32* %.101
+  %.126 = load i32, i32* %.101
+  %.127 = getelementptr inbounds [3 x float], [3 x float]* %.94, i32 0, i32 %.126
+  %.128 = sitofp i32 %.125 to float
   store float %.128, float* %.127
-  %.132 = getelementptr inbounds [3 x float], [3 x float]* %.95, i32 0, i32 %.228
-  %.133 = sitofp i32 %.228 to float
+  %.130 = load i32, i32* %.101
+  %.131 = load i32, i32* %.101
+  %.132 = getelementptr inbounds [3 x float], [3 x float]* %.95, i32 0, i32 %.131
+  %.133 = sitofp i32 %.130 to float
   store float %.133, float* %.132
-  %.137 = getelementptr inbounds [3 x float], [3 x float]* %.96, i32 0, i32 %.228
-  %.138 = sitofp i32 %.228 to float
+  %.135 = load i32, i32* %.101
+  %.136 = load i32, i32* %.101
+  %.137 = getelementptr inbounds [3 x float], [3 x float]* %.96, i32 0, i32 %.136
+  %.138 = sitofp i32 %.135 to float
   store float %.138, float* %.137
-  %.141 = add i32 %.228, 1
+  %.140 = load i32, i32* %.101
+  %.141 = add i32 %.140, 1
+  store i32 %.141, i32* %.101
   br label %.103wc 
 .105wn:
   %.144 = getelementptr inbounds [3 x float], [3 x float]* %.91, i32 0, i32 0
@@ -444,47 +501,71 @@ define i32 @main(){
   %.151 = getelementptr inbounds [3 x float], [3 x float]* %.99, i32 0, i32 0
   %.152 = getelementptr inbounds [3 x float], [3 x float]* %.100, i32 0, i32 0
   %.153at0 = call i32 @_user_sub(float* %.144, float* %.145, float* %.146, float* %.147, float* %.148, float* %.149, float* %.150, float* %.151, float* %.152)
+  store i32 %.153at0, i32* %.101
   br label %.156wc 
 .156wc:
-  %.229 = phi i32 [%.153at0, %.105wn], [%.172, %.157wloop.]
-  %.161 = icmp slt i32 %.229, 3
+  %.160 = load i32, i32* %.101
+  %.161 = icmp slt i32 %.160, 3
   br i1 %.161, label %.157wloop., label %.158wn
 .157wloop.:
-  %.164 = getelementptr inbounds [6 x float], [6 x float]* %.98, i32 0, i32 %.229
+  %.163 = load i32, i32* %.101
+  %.164 = getelementptr inbounds [6 x float], [6 x float]* %.98, i32 0, i32 %.163
   %.165 = load float, float* %.164
   %.166 = fptosi float %.165 to i32
-  call void @putint(i32 %.166)
-  %.172 = add i32 %.229, 1
+  store i32 %.166, i32* %.155
+  %.168 = load i32, i32* %.155
+  call void @putint(i32 %.168)
+  %.171 = load i32, i32* %.101
+  %.172 = add i32 %.171, 1
+  store i32 %.172, i32* %.101
   br label %.156wc 
 .158wn:
-  call void @putch(i32 10)
+  store i32 10, i32* %.155
+  store i32 0, i32* %.101
+  %.178 = load i32, i32* %.155
+  call void @putch(i32 %.178)
   br label %.181wc 
 .181wc:
-  %.230 = phi i32 [0, %.158wn], [%.196, %.182wloop.]
-  %.186 = icmp slt i32 %.230, 3
+  %.185 = load i32, i32* %.101
+  %.186 = icmp slt i32 %.185, 3
   br i1 %.186, label %.182wloop., label %.183wn
 .182wloop.:
-  %.189 = getelementptr inbounds [3 x float], [3 x float]* %.99, i32 0, i32 %.230
+  %.188 = load i32, i32* %.101
+  %.189 = getelementptr inbounds [3 x float], [3 x float]* %.99, i32 0, i32 %.188
   %.190 = load float, float* %.189
   %.191 = fptosi float %.190 to i32
-  call void @putint(i32 %.191)
-  %.196 = add i32 %.230, 1
+  store i32 %.191, i32* %.155
+  %.193 = load i32, i32* %.155
+  call void @putint(i32 %.193)
+  %.195 = load i32, i32* %.101
+  %.196 = add i32 %.195, 1
+  store i32 %.196, i32* %.101
   br label %.181wc 
 .183wn:
-  call void @putch(i32 10)
+  store i32 10, i32* %.155
+  store i32 0, i32* %.101
+  %.201 = load i32, i32* %.155
+  call void @putch(i32 %.201)
   br label %.203wc 
 .203wc:
-  %.231 = phi i32 [0, %.183wn], [%.218, %.204wloop.]
-  %.208 = icmp slt i32 %.231, 3
+  %.207 = load i32, i32* %.101
+  %.208 = icmp slt i32 %.207, 3
   br i1 %.208, label %.204wloop., label %.205wn
 .204wloop.:
-  %.211 = getelementptr inbounds [3 x float], [3 x float]* %.100, i32 0, i32 %.231
+  %.210 = load i32, i32* %.101
+  %.211 = getelementptr inbounds [3 x float], [3 x float]* %.100, i32 0, i32 %.210
   %.212 = load float, float* %.211
   %.213 = fptosi float %.212 to i32
-  call void @putint(i32 %.213)
-  %.218 = add i32 %.231, 1
+  store i32 %.213, i32* %.155
+  %.215 = load i32, i32* %.155
+  call void @putint(i32 %.215)
+  %.217 = load i32, i32* %.101
+  %.218 = add i32 %.217, 1
+  store i32 %.218, i32* %.101
   br label %.203wc 
 .205wn:
-  call void @putch(i32 10)
+  store i32 10, i32* %.155
+  %.222 = load i32, i32* %.155
+  call void @putch(i32 %.222)
   ret i32 0 
 }

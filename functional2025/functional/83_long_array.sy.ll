@@ -359,154 +359,210 @@ attributes #7 = { cold }
 @.G.N = global i32 zeroinitializer
 define i32 @_user_long_array(i32 %.3){
 .2:
+  %.152 = alloca i32
+  %.117 = alloca i32
+  %.83 = alloca i32
+  %.9 = alloca i32
   %.8 = alloca [10000 x i32]
   %.7 = alloca [10000 x i32]
   %.6 = alloca [10000 x i32]
+  %.4 = alloca i32
+  store i32 %.3, i32* %.4
+  store i32 0, i32* %.9
   br label %.12wc 
 .12wc:
-  %.236 = phi i32 [0, %.2], [%.29, %.13wloop.]
-  %.17 = icmp slt i32 %.236, 10000
+  %.16 = load i32, i32* %.9
+  %.17 = icmp slt i32 %.16, 10000
   br i1 %.17, label %.13wloop., label %.14wn
 .13wloop.:
-  %.21 = mul i32 %.236, %.236
+  %.19 = load i32, i32* %.9
+  %.20 = load i32, i32* %.9
+  %.21 = mul i32 %.19, %.20
   %.23 = srem i32 %.21, 10
-  %.25 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.236
+  %.24 = load i32, i32* %.9
+  %.25 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.24
   store i32 %.23, i32* %.25
-  %.29 = add i32 %.236, 1
+  %.27 = load i32, i32* %.9
+  %.29 = add i32 %.27, 1
+  store i32 %.29, i32* %.9
   br label %.12wc 
 .14wn:
+  store i32 0, i32* %.9
   br label %.33wc 
 .33wc:
-  %.237 = phi i32 [0, %.14wn], [%.52, %.34wloop.]
-  %.38 = icmp slt i32 %.237, 10000
+  %.37 = load i32, i32* %.9
+  %.38 = icmp slt i32 %.37, 10000
   br i1 %.38, label %.34wloop., label %.35wn
 .34wloop.:
-  %.41 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.237
+  %.40 = load i32, i32* %.9
+  %.41 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.40
   %.42 = load i32, i32* %.41
-  %.44 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.237
+  %.43 = load i32, i32* %.9
+  %.44 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.43
   %.45 = load i32, i32* %.44
   %.46 = mul i32 %.42, %.45
   %.47 = srem i32 %.46, 10
-  %.49 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.237
+  %.48 = load i32, i32* %.9
+  %.49 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.48
   store i32 %.47, i32* %.49
-  %.52 = add i32 %.237, 1
+  %.51 = load i32, i32* %.9
+  %.52 = add i32 %.51, 1
+  store i32 %.52, i32* %.9
   br label %.33wc 
 .35wn:
+  store i32 0, i32* %.9
   br label %.56wc 
 .56wc:
-  %.238 = phi i32 [0, %.35wn], [%.80, %.57wloop.]
-  %.61 = icmp slt i32 %.238, 10000
+  %.60 = load i32, i32* %.9
+  %.61 = icmp slt i32 %.60, 10000
   br i1 %.61, label %.57wloop., label %.58wn
 .57wloop.:
-  %.64 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.238
+  %.63 = load i32, i32* %.9
+  %.64 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.63
   %.65 = load i32, i32* %.64
-  %.67 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.238
+  %.66 = load i32, i32* %.9
+  %.67 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.66
   %.68 = load i32, i32* %.67
   %.69 = mul i32 %.65, %.68
   %.71 = srem i32 %.69, 100
-  %.73 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.238
+  %.72 = load i32, i32* %.9
+  %.73 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.72
   %.74 = load i32, i32* %.73
   %.75 = add i32 %.71, %.74
-  %.77 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.238
+  %.76 = load i32, i32* %.9
+  %.77 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.76
   store i32 %.75, i32* %.77
-  %.80 = add i32 %.238, 1
+  %.79 = load i32, i32* %.9
+  %.80 = add i32 %.79, 1
+  store i32 %.80, i32* %.9
   br label %.56wc 
 .58wn:
+  store i32 0, i32* %.83
+  store i32 0, i32* %.9
   br label %.86wc 
 .86wc:
-  %.239 = phi i32 [0, %.58wn], [%.217, %.109]
-  %.229 = phi i32 [0, %.58wn], [%.230, %.109]
-  %.91 = icmp slt i32 %.239, 10000
+  %.90 = load i32, i32* %.9
+  %.91 = icmp slt i32 %.90, 10000
   br i1 %.91, label %.87wloop., label %.88wn
 .87wloop.:
-  %.96 = icmp slt i32 %.239, 10
+  %.95 = load i32, i32* %.9
+  %.96 = icmp slt i32 %.95, 10
   br i1 %.96, label %.93, label %.94
 .88wn:
-  ret i32 %.229 
+  %.220 = load i32, i32* %.83
+  ret i32 %.220 
 .93:
-  %.100 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.239
+  %.98 = load i32, i32* %.83
+  %.99 = load i32, i32* %.9
+  %.100 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.99
   %.101 = load i32, i32* %.100
-  %.102 = add i32 %.229, %.101
+  %.102 = add i32 %.98, %.101
   %.104 = srem i32 %.102, 1333
-  call void @putint(i32 %.104)
+  store i32 %.104, i32* %.83
+  %.106 = load i32, i32* %.83
+  call void @putint(i32 %.106)
   br label %.109 
 .94:
-  %.115 = icmp slt i32 %.239, 20
+  %.113 = load i32, i32* %.9
+  %.115 = icmp slt i32 %.113, 20
   br i1 %.115, label %.111, label %.112
 .109:
-  %.230 = phi i32 [%.232, %.144], [%.104, %.93]
-  %.217 = add i32 %.239, 1
+  %.216 = load i32, i32* %.9
+  %.217 = add i32 %.216, 1
+  store i32 %.217, i32* %.9
   br label %.86wc 
 .111:
+  store i32 5000, i32* %.117
   br label %.121wc 
 .112:
-  %.150 = icmp slt i32 %.239, 30
+  %.148 = load i32, i32* %.9
+  %.150 = icmp slt i32 %.148, 30
   br i1 %.150, label %.146, label %.147
 .121wc:
-  %.231 = phi i32 [%.229, %.111], [%.136, %.122wloop.]
-  %.228 = phi i32 [5000, %.111], [%.139, %.122wloop.]
-  %.126 = icmp slt i32 %.228, 10000
+  %.125 = load i32, i32* %.117
+  %.126 = icmp slt i32 %.125, 10000
   br i1 %.126, label %.122wloop., label %.123wn
 .122wloop.:
-  %.130 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.239
+  %.128 = load i32, i32* %.83
+  %.129 = load i32, i32* %.9
+  %.130 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.129
   %.131 = load i32, i32* %.130
-  %.132 = add i32 %.231, %.131
-  %.134 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.228
+  %.132 = add i32 %.128, %.131
+  %.133 = load i32, i32* %.117
+  %.134 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.133
   %.135 = load i32, i32* %.134
   %.136 = sub i32 %.132, %.135
-  %.139 = add i32 %.228, 1
+  store i32 %.136, i32* %.83
+  %.138 = load i32, i32* %.117
+  %.139 = add i32 %.138, 1
+  store i32 %.139, i32* %.117
   br label %.121wc 
 .123wn:
-  call void @putint(i32 %.231)
+  %.142 = load i32, i32* %.83
+  call void @putint(i32 %.142)
   br label %.144 
 .144:
-  %.232 = phi i32 [%.235, %.201], [%.231, %.123wn]
   br label %.109 
 .146:
+  store i32 5000, i32* %.152
   br label %.154wc 
 .147:
-  %.205 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.239
+  %.203 = load i32, i32* %.83
+  %.204 = load i32, i32* %.9
+  %.205 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.204
   %.206 = load i32, i32* %.205
-  %.208 = mul i32 %.206, %.3
-  %.209 = add i32 %.229, %.208
+  %.207 = load i32, i32* %.4
+  %.208 = mul i32 %.206, %.207
+  %.209 = add i32 %.203, %.208
   %.211 = srem i32 %.209, 99988
+  store i32 %.211, i32* %.83
   br label %.201 
 .154wc:
-  %.233 = phi i32 [%.229, %.146], [%.234, %.180]
-  %.226 = phi i32 [5000, %.146], [%.227, %.180]
-  %.159 = icmp slt i32 %.226, 10000
+  %.158 = load i32, i32* %.152
+  %.159 = icmp slt i32 %.158, 10000
   br i1 %.159, label %.155wloop., label %.156wn
 .155wloop.:
-  %.165 = icmp sgt i32 %.226, 2233
+  %.163 = load i32, i32* %.152
+  %.165 = icmp sgt i32 %.163, 2233
   br i1 %.165, label %.161, label %.162
 .156wn:
-  call void @putint(i32 %.233)
+  %.199 = load i32, i32* %.83
+  call void @putint(i32 %.199)
   br label %.201 
 .161:
-  %.169 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.239
+  %.167 = load i32, i32* %.83
+  %.168 = load i32, i32* %.9
+  %.169 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.7, i32 0, i32 %.168
   %.170 = load i32, i32* %.169
-  %.171 = add i32 %.233, %.170
-  %.173 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.226
+  %.171 = add i32 %.167, %.170
+  %.172 = load i32, i32* %.152
+  %.173 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.172
   %.174 = load i32, i32* %.173
   %.175 = sub i32 %.171, %.174
-  %.178 = add i32 %.226, 1
+  store i32 %.175, i32* %.83
+  %.177 = load i32, i32* %.152
+  %.178 = add i32 %.177, 1
+  store i32 %.178, i32* %.152
   br label %.180 
 .162:
-  %.184 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.239
+  %.182 = load i32, i32* %.83
+  %.183 = load i32, i32* %.9
+  %.184 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.6, i32 0, i32 %.183
   %.185 = load i32, i32* %.184
-  %.186 = add i32 %.233, %.185
-  %.188 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.226
+  %.186 = add i32 %.182, %.185
+  %.187 = load i32, i32* %.152
+  %.188 = getelementptr inbounds [10000 x i32], [10000 x i32]* %.8, i32 0, i32 %.187
   %.189 = load i32, i32* %.188
   %.190 = add i32 %.186, %.189
   %.192 = srem i32 %.190, 13333
-  %.195 = add i32 %.226, 2
+  store i32 %.192, i32* %.83
+  %.194 = load i32, i32* %.152
+  %.195 = add i32 %.194, 2
+  store i32 %.195, i32* %.152
   br label %.180 
 .180:
-  %.234 = phi i32 [%.192, %.162], [%.175, %.161]
-  %.227 = phi i32 [%.195, %.162], [%.178, %.161]
   br label %.154wc 
 .201:
-  %.235 = phi i32 [%.211, %.147], [%.233, %.156wn]
   br label %.144 
 }
 define i32 @main(){

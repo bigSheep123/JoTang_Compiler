@@ -362,5 +362,8 @@ define i32 @_user_f(){
 }
 define i32 @main(){
 .3:
-  ret i32 20 
+  %.4 = alloca i32
+  store i32 20, i32* %.4
+  %.7 = load i32, i32* %.4
+  ret i32 %.7 
 }

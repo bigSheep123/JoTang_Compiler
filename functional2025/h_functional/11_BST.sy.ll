@@ -365,57 +365,80 @@ attributes #7 = { cold }
 @.G.now = global i32 zeroinitializer
 define i32 @_user_search(i32 %.11, i32 %.14){
 .10:
-  %.24 = icmp eq i32 %.11, -1
+  %.15 = alloca i32
+  %.12 = alloca i32
+  store i32 %.11, i32* %.12
+  store i32 %.14, i32* %.15
+  %.20 = load i32, i32* %.12
+  %.24 = icmp eq i32 %.20, -1
   br i1 %.24, label %.17, label %.19
 .17:
-  ret i32 %.11 
+  %.32 = load i32, i32* %.12
+  ret i32 %.32 
 .18:
-  %.38 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.11
+  %.36 = load i32, i32* %.15
+  %.37 = load i32, i32* %.12
+  %.38 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.37
   %.39 = load i32, i32* %.38
-  %.40 = icmp sgt i32 %.14, %.39
+  %.40 = icmp sgt i32 %.36, %.39
   br i1 %.40, label %.34, label %.35
 .19:
-  %.27 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.11
+  %.26 = load i32, i32* %.12
+  %.27 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.26
   %.28 = load i32, i32* %.27
-  %.30 = icmp eq i32 %.28, %.14
+  %.29 = load i32, i32* %.15
+  %.30 = icmp eq i32 %.28, %.29
   br i1 %.30, label %.17, label %.18
 .34:
-  %.43 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.11
+  %.42 = load i32, i32* %.12
+  %.43 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.42
   %.44 = load i32, i32* %.43
-  %.46at0 = call i32 @_user_search(i32 %.44, i32 %.14)
+  %.45 = load i32, i32* %.15
+  %.46at0 = call i32 @_user_search(i32 %.44, i32 %.45)
   ret i32 %.46at0 
 .35:
-  %.49 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.11
+  %.48 = load i32, i32* %.12
+  %.49 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.48
   %.50 = load i32, i32* %.49
-  %.52at1 = call i32 @_user_search(i32 %.50, i32 %.14)
+  %.51 = load i32, i32* %.15
+  %.52at1 = call i32 @_user_search(i32 %.50, i32 %.51)
   ret i32 %.52at1 
 }
 define i32 @_user_find_minimum(i32 %.55){
 .54:
-  %.61 = icmp eq i32 %.55, -1
+  %.56 = alloca i32
+  store i32 %.55, i32* %.56
+  %.60 = load i32, i32* %.56
+  %.61 = icmp eq i32 %.60, -1
   br i1 %.61, label %.58, label %.59
 .58:
   ret i32 -1 
 .59:
-  %.67 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.55
+  %.66 = load i32, i32* %.56
+  %.67 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.66
   %.68 = load i32, i32* %.67
   %.69 = icmp ne i32 %.68, -1
   br i1 %.69, label %.64, label %.65
 .64:
-  %.72 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.55
+  %.71 = load i32, i32* %.56
+  %.72 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.71
   %.73 = load i32, i32* %.72
   %.74at2 = call i32 @_user_find_minimum(i32 %.73)
   ret i32 %.74at2 
 .65:
   br label %.76 
 .76:
-  ret i32 %.55 
+  %.78 = load i32, i32* %.56
+  ret i32 %.78 
 }
 define i32 @_user_new_node(i32 %.81){
 .80:
+  %.82 = alloca i32
+  store i32 %.81, i32* %.82
+  %.84 = load i32, i32* %.82
   %.85 = load i32, i32* @.G.now
   %.86 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.85
-  store i32 %.81, i32* %.86
+  store i32 %.84, i32* %.86
   %.88 = load i32, i32* @.G.now
   %.89 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.88
   store i32 -1, i32* %.89
@@ -431,69 +454,102 @@ define i32 @_user_new_node(i32 %.81){
 }
 define i32 @_user_insert(i32 %.101, i32 %.104){
 .100:
-  %.110 = icmp eq i32 %.101, -1
+  %.105 = alloca i32
+  %.102 = alloca i32
+  store i32 %.101, i32* %.102
+  store i32 %.104, i32* %.105
+  %.109 = load i32, i32* %.102
+  %.110 = icmp eq i32 %.109, -1
   br i1 %.110, label %.107, label %.108
 .107:
-  %.113at3 = call i32 @_user_new_node(i32 %.104)
+  %.112 = load i32, i32* %.105
+  %.113at3 = call i32 @_user_new_node(i32 %.112)
   ret i32 %.113at3 
 .108:
-  %.119 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.101
+  %.117 = load i32, i32* %.105
+  %.118 = load i32, i32* %.102
+  %.119 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.118
   %.120 = load i32, i32* %.119
-  %.121 = icmp sgt i32 %.104, %.120
+  %.121 = icmp sgt i32 %.117, %.120
   br i1 %.121, label %.115, label %.116
 .115:
-  %.124 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.101
+  %.123 = load i32, i32* %.102
+  %.124 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.123
   %.125 = load i32, i32* %.124
-  %.127at4 = call i32 @_user_insert(i32 %.125, i32 %.104)
-  %.129 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.101
+  %.126 = load i32, i32* %.105
+  %.127at4 = call i32 @_user_insert(i32 %.125, i32 %.126)
+  %.128 = load i32, i32* %.102
+  %.129 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.128
   store i32 %.127at4, i32* %.129
   br label %.131 
 .116:
-  %.134 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.101
+  %.133 = load i32, i32* %.102
+  %.134 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.133
   %.135 = load i32, i32* %.134
-  %.137at5 = call i32 @_user_insert(i32 %.135, i32 %.104)
-  %.139 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.101
+  %.136 = load i32, i32* %.105
+  %.137at5 = call i32 @_user_insert(i32 %.135, i32 %.136)
+  %.138 = load i32, i32* %.102
+  %.139 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.138
   store i32 %.137at5, i32* %.139
   br label %.131 
 .131:
   br label %.142 
 .142:
-  ret i32 %.101 
+  %.144 = load i32, i32* %.102
+  ret i32 %.144 
 }
 define i32 @_user_delete(i32 %.147, i32 %.150){
 .146:
-  %.156 = icmp eq i32 %.147, -1
+  %.237 = alloca i32
+  %.151 = alloca i32
+  %.148 = alloca i32
+  store i32 %.147, i32* %.148
+  store i32 %.150, i32* %.151
+  %.155 = load i32, i32* %.148
+  %.156 = icmp eq i32 %.155, -1
   br i1 %.156, label %.153, label %.154
 .153:
   ret i32 -1 
 .154:
-  %.163 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.147
+  %.161 = load i32, i32* %.151
+  %.162 = load i32, i32* %.148
+  %.163 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.162
   %.164 = load i32, i32* %.163
-  %.165 = icmp sgt i32 %.150, %.164
+  %.165 = icmp sgt i32 %.161, %.164
   br i1 %.165, label %.159, label %.160
 .159:
-  %.168 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.167 = load i32, i32* %.148
+  %.168 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.167
   %.169 = load i32, i32* %.168
-  %.171at6 = call i32 @_user_delete(i32 %.169, i32 %.150)
-  %.173 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.170 = load i32, i32* %.151
+  %.171at6 = call i32 @_user_delete(i32 %.169, i32 %.170)
+  %.172 = load i32, i32* %.148
+  %.173 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.172
   store i32 %.171at6, i32* %.173
   br label %.175 
 .160:
-  %.181 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.147
+  %.179 = load i32, i32* %.151
+  %.180 = load i32, i32* %.148
+  %.181 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.180
   %.182 = load i32, i32* %.181
-  %.183 = icmp slt i32 %.150, %.182
+  %.183 = icmp slt i32 %.179, %.182
   br i1 %.183, label %.177, label %.178
 .175:
-  ret i32 %.147 
+  %.265 = load i32, i32* %.148
+  ret i32 %.265 
 .177:
-  %.186 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.147
+  %.185 = load i32, i32* %.148
+  %.186 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.185
   %.187 = load i32, i32* %.186
-  %.189at7 = call i32 @_user_delete(i32 %.187, i32 %.150)
-  %.191 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.147
+  %.188 = load i32, i32* %.151
+  %.189at7 = call i32 @_user_delete(i32 %.187, i32 %.188)
+  %.190 = load i32, i32* %.148
+  %.191 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.190
   store i32 %.189at7, i32* %.191
   br label %.193 
 .178:
-  %.198 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.147
+  %.197 = load i32, i32* %.148
+  %.198 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.197
   %.199 = load i32, i32* %.198
   %.200 = icmp eq i32 %.199, -1
   br i1 %.200, label %.201, label %.196
@@ -502,47 +558,60 @@ define i32 @_user_delete(i32 %.147, i32 %.150){
 .195:
   ret i32 -1 
 .196:
-  %.213 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.147
+  %.212 = load i32, i32* %.148
+  %.213 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.212
   %.214 = load i32, i32* %.213
   %.215 = icmp eq i32 %.214, -1
   br i1 %.215, label %.209, label %.211
 .201:
-  %.204 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.203 = load i32, i32* %.148
+  %.204 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.203
   %.205 = load i32, i32* %.204
   %.206 = icmp eq i32 %.205, -1
   br i1 %.206, label %.195, label %.196
 .209:
-  %.225 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.147
+  %.224 = load i32, i32* %.148
+  %.225 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.224
   %.226 = load i32, i32* %.225
   %.227 = icmp eq i32 %.226, -1
   br i1 %.227, label %.222, label %.223
 .210:
-  %.239 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.238 = load i32, i32* %.148
+  %.239 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.238
   %.240 = load i32, i32* %.239
   %.241at8 = call i32 @_user_find_minimum(i32 %.240)
-  %.244 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.241at8
+  store i32 %.241at8, i32* %.237
+  %.243 = load i32, i32* %.237
+  %.244 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.243
   %.245 = load i32, i32* %.244
-  %.247 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.147
+  %.246 = load i32, i32* %.148
+  %.247 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.246
   store i32 %.245, i32* %.247
-  %.250 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.249 = load i32, i32* %.148
+  %.250 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.249
   %.251 = load i32, i32* %.250
-  %.253 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.241at8
+  %.252 = load i32, i32* %.237
+  %.253 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.252
   %.254 = load i32, i32* %.253
   %.255at9 = call i32 @_user_delete(i32 %.251, i32 %.254)
-  %.257 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.256 = load i32, i32* %.148
+  %.257 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.256
   store i32 %.255at9, i32* %.257
   br label %.259 
 .211:
-  %.218 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.217 = load i32, i32* %.148
+  %.218 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.217
   %.219 = load i32, i32* %.218
   %.220 = icmp eq i32 %.219, -1
   br i1 %.220, label %.209, label %.210
 .222:
-  %.230 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.147
+  %.229 = load i32, i32* %.148
+  %.230 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.229
   %.231 = load i32, i32* %.230
   ret i32 %.231 
 .223:
-  %.234 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.147
+  %.233 = load i32, i32* %.148
+  %.234 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.233
   %.235 = load i32, i32* %.234
   ret i32 %.235 
 .259:
@@ -552,17 +621,23 @@ define i32 @_user_delete(i32 %.147, i32 %.150){
 }
 define void @_user_inorder(i32 %.268){
 .267:
-  %.274 = icmp ne i32 %.268, -1
+  %.269 = alloca i32
+  store i32 %.268, i32* %.269
+  %.273 = load i32, i32* %.269
+  %.274 = icmp ne i32 %.273, -1
   br i1 %.274, label %.271, label %.272
 .271:
-  %.277 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.268
+  %.276 = load i32, i32* %.269
+  %.277 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.left_child, i32 0, i32 %.276
   %.278 = load i32, i32* %.277
   call void @_user_inorder(i32 %.278)
-  %.281 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.268
+  %.280 = load i32, i32* %.269
+  %.281 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.value, i32 0, i32 %.280
   %.282 = load i32, i32* %.281
   call void @putint(i32 %.282)
   call void @putch(i32 32)
-  %.288 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.268
+  %.287 = load i32, i32* %.269
+  %.288 = getelementptr inbounds [10000 x i32], [10000 x i32]* @.G.right_child, i32 0, i32 %.287
   %.289 = load i32, i32* %.288
   call void @_user_inorder(i32 %.289)
   br label %.272 
@@ -571,42 +646,61 @@ define void @_user_inorder(i32 %.268){
 }
 define i32 @main(){
 .293:
+  %.309 = alloca i32
+  %.305 = alloca i32
+  %.295 = alloca i32
   store i32 0, i32* @.G.now
   %.297at14 = call i32 @getint()
-  %.302 = icmp eq i32 %.297at14, 0
+  store i32 %.297at14, i32* %.295
+  %.301 = load i32, i32* %.295
+  %.302 = icmp eq i32 %.301, 0
   br i1 %.302, label %.299, label %.300
 .299:
   ret i32 0 
 .300:
   %.306at15 = call i32 @getint()
   %.307at16 = call i32 @_user_new_node(i32 %.306at15)
+  store i32 %.307at16, i32* %.305
+  store i32 1, i32* %.309
   br label %.311wc 
 .311wc:
-  %.353 = phi i32 [1, %.300], [%.323, %.312wloop.]
-  %.317 = icmp slt i32 %.353, %.297at14
+  %.315 = load i32, i32* %.309
+  %.316 = load i32, i32* %.295
+  %.317 = icmp slt i32 %.315, %.316
   br i1 %.317, label %.312wloop., label %.313wn
 .312wloop.:
+  %.319 = load i32, i32* %.305
   %.320at17 = call i32 @getint()
-  %.321at18 = call i32 @_user_insert(i32 %.307at16, i32 %.320at17)
-  %.323 = add i32 %.353, 1
+  %.321at18 = call i32 @_user_insert(i32 %.319, i32 %.320at17)
+  %.322 = load i32, i32* %.309
+  %.323 = add i32 %.322, 1
+  store i32 %.323, i32* %.309
   br label %.311wc 
 .313wn:
-  call void @_user_inorder(i32 %.307at16)
+  %.326 = load i32, i32* %.305
+  call void @_user_inorder(i32 %.326)
   call void @putch(i32 10)
   %.329at21 = call i32 @getint()
+  store i32 %.329at21, i32* %.295
+  store i32 0, i32* %.309
   br label %.332wc 
 .332wc:
-  %.355 = phi i32 [%.307at16, %.313wn], [%.342at23, %.333wloop.]
-  %.354 = phi i32 [0, %.313wn], [%.345, %.333wloop.]
-  %.338 = icmp slt i32 %.354, %.329at21
+  %.336 = load i32, i32* %.309
+  %.337 = load i32, i32* %.295
+  %.338 = icmp slt i32 %.336, %.337
   br i1 %.338, label %.333wloop., label %.334wn
 .333wloop.:
+  %.340 = load i32, i32* %.305
   %.341at22 = call i32 @getint()
-  %.342at23 = call i32 @_user_delete(i32 %.355, i32 %.341at22)
-  %.345 = add i32 %.354, 1
+  %.342at23 = call i32 @_user_delete(i32 %.340, i32 %.341at22)
+  store i32 %.342at23, i32* %.305
+  %.344 = load i32, i32* %.309
+  %.345 = add i32 %.344, 1
+  store i32 %.345, i32* %.309
   br label %.332wc 
 .334wn:
-  call void @_user_inorder(i32 %.355)
+  %.348 = load i32, i32* %.305
+  call void @_user_inorder(i32 %.348)
   call void @putch(i32 10)
   ret i32 0 
 }

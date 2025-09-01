@@ -358,23 +358,35 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define void @_user_reverse(i32 %.1){
 .0:
-  %.9 = icmp sle i32 %.1, 1
+  %.4 = alloca i32
+  %.2 = alloca i32
+  store i32 %.1, i32* %.2
+  %.7 = load i32, i32* %.2
+  %.9 = icmp sle i32 %.7, 1
   br i1 %.9, label %.5, label %.6
 .5:
   %.12at0 = call i32 @getint()
-  call void @putint(i32 %.12at0)
+  store i32 %.12at0, i32* %.4
+  %.14 = load i32, i32* %.4
+  call void @putint(i32 %.14)
   br label %.17 
 .6:
   %.19at2 = call i32 @getint()
-  %.22 = sub i32 %.1, 1
+  store i32 %.19at2, i32* %.4
+  %.21 = load i32, i32* %.2
+  %.22 = sub i32 %.21, 1
   call void @_user_reverse(i32 %.22)
-  call void @putint(i32 %.19at2)
+  %.24 = load i32, i32* %.4
+  call void @putint(i32 %.24)
   br label %.17 
 .17:
   ret void
 }
 define i32 @main(){
 .28:
-  call void @_user_reverse(i32 200)
+  %.29 = alloca i32
+  store i32 200, i32* %.29
+  %.32 = load i32, i32* %.29
+  call void @_user_reverse(i32 %.32)
   ret i32 0 
 }

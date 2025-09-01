@@ -369,36 +369,49 @@ define i32 @_user_getA(){
 }
 define void @_user_f1(i32 %.12){
 .11:
+  %.29 = alloca i32
+  %.13 = alloca i32
+  store i32 %.12, i32* %.13
   %.15 = load i32, i32* @.G.sum
-  %.17 = add i32 %.15, %.12
+  %.16 = load i32, i32* %.13
+  %.17 = add i32 %.15, %.16
   store i32 %.17, i32* @.G.sum
   %.19at0 = call i32 @_user_getA()
+  store i32 %.19at0, i32* %.13
   %.21 = load i32, i32* @.G.sum
-  %.23 = add i32 %.21, %.19at0
+  %.22 = load i32, i32* %.13
+  %.23 = add i32 %.21, %.22
   store i32 %.23, i32* @.G.sum
-  br i1 true, label %.25, label %.26
+  %.27 = icmp ne i32 1, 0
+  br i1 %.27, label %.25, label %.26
 .25:
   %.30at1 = call i32 @_user_getA()
+  store i32 %.30at1, i32* %.29
   %.32 = load i32, i32* @.G.sum
-  %.34 = add i32 %.32, %.30at1
+  %.33 = load i32, i32* %.29
+  %.34 = add i32 %.32, %.33
   store i32 %.34, i32* @.G.sum
   br label %.26 
 .26:
   %.37 = load i32, i32* @.G.sum
-  %.39 = add i32 %.37, %.19at0
+  %.38 = load i32, i32* %.13
+  %.39 = add i32 %.37, %.38
   store i32 %.39, i32* @.G.sum
   %.41 = load i32, i32* @.G.sum
-  %.43 = add i32 %.41, %.19at0
+  %.42 = load i32, i32* %.13
+  %.43 = add i32 %.41, %.42
   store i32 %.43, i32* @.G.sum
   ret void
 }
 define void @_user_f2(){
 .46:
+  %.51 = alloca i32
   %.47 = load i32, i32* @.G.sum
   %.48 = load i32, i32* @.G.a
   %.49 = add i32 %.47, %.48
   store i32 %.49, i32* @.G.sum
   %.52at2 = call i32 @_user_getA()
+  store i32 %.52at2, i32* %.51
   %.54 = load i32, i32* @.G.sum
   %.55 = load i32, i32* @.G.a
   %.56 = add i32 %.54, %.55
@@ -407,22 +420,37 @@ define void @_user_f2(){
 }
 define void @_user_f3(){
 .59:
+  %.73 = alloca i32
+  %.60 = alloca i32
   %.61at3 = call i32 @_user_getA()
+  store i32 %.61at3, i32* %.60
   %.63 = load i32, i32* @.G.sum
-  %.65 = add i32 %.63, %.61at3
+  %.64 = load i32, i32* %.60
+  %.65 = add i32 %.63, %.64
   store i32 %.65, i32* @.G.sum
   %.67at4 = call i32 @_user_getA()
+  store i32 %.67at4, i32* %.60
   %.69 = load i32, i32* @.G.sum
-  %.71 = add i32 %.69, %.67at4
+  %.70 = load i32, i32* %.60
+  %.71 = add i32 %.69, %.70
   store i32 %.71, i32* @.G.sum
   %.74at5 = call i32 @_user_getA()
+  store i32 %.74at5, i32* %.73
   %.76 = load i32, i32* @.G.sum
-  %.78 = add i32 %.76, %.67at4
+  %.77 = load i32, i32* %.60
+  %.78 = add i32 %.76, %.77
   store i32 %.78, i32* @.G.sum
   ret void
 }
 define i32 @main(){
 .81:
+  %.179 = alloca i32
+  %.146 = alloca i32
+  %.117 = alloca i32
+  %.110 = alloca i32
+  %.107 = alloca i32
+  %.100 = alloca i32
+  %.89 = alloca i32
   store i32 0, i32* @.G.sum
   %.83at6 = call i32 @_user_getA()
   store i32 %.83at6, i32* @.G.a
@@ -431,35 +459,49 @@ define i32 @main(){
   %.87 = add i32 %.85, %.86
   store i32 %.87, i32* @.G.sum
   %.90at7 = call i32 @_user_getA()
-  call void @_user_f1(i32 %.90at7)
+  store i32 %.90at7, i32* %.89
+  %.92 = load i32, i32* %.89
+  call void @_user_f1(i32 %.92)
   call void @_user_f2()
   call void @_user_f3()
-  call void @_user_f1(i32 %.90at7)
+  %.96 = load i32, i32* %.89
+  call void @_user_f1(i32 %.96)
   call void @_user_f2()
   call void @_user_f3()
   %.101at14 = call i32 @_user_getA()
-  call void @_user_f1(i32 %.90at7)
+  store i32 %.101at14, i32* %.100
+  %.103 = load i32, i32* %.89
+  call void @_user_f1(i32 %.103)
   call void @_user_f2()
   call void @_user_f3()
   %.108at18 = call i32 @_user_getA()
+  store i32 %.108at18, i32* %.107
   %.111at19 = call i32 @_user_getA()
-  call void @_user_f1(i32 %.111at19)
+  store i32 %.111at19, i32* %.110
+  %.113 = load i32, i32* %.110
+  call void @_user_f1(i32 %.113)
   call void @_user_f2()
   call void @_user_f3()
   %.118at23 = call i32 @_user_getA()
-  call void @_user_f1(i32 %.118at23)
+  store i32 %.118at23, i32* %.117
+  %.120 = load i32, i32* %.117
+  call void @_user_f1(i32 %.120)
   call void @_user_f2()
   call void @_user_f3()
   %.124at27 = call i32 @_user_getA()
-  call void @_user_f1(i32 %.124at27)
+  store i32 %.124at27, i32* %.117
+  %.126 = load i32, i32* %.117
+  call void @_user_f1(i32 %.126)
   call void @_user_f2()
   call void @_user_f3()
-  call void @_user_f1(i32 %.90at7)
+  %.130 = load i32, i32* %.89
+  call void @_user_f1(i32 %.130)
   call void @_user_f2()
   call void @_user_f3()
   br label %.134wc 
 .134wc:
-  br i1 true, label %.135wloop., label %.136wn
+  %.138 = icmp ne i32 1, 0
+  br i1 %.138, label %.135wloop., label %.136wn
 .135wloop.:
   br label %.140wc 
 .136wn:
@@ -467,50 +509,63 @@ define i32 @main(){
   call void @putint(i32 %.204)
   ret i32 0 
 .140wc:
-  br i1 true, label %.141wloop., label %.142wn
+  %.144 = icmp ne i32 1, 0
+  br i1 %.144, label %.141wloop., label %.142wn
 .141wloop.:
+  store i32 0, i32* %.146
   br label %.148wc 
 .142wn:
   br label %.136wn 
 .148wc:
-  %.211 = phi i32 [0, %.141wloop.], [%.199, %.194], [%.187, %.174]
-  %.209 = phi i32 [%.90at7, %.141wloop.], [%.196at45, %.194], [%.210, %.174]
-  %.154 = icmp slt i32 %.211, 3
+  %.152 = load i32, i32* %.146
+  %.154 = icmp slt i32 %.152, 3
   br i1 %.154, label %.149wloop., label %.150wn
 .149wloop.:
   br label %.156wc 
 .150wn:
   br label %.142wn 
 .156wc:
-  %.210 = phi i32 [%.209, %.149wloop.], [%.171at37, %.163]
-  br i1 true, label %.157wloop., label %.158wn
+  %.160 = icmp ne i32 1, 0
+  br i1 %.160, label %.157wloop., label %.158wn
 .157wloop.:
-  br i1 true, label %.162, label %.163
+  %.164 = icmp ne i32 1, 0
+  br i1 %.164, label %.162, label %.163
 .158wn:
-  %.177 = icmp eq i32 %.211, 1
+  %.176 = load i32, i32* %.146
+  %.177 = icmp eq i32 %.176, 1
   br i1 %.177, label %.174, label %.175
 .162:
-  call void @_user_f1(i32 %.210)
+  %.166 = load i32, i32* %.89
+  call void @_user_f1(i32 %.166)
   call void @_user_f2()
   call void @_user_f3()
   br label %.158wn 
 .163:
   %.171at37 = call i32 @_user_getA()
+  store i32 %.171at37, i32* %.89
   br label %.156wc 
 .174:
   %.180at38 = call i32 @_user_getA()
-  call void @_user_f1(i32 %.180at38)
+  store i32 %.180at38, i32* %.179
+  %.182 = load i32, i32* %.179
+  call void @_user_f1(i32 %.182)
   call void @_user_f2()
   call void @_user_f3()
-  %.187 = add i32 %.211, 1
+  %.186 = load i32, i32* %.146
+  %.187 = add i32 %.186, 1
+  store i32 %.187, i32* %.146
   br label %.148wc 
 .175:
-  call void @_user_f1(i32 %.210)
+  %.190 = load i32, i32* %.89
+  call void @_user_f1(i32 %.190)
   call void @_user_f2()
   call void @_user_f3()
   br label %.194 
 .194:
   %.196at45 = call i32 @_user_getA()
-  %.199 = add i32 %.211, 1
+  store i32 %.196at45, i32* %.89
+  %.198 = load i32, i32* %.146
+  %.199 = add i32 %.198, 1
+  store i32 %.199, i32* %.146
   br label %.148wc 
 }

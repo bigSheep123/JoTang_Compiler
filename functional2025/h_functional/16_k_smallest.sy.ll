@@ -361,80 +361,146 @@ attributes #7 = { cold }
 @.G.array = global [1000 x i32] zeroinitializer
 define void @_user_swap(i32 %.6, i32 %.9){
 .5:
-  %.14 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.6
+  %.12 = alloca i32
+  %.10 = alloca i32
+  %.7 = alloca i32
+  store i32 %.6, i32* %.7
+  store i32 %.9, i32* %.10
+  %.13 = load i32, i32* %.7
+  %.14 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.13
   %.16 = load i32, i32* %.14
-  %.19 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.9
+  store i32 %.16, i32* %.12
+  %.18 = load i32, i32* %.10
+  %.19 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.18
   %.20 = load i32, i32* %.19
-  %.22 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.6
+  %.21 = load i32, i32* %.7
+  %.22 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.21
   store i32 %.20, i32* %.22
-  %.26 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.9
-  store i32 %.16, i32* %.26
+  %.24 = load i32, i32* %.12
+  %.25 = load i32, i32* %.10
+  %.26 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.25
+  store i32 %.24, i32* %.26
   ret void
 }
 define i32 @_user_findPivot(i32 %.30, i32 %.33){
 .29:
-  %.38 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.33
+  %.44 = alloca i32
+  %.41 = alloca i32
+  %.36 = alloca i32
+  %.34 = alloca i32
+  %.31 = alloca i32
+  store i32 %.30, i32* %.31
+  store i32 %.33, i32* %.34
+  %.37 = load i32, i32* %.34
+  %.38 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.37
   %.39 = load i32, i32* %.38
+  store i32 %.39, i32* %.36
+  %.42 = load i32, i32* %.31
+  store i32 %.42, i32* %.41
+  %.45 = load i32, i32* %.31
+  store i32 %.45, i32* %.44
   br label %.47wc 
 .47wc:
-  %.198 = phi i32 [%.30, %.29], [%.199, %.56]
-  %.197 = phi i32 [%.30, %.29], [%.72, %.56]
-  %.53 = icmp slt i32 %.197, %.33
+  %.51 = load i32, i32* %.44
+  %.52 = load i32, i32* %.34
+  %.53 = icmp slt i32 %.51, %.52
   br i1 %.53, label %.48wloop., label %.49wn
 .48wloop.:
-  %.58 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.197
+  %.57 = load i32, i32* %.44
+  %.58 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.57
   %.59 = load i32, i32* %.58
-  %.61 = icmp sle i32 %.59, %.39
+  %.60 = load i32, i32* %.36
+  %.61 = icmp sle i32 %.59, %.60
   br i1 %.61, label %.55, label %.56
 .49wn:
-  call void @_user_swap(i32 %.198, i32 %.33)
-  ret i32 %.198 
+  %.75 = load i32, i32* %.41
+  %.76 = load i32, i32* %.34
+  call void @_user_swap(i32 %.75, i32 %.76)
+  %.78 = load i32, i32* %.41
+  ret i32 %.78 
 .55:
-  call void @_user_swap(i32 %.197, i32 %.198)
-  %.68 = add i32 %.198, 1
+  %.63 = load i32, i32* %.44
+  %.64 = load i32, i32* %.41
+  call void @_user_swap(i32 %.63, i32 %.64)
+  %.66 = load i32, i32* %.41
+  %.68 = add i32 %.66, 1
+  store i32 %.68, i32* %.41
   br label %.56 
 .56:
-  %.199 = phi i32 [%.198, %.48wloop.], [%.68, %.55]
-  %.72 = add i32 %.197, 1
+  %.71 = load i32, i32* %.44
+  %.72 = add i32 %.71, 1
+  store i32 %.72, i32* %.44
   br label %.47wc 
 }
 define void @_user_findSmallest(i32 %.81, i32 %.84, i32 %.87, i32 %.90){
 .80:
-  %.97 = icmp eq i32 %.81, %.84
+  %.111 = alloca i32
+  %.100 = alloca i32
+  %.91 = alloca i32
+  %.88 = alloca i32
+  %.85 = alloca i32
+  %.82 = alloca i32
+  store i32 %.81, i32* %.82
+  store i32 %.84, i32* %.85
+  store i32 %.87, i32* %.88
+  store i32 %.90, i32* %.91
+  %.95 = load i32, i32* %.82
+  %.96 = load i32, i32* %.85
+  %.97 = icmp eq i32 %.95, %.96
   br i1 %.97, label %.93, label %.94
 .93:
   ret void
 .94:
-  %.103at2 = call i32 @_user_findPivot(i32 %.81, i32 %.84)
-  %.109 = icmp eq i32 %.87, %.103at2
+  %.101 = load i32, i32* %.82
+  %.102 = load i32, i32* %.85
+  %.103at2 = call i32 @_user_findPivot(i32 %.101, i32 %.102)
+  store i32 %.103at2, i32* %.100
+  %.107 = load i32, i32* %.88
+  %.108 = load i32, i32* %.100
+  %.109 = icmp eq i32 %.107, %.108
   br i1 %.109, label %.105, label %.106
 .105:
+  store i32 0, i32* %.111
   br label %.113wc 
 .106:
-  %.138 = icmp slt i32 %.87, %.103at2
+  %.136 = load i32, i32* %.88
+  %.137 = load i32, i32* %.100
+  %.138 = icmp slt i32 %.136, %.137
   br i1 %.138, label %.134, label %.135
 .113wc:
-  %.201 = phi i32 [0, %.105], [%.129, %.114wloop.]
-  %.119 = icmp slt i32 %.201, %.103at2
+  %.117 = load i32, i32* %.111
+  %.118 = load i32, i32* %.100
+  %.119 = icmp slt i32 %.117, %.118
   br i1 %.119, label %.114wloop., label %.115wn
 .114wloop.:
-  %.122 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.201
+  %.121 = load i32, i32* %.111
+  %.122 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.121
   %.123 = load i32, i32* %.122
   call void @putint(i32 %.123)
   call void @putch(i32 32)
-  %.129 = add i32 %.201, 1
+  %.128 = load i32, i32* %.111
+  %.129 = add i32 %.128, 1
+  store i32 %.129, i32* %.111
   br label %.113wc 
 .115wn:
   br label %.132 
 .132:
   br label %.156 
 .134:
-  %.142 = sub i32 %.103at2, 1
-  call void @_user_findSmallest(i32 %.81, i32 %.142, i32 %.87, i32 %.90)
+  %.140 = load i32, i32* %.82
+  %.141 = load i32, i32* %.100
+  %.142 = sub i32 %.141, 1
+  %.143 = load i32, i32* %.88
+  %.144 = load i32, i32* %.91
+  call void @_user_findSmallest(i32 %.140, i32 %.142, i32 %.143, i32 %.144)
   br label %.146 
 .135:
-  %.149 = add i32 %.103at2, 1
-  call void @_user_findSmallest(i32 %.149, i32 %.84, i32 %.87, i32 %.90)
+  %.148 = load i32, i32* %.100
+  %.149 = add i32 %.148, 1
+  %.150 = load i32, i32* %.85
+  %.151 = load i32, i32* %.88
+  %.152 = load i32, i32* %.91
+  call void @_user_findSmallest(i32 %.149, i32 %.150, i32 %.151, i32 %.152)
   br label %.146 
 .146:
   br label %.132 
@@ -443,21 +509,40 @@ define void @_user_findSmallest(i32 %.81, i32 %.84, i32 %.87, i32 %.90){
 }
 define i32 @main(){
 .159:
+  %.187 = alloca i32
+  %.185 = alloca i32
+  %.167 = alloca i32
+  %.164 = alloca i32
+  %.160 = alloca i32
   %.162at7 = call i32 @getint()
+  store i32 %.162at7, i32* %.160
   %.165at8 = call i32 @getint()
+  store i32 %.165at8, i32* %.164
+  store i32 0, i32* %.167
   br label %.169wc 
 .169wc:
-  %.202 = phi i32 [0, %.159], [%.182, %.170wloop.]
-  %.175 = icmp slt i32 %.202, %.162at7
+  %.173 = load i32, i32* %.167
+  %.174 = load i32, i32* %.160
+  %.175 = icmp slt i32 %.173, %.174
   br i1 %.175, label %.170wloop., label %.171wn
 .170wloop.:
   %.177at9 = call i32 @getint()
-  %.179 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.202
+  %.178 = load i32, i32* %.167
+  %.179 = getelementptr inbounds [1000 x i32], [1000 x i32]* @.G.array, i32 0, i32 %.178
   store i32 %.177at9, i32* %.179
-  %.182 = add i32 %.202, 1
+  %.181 = load i32, i32* %.167
+  %.182 = add i32 %.181, 1
+  store i32 %.182, i32* %.167
   br label %.169wc 
 .171wn:
-  %.189 = sub i32 %.162at7, 1
-  call void @_user_findSmallest(i32 0, i32 %.189, i32 %.165at8, i32 %.162at7)
+  store i32 0, i32* %.185
+  %.188 = load i32, i32* %.160
+  %.189 = sub i32 %.188, 1
+  store i32 %.189, i32* %.187
+  %.191 = load i32, i32* %.185
+  %.192 = load i32, i32* %.187
+  %.193 = load i32, i32* %.164
+  %.194 = load i32, i32* %.160
+  call void @_user_findSmallest(i32 %.191, i32 %.192, i32 %.193, i32 %.194)
   ret i32 0 
 }

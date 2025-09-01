@@ -358,13 +358,33 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
-  br i1 false, label %.14, label %.15
+  %.2 = alloca i32
+  %.1 = alloca i32
+  store i32 56, i32* %.1
+  store i32 4, i32* %.2
+  %.7 = load i32, i32* %.1
+  %.10 = sub i32 %.7, -4
+  %.11 = load i32, i32* %.2
+  %.12 = add i32 %.10, %.11
+  store i32 %.12, i32* %.1
+  %.16 = load i32, i32* %.1
+  %.17 = icmp eq i32 %.16, 0
+  %.20 = icmp eq i1 %.17, false
+  %.21 = icmp eq i1 %.20, false
+  %.22 = zext i1 %.21 to i32
+  %.23 = sub i32 0, %.22
+  %.24 = icmp ne i32 %.23, 0
+  br i1 %.24, label %.14, label %.15
 .14:
+  store i32 -1, i32* %.1
   br label %.29 
 .15:
+  %.31 = load i32, i32* %.2
+  %.32 = add i32 0, %.31
+  store i32 %.32, i32* %.1
   br label %.29 
 .29:
-  %.39 = phi i32 [4, %.15], [-1, %.14]
-  call void @putint(i32 %.39)
+  %.35 = load i32, i32* %.1
+  call void @putint(i32 %.35)
   ret i32 0 
 }

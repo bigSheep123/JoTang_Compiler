@@ -366,39 +366,161 @@ attributes #7 = { cold }
 define float @_user_params_f40(float %.2, float %.5, float %.8, float %.11, float %.14, float %.17, float %.20, float %.23, float %.26, float %.29, float %.32, float %.35, float %.38, float %.41, float %.44, float %.47, float %.50, float %.53, float %.56, float %.59, float %.62, float %.65, float %.68, float %.71, float %.74, float %.77, float %.80, float %.83, float %.86, float %.89, float %.92, float %.95, float %.98, float %.101, float %.104, float %.107, float %.110, float %.113, float %.116, float %.119){
 .1:
   %.130 = alloca [10 x float]
-  %.127 = fcmp une float %.119, 0x0
+  %.120 = alloca float
+  %.117 = alloca float
+  %.114 = alloca float
+  %.111 = alloca float
+  %.108 = alloca float
+  %.105 = alloca float
+  %.102 = alloca float
+  %.99 = alloca float
+  %.96 = alloca float
+  %.93 = alloca float
+  %.90 = alloca float
+  %.87 = alloca float
+  %.84 = alloca float
+  %.81 = alloca float
+  %.78 = alloca float
+  %.75 = alloca float
+  %.72 = alloca float
+  %.69 = alloca float
+  %.66 = alloca float
+  %.63 = alloca float
+  %.60 = alloca float
+  %.57 = alloca float
+  %.54 = alloca float
+  %.51 = alloca float
+  %.48 = alloca float
+  %.45 = alloca float
+  %.42 = alloca float
+  %.39 = alloca float
+  %.36 = alloca float
+  %.33 = alloca float
+  %.30 = alloca float
+  %.27 = alloca float
+  %.24 = alloca float
+  %.21 = alloca float
+  %.18 = alloca float
+  %.15 = alloca float
+  %.12 = alloca float
+  %.9 = alloca float
+  %.6 = alloca float
+  %.3 = alloca float
+  store float %.2, float* %.3
+  store float %.5, float* %.6
+  store float %.8, float* %.9
+  store float %.11, float* %.12
+  store float %.14, float* %.15
+  store float %.17, float* %.18
+  store float %.20, float* %.21
+  store float %.23, float* %.24
+  store float %.26, float* %.27
+  store float %.29, float* %.30
+  store float %.32, float* %.33
+  store float %.35, float* %.36
+  store float %.38, float* %.39
+  store float %.41, float* %.42
+  store float %.44, float* %.45
+  store float %.47, float* %.48
+  store float %.50, float* %.51
+  store float %.53, float* %.54
+  store float %.56, float* %.57
+  store float %.59, float* %.60
+  store float %.62, float* %.63
+  store float %.65, float* %.66
+  store float %.68, float* %.69
+  store float %.71, float* %.72
+  store float %.74, float* %.75
+  store float %.77, float* %.78
+  store float %.80, float* %.81
+  store float %.83, float* %.84
+  store float %.86, float* %.87
+  store float %.89, float* %.90
+  store float %.92, float* %.93
+  store float %.95, float* %.96
+  store float %.98, float* %.99
+  store float %.101, float* %.102
+  store float %.104, float* %.105
+  store float %.107, float* %.108
+  store float %.110, float* %.111
+  store float %.113, float* %.114
+  store float %.116, float* %.117
+  store float %.119, float* %.120
+  %.124 = load float, float* %.120
+  %.126 = sitofp i32 0 to float
+  %.127 = fcmp une float %.124, %.126
   br i1 %.127, label %.122, label %.123
 .122:
-  %.134 = fadd float %.2, %.5
-  %.136 = fadd float %.134, %.8
-  %.138 = fadd float %.136, %.11
-  %.141 = fadd float %.14, %.17
-  %.143 = fadd float %.141, %.20
-  %.145 = fadd float %.143, %.23
-  %.148 = fadd float %.26, %.29
-  %.150 = fadd float %.148, %.32
-  %.152 = fadd float %.150, %.35
-  %.155 = fadd float %.38, %.41
-  %.157 = fadd float %.155, %.44
-  %.159 = fadd float %.157, %.47
-  %.162 = fadd float %.50, %.53
-  %.164 = fadd float %.162, %.56
-  %.166 = fadd float %.164, %.59
-  %.169 = fadd float %.62, %.65
-  %.171 = fadd float %.169, %.68
-  %.173 = fadd float %.171, %.71
-  %.176 = fadd float %.74, %.77
-  %.178 = fadd float %.176, %.80
-  %.180 = fadd float %.178, %.83
-  %.183 = fadd float %.86, %.89
-  %.185 = fadd float %.183, %.92
-  %.187 = fadd float %.185, %.95
-  %.190 = fadd float %.98, %.101
-  %.192 = fadd float %.190, %.104
-  %.194 = fadd float %.192, %.107
-  %.197 = fadd float %.110, %.113
-  %.199 = fadd float %.197, %.116
-  %.201 = fadd float %.199, %.119
+  %.132 = load float, float* %.3
+  %.133 = load float, float* %.6
+  %.134 = fadd float %.132, %.133
+  %.135 = load float, float* %.9
+  %.136 = fadd float %.134, %.135
+  %.137 = load float, float* %.12
+  %.138 = fadd float %.136, %.137
+  %.139 = load float, float* %.15
+  %.140 = load float, float* %.18
+  %.141 = fadd float %.139, %.140
+  %.142 = load float, float* %.21
+  %.143 = fadd float %.141, %.142
+  %.144 = load float, float* %.24
+  %.145 = fadd float %.143, %.144
+  %.146 = load float, float* %.27
+  %.147 = load float, float* %.30
+  %.148 = fadd float %.146, %.147
+  %.149 = load float, float* %.33
+  %.150 = fadd float %.148, %.149
+  %.151 = load float, float* %.36
+  %.152 = fadd float %.150, %.151
+  %.153 = load float, float* %.39
+  %.154 = load float, float* %.42
+  %.155 = fadd float %.153, %.154
+  %.156 = load float, float* %.45
+  %.157 = fadd float %.155, %.156
+  %.158 = load float, float* %.48
+  %.159 = fadd float %.157, %.158
+  %.160 = load float, float* %.51
+  %.161 = load float, float* %.54
+  %.162 = fadd float %.160, %.161
+  %.163 = load float, float* %.57
+  %.164 = fadd float %.162, %.163
+  %.165 = load float, float* %.60
+  %.166 = fadd float %.164, %.165
+  %.167 = load float, float* %.63
+  %.168 = load float, float* %.66
+  %.169 = fadd float %.167, %.168
+  %.170 = load float, float* %.69
+  %.171 = fadd float %.169, %.170
+  %.172 = load float, float* %.72
+  %.173 = fadd float %.171, %.172
+  %.174 = load float, float* %.75
+  %.175 = load float, float* %.78
+  %.176 = fadd float %.174, %.175
+  %.177 = load float, float* %.81
+  %.178 = fadd float %.176, %.177
+  %.179 = load float, float* %.84
+  %.180 = fadd float %.178, %.179
+  %.181 = load float, float* %.87
+  %.182 = load float, float* %.90
+  %.183 = fadd float %.181, %.182
+  %.184 = load float, float* %.93
+  %.185 = fadd float %.183, %.184
+  %.186 = load float, float* %.96
+  %.187 = fadd float %.185, %.186
+  %.188 = load float, float* %.99
+  %.189 = load float, float* %.102
+  %.190 = fadd float %.188, %.189
+  %.191 = load float, float* %.105
+  %.192 = fadd float %.190, %.191
+  %.193 = load float, float* %.108
+  %.194 = fadd float %.192, %.193
+  %.195 = load float, float* %.111
+  %.196 = load float, float* %.114
+  %.197 = fadd float %.195, %.196
+  %.198 = load float, float* %.117
+  %.199 = fadd float %.197, %.198
+  %.200 = load float, float* %.120
+  %.201 = fadd float %.199, %.200
   call void @llvm.memcpy.p0.p0.i32([10 x float]* %.130, [10 x float]* @.C..202, i32 40, i1 false)
   %.208 = getelementptr inbounds [10 x float], [10 x float]* %.130, i32 0, i32 0
   store float %.138, float* %.208
@@ -427,48 +549,260 @@ define float @_user_params_f40(float %.2, float %.5, float %.8, float %.11, floa
   %.243 = load float, float* %.242
   ret float %.243 
 .123:
-  %.286 = fadd float %.2, %.5
-  %.288 = fadd float %.286, %.8
-  %.289at1 = call float @_user_params_f40(float %.5, float %.8, float %.11, float %.14, float %.17, float %.20, float %.23, float %.26, float %.29, float %.32, float %.35, float %.38, float %.41, float %.44, float %.47, float %.50, float %.53, float %.56, float %.59, float %.62, float %.65, float %.68, float %.71, float %.74, float %.77, float %.80, float %.83, float %.86, float %.89, float %.92, float %.95, float %.98, float %.101, float %.104, float %.107, float %.110, float %.113, float %.116, float %.119, float %.288)
+  %.245 = load float, float* %.6
+  %.246 = load float, float* %.9
+  %.247 = load float, float* %.12
+  %.248 = load float, float* %.15
+  %.249 = load float, float* %.18
+  %.250 = load float, float* %.21
+  %.251 = load float, float* %.24
+  %.252 = load float, float* %.27
+  %.253 = load float, float* %.30
+  %.254 = load float, float* %.33
+  %.255 = load float, float* %.36
+  %.256 = load float, float* %.39
+  %.257 = load float, float* %.42
+  %.258 = load float, float* %.45
+  %.259 = load float, float* %.48
+  %.260 = load float, float* %.51
+  %.261 = load float, float* %.54
+  %.262 = load float, float* %.57
+  %.263 = load float, float* %.60
+  %.264 = load float, float* %.63
+  %.265 = load float, float* %.66
+  %.266 = load float, float* %.69
+  %.267 = load float, float* %.72
+  %.268 = load float, float* %.75
+  %.269 = load float, float* %.78
+  %.270 = load float, float* %.81
+  %.271 = load float, float* %.84
+  %.272 = load float, float* %.87
+  %.273 = load float, float* %.90
+  %.274 = load float, float* %.93
+  %.275 = load float, float* %.96
+  %.276 = load float, float* %.99
+  %.277 = load float, float* %.102
+  %.278 = load float, float* %.105
+  %.279 = load float, float* %.108
+  %.280 = load float, float* %.111
+  %.281 = load float, float* %.114
+  %.282 = load float, float* %.117
+  %.283 = load float, float* %.120
+  %.284 = load float, float* %.3
+  %.285 = load float, float* %.6
+  %.286 = fadd float %.284, %.285
+  %.287 = load float, float* %.9
+  %.288 = fadd float %.286, %.287
+  %.289at1 = call float @_user_params_f40(float %.245, float %.246, float %.247, float %.248, float %.249, float %.250, float %.251, float %.252, float %.253, float %.254, float %.255, float %.256, float %.257, float %.258, float %.259, float %.260, float %.261, float %.262, float %.263, float %.264, float %.265, float %.266, float %.267, float %.268, float %.269, float %.270, float %.271, float %.272, float %.273, float %.274, float %.275, float %.276, float %.277, float %.278, float %.279, float %.280, float %.281, float %.282, float %.283, float %.288)
   ret float %.289at1 
 }
 define float @_user_params_f40_i24(i32 %.292, i32 %.295, i32 %.298, float %.301, i32 %.304, i32 %.307, i32 %.310, float %.313, float %.316, float %.319, i32 %.322, float %.325, float %.328, i32 %.331, float %.334, i32 %.337, float %.340, float %.343, float %.346, float %.349, float %.352, float %.355, i32 %.358, float %.361, i32 %.364, i32 %.367, float %.370, float %.373, float %.376, float %.379, float %.382, i32 %.385, float %.388, i32 %.391, float %.394, float %.397, float %.400, float %.403, i32 %.406, i32 %.409, float %.412, float %.415, float %.418, i32 %.421, float %.424, i32 %.427, i32 %.430, float %.433, float %.436, float %.439, float %.442, i32 %.445, i32 %.448, i32 %.451, float %.454, float %.457, float %.460, float %.463, float %.466, float %.469, i32 %.472, float %.475, i32 %.478, float %.481){
 .291:
+  %.649 = alloca i32
   %.583 = alloca [8 x i32]
   %.489 = alloca [10 x float]
-  %.487 = icmp ne i32 %.292, 0
+  %.482 = alloca float
+  %.479 = alloca i32
+  %.476 = alloca float
+  %.473 = alloca i32
+  %.470 = alloca float
+  %.467 = alloca float
+  %.464 = alloca float
+  %.461 = alloca float
+  %.458 = alloca float
+  %.455 = alloca float
+  %.452 = alloca i32
+  %.449 = alloca i32
+  %.446 = alloca i32
+  %.443 = alloca float
+  %.440 = alloca float
+  %.437 = alloca float
+  %.434 = alloca float
+  %.431 = alloca i32
+  %.428 = alloca i32
+  %.425 = alloca float
+  %.422 = alloca i32
+  %.419 = alloca float
+  %.416 = alloca float
+  %.413 = alloca float
+  %.410 = alloca i32
+  %.407 = alloca i32
+  %.404 = alloca float
+  %.401 = alloca float
+  %.398 = alloca float
+  %.395 = alloca float
+  %.392 = alloca i32
+  %.389 = alloca float
+  %.386 = alloca i32
+  %.383 = alloca float
+  %.380 = alloca float
+  %.377 = alloca float
+  %.374 = alloca float
+  %.371 = alloca float
+  %.368 = alloca i32
+  %.365 = alloca i32
+  %.362 = alloca float
+  %.359 = alloca i32
+  %.356 = alloca float
+  %.353 = alloca float
+  %.350 = alloca float
+  %.347 = alloca float
+  %.344 = alloca float
+  %.341 = alloca float
+  %.338 = alloca i32
+  %.335 = alloca float
+  %.332 = alloca i32
+  %.329 = alloca float
+  %.326 = alloca float
+  %.323 = alloca i32
+  %.320 = alloca float
+  %.317 = alloca float
+  %.314 = alloca float
+  %.311 = alloca i32
+  %.308 = alloca i32
+  %.305 = alloca i32
+  %.302 = alloca float
+  %.299 = alloca i32
+  %.296 = alloca i32
+  %.293 = alloca i32
+  store i32 %.292, i32* %.293
+  store i32 %.295, i32* %.296
+  store i32 %.298, i32* %.299
+  store float %.301, float* %.302
+  store i32 %.304, i32* %.305
+  store i32 %.307, i32* %.308
+  store i32 %.310, i32* %.311
+  store float %.313, float* %.314
+  store float %.316, float* %.317
+  store float %.319, float* %.320
+  store i32 %.322, i32* %.323
+  store float %.325, float* %.326
+  store float %.328, float* %.329
+  store i32 %.331, i32* %.332
+  store float %.334, float* %.335
+  store i32 %.337, i32* %.338
+  store float %.340, float* %.341
+  store float %.343, float* %.344
+  store float %.346, float* %.347
+  store float %.349, float* %.350
+  store float %.352, float* %.353
+  store float %.355, float* %.356
+  store i32 %.358, i32* %.359
+  store float %.361, float* %.362
+  store i32 %.364, i32* %.365
+  store i32 %.367, i32* %.368
+  store float %.370, float* %.371
+  store float %.373, float* %.374
+  store float %.376, float* %.377
+  store float %.379, float* %.380
+  store float %.382, float* %.383
+  store i32 %.385, i32* %.386
+  store float %.388, float* %.389
+  store i32 %.391, i32* %.392
+  store float %.394, float* %.395
+  store float %.397, float* %.398
+  store float %.400, float* %.401
+  store float %.403, float* %.404
+  store i32 %.406, i32* %.407
+  store i32 %.409, i32* %.410
+  store float %.412, float* %.413
+  store float %.415, float* %.416
+  store float %.418, float* %.419
+  store i32 %.421, i32* %.422
+  store float %.424, float* %.425
+  store i32 %.427, i32* %.428
+  store i32 %.430, i32* %.431
+  store float %.433, float* %.434
+  store float %.436, float* %.437
+  store float %.439, float* %.440
+  store float %.442, float* %.443
+  store i32 %.445, i32* %.446
+  store i32 %.448, i32* %.449
+  store i32 %.451, i32* %.452
+  store float %.454, float* %.455
+  store float %.457, float* %.458
+  store float %.460, float* %.461
+  store float %.463, float* %.464
+  store float %.466, float* %.467
+  store float %.469, float* %.470
+  store i32 %.472, i32* %.473
+  store float %.475, float* %.476
+  store i32 %.478, i32* %.479
+  store float %.481, float* %.482
+  %.486 = load i32, i32* %.293
+  %.487 = icmp ne i32 %.486, 0
   br i1 %.487, label %.484, label %.485
 .484:
-  %.493 = fadd float %.418, %.346
-  %.495 = fadd float %.493, %.475
-  %.497 = fadd float %.495, %.325
-  %.500 = fadd float %.301, %.400
-  %.502 = fadd float %.500, %.355
-  %.504 = fadd float %.502, %.319
-  %.507 = fadd float %.313, %.379
-  %.509 = fadd float %.507, %.415
-  %.511 = fadd float %.509, %.349
-  %.514 = fadd float %.343, %.439
-  %.516 = fadd float %.514, %.412
-  %.518 = fadd float %.516, %.316
-  %.521 = fadd float %.397, %.469
-  %.523 = fadd float %.521, %.454
-  %.525 = fadd float %.523, %.457
-  %.528 = fadd float %.370, %.394
-  %.530 = fadd float %.528, %.460
-  %.532 = fadd float %.530, %.376
-  %.535 = fadd float %.436, %.382
-  %.537 = fadd float %.535, %.463
-  %.539 = fadd float %.537, %.433
-  %.542 = fadd float %.328, %.442
-  %.544 = fadd float %.542, %.340
-  %.546 = fadd float %.544, %.424
-  %.549 = fadd float %.361, %.373
-  %.551 = fadd float %.549, %.403
-  %.553 = fadd float %.551, %.481
-  %.556 = fadd float %.466, %.334
-  %.558 = fadd float %.556, %.352
-  %.560 = fadd float %.558, %.388
+  %.491 = load float, float* %.419
+  %.492 = load float, float* %.347
+  %.493 = fadd float %.491, %.492
+  %.494 = load float, float* %.476
+  %.495 = fadd float %.493, %.494
+  %.496 = load float, float* %.326
+  %.497 = fadd float %.495, %.496
+  %.498 = load float, float* %.302
+  %.499 = load float, float* %.401
+  %.500 = fadd float %.498, %.499
+  %.501 = load float, float* %.356
+  %.502 = fadd float %.500, %.501
+  %.503 = load float, float* %.320
+  %.504 = fadd float %.502, %.503
+  %.505 = load float, float* %.314
+  %.506 = load float, float* %.380
+  %.507 = fadd float %.505, %.506
+  %.508 = load float, float* %.416
+  %.509 = fadd float %.507, %.508
+  %.510 = load float, float* %.350
+  %.511 = fadd float %.509, %.510
+  %.512 = load float, float* %.344
+  %.513 = load float, float* %.440
+  %.514 = fadd float %.512, %.513
+  %.515 = load float, float* %.413
+  %.516 = fadd float %.514, %.515
+  %.517 = load float, float* %.317
+  %.518 = fadd float %.516, %.517
+  %.519 = load float, float* %.398
+  %.520 = load float, float* %.470
+  %.521 = fadd float %.519, %.520
+  %.522 = load float, float* %.455
+  %.523 = fadd float %.521, %.522
+  %.524 = load float, float* %.458
+  %.525 = fadd float %.523, %.524
+  %.526 = load float, float* %.371
+  %.527 = load float, float* %.395
+  %.528 = fadd float %.526, %.527
+  %.529 = load float, float* %.461
+  %.530 = fadd float %.528, %.529
+  %.531 = load float, float* %.377
+  %.532 = fadd float %.530, %.531
+  %.533 = load float, float* %.437
+  %.534 = load float, float* %.383
+  %.535 = fadd float %.533, %.534
+  %.536 = load float, float* %.464
+  %.537 = fadd float %.535, %.536
+  %.538 = load float, float* %.434
+  %.539 = fadd float %.537, %.538
+  %.540 = load float, float* %.329
+  %.541 = load float, float* %.443
+  %.542 = fadd float %.540, %.541
+  %.543 = load float, float* %.341
+  %.544 = fadd float %.542, %.543
+  %.545 = load float, float* %.425
+  %.546 = fadd float %.544, %.545
+  %.547 = load float, float* %.362
+  %.548 = load float, float* %.374
+  %.549 = fadd float %.547, %.548
+  %.550 = load float, float* %.404
+  %.551 = fadd float %.549, %.550
+  %.552 = load float, float* %.482
+  %.553 = fadd float %.551, %.552
+  %.554 = load float, float* %.467
+  %.555 = load float, float* %.335
+  %.556 = fadd float %.554, %.555
+  %.557 = load float, float* %.353
+  %.558 = fadd float %.556, %.557
+  %.559 = load float, float* %.389
+  %.560 = fadd float %.558, %.559
   call void @llvm.memcpy.p0.p0.i32([10 x float]* %.489, [10 x float]* @.C..561, i32 40, i1 false)
   %.563 = getelementptr inbounds [10 x float], [10 x float]* %.489, i32 0, i32 0
   store float %.497, float* %.563
@@ -490,22 +824,46 @@ define float @_user_params_f40_i24(i32 %.292, i32 %.295, i32 %.298, float %.301,
   store float %.553, float* %.579
   %.581 = getelementptr inbounds [10 x float], [10 x float]* %.489, i32 0, i32 9
   store float %.560, float* %.581
-  %.587 = add i32 %.331, %.304
-  %.589 = add i32 %.587, %.295
-  %.592 = add i32 %.445, %.307
-  %.594 = add i32 %.592, %.310
-  %.597 = add i32 %.298, %.358
-  %.599 = add i32 %.597, %.385
-  %.602 = add i32 %.409, %.364
-  %.604 = add i32 %.602, %.427
-  %.607 = add i32 %.421, %.367
-  %.609 = add i32 %.607, %.478
-  %.612 = add i32 %.472, %.430
-  %.614 = add i32 %.612, %.391
-  %.617 = add i32 %.406, %.337
-  %.619 = add i32 %.617, %.451
-  %.622 = add i32 %.448, %.322
-  %.624 = add i32 %.622, %.292
+  %.585 = load i32, i32* %.332
+  %.586 = load i32, i32* %.305
+  %.587 = add i32 %.585, %.586
+  %.588 = load i32, i32* %.296
+  %.589 = add i32 %.587, %.588
+  %.590 = load i32, i32* %.446
+  %.591 = load i32, i32* %.308
+  %.592 = add i32 %.590, %.591
+  %.593 = load i32, i32* %.311
+  %.594 = add i32 %.592, %.593
+  %.595 = load i32, i32* %.299
+  %.596 = load i32, i32* %.359
+  %.597 = add i32 %.595, %.596
+  %.598 = load i32, i32* %.386
+  %.599 = add i32 %.597, %.598
+  %.600 = load i32, i32* %.410
+  %.601 = load i32, i32* %.365
+  %.602 = add i32 %.600, %.601
+  %.603 = load i32, i32* %.428
+  %.604 = add i32 %.602, %.603
+  %.605 = load i32, i32* %.422
+  %.606 = load i32, i32* %.368
+  %.607 = add i32 %.605, %.606
+  %.608 = load i32, i32* %.479
+  %.609 = add i32 %.607, %.608
+  %.610 = load i32, i32* %.473
+  %.611 = load i32, i32* %.431
+  %.612 = add i32 %.610, %.611
+  %.613 = load i32, i32* %.392
+  %.614 = add i32 %.612, %.613
+  %.615 = load i32, i32* %.407
+  %.616 = load i32, i32* %.338
+  %.617 = add i32 %.615, %.616
+  %.618 = load i32, i32* %.452
+  %.619 = add i32 %.617, %.618
+  %.620 = load i32, i32* %.449
+  %.621 = load i32, i32* %.323
+  %.622 = add i32 %.620, %.621
+  %.623 = load i32, i32* %.293
+  %.624 = add i32 %.622, %.623
   call void @llvm.memcpy.p0.p0.i32([8 x i32]* %.583, [8 x i32]* @.C..625, i32 32, i1 false)
   %.628 = getelementptr inbounds [8 x i32], [8 x i32]* %.583, i32 0, i32 0
   store i32 %.589, i32* %.628
@@ -527,25 +885,95 @@ define float @_user_params_f40_i24(i32 %.292, i32 %.295, i32 %.298, float %.301,
   call void @putfarray(i32 10, float* %.644)
   %.646 = getelementptr inbounds [8 x i32], [8 x i32]* %.583, i32 0, i32 0
   call void @putarray(i32 8, i32* %.646)
+  store i32 0, i32* %.649
   br label %.651wc 
 .485:
-  %.743at4 = call float @_user_params_f40_i24(i32 %.304, i32 %.295, i32 %.298, float %.301, i32 %.304, i32 %.307, i32 %.310, float %.313, float %.316, float %.319, i32 %.322, float %.325, float %.328, i32 %.331, float %.334, i32 %.337, float %.340, float %.343, float %.346, float %.349, float %.352, float %.355, i32 %.358, float %.361, i32 %.364, i32 %.367, float %.370, float %.373, float %.376, float %.379, float %.382, i32 %.385, float %.388, i32 %.391, float %.394, float %.397, float %.400, float %.403, i32 %.406, i32 %.409, float %.412, float %.415, float %.418, i32 %.421, float %.424, i32 %.427, i32 %.430, float %.433, float %.436, float %.439, float %.442, i32 %.445, i32 %.448, i32 %.451, float %.454, float %.457, float %.460, float %.463, float %.466, float %.469, i32 %.472, float %.475, i32 %.478, float %.481)
+  %.679 = load i32, i32* %.305
+  %.680 = load i32, i32* %.296
+  %.681 = load i32, i32* %.299
+  %.682 = load float, float* %.302
+  %.683 = load i32, i32* %.305
+  %.684 = load i32, i32* %.308
+  %.685 = load i32, i32* %.311
+  %.686 = load float, float* %.314
+  %.687 = load float, float* %.317
+  %.688 = load float, float* %.320
+  %.689 = load i32, i32* %.323
+  %.690 = load float, float* %.326
+  %.691 = load float, float* %.329
+  %.692 = load i32, i32* %.332
+  %.693 = load float, float* %.335
+  %.694 = load i32, i32* %.338
+  %.695 = load float, float* %.341
+  %.696 = load float, float* %.344
+  %.697 = load float, float* %.347
+  %.698 = load float, float* %.350
+  %.699 = load float, float* %.353
+  %.700 = load float, float* %.356
+  %.701 = load i32, i32* %.359
+  %.702 = load float, float* %.362
+  %.703 = load i32, i32* %.365
+  %.704 = load i32, i32* %.368
+  %.705 = load float, float* %.371
+  %.706 = load float, float* %.374
+  %.707 = load float, float* %.377
+  %.708 = load float, float* %.380
+  %.709 = load float, float* %.383
+  %.710 = load i32, i32* %.386
+  %.711 = load float, float* %.389
+  %.712 = load i32, i32* %.392
+  %.713 = load float, float* %.395
+  %.714 = load float, float* %.398
+  %.715 = load float, float* %.401
+  %.716 = load float, float* %.404
+  %.717 = load i32, i32* %.407
+  %.718 = load i32, i32* %.410
+  %.719 = load float, float* %.413
+  %.720 = load float, float* %.416
+  %.721 = load float, float* %.419
+  %.722 = load i32, i32* %.422
+  %.723 = load float, float* %.425
+  %.724 = load i32, i32* %.428
+  %.725 = load i32, i32* %.431
+  %.726 = load float, float* %.434
+  %.727 = load float, float* %.437
+  %.728 = load float, float* %.440
+  %.729 = load float, float* %.443
+  %.730 = load i32, i32* %.446
+  %.731 = load i32, i32* %.449
+  %.732 = load i32, i32* %.452
+  %.733 = load float, float* %.455
+  %.734 = load float, float* %.458
+  %.735 = load float, float* %.461
+  %.736 = load float, float* %.464
+  %.737 = load float, float* %.467
+  %.738 = load float, float* %.470
+  %.739 = load i32, i32* %.473
+  %.740 = load float, float* %.476
+  %.741 = load i32, i32* %.479
+  %.742 = load float, float* %.482
+  %.743at4 = call float @_user_params_f40_i24(i32 %.679, i32 %.680, i32 %.681, float %.682, i32 %.683, i32 %.684, i32 %.685, float %.686, float %.687, float %.688, i32 %.689, float %.690, float %.691, i32 %.692, float %.693, i32 %.694, float %.695, float %.696, float %.697, float %.698, float %.699, float %.700, i32 %.701, float %.702, i32 %.703, i32 %.704, float %.705, float %.706, float %.707, float %.708, float %.709, i32 %.710, float %.711, i32 %.712, float %.713, float %.714, float %.715, float %.716, i32 %.717, i32 %.718, float %.719, float %.720, float %.721, i32 %.722, float %.723, i32 %.724, i32 %.725, float %.726, float %.727, float %.728, float %.729, i32 %.730, i32 %.731, i32 %.732, float %.733, float %.734, float %.735, float %.736, float %.737, float %.738, i32 %.739, float %.740, i32 %.741, float %.742)
   ret float %.743at4 
 .651wc:
-  %.2269 = phi i32 [0, %.484], [%.671, %.652wloop.]
-  %.656 = icmp slt i32 %.2269, 8
+  %.655 = load i32, i32* %.649
+  %.656 = icmp slt i32 %.655, 8
   br i1 %.656, label %.652wloop., label %.653wn
 .652wloop.:
-  %.659 = getelementptr inbounds [8 x i32], [8 x i32]* %.583, i32 0, i32 %.2269
+  %.658 = load i32, i32* %.649
+  %.659 = getelementptr inbounds [8 x i32], [8 x i32]* %.583, i32 0, i32 %.658
   %.660 = load i32, i32* %.659
-  %.662 = getelementptr inbounds [10 x float], [10 x float]* %.489, i32 0, i32 %.2269
+  %.661 = load i32, i32* %.649
+  %.662 = getelementptr inbounds [10 x float], [10 x float]* %.489, i32 0, i32 %.661
   %.663 = load float, float* %.662
   %.664 = sitofp i32 %.660 to float
   %.665 = fsub float %.664, %.663
-  %.667 = getelementptr inbounds [8 x i32], [8 x i32]* %.583, i32 0, i32 %.2269
+  %.666 = load i32, i32* %.649
+  %.667 = getelementptr inbounds [8 x i32], [8 x i32]* %.583, i32 0, i32 %.666
   %.668 = fptosi float %.665 to i32
   store i32 %.668, i32* %.667
-  %.671 = add i32 %.2269, 1
+  %.670 = load i32, i32* %.649
+  %.671 = add i32 %.670, 1
+  store i32 %.671, i32* %.649
   br label %.651wc 
 .653wn:
   %.674 = load i32, i32* @.G.k
@@ -557,154 +985,274 @@ define float @_user_params_f40_i24(i32 %.292, i32 %.295, i32 %.298, float %.301,
 define float @_user_params_fa40(float* %.746, float* %.749, float* %.752, float* %.755, float* %.758, float* %.761, float* %.764, float* %.767, float* %.770, float* %.773, float* %.776, float* %.779, float* %.782, float* %.785, float* %.788, float* %.791, float* %.794, float* %.797, float* %.800, float* %.803, float* %.806, float* %.809, float* %.812, float* %.815, float* %.818, float* %.821, float* %.824, float* %.827, float* %.830, float* %.833, float* %.836, float* %.839, float* %.842, float* %.845, float* %.848, float* %.851, float* %.854, float* %.857, float* %.860, float* %.863){
 .745:
   %.866 = alloca [10 x float]
+  %.864 = alloca float*
+  %.861 = alloca float*
+  %.858 = alloca float*
+  %.855 = alloca float*
+  %.852 = alloca float*
+  %.849 = alloca float*
+  %.846 = alloca float*
+  %.843 = alloca float*
+  %.840 = alloca float*
+  %.837 = alloca float*
+  %.834 = alloca float*
+  %.831 = alloca float*
+  %.828 = alloca float*
+  %.825 = alloca float*
+  %.822 = alloca float*
+  %.819 = alloca float*
+  %.816 = alloca float*
+  %.813 = alloca float*
+  %.810 = alloca float*
+  %.807 = alloca float*
+  %.804 = alloca float*
+  %.801 = alloca float*
+  %.798 = alloca float*
+  %.795 = alloca float*
+  %.792 = alloca float*
+  %.789 = alloca float*
+  %.786 = alloca float*
+  %.783 = alloca float*
+  %.780 = alloca float*
+  %.777 = alloca float*
+  %.774 = alloca float*
+  %.771 = alloca float*
+  %.768 = alloca float*
+  %.765 = alloca float*
+  %.762 = alloca float*
+  %.759 = alloca float*
+  %.756 = alloca float*
+  %.753 = alloca float*
+  %.750 = alloca float*
+  %.747 = alloca float*
+  store float* %.746, float** %.747
+  store float* %.749, float** %.750
+  store float* %.752, float** %.753
+  store float* %.755, float** %.756
+  store float* %.758, float** %.759
+  store float* %.761, float** %.762
+  store float* %.764, float** %.765
+  store float* %.767, float** %.768
+  store float* %.770, float** %.771
+  store float* %.773, float** %.774
+  store float* %.776, float** %.777
+  store float* %.779, float** %.780
+  store float* %.782, float** %.783
+  store float* %.785, float** %.786
+  store float* %.788, float** %.789
+  store float* %.791, float** %.792
+  store float* %.794, float** %.795
+  store float* %.797, float** %.798
+  store float* %.800, float** %.801
+  store float* %.803, float** %.804
+  store float* %.806, float** %.807
+  store float* %.809, float** %.810
+  store float* %.812, float** %.813
+  store float* %.815, float** %.816
+  store float* %.818, float** %.819
+  store float* %.821, float** %.822
+  store float* %.824, float** %.825
+  store float* %.827, float** %.828
+  store float* %.830, float** %.831
+  store float* %.833, float** %.834
+  store float* %.836, float** %.837
+  store float* %.839, float** %.840
+  store float* %.842, float** %.843
+  store float* %.845, float** %.846
+  store float* %.848, float** %.849
+  store float* %.851, float** %.852
+  store float* %.854, float** %.855
+  store float* %.857, float** %.858
+  store float* %.860, float** %.861
+  store float* %.863, float** %.864
   %.868 = load i32, i32* @.G.k
-  %.870 = getelementptr inbounds float, float* %.746, i32 %.868
+  %.869 = load float*, float** %.747
+  %.870 = getelementptr inbounds float, float* %.869, i32 %.868
   %.871 = load float, float* %.870
   %.872 = load i32, i32* @.G.k
-  %.874 = getelementptr inbounds float, float* %.749, i32 %.872
+  %.873 = load float*, float** %.750
+  %.874 = getelementptr inbounds float, float* %.873, i32 %.872
   %.875 = load float, float* %.874
   %.876 = fadd float %.871, %.875
   %.877 = load i32, i32* @.G.k
-  %.879 = getelementptr inbounds float, float* %.752, i32 %.877
+  %.878 = load float*, float** %.753
+  %.879 = getelementptr inbounds float, float* %.878, i32 %.877
   %.880 = load float, float* %.879
   %.881 = fadd float %.876, %.880
   %.882 = load i32, i32* @.G.k
-  %.884 = getelementptr inbounds float, float* %.755, i32 %.882
+  %.883 = load float*, float** %.756
+  %.884 = getelementptr inbounds float, float* %.883, i32 %.882
   %.885 = load float, float* %.884
   %.886 = fadd float %.881, %.885
   %.887 = load i32, i32* @.G.k
-  %.889 = getelementptr inbounds float, float* %.758, i32 %.887
+  %.888 = load float*, float** %.759
+  %.889 = getelementptr inbounds float, float* %.888, i32 %.887
   %.890 = load float, float* %.889
   %.891 = load i32, i32* @.G.k
-  %.893 = getelementptr inbounds float, float* %.761, i32 %.891
+  %.892 = load float*, float** %.762
+  %.893 = getelementptr inbounds float, float* %.892, i32 %.891
   %.894 = load float, float* %.893
   %.895 = fadd float %.890, %.894
   %.896 = load i32, i32* @.G.k
-  %.898 = getelementptr inbounds float, float* %.764, i32 %.896
+  %.897 = load float*, float** %.765
+  %.898 = getelementptr inbounds float, float* %.897, i32 %.896
   %.899 = load float, float* %.898
   %.900 = fadd float %.895, %.899
   %.901 = load i32, i32* @.G.k
-  %.903 = getelementptr inbounds float, float* %.767, i32 %.901
+  %.902 = load float*, float** %.768
+  %.903 = getelementptr inbounds float, float* %.902, i32 %.901
   %.904 = load float, float* %.903
   %.905 = fadd float %.900, %.904
   %.906 = load i32, i32* @.G.k
-  %.908 = getelementptr inbounds float, float* %.770, i32 %.906
+  %.907 = load float*, float** %.771
+  %.908 = getelementptr inbounds float, float* %.907, i32 %.906
   %.909 = load float, float* %.908
   %.910 = load i32, i32* @.G.k
-  %.912 = getelementptr inbounds float, float* %.773, i32 %.910
+  %.911 = load float*, float** %.774
+  %.912 = getelementptr inbounds float, float* %.911, i32 %.910
   %.913 = load float, float* %.912
   %.914 = fadd float %.909, %.913
   %.915 = load i32, i32* @.G.k
-  %.917 = getelementptr inbounds float, float* %.776, i32 %.915
+  %.916 = load float*, float** %.777
+  %.917 = getelementptr inbounds float, float* %.916, i32 %.915
   %.918 = load float, float* %.917
   %.919 = fadd float %.914, %.918
   %.920 = load i32, i32* @.G.k
-  %.922 = getelementptr inbounds float, float* %.779, i32 %.920
+  %.921 = load float*, float** %.780
+  %.922 = getelementptr inbounds float, float* %.921, i32 %.920
   %.923 = load float, float* %.922
   %.924 = fadd float %.919, %.923
   %.925 = load i32, i32* @.G.k
-  %.927 = getelementptr inbounds float, float* %.782, i32 %.925
+  %.926 = load float*, float** %.783
+  %.927 = getelementptr inbounds float, float* %.926, i32 %.925
   %.928 = load float, float* %.927
   %.929 = load i32, i32* @.G.k
-  %.931 = getelementptr inbounds float, float* %.785, i32 %.929
+  %.930 = load float*, float** %.786
+  %.931 = getelementptr inbounds float, float* %.930, i32 %.929
   %.932 = load float, float* %.931
   %.933 = fadd float %.928, %.932
   %.934 = load i32, i32* @.G.k
-  %.936 = getelementptr inbounds float, float* %.788, i32 %.934
+  %.935 = load float*, float** %.789
+  %.936 = getelementptr inbounds float, float* %.935, i32 %.934
   %.937 = load float, float* %.936
   %.938 = fadd float %.933, %.937
   %.939 = load i32, i32* @.G.k
-  %.941 = getelementptr inbounds float, float* %.791, i32 %.939
+  %.940 = load float*, float** %.792
+  %.941 = getelementptr inbounds float, float* %.940, i32 %.939
   %.942 = load float, float* %.941
   %.943 = fadd float %.938, %.942
   %.944 = load i32, i32* @.G.k
-  %.946 = getelementptr inbounds float, float* %.794, i32 %.944
+  %.945 = load float*, float** %.795
+  %.946 = getelementptr inbounds float, float* %.945, i32 %.944
   %.947 = load float, float* %.946
   %.948 = load i32, i32* @.G.k
-  %.950 = getelementptr inbounds float, float* %.797, i32 %.948
+  %.949 = load float*, float** %.798
+  %.950 = getelementptr inbounds float, float* %.949, i32 %.948
   %.951 = load float, float* %.950
   %.952 = fadd float %.947, %.951
   %.953 = load i32, i32* @.G.k
-  %.955 = getelementptr inbounds float, float* %.800, i32 %.953
+  %.954 = load float*, float** %.801
+  %.955 = getelementptr inbounds float, float* %.954, i32 %.953
   %.956 = load float, float* %.955
   %.957 = fadd float %.952, %.956
   %.958 = load i32, i32* @.G.k
-  %.960 = getelementptr inbounds float, float* %.803, i32 %.958
+  %.959 = load float*, float** %.804
+  %.960 = getelementptr inbounds float, float* %.959, i32 %.958
   %.961 = load float, float* %.960
   %.962 = fadd float %.957, %.961
   %.963 = load i32, i32* @.G.k
-  %.965 = getelementptr inbounds float, float* %.806, i32 %.963
+  %.964 = load float*, float** %.807
+  %.965 = getelementptr inbounds float, float* %.964, i32 %.963
   %.966 = load float, float* %.965
   %.967 = load i32, i32* @.G.k
-  %.969 = getelementptr inbounds float, float* %.809, i32 %.967
+  %.968 = load float*, float** %.810
+  %.969 = getelementptr inbounds float, float* %.968, i32 %.967
   %.970 = load float, float* %.969
   %.971 = fadd float %.966, %.970
   %.972 = load i32, i32* @.G.k
-  %.974 = getelementptr inbounds float, float* %.812, i32 %.972
+  %.973 = load float*, float** %.813
+  %.974 = getelementptr inbounds float, float* %.973, i32 %.972
   %.975 = load float, float* %.974
   %.976 = fadd float %.971, %.975
   %.977 = load i32, i32* @.G.k
-  %.979 = getelementptr inbounds float, float* %.815, i32 %.977
+  %.978 = load float*, float** %.816
+  %.979 = getelementptr inbounds float, float* %.978, i32 %.977
   %.980 = load float, float* %.979
   %.981 = fadd float %.976, %.980
   %.982 = load i32, i32* @.G.k
-  %.984 = getelementptr inbounds float, float* %.818, i32 %.982
+  %.983 = load float*, float** %.819
+  %.984 = getelementptr inbounds float, float* %.983, i32 %.982
   %.985 = load float, float* %.984
   %.986 = load i32, i32* @.G.k
-  %.988 = getelementptr inbounds float, float* %.821, i32 %.986
+  %.987 = load float*, float** %.822
+  %.988 = getelementptr inbounds float, float* %.987, i32 %.986
   %.989 = load float, float* %.988
   %.990 = fadd float %.985, %.989
   %.991 = load i32, i32* @.G.k
-  %.993 = getelementptr inbounds float, float* %.824, i32 %.991
+  %.992 = load float*, float** %.825
+  %.993 = getelementptr inbounds float, float* %.992, i32 %.991
   %.994 = load float, float* %.993
   %.995 = fadd float %.990, %.994
   %.996 = load i32, i32* @.G.k
-  %.998 = getelementptr inbounds float, float* %.827, i32 %.996
+  %.997 = load float*, float** %.828
+  %.998 = getelementptr inbounds float, float* %.997, i32 %.996
   %.999 = load float, float* %.998
   %.1000 = fadd float %.995, %.999
   %.1001 = load i32, i32* @.G.k
-  %.1003 = getelementptr inbounds float, float* %.830, i32 %.1001
+  %.1002 = load float*, float** %.831
+  %.1003 = getelementptr inbounds float, float* %.1002, i32 %.1001
   %.1004 = load float, float* %.1003
   %.1005 = load i32, i32* @.G.k
-  %.1007 = getelementptr inbounds float, float* %.833, i32 %.1005
+  %.1006 = load float*, float** %.834
+  %.1007 = getelementptr inbounds float, float* %.1006, i32 %.1005
   %.1008 = load float, float* %.1007
   %.1009 = fadd float %.1004, %.1008
   %.1010 = load i32, i32* @.G.k
-  %.1012 = getelementptr inbounds float, float* %.836, i32 %.1010
+  %.1011 = load float*, float** %.837
+  %.1012 = getelementptr inbounds float, float* %.1011, i32 %.1010
   %.1013 = load float, float* %.1012
   %.1014 = fadd float %.1009, %.1013
   %.1015 = load i32, i32* @.G.k
-  %.1017 = getelementptr inbounds float, float* %.839, i32 %.1015
+  %.1016 = load float*, float** %.840
+  %.1017 = getelementptr inbounds float, float* %.1016, i32 %.1015
   %.1018 = load float, float* %.1017
   %.1019 = fadd float %.1014, %.1018
   %.1020 = load i32, i32* @.G.k
-  %.1022 = getelementptr inbounds float, float* %.842, i32 %.1020
+  %.1021 = load float*, float** %.843
+  %.1022 = getelementptr inbounds float, float* %.1021, i32 %.1020
   %.1023 = load float, float* %.1022
   %.1024 = load i32, i32* @.G.k
-  %.1026 = getelementptr inbounds float, float* %.845, i32 %.1024
+  %.1025 = load float*, float** %.846
+  %.1026 = getelementptr inbounds float, float* %.1025, i32 %.1024
   %.1027 = load float, float* %.1026
   %.1028 = fadd float %.1023, %.1027
   %.1029 = load i32, i32* @.G.k
-  %.1031 = getelementptr inbounds float, float* %.848, i32 %.1029
+  %.1030 = load float*, float** %.849
+  %.1031 = getelementptr inbounds float, float* %.1030, i32 %.1029
   %.1032 = load float, float* %.1031
   %.1033 = fadd float %.1028, %.1032
   %.1034 = load i32, i32* @.G.k
-  %.1036 = getelementptr inbounds float, float* %.851, i32 %.1034
+  %.1035 = load float*, float** %.852
+  %.1036 = getelementptr inbounds float, float* %.1035, i32 %.1034
   %.1037 = load float, float* %.1036
   %.1038 = fadd float %.1033, %.1037
   %.1039 = load i32, i32* @.G.k
-  %.1041 = getelementptr inbounds float, float* %.854, i32 %.1039
+  %.1040 = load float*, float** %.855
+  %.1041 = getelementptr inbounds float, float* %.1040, i32 %.1039
   %.1042 = load float, float* %.1041
   %.1043 = load i32, i32* @.G.k
-  %.1045 = getelementptr inbounds float, float* %.857, i32 %.1043
+  %.1044 = load float*, float** %.858
+  %.1045 = getelementptr inbounds float, float* %.1044, i32 %.1043
   %.1046 = load float, float* %.1045
   %.1047 = fadd float %.1042, %.1046
   %.1048 = load i32, i32* @.G.k
-  %.1050 = getelementptr inbounds float, float* %.860, i32 %.1048
+  %.1049 = load float*, float** %.861
+  %.1050 = getelementptr inbounds float, float* %.1049, i32 %.1048
   %.1051 = load float, float* %.1050
   %.1052 = fadd float %.1047, %.1051
   %.1053 = load i32, i32* @.G.k
-  %.1055 = getelementptr inbounds float, float* %.863, i32 %.1053
+  %.1054 = load float*, float** %.864
+  %.1055 = getelementptr inbounds float, float* %.1054, i32 %.1053
   %.1056 = load float, float* %.1055
   %.1057 = fadd float %.1052, %.1056
   call void @llvm.memcpy.p0.p0.i32([10 x float]* %.866, [10 x float]* @.C..1058, i32 40, i1 false)
@@ -729,9 +1277,11 @@ define float @_user_params_fa40(float* %.746, float* %.749, float* %.752, float*
   %.1078 = getelementptr inbounds [10 x float], [10 x float]* %.866, i32 0, i32 9
   store float %.1057, float* %.1078
   %.1082 = load i32, i32* @.G.k
-  %.1084 = getelementptr inbounds float, float* %.863, i32 %.1082
+  %.1083 = load float*, float** %.864
+  %.1084 = getelementptr inbounds float, float* %.1083, i32 %.1082
   %.1085 = load float, float* %.1084
-  %.1087 = fcmp une float %.1085, 0x0
+  %.1086 = sitofp i32 0 to float
+  %.1087 = fcmp une float %.1085, %.1086
   %.1088 = zext i1 %.1087 to i32
   %.1089 = icmp ne i32 %.1088, 0
   %.1090 = sitofp i1 %.1089 to float
@@ -747,86 +1297,290 @@ define float @_user_params_fa40(float* %.746, float* %.749, float* %.752, float*
   %.1099 = load float, float* %.1098
   ret float %.1099 
 .1081:
+  %.1101 = load float*, float** %.750
+  %.1102 = load float*, float** %.753
+  %.1103 = load float*, float** %.756
+  %.1104 = load float*, float** %.759
+  %.1105 = load float*, float** %.762
+  %.1106 = load float*, float** %.765
+  %.1107 = load float*, float** %.768
+  %.1108 = load float*, float** %.771
+  %.1109 = load float*, float** %.774
+  %.1110 = load float*, float** %.777
+  %.1111 = load float*, float** %.780
+  %.1112 = load float*, float** %.783
+  %.1113 = load float*, float** %.786
+  %.1114 = load float*, float** %.789
+  %.1115 = load float*, float** %.792
+  %.1116 = load float*, float** %.795
+  %.1117 = load float*, float** %.798
+  %.1118 = load float*, float** %.801
+  %.1119 = load float*, float** %.804
+  %.1120 = load float*, float** %.807
+  %.1121 = load float*, float** %.810
+  %.1122 = load float*, float** %.813
+  %.1123 = load float*, float** %.816
+  %.1124 = load float*, float** %.819
+  %.1125 = load float*, float** %.822
+  %.1126 = load float*, float** %.825
+  %.1127 = load float*, float** %.828
+  %.1128 = load float*, float** %.831
+  %.1129 = load float*, float** %.834
+  %.1130 = load float*, float** %.837
+  %.1131 = load float*, float** %.840
+  %.1132 = load float*, float** %.843
+  %.1133 = load float*, float** %.846
+  %.1134 = load float*, float** %.849
+  %.1135 = load float*, float** %.852
+  %.1136 = load float*, float** %.855
+  %.1137 = load float*, float** %.858
+  %.1138 = load float*, float** %.861
+  %.1139 = load float*, float** %.864
   %.1140 = getelementptr inbounds [10 x float], [10 x float]* %.866, i32 0, i32 0
-  %.1141at6 = call float @_user_params_fa40(float* %.749, float* %.752, float* %.755, float* %.758, float* %.761, float* %.764, float* %.767, float* %.770, float* %.773, float* %.776, float* %.779, float* %.782, float* %.785, float* %.788, float* %.791, float* %.794, float* %.797, float* %.800, float* %.803, float* %.806, float* %.809, float* %.812, float* %.815, float* %.818, float* %.821, float* %.824, float* %.827, float* %.830, float* %.833, float* %.836, float* %.839, float* %.842, float* %.845, float* %.848, float* %.851, float* %.854, float* %.857, float* %.860, float* %.863, float* %.1140)
+  %.1141at6 = call float @_user_params_fa40(float* %.1101, float* %.1102, float* %.1103, float* %.1104, float* %.1105, float* %.1106, float* %.1107, float* %.1108, float* %.1109, float* %.1110, float* %.1111, float* %.1112, float* %.1113, float* %.1114, float* %.1115, float* %.1116, float* %.1117, float* %.1118, float* %.1119, float* %.1120, float* %.1121, float* %.1122, float* %.1123, float* %.1124, float* %.1125, float* %.1126, float* %.1127, float* %.1128, float* %.1129, float* %.1130, float* %.1131, float* %.1132, float* %.1133, float* %.1134, float* %.1135, float* %.1136, float* %.1137, float* %.1138, float* %.1139, float* %.1140)
   ret float %.1141at6 
 }
 define i32 @_user_params_mix(float %.1144, i32* %.1147, i32 %.1150, float* %.1153, float %.1156, i32 %.1159, float %.1162, float %.1165, float* %.1168, i32* %.1171, i32 %.1174, i32 %.1177, float* %.1180, i32* %.1183, i32* %.1186, i32 %.1189, float* %.1192, float* %.1195, float %.1198, float %.1201, float %.1204, float* %.1207, i32 %.1210, float %.1213, float %.1216, float %.1219, i32* %.1222, float* %.1225, i32* %.1228, i32* %.1231, float* %.1234, float %.1237, float %.1240, i32* %.1243, i32 %.1246, float* %.1249, float* %.1252, float %.1255, float %.1258, i32* %.1261, i32* %.1264, i32 %.1267, i32 %.1270, float %.1273, float %.1276, i32* %.1279, i32 %.1282, float* %.1285, i32 %.1288, i32* %.1291, i32* %.1294, float %.1297, float %.1300, float* %.1303, i32 %.1306, i32* %.1309, float* %.1312, float %.1315, i32 %.1318, float %.1321, float* %.1324, float* %.1327, float %.1330, i32 %.1333){
 .1143:
+  %.1586 = alloca i32
   %.1466 = alloca [10 x i32]
   %.1336 = alloca [10 x float]
+  %.1334 = alloca i32
+  %.1331 = alloca float
+  %.1328 = alloca float*
+  %.1325 = alloca float*
+  %.1322 = alloca float
+  %.1319 = alloca i32
+  %.1316 = alloca float
+  %.1313 = alloca float*
+  %.1310 = alloca i32*
+  %.1307 = alloca i32
+  %.1304 = alloca float*
+  %.1301 = alloca float
+  %.1298 = alloca float
+  %.1295 = alloca i32*
+  %.1292 = alloca i32*
+  %.1289 = alloca i32
+  %.1286 = alloca float*
+  %.1283 = alloca i32
+  %.1280 = alloca i32*
+  %.1277 = alloca float
+  %.1274 = alloca float
+  %.1271 = alloca i32
+  %.1268 = alloca i32
+  %.1265 = alloca i32*
+  %.1262 = alloca i32*
+  %.1259 = alloca float
+  %.1256 = alloca float
+  %.1253 = alloca float*
+  %.1250 = alloca float*
+  %.1247 = alloca i32
+  %.1244 = alloca i32*
+  %.1241 = alloca float
+  %.1238 = alloca float
+  %.1235 = alloca float*
+  %.1232 = alloca i32*
+  %.1229 = alloca i32*
+  %.1226 = alloca float*
+  %.1223 = alloca i32*
+  %.1220 = alloca float
+  %.1217 = alloca float
+  %.1214 = alloca float
+  %.1211 = alloca i32
+  %.1208 = alloca float*
+  %.1205 = alloca float
+  %.1202 = alloca float
+  %.1199 = alloca float
+  %.1196 = alloca float*
+  %.1193 = alloca float*
+  %.1190 = alloca i32
+  %.1187 = alloca i32*
+  %.1184 = alloca i32*
+  %.1181 = alloca float*
+  %.1178 = alloca i32
+  %.1175 = alloca i32
+  %.1172 = alloca i32*
+  %.1169 = alloca float*
+  %.1166 = alloca float
+  %.1163 = alloca float
+  %.1160 = alloca i32
+  %.1157 = alloca float
+  %.1154 = alloca float*
+  %.1151 = alloca i32
+  %.1148 = alloca i32*
+  %.1145 = alloca float
+  store float %.1144, float* %.1145
+  store i32* %.1147, i32** %.1148
+  store i32 %.1150, i32* %.1151
+  store float* %.1153, float** %.1154
+  store float %.1156, float* %.1157
+  store i32 %.1159, i32* %.1160
+  store float %.1162, float* %.1163
+  store float %.1165, float* %.1166
+  store float* %.1168, float** %.1169
+  store i32* %.1171, i32** %.1172
+  store i32 %.1174, i32* %.1175
+  store i32 %.1177, i32* %.1178
+  store float* %.1180, float** %.1181
+  store i32* %.1183, i32** %.1184
+  store i32* %.1186, i32** %.1187
+  store i32 %.1189, i32* %.1190
+  store float* %.1192, float** %.1193
+  store float* %.1195, float** %.1196
+  store float %.1198, float* %.1199
+  store float %.1201, float* %.1202
+  store float %.1204, float* %.1205
+  store float* %.1207, float** %.1208
+  store i32 %.1210, i32* %.1211
+  store float %.1213, float* %.1214
+  store float %.1216, float* %.1217
+  store float %.1219, float* %.1220
+  store i32* %.1222, i32** %.1223
+  store float* %.1225, float** %.1226
+  store i32* %.1228, i32** %.1229
+  store i32* %.1231, i32** %.1232
+  store float* %.1234, float** %.1235
+  store float %.1237, float* %.1238
+  store float %.1240, float* %.1241
+  store i32* %.1243, i32** %.1244
+  store i32 %.1246, i32* %.1247
+  store float* %.1249, float** %.1250
+  store float* %.1252, float** %.1253
+  store float %.1255, float* %.1256
+  store float %.1258, float* %.1259
+  store i32* %.1261, i32** %.1262
+  store i32* %.1264, i32** %.1265
+  store i32 %.1267, i32* %.1268
+  store i32 %.1270, i32* %.1271
+  store float %.1273, float* %.1274
+  store float %.1276, float* %.1277
+  store i32* %.1279, i32** %.1280
+  store i32 %.1282, i32* %.1283
+  store float* %.1285, float** %.1286
+  store i32 %.1288, i32* %.1289
+  store i32* %.1291, i32** %.1292
+  store i32* %.1294, i32** %.1295
+  store float %.1297, float* %.1298
+  store float %.1300, float* %.1301
+  store float* %.1303, float** %.1304
+  store i32 %.1306, i32* %.1307
+  store i32* %.1309, i32** %.1310
+  store float* %.1312, float** %.1313
+  store float %.1315, float* %.1316
+  store i32 %.1318, i32* %.1319
+  store float %.1321, float* %.1322
+  store float* %.1324, float** %.1325
+  store float* %.1327, float** %.1328
+  store float %.1330, float* %.1331
+  store i32 %.1333, i32* %.1334
+  %.1338 = load float, float* %.1145
   %.1339 = load i32, i32* @.G.k
-  %.1341 = getelementptr inbounds float, float* %.1153, i32 %.1339
+  %.1340 = load float*, float** %.1154
+  %.1341 = getelementptr inbounds float, float* %.1340, i32 %.1339
   %.1342 = load float, float* %.1341
-  %.1343 = fadd float %.1144, %.1342
-  %.1345 = fadd float %.1343, %.1156
-  %.1347 = fadd float %.1345, %.1162
+  %.1343 = fadd float %.1338, %.1342
+  %.1344 = load float, float* %.1157
+  %.1345 = fadd float %.1343, %.1344
+  %.1346 = load float, float* %.1163
+  %.1347 = fadd float %.1345, %.1346
+  %.1348 = load float, float* %.1166
   %.1349 = load i32, i32* @.G.k
-  %.1351 = getelementptr inbounds float, float* %.1168, i32 %.1349
+  %.1350 = load float*, float** %.1169
+  %.1351 = getelementptr inbounds float, float* %.1350, i32 %.1349
   %.1352 = load float, float* %.1351
-  %.1353 = fadd float %.1165, %.1352
+  %.1353 = fadd float %.1348, %.1352
   %.1354 = load i32, i32* @.G.k
-  %.1356 = getelementptr inbounds float, float* %.1180, i32 %.1354
+  %.1355 = load float*, float** %.1181
+  %.1356 = getelementptr inbounds float, float* %.1355, i32 %.1354
   %.1357 = load float, float* %.1356
   %.1358 = fadd float %.1353, %.1357
   %.1359 = load i32, i32* @.G.k
-  %.1361 = getelementptr inbounds float, float* %.1192, i32 %.1359
+  %.1360 = load float*, float** %.1193
+  %.1361 = getelementptr inbounds float, float* %.1360, i32 %.1359
   %.1362 = load float, float* %.1361
   %.1363 = fadd float %.1358, %.1362
   %.1364 = load i32, i32* @.G.k
-  %.1366 = getelementptr inbounds float, float* %.1195, i32 %.1364
+  %.1365 = load float*, float** %.1196
+  %.1366 = getelementptr inbounds float, float* %.1365, i32 %.1364
   %.1367 = load float, float* %.1366
-  %.1369 = fadd float %.1367, %.1198
-  %.1371 = fadd float %.1369, %.1201
-  %.1373 = fadd float %.1371, %.1204
+  %.1368 = load float, float* %.1199
+  %.1369 = fadd float %.1367, %.1368
+  %.1370 = load float, float* %.1202
+  %.1371 = fadd float %.1369, %.1370
+  %.1372 = load float, float* %.1205
+  %.1373 = fadd float %.1371, %.1372
   %.1374 = load i32, i32* @.G.k
-  %.1376 = getelementptr inbounds float, float* %.1207, i32 %.1374
+  %.1375 = load float*, float** %.1208
+  %.1376 = getelementptr inbounds float, float* %.1375, i32 %.1374
   %.1377 = load float, float* %.1376
-  %.1379 = fadd float %.1377, %.1213
-  %.1381 = fadd float %.1379, %.1216
-  %.1383 = fadd float %.1381, %.1219
+  %.1378 = load float, float* %.1214
+  %.1379 = fadd float %.1377, %.1378
+  %.1380 = load float, float* %.1217
+  %.1381 = fadd float %.1379, %.1380
+  %.1382 = load float, float* %.1220
+  %.1383 = fadd float %.1381, %.1382
   %.1384 = load i32, i32* @.G.k
-  %.1386 = getelementptr inbounds float, float* %.1225, i32 %.1384
+  %.1385 = load float*, float** %.1226
+  %.1386 = getelementptr inbounds float, float* %.1385, i32 %.1384
   %.1387 = load float, float* %.1386
   %.1388 = load i32, i32* @.G.k
-  %.1390 = getelementptr inbounds float, float* %.1234, i32 %.1388
+  %.1389 = load float*, float** %.1235
+  %.1390 = getelementptr inbounds float, float* %.1389, i32 %.1388
   %.1391 = load float, float* %.1390
   %.1392 = fadd float %.1387, %.1391
-  %.1394 = fadd float %.1392, %.1237
-  %.1396 = fadd float %.1394, %.1240
+  %.1393 = load float, float* %.1238
+  %.1394 = fadd float %.1392, %.1393
+  %.1395 = load float, float* %.1241
+  %.1396 = fadd float %.1394, %.1395
   %.1397 = load i32, i32* @.G.k
-  %.1399 = getelementptr inbounds float, float* %.1249, i32 %.1397
+  %.1398 = load float*, float** %.1250
+  %.1399 = getelementptr inbounds float, float* %.1398, i32 %.1397
   %.1400 = load float, float* %.1399
   %.1401 = load i32, i32* @.G.k
-  %.1403 = getelementptr inbounds float, float* %.1252, i32 %.1401
+  %.1402 = load float*, float** %.1253
+  %.1403 = getelementptr inbounds float, float* %.1402, i32 %.1401
   %.1404 = load float, float* %.1403
   %.1405 = fadd float %.1400, %.1404
-  %.1407 = fadd float %.1405, %.1255
-  %.1409 = fadd float %.1407, %.1258
-  %.1412 = fadd float %.1273, %.1276
+  %.1406 = load float, float* %.1256
+  %.1407 = fadd float %.1405, %.1406
+  %.1408 = load float, float* %.1259
+  %.1409 = fadd float %.1407, %.1408
+  %.1410 = load float, float* %.1274
+  %.1411 = load float, float* %.1277
+  %.1412 = fadd float %.1410, %.1411
   %.1413 = load i32, i32* @.G.k
-  %.1415 = getelementptr inbounds float, float* %.1285, i32 %.1413
+  %.1414 = load float*, float** %.1286
+  %.1415 = getelementptr inbounds float, float* %.1414, i32 %.1413
   %.1416 = load float, float* %.1415
   %.1417 = fadd float %.1412, %.1416
-  %.1419 = fadd float %.1417, %.1297
+  %.1418 = load float, float* %.1298
+  %.1419 = fadd float %.1417, %.1418
+  %.1420 = load float, float* %.1301
   %.1421 = load i32, i32* @.G.k
-  %.1423 = getelementptr inbounds float, float* %.1303, i32 %.1421
+  %.1422 = load float*, float** %.1304
+  %.1423 = getelementptr inbounds float, float* %.1422, i32 %.1421
   %.1424 = load float, float* %.1423
-  %.1425 = fadd float %.1300, %.1424
+  %.1425 = fadd float %.1420, %.1424
   %.1426 = load i32, i32* @.G.k
-  %.1428 = getelementptr inbounds float, float* %.1312, i32 %.1426
+  %.1427 = load float*, float** %.1313
+  %.1428 = getelementptr inbounds float, float* %.1427, i32 %.1426
   %.1429 = load float, float* %.1428
   %.1430 = fadd float %.1425, %.1429
-  %.1432 = fadd float %.1430, %.1315
+  %.1431 = load float, float* %.1316
+  %.1432 = fadd float %.1430, %.1431
+  %.1433 = load float, float* %.1322
   %.1434 = load i32, i32* @.G.k
-  %.1436 = getelementptr inbounds float, float* %.1324, i32 %.1434
+  %.1435 = load float*, float** %.1325
+  %.1436 = getelementptr inbounds float, float* %.1435, i32 %.1434
   %.1437 = load float, float* %.1436
-  %.1438 = fadd float %.1321, %.1437
+  %.1438 = fadd float %.1433, %.1437
   %.1439 = load i32, i32* @.G.k
-  %.1441 = getelementptr inbounds float, float* %.1327, i32 %.1439
+  %.1440 = load float*, float** %.1328
+  %.1441 = getelementptr inbounds float, float* %.1440, i32 %.1439
   %.1442 = load float, float* %.1441
   %.1443 = fadd float %.1438, %.1442
-  %.1445 = fadd float %.1443, %.1330
+  %.1444 = load float, float* %.1331
+  %.1445 = fadd float %.1443, %.1444
   call void @llvm.memcpy.p0.p0.i32([10 x float]* %.1336, [10 x float]* @.C..1446, i32 40, i1 false)
   %.1448 = getelementptr inbounds [10 x float], [10 x float]* %.1336, i32 0, i32 0
   store float %.1347, float* %.1448
@@ -847,66 +1601,94 @@ define i32 @_user_params_mix(float %.1144, i32* %.1147, i32 %.1150, float* %.115
   %.1464 = getelementptr inbounds [10 x float], [10 x float]* %.1336, i32 0, i32 8
   store float %.1445, float* %.1464
   %.1468 = load i32, i32* @.G.k
-  %.1470 = getelementptr inbounds i32, i32* %.1147, i32 %.1468
+  %.1469 = load i32*, i32** %.1148
+  %.1470 = getelementptr inbounds i32, i32* %.1469, i32 %.1468
   %.1471 = load i32, i32* %.1470
-  %.1473 = add i32 %.1471, %.1150
-  %.1475 = add i32 %.1473, %.1159
+  %.1472 = load i32, i32* %.1151
+  %.1473 = add i32 %.1471, %.1472
+  %.1474 = load i32, i32* %.1160
+  %.1475 = add i32 %.1473, %.1474
   %.1476 = load i32, i32* @.G.k
-  %.1478 = getelementptr inbounds i32, i32* %.1171, i32 %.1476
+  %.1477 = load i32*, i32** %.1172
+  %.1478 = getelementptr inbounds i32, i32* %.1477, i32 %.1476
   %.1479 = load i32, i32* %.1478
-  %.1481 = add i32 %.1479, %.1174
-  %.1483 = add i32 %.1481, %.1177
+  %.1480 = load i32, i32* %.1175
+  %.1481 = add i32 %.1479, %.1480
+  %.1482 = load i32, i32* %.1178
+  %.1483 = add i32 %.1481, %.1482
   %.1484 = load i32, i32* @.G.k
-  %.1486 = getelementptr inbounds i32, i32* %.1183, i32 %.1484
+  %.1485 = load i32*, i32** %.1184
+  %.1486 = getelementptr inbounds i32, i32* %.1485, i32 %.1484
   %.1487 = load i32, i32* %.1486
   %.1488 = load i32, i32* @.G.k
-  %.1490 = getelementptr inbounds i32, i32* %.1186, i32 %.1488
+  %.1489 = load i32*, i32** %.1187
+  %.1490 = getelementptr inbounds i32, i32* %.1489, i32 %.1488
   %.1491 = load i32, i32* %.1490
   %.1492 = add i32 %.1487, %.1491
-  %.1494 = add i32 %.1492, %.1189
+  %.1493 = load i32, i32* %.1190
+  %.1494 = add i32 %.1492, %.1493
+  %.1495 = load i32, i32* %.1211
   %.1496 = load i32, i32* @.G.k
-  %.1498 = getelementptr inbounds i32, i32* %.1222, i32 %.1496
+  %.1497 = load i32*, i32** %.1223
+  %.1498 = getelementptr inbounds i32, i32* %.1497, i32 %.1496
   %.1499 = load i32, i32* %.1498
-  %.1500 = add i32 %.1210, %.1499
+  %.1500 = add i32 %.1495, %.1499
   %.1501 = load i32, i32* @.G.k
-  %.1503 = getelementptr inbounds i32, i32* %.1228, i32 %.1501
+  %.1502 = load i32*, i32** %.1229
+  %.1503 = getelementptr inbounds i32, i32* %.1502, i32 %.1501
   %.1504 = load i32, i32* %.1503
   %.1505 = add i32 %.1500, %.1504
   %.1506 = load i32, i32* @.G.k
-  %.1508 = getelementptr inbounds i32, i32* %.1231, i32 %.1506
+  %.1507 = load i32*, i32** %.1232
+  %.1508 = getelementptr inbounds i32, i32* %.1507, i32 %.1506
   %.1509 = load i32, i32* %.1508
   %.1510 = load i32, i32* @.G.k
-  %.1512 = getelementptr inbounds i32, i32* %.1243, i32 %.1510
+  %.1511 = load i32*, i32** %.1244
+  %.1512 = getelementptr inbounds i32, i32* %.1511, i32 %.1510
   %.1513 = load i32, i32* %.1512
   %.1514 = add i32 %.1509, %.1513
-  %.1516 = add i32 %.1514, %.1246
+  %.1515 = load i32, i32* %.1247
+  %.1516 = add i32 %.1514, %.1515
   %.1517 = load i32, i32* @.G.k
-  %.1519 = getelementptr inbounds i32, i32* %.1261, i32 %.1517
+  %.1518 = load i32*, i32** %.1262
+  %.1519 = getelementptr inbounds i32, i32* %.1518, i32 %.1517
   %.1520 = load i32, i32* %.1519
   %.1521 = load i32, i32* @.G.k
-  %.1523 = getelementptr inbounds i32, i32* %.1264, i32 %.1521
+  %.1522 = load i32*, i32** %.1265
+  %.1523 = getelementptr inbounds i32, i32* %.1522, i32 %.1521
   %.1524 = load i32, i32* %.1523
   %.1525 = add i32 %.1520, %.1524
-  %.1527 = add i32 %.1525, %.1267
+  %.1526 = load i32, i32* %.1268
+  %.1527 = add i32 %.1525, %.1526
+  %.1528 = load i32, i32* %.1271
   %.1529 = load i32, i32* @.G.k
-  %.1531 = getelementptr inbounds i32, i32* %.1279, i32 %.1529
+  %.1530 = load i32*, i32** %.1280
+  %.1531 = getelementptr inbounds i32, i32* %.1530, i32 %.1529
   %.1532 = load i32, i32* %.1531
-  %.1533 = add i32 %.1270, %.1532
-  %.1535 = add i32 %.1533, %.1282
+  %.1533 = add i32 %.1528, %.1532
+  %.1534 = load i32, i32* %.1283
+  %.1535 = add i32 %.1533, %.1534
+  %.1536 = load i32, i32* %.1289
   %.1537 = load i32, i32* @.G.k
-  %.1539 = getelementptr inbounds i32, i32* %.1291, i32 %.1537
+  %.1538 = load i32*, i32** %.1292
+  %.1539 = getelementptr inbounds i32, i32* %.1538, i32 %.1537
   %.1540 = load i32, i32* %.1539
-  %.1541 = add i32 %.1288, %.1540
+  %.1541 = add i32 %.1536, %.1540
   %.1542 = load i32, i32* @.G.k
-  %.1544 = getelementptr inbounds i32, i32* %.1294, i32 %.1542
+  %.1543 = load i32*, i32** %.1295
+  %.1544 = getelementptr inbounds i32, i32* %.1543, i32 %.1542
   %.1545 = load i32, i32* %.1544
   %.1546 = add i32 %.1541, %.1545
+  %.1547 = load i32, i32* %.1307
   %.1548 = load i32, i32* @.G.k
-  %.1550 = getelementptr inbounds i32, i32* %.1309, i32 %.1548
+  %.1549 = load i32*, i32** %.1310
+  %.1550 = getelementptr inbounds i32, i32* %.1549, i32 %.1548
   %.1551 = load i32, i32* %.1550
-  %.1552 = add i32 %.1306, %.1551
-  %.1554 = add i32 %.1552, %.1318
-  %.1556 = add i32 %.1554, %.1333
+  %.1552 = add i32 %.1547, %.1551
+  %.1553 = load i32, i32* %.1319
+  %.1554 = add i32 %.1552, %.1553
+  %.1555 = load i32, i32* %.1334
+  %.1556 = add i32 %.1554, %.1555
   call void @llvm.memcpy.p0.p0.i32([10 x i32]* %.1466, [10 x i32]* @.C..1557, i32 40, i1 false)
   %.1559 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 0
   store i32 %.1475, i32* %.1559
@@ -926,36 +1708,105 @@ define i32 @_user_params_mix(float %.1144, i32* %.1147, i32 %.1150, float* %.115
   store i32 %.1546, i32* %.1573
   %.1575 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 8
   store i32 %.1556, i32* %.1575
-  %.1580 = icmp ne i32 %.1333, 0
+  %.1579 = load i32, i32* %.1334
+  %.1580 = icmp ne i32 %.1579, 0
   br i1 %.1580, label %.1577, label %.1578
 .1577:
   %.1582 = getelementptr inbounds [10 x float], [10 x float]* %.1336, i32 0, i32 0
   call void @putfarray(i32 10, float* %.1582)
   %.1584 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 0
   call void @putarray(i32 10, i32* %.1584)
+  store i32 0, i32* %.1586
   br label %.1588wc 
 .1578:
+  %.1620 = load float, float* %.1145
   %.1621 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 0
+  %.1622 = load i32, i32* %.1151
   %.1623 = getelementptr inbounds [10 x float], [10 x float]* %.1336, i32 0, i32 0
-  %.1684 = sitofp i32 %.1333 to float
-  %.1685 = fptosi float %.1330 to i32
-  %.1686at9 = call i32 @_user_params_mix(float %.1144, i32* %.1621, i32 %.1150, float* %.1623, float %.1156, i32 %.1159, float %.1162, float %.1165, float* %.1168, i32* %.1171, i32 %.1174, i32 %.1177, float* %.1180, i32* %.1183, i32* %.1186, i32 %.1189, float* %.1192, float* %.1195, float %.1198, float %.1201, float %.1204, float* %.1207, i32 %.1210, float %.1213, float %.1216, float %.1219, i32* %.1222, float* %.1225, i32* %.1228, i32* %.1231, float* %.1234, float %.1237, float %.1240, i32* %.1243, i32 %.1246, float* %.1249, float* %.1252, float %.1255, float %.1258, i32* %.1261, i32* %.1264, i32 %.1267, i32 %.1270, float %.1273, float %.1276, i32* %.1279, i32 %.1282, float* %.1285, i32 %.1288, i32* %.1291, i32* %.1294, float %.1297, float %.1300, float* %.1303, i32 %.1306, i32* %.1309, float* %.1312, float %.1315, i32 %.1318, float %.1321, float* %.1324, float* %.1327, float %.1684, i32 %.1685)
+  %.1624 = load float, float* %.1157
+  %.1625 = load i32, i32* %.1160
+  %.1626 = load float, float* %.1163
+  %.1627 = load float, float* %.1166
+  %.1628 = load float*, float** %.1169
+  %.1629 = load i32*, i32** %.1172
+  %.1630 = load i32, i32* %.1175
+  %.1631 = load i32, i32* %.1178
+  %.1632 = load float*, float** %.1181
+  %.1633 = load i32*, i32** %.1184
+  %.1634 = load i32*, i32** %.1187
+  %.1635 = load i32, i32* %.1190
+  %.1636 = load float*, float** %.1193
+  %.1637 = load float*, float** %.1196
+  %.1638 = load float, float* %.1199
+  %.1639 = load float, float* %.1202
+  %.1640 = load float, float* %.1205
+  %.1641 = load float*, float** %.1208
+  %.1642 = load i32, i32* %.1211
+  %.1643 = load float, float* %.1214
+  %.1644 = load float, float* %.1217
+  %.1645 = load float, float* %.1220
+  %.1646 = load i32*, i32** %.1223
+  %.1647 = load float*, float** %.1226
+  %.1648 = load i32*, i32** %.1229
+  %.1649 = load i32*, i32** %.1232
+  %.1650 = load float*, float** %.1235
+  %.1651 = load float, float* %.1238
+  %.1652 = load float, float* %.1241
+  %.1653 = load i32*, i32** %.1244
+  %.1654 = load i32, i32* %.1247
+  %.1655 = load float*, float** %.1250
+  %.1656 = load float*, float** %.1253
+  %.1657 = load float, float* %.1256
+  %.1658 = load float, float* %.1259
+  %.1659 = load i32*, i32** %.1262
+  %.1660 = load i32*, i32** %.1265
+  %.1661 = load i32, i32* %.1268
+  %.1662 = load i32, i32* %.1271
+  %.1663 = load float, float* %.1274
+  %.1664 = load float, float* %.1277
+  %.1665 = load i32*, i32** %.1280
+  %.1666 = load i32, i32* %.1283
+  %.1667 = load float*, float** %.1286
+  %.1668 = load i32, i32* %.1289
+  %.1669 = load i32*, i32** %.1292
+  %.1670 = load i32*, i32** %.1295
+  %.1671 = load float, float* %.1298
+  %.1672 = load float, float* %.1301
+  %.1673 = load float*, float** %.1304
+  %.1674 = load i32, i32* %.1307
+  %.1675 = load i32*, i32** %.1310
+  %.1676 = load float*, float** %.1313
+  %.1677 = load float, float* %.1316
+  %.1678 = load i32, i32* %.1319
+  %.1679 = load float, float* %.1322
+  %.1680 = load float*, float** %.1325
+  %.1681 = load float*, float** %.1328
+  %.1682 = load i32, i32* %.1334
+  %.1683 = load float, float* %.1331
+  %.1684 = sitofp i32 %.1682 to float
+  %.1685 = fptosi float %.1683 to i32
+  %.1686at9 = call i32 @_user_params_mix(float %.1620, i32* %.1621, i32 %.1622, float* %.1623, float %.1624, i32 %.1625, float %.1626, float %.1627, float* %.1628, i32* %.1629, i32 %.1630, i32 %.1631, float* %.1632, i32* %.1633, i32* %.1634, i32 %.1635, float* %.1636, float* %.1637, float %.1638, float %.1639, float %.1640, float* %.1641, i32 %.1642, float %.1643, float %.1644, float %.1645, i32* %.1646, float* %.1647, i32* %.1648, i32* %.1649, float* %.1650, float %.1651, float %.1652, i32* %.1653, i32 %.1654, float* %.1655, float* %.1656, float %.1657, float %.1658, i32* %.1659, i32* %.1660, i32 %.1661, i32 %.1662, float %.1663, float %.1664, i32* %.1665, i32 %.1666, float* %.1667, i32 %.1668, i32* %.1669, i32* %.1670, float %.1671, float %.1672, float* %.1673, i32 %.1674, i32* %.1675, float* %.1676, float %.1677, i32 %.1678, float %.1679, float* %.1680, float* %.1681, float %.1684, i32 %.1685)
   ret i32 %.1686at9 
 .1588wc:
-  %.2271 = phi i32 [0, %.1577], [%.1608, %.1589wloop.]
-  %.1593 = icmp slt i32 %.2271, 10
+  %.1592 = load i32, i32* %.1586
+  %.1593 = icmp slt i32 %.1592, 10
   br i1 %.1593, label %.1589wloop., label %.1590wn
 .1589wloop.:
-  %.1596 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 %.2271
+  %.1595 = load i32, i32* %.1586
+  %.1596 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 %.1595
   %.1597 = load i32, i32* %.1596
-  %.1599 = getelementptr inbounds [10 x float], [10 x float]* %.1336, i32 0, i32 %.2271
+  %.1598 = load i32, i32* %.1586
+  %.1599 = getelementptr inbounds [10 x float], [10 x float]* %.1336, i32 0, i32 %.1598
   %.1600 = load float, float* %.1599
   %.1601 = sitofp i32 %.1597 to float
   %.1602 = fsub float %.1601, %.1600
-  %.1604 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 %.2271
+  %.1603 = load i32, i32* %.1586
+  %.1604 = getelementptr inbounds [10 x i32], [10 x i32]* %.1466, i32 0, i32 %.1603
   %.1605 = fptosi float %.1602 to i32
   store i32 %.1605, i32* %.1604
-  %.1608 = add i32 %.2271, 1
+  %.1607 = load i32, i32* %.1586
+  %.1608 = add i32 %.1607, 1
+  store i32 %.1608, i32* %.1586
   br label %.1588wc 
 .1590wn:
   %.1611 = load i32, i32* @.G.k
@@ -970,30 +1821,43 @@ define i32 @_user_params_mix(float %.1144, i32* %.1147, i32 %.1150, float* %.115
 }
 define i32 @main(){
 .1688:
+  %.2116 = alloca i32
+  %.2073 = alloca float
+  %.1878 = alloca float
+  %.1728 = alloca float
+  %.1692 = alloca i32
   %.1691 = alloca [24 x [3 x i32]]
   %.1689 = alloca [40 x [3 x float]]
   %.1694at10 = call i32 @getint()
   store i32 %.1694at10, i32* @.G.k
+  store i32 0, i32* %.1692
   br label %.1697wc 
 .1697wc:
-  %.2272 = phi i32 [0, %.1688], [%.1709, %.1698wloop.]
-  %.1702 = icmp slt i32 %.2272, 40
+  %.1701 = load i32, i32* %.1692
+  %.1702 = icmp slt i32 %.1701, 40
   br i1 %.1702, label %.1698wloop., label %.1699wn
 .1698wloop.:
-  %.1705 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 %.2272, i32 0
+  %.1704 = load i32, i32* %.1692
+  %.1705 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 %.1704, i32 0
   %.1707at11 = call i32 @getfarray(float* %.1705)
-  %.1709 = add i32 %.2272, 1
+  %.1708 = load i32, i32* %.1692
+  %.1709 = add i32 %.1708, 1
+  store i32 %.1709, i32* %.1692
   br label %.1697wc 
 .1699wn:
+  store i32 0, i32* %.1692
   br label %.1713wc 
 .1713wc:
-  %.2273 = phi i32 [0, %.1699wn], [%.1725, %.1714wloop.]
-  %.1718 = icmp slt i32 %.2273, 24
+  %.1717 = load i32, i32* %.1692
+  %.1718 = icmp slt i32 %.1717, 24
   br i1 %.1718, label %.1714wloop., label %.1715wn
 .1714wloop.:
-  %.1721 = getelementptr inbounds [24 x [3 x i32]], [24 x [3 x i32]]* %.1691, i32 0, i32 %.2273, i32 0
+  %.1720 = load i32, i32* %.1692
+  %.1721 = getelementptr inbounds [24 x [3 x i32]], [24 x [3 x i32]]* %.1691, i32 0, i32 %.1720, i32 0
   %.1723at12 = call i32 @getarray(i32* %.1721)
-  %.1725 = add i32 %.2273, 1
+  %.1724 = load i32, i32* %.1692
+  %.1725 = add i32 %.1724, 1
+  store i32 %.1725, i32* %.1692
   br label %.1713wc 
 .1715wn:
   %.1729 = load i32, i32* @.G.k
@@ -1117,6 +1981,7 @@ define i32 @main(){
   %.1874 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 39, i32 %.1873
   %.1875 = load float, float* %.1874
   %.1876at13 = call float @_user_params_f40(float %.1731, float %.1734, float %.1737, float %.1740, float %.1743, float %.1746, float %.1749, float %.1752, float %.1755, float %.1758, float %.1761, float %.1765, float %.1769, float %.1773, float %.1777, float %.1781, float %.1785, float %.1789, float %.1793, float %.1797, float %.1801, float %.1805, float %.1809, float %.1813, float %.1816, float %.1820, float %.1824, float %.1828, float %.1832, float %.1836, float %.1840, float %.1844, float %.1847, float %.1851, float %.1855, float %.1859, float %.1863, float %.1867, float %.1871, float %.1875)
+  store float %.1876at13, float* %.1728
   %.1879 = load i32, i32* @.G.k
   %.1880 = getelementptr inbounds [24 x [3 x i32]], [24 x [3 x i32]]* %.1691, i32 0, i32 23, i32 %.1879
   %.1881 = load i32, i32* %.1880
@@ -1310,6 +2175,7 @@ define i32 @main(){
   %.2069 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 35, i32 %.2068
   %.2070 = load float, float* %.2069
   %.2071at14 = call float @_user_params_f40_i24(i32 %.1881, i32 %.1884, i32 %.1887, float %.1890, i32 %.1893, i32 %.1896, i32 %.1899, float %.1902, float %.1905, float %.1908, i32 %.1911, float %.1914, float %.1917, i32 %.1920, float %.1923, i32 %.1926, float %.1929, float %.1932, float %.1935, float %.1938, float %.1941, float %.1944, i32 %.1947, float %.1950, i32 %.1953, i32 %.1956, float %.1959, float %.1962, float %.1965, float %.1968, float %.1971, i32 %.1974, float %.1977, i32 %.1980, float %.1983, float %.1986, float %.1989, float %.1992, i32 %.1995, i32 %.1998, float %.2001, float %.2004, float %.2007, i32 %.2010, float %.2013, i32 %.2016, i32 %.2019, float %.2022, float %.2025, float %.2028, float %.2031, i32 %.2034, i32 %.2037, i32 %.2040, float %.2043, float %.2046, float %.2049, float %.2052, float %.2055, float %.2058, i32 %.2061, float %.2064, i32 %.2067, float %.2070)
+  store float %.2071at14, float* %.1878
   %.2074 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 0, i32 0
   %.2075 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 1, i32 0
   %.2076 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 2, i32 0
@@ -1351,6 +2217,7 @@ define i32 @main(){
   %.2112 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 38, i32 0
   %.2113 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 39, i32 0
   %.2114at15 = call float @_user_params_fa40(float* %.2074, float* %.2075, float* %.2076, float* %.2077, float* %.2078, float* %.2079, float* %.2080, float* %.2081, float* %.2082, float* %.2083, float* %.2084, float* %.2085, float* %.2086, float* %.2087, float* %.2088, float* %.2089, float* %.2090, float* %.2091, float* %.2092, float* %.2093, float* %.2094, float* %.2095, float* %.2096, float* %.2097, float* %.2098, float* %.2099, float* %.2100, float* %.2101, float* %.2102, float* %.2103, float* %.2104, float* %.2105, float* %.2106, float* %.2107, float* %.2108, float* %.2109, float* %.2110, float* %.2111, float* %.2112, float* %.2113)
+  store float %.2114at15, float* %.2073
   %.2117 = load i32, i32* @.G.k
   %.2118 = getelementptr inbounds [40 x [3 x float]], [40 x [3 x float]]* %.1689, i32 0, i32 0, i32 %.2117
   %.2119 = load float, float* %.2118
@@ -1486,13 +2353,18 @@ define i32 @main(){
   %.2249 = getelementptr inbounds [24 x [3 x i32]], [24 x [3 x i32]]* %.1691, i32 0, i32 3, i32 %.2248
   %.2250 = load i32, i32* %.2249
   %.2251at16 = call i32 @_user_params_mix(float %.2119, i32* %.2120, i32 %.2123, float* %.2124, float %.2127, i32 %.2130, float %.2133, float %.2136, float* %.2137, i32* %.2138, i32 %.2141, i32 %.2144, float* %.2145, i32* %.2146, i32* %.2147, i32 %.2150, float* %.2151, float* %.2152, float %.2155, float %.2158, float %.2161, float* %.2162, i32 %.2165, float %.2168, float %.2171, float %.2174, i32* %.2175, float* %.2176, i32* %.2177, i32* %.2178, float* %.2179, float %.2182, float %.2185, i32* %.2186, i32 %.2189, float* %.2190, float* %.2191, float %.2194, float %.2197, i32* %.2198, i32* %.2199, i32 %.2202, i32 %.2205, float %.2208, float %.2211, i32* %.2212, i32 %.2215, float* %.2216, i32 %.2219, i32* %.2220, i32* %.2221, float %.2224, float %.2227, float* %.2228, i32 %.2231, i32* %.2232, float* %.2233, float %.2236, i32 %.2239, float %.2242, float* %.2243, float* %.2244, float %.2247, i32 %.2250)
-  call void @putfloat(float %.1876at13)
+  store i32 %.2251at16, i32* %.2116
+  %.2253 = load float, float* %.1728
+  call void @putfloat(float %.2253)
   call void @putch(i32 10)
-  call void @putfloat(float %.2071at14)
+  %.2258 = load float, float* %.1878
+  call void @putfloat(float %.2258)
   call void @putch(i32 10)
-  call void @putfloat(float %.2114at15)
+  %.2261 = load float, float* %.2073
+  call void @putfloat(float %.2261)
   call void @putch(i32 10)
-  call void @putint(i32 %.2251at16)
+  %.2264 = load i32, i32* %.2116
+  call void @putint(i32 %.2264)
   call void @putch(i32 10)
   ret i32 0 
 }

@@ -358,33 +358,44 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
+  %.6 = alloca i32
+  %.3 = alloca i32
   %.2 = alloca [100 x i32]
+  store i32 0, i32* %.3
+  store i32 0, i32* %.6
   br label %.8wc 
 .8wc:
-  %.47 = phi i32 [0, %.0], [%.22, %.9wloop.]
   %.13at0 = call i32 @getint()
   %.14 = icmp ne i32 %.13at0, 0
   br i1 %.14, label %.9wloop., label %.10wn
 .9wloop.:
   %.16at1 = call i32 @getint()
-  %.18 = getelementptr inbounds [100 x i32], [100 x i32]* %.2, i32 0, i32 %.47
+  %.17 = load i32, i32* %.3
+  %.18 = getelementptr inbounds [100 x i32], [100 x i32]* %.2, i32 0, i32 %.17
   store i32 %.16at1, i32* %.18
-  %.22 = add i32 %.47, 1
+  %.20 = load i32, i32* %.3
+  %.22 = add i32 %.20, 1
+  store i32 %.22, i32* %.3
   br label %.8wc 
 .10wn:
   br label %.25wc 
 .25wc:
-  %.48 = phi i32 [%.47, %.10wn], [%.33, %.26wloop.]
-  %.46 = phi i32 [0, %.10wn], [%.39, %.26wloop.]
-  %.30 = icmp ne i32 %.48, 0
+  %.29 = load i32, i32* %.3
+  %.30 = icmp ne i32 %.29, 0
   br i1 %.30, label %.26wloop., label %.27wn
 .26wloop.:
-  %.33 = sub i32 %.48, 1
-  %.37 = getelementptr inbounds [100 x i32], [100 x i32]* %.2, i32 0, i32 %.33
+  %.32 = load i32, i32* %.3
+  %.33 = sub i32 %.32, 1
+  store i32 %.33, i32* %.3
+  %.35 = load i32, i32* %.6
+  %.36 = load i32, i32* %.3
+  %.37 = getelementptr inbounds [100 x i32], [100 x i32]* %.2, i32 0, i32 %.36
   %.38 = load i32, i32* %.37
-  %.39 = add i32 %.46, %.38
+  %.39 = add i32 %.35, %.38
+  store i32 %.39, i32* %.6
   br label %.25wc 
 .27wn:
-  %.44 = srem i32 %.46, 79
+  %.42 = load i32, i32* %.6
+  %.44 = srem i32 %.42, 79
   ret i32 %.44 
 }

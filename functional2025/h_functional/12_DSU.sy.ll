@@ -361,86 +361,124 @@ attributes #7 = { cold }
 @.G.fa = global [100005 x i32] zeroinitializer
 define i32 @_user_quick_read(){
 .0:
+  %.8 = alloca i32
+  %.5 = alloca i32
+  %.1 = alloca i32
   %.3at0 = call i32 @getch()
+  store i32 %.3at0, i32* %.1
+  store i32 0, i32* %.5
+  store i32 0, i32* %.8
   br label %.10wc 
 .10wc:
-  %.206 = phi i32 [%.3at0, %.0], [%.32at1, %.24]
-  %.203 = phi i32 [0, %.0], [%.204, %.24]
-  %.17 = icmp slt i32 %.206, 48
+  %.15 = load i32, i32* %.1
+  %.17 = icmp slt i32 %.15, 48
   br i1 %.17, label %.11wloop., label %.14
 .11wloop.:
-  %.27 = icmp eq i32 %.206, 45
+  %.25 = load i32, i32* %.1
+  %.27 = icmp eq i32 %.25, 45
   br i1 %.27, label %.23, label %.24
 .12wn:
   br label %.35wc 
 .14:
-  %.21 = icmp sgt i32 %.206, 57
+  %.19 = load i32, i32* %.1
+  %.21 = icmp sgt i32 %.19, 57
   br i1 %.21, label %.11wloop., label %.12wn
 .23:
+  store i32 1, i32* %.8
   br label %.24 
 .24:
-  %.204 = phi i32 [%.203, %.11wloop.], [1, %.23]
   %.32at1 = call i32 @getch()
+  store i32 %.32at1, i32* %.1
   br label %.10wc 
 .35wc:
-  %.207 = phi i32 [%.206, %.12wn], [%.53at2, %.36wloop.]
-  %.205 = phi i32 [0, %.12wn], [%.51, %.36wloop.]
-  %.40 = icmp sge i32 %.207, 48
+  %.39 = load i32, i32* %.1
+  %.40 = icmp sge i32 %.39, 48
   br i1 %.40, label %.41, label %.37wn
 .36wloop.:
-  %.48 = mul i32 %.205, 10
-  %.50 = add i32 %.48, %.207
+  %.46 = load i32, i32* %.5
+  %.48 = mul i32 %.46, 10
+  %.49 = load i32, i32* %.1
+  %.50 = add i32 %.48, %.49
   %.51 = sub i32 %.50, 48
+  store i32 %.51, i32* %.5
   %.53at2 = call i32 @getch()
+  store i32 %.53at2, i32* %.1
   br label %.35wc 
 .37wn:
-  %.59 = icmp ne i32 %.203, 0
+  %.58 = load i32, i32* %.8
+  %.59 = icmp ne i32 %.58, 0
   br i1 %.59, label %.56, label %.57
 .41:
-  %.44 = icmp sle i32 %.207, 57
+  %.43 = load i32, i32* %.1
+  %.44 = icmp sle i32 %.43, 57
   br i1 %.44, label %.36wloop., label %.37wn
 .56:
-  %.62 = sub i32 0, %.205
+  %.61 = load i32, i32* %.5
+  %.62 = sub i32 0, %.61
   ret i32 %.62 
 .57:
-  ret i32 %.205 
+  %.64 = load i32, i32* %.5
+  ret i32 %.64 
 }
 define void @_user_init(){
 .70:
+  %.71 = alloca i32
+  store i32 1, i32* %.71
   br label %.73wc 
 .73wc:
-  %.209 = phi i32 [1, %.70], [%.86, %.74wloop.]
+  %.77 = load i32, i32* %.71
   %.78 = load i32, i32* @.G.n
-  %.79 = icmp sle i32 %.209, %.78
+  %.79 = icmp sle i32 %.77, %.78
   br i1 %.79, label %.74wloop., label %.75wn
 .74wloop.:
-  %.83 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.209
-  store i32 %.209, i32* %.83
-  %.86 = add i32 %.209, 1
+  %.81 = load i32, i32* %.71
+  %.82 = load i32, i32* %.71
+  %.83 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.82
+  store i32 %.81, i32* %.83
+  %.85 = load i32, i32* %.71
+  %.86 = add i32 %.85, 1
+  store i32 %.86, i32* %.71
   br label %.73wc 
 .75wn:
   ret void
 }
 define i32 @_user_find(i32 %.91){
 .90:
-  %.97 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.91
+  %.104 = alloca i32
+  %.92 = alloca i32
+  store i32 %.91, i32* %.92
+  %.96 = load i32, i32* %.92
+  %.97 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.96
   %.98 = load i32, i32* %.97
-  %.100 = icmp eq i32 %.98, %.91
+  %.99 = load i32, i32* %.92
+  %.100 = icmp eq i32 %.98, %.99
   br i1 %.100, label %.94, label %.95
 .94:
-  ret i32 %.91 
+  %.102 = load i32, i32* %.92
+  ret i32 %.102 
 .95:
-  %.106 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.91
+  %.105 = load i32, i32* %.92
+  %.106 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.105
   %.107 = load i32, i32* %.106
   %.108at3 = call i32 @_user_find(i32 %.107)
-  %.112 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.91
-  store i32 %.108at3, i32* %.112
-  ret i32 %.108at3 
+  store i32 %.108at3, i32* %.104
+  %.110 = load i32, i32* %.104
+  %.111 = load i32, i32* %.92
+  %.112 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.111
+  store i32 %.110, i32* %.112
+  %.114 = load i32, i32* %.104
+  ret i32 %.114 
 }
 define i32 @_user_same(i32 %.117, i32 %.120){
 .116:
-  %.126at4 = call i32 @_user_find(i32 %.117)
-  %.128at5 = call i32 @_user_find(i32 %.120)
+  %.121 = alloca i32
+  %.118 = alloca i32
+  store i32 %.117, i32* %.118
+  store i32 %.120, i32* %.121
+  %.125 = load i32, i32* %.118
+  %.126at4 = call i32 @_user_find(i32 %.125)
+  %.127 = load i32, i32* %.121
+  %.128at5 = call i32 @_user_find(i32 %.127)
   %.129 = icmp eq i32 %.126at4, %.128at5
   br i1 %.129, label %.123, label %.124
 .123:
@@ -450,6 +488,11 @@ define i32 @_user_same(i32 %.117, i32 %.120){
 }
 define i32 @main(){
 .133:
+  %.189 = alloca i32
+  %.185 = alloca i32
+  %.173 = alloca i32
+  %.170 = alloca i32
+  %.146 = alloca i32
   %.134at6 = call i32 @_user_quick_read()
   store i32 %.134at6, i32* @.G.n
   %.136at7 = call i32 @_user_quick_read()
@@ -462,36 +505,48 @@ define i32 @main(){
   br i1 %.144, label %.140wloop., label %.141wn
 .140wloop.:
   %.147at9 = call i32 @getch()
+  store i32 %.147at9, i32* %.146
   br label %.149wc 
 .141wn:
   ret i32 0 
 .149wc:
-  %.210 = phi i32 [%.147at9, %.140wloop.], [%.162at10, %.150wloop.]
-  %.155 = icmp ne i32 %.210, 81
+  %.153 = load i32, i32* %.146
+  %.155 = icmp ne i32 %.153, 81
   br i1 %.155, label %.156, label %.151wn
 .150wloop.:
   %.162at10 = call i32 @getch()
+  store i32 %.162at10, i32* %.146
   br label %.149wc 
 .151wn:
-  %.168 = icmp eq i32 %.210, 81
+  %.167 = load i32, i32* %.146
+  %.168 = icmp eq i32 %.167, 81
   br i1 %.168, label %.165, label %.166
 .156:
-  %.160 = icmp ne i32 %.210, 85
+  %.158 = load i32, i32* %.146
+  %.160 = icmp ne i32 %.158, 85
   br i1 %.160, label %.150wloop., label %.151wn
 .165:
   %.171at11 = call i32 @_user_quick_read()
+  store i32 %.171at11, i32* %.170
   %.174at12 = call i32 @_user_quick_read()
-  %.178at13 = call i32 @_user_same(i32 %.171at11, i32 %.174at12)
+  store i32 %.174at12, i32* %.173
+  %.176 = load i32, i32* %.170
+  %.177 = load i32, i32* %.173
+  %.178at13 = call i32 @_user_same(i32 %.176, i32 %.177)
   call void @putint(i32 %.178at13)
   call void @putch(i32 10)
   br label %.183 
 .166:
   %.186at16 = call i32 @_user_quick_read()
   %.187at17 = call i32 @_user_find(i32 %.186at16)
+  store i32 %.187at17, i32* %.185
   %.190at18 = call i32 @_user_quick_read()
   %.191at19 = call i32 @_user_find(i32 %.190at18)
-  %.195 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.187at17
-  store i32 %.191at19, i32* %.195
+  store i32 %.191at19, i32* %.189
+  %.193 = load i32, i32* %.189
+  %.194 = load i32, i32* %.185
+  %.195 = getelementptr inbounds [100005 x i32], [100005 x i32]* @.G.fa, i32 0, i32 %.194
+  store i32 %.193, i32* %.195
   br label %.183 
 .183:
   %.198 = load i32, i32* @.G.m

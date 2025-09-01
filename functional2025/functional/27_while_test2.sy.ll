@@ -358,54 +358,74 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_FourWhile(){
 .0:
+  %.10 = alloca i32
+  %.5 = alloca i32
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 5, i32* %.1
+  store i32 6, i32* %.4
+  store i32 7, i32* %.5
+  store i32 10, i32* %.10
   br label %.13wc 
 .13wc:
-  %.90 = phi i32 [5, %.0], [%.23, %.27wn]
-  %.88 = phi i32 [6, %.0], [%.67, %.27wn]
-  %.85 = phi i32 [7, %.0], [%.86, %.27wn]
-  %.81 = phi i32 [10, %.0], [%.82, %.27wn]
-  %.19 = icmp slt i32 %.90, 20
+  %.17 = load i32, i32* %.1
+  %.19 = icmp slt i32 %.17, 20
   br i1 %.19, label %.14wloop., label %.15wn
 .14wloop.:
-  %.23 = add i32 %.90, 3
+  %.21 = load i32, i32* %.1
+  %.23 = add i32 %.21, 3
+  store i32 %.23, i32* %.1
   br label %.25wc 
 .15wn:
-  %.73 = add i32 %.88, %.81
-  %.74 = add i32 %.90, %.73
-  %.76 = add i32 %.74, %.85
+  %.70 = load i32, i32* %.1
+  %.71 = load i32, i32* %.4
+  %.72 = load i32, i32* %.10
+  %.73 = add i32 %.71, %.72
+  %.74 = add i32 %.70, %.73
+  %.75 = load i32, i32* %.5
+  %.76 = add i32 %.74, %.75
   ret i32 %.76 
 .25wc:
-  %.89 = phi i32 [%.88, %.14wloop.], [%.34, %.38wn]
-  %.86 = phi i32 [%.85, %.14wloop.], [%.62, %.38wn]
-  %.82 = phi i32 [%.81, %.14wloop.], [%.83, %.38wn]
-  %.30 = icmp slt i32 %.89, 10
+  %.29 = load i32, i32* %.4
+  %.30 = icmp slt i32 %.29, 10
   br i1 %.30, label %.26wloop., label %.27wn
 .26wloop.:
-  %.34 = add i32 %.89, 1
+  %.32 = load i32, i32* %.4
+  %.34 = add i32 %.32, 1
+  store i32 %.34, i32* %.4
   br label %.36wc 
 .27wn:
-  %.67 = sub i32 %.89, 2
+  %.65 = load i32, i32* %.4
+  %.67 = sub i32 %.65, 2
+  store i32 %.67, i32* %.4
   br label %.13wc 
 .36wc:
-  %.87 = phi i32 [%.86, %.26wloop.], [%.44, %.48wn]
-  %.83 = phi i32 [%.82, %.26wloop.], [%.58, %.48wn]
-  %.41 = icmp eq i32 %.87, 7
+  %.40 = load i32, i32* %.5
+  %.41 = icmp eq i32 %.40, 7
   br i1 %.41, label %.37wloop., label %.38wn
 .37wloop.:
-  %.44 = sub i32 %.87, 1
+  %.43 = load i32, i32* %.5
+  %.44 = sub i32 %.43, 1
+  store i32 %.44, i32* %.5
   br label %.46wc 
 .38wn:
-  %.62 = add i32 %.87, 1
+  %.61 = load i32, i32* %.5
+  %.62 = add i32 %.61, 1
+  store i32 %.62, i32* %.5
   br label %.25wc 
 .46wc:
-  %.84 = phi i32 [%.83, %.37wloop.], [%.54, %.47wloop.]
-  %.51 = icmp slt i32 %.84, 20
+  %.50 = load i32, i32* %.10
+  %.51 = icmp slt i32 %.50, 20
   br i1 %.51, label %.47wloop., label %.48wn
 .47wloop.:
-  %.54 = add i32 %.84, 3
+  %.53 = load i32, i32* %.10
+  %.54 = add i32 %.53, 3
+  store i32 %.54, i32* %.10
   br label %.46wc 
 .48wn:
-  %.58 = sub i32 %.84, 1
+  %.57 = load i32, i32* %.10
+  %.58 = sub i32 %.57, 1
+  store i32 %.58, i32* %.10
   br label %.36wc 
 }
 define i32 @main(){

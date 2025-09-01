@@ -356,8 +356,15 @@ attributes #4 = { nofree norecurse nounwind uwtable writeonly "correctly-rounded
 attributes #5 = { nofree nounwind }
 attributes #6 = { nounwind }
 attributes #7 = { cold }
-define i32 @main(){
+define i32 @_user_fact(i32 %.1, i32 %.4){
 .0:
-  %.10 = add i32 10, 20
-  ret i32 %.10 
+  %.11 = icmp eq i32 %.1, 0
+  br i1 %.11, label %.7, label %.8
+.7:
+  ret i32 %.4 
+.8:
+  %.17 = sub i32 %.1, 1
+  %.20 = mul i32 %.4, %.1
+  %.21at0 = call i32 @_user_fact(i32 %.17, i32 %.20)
+  ret i32 %.21at0 
 }

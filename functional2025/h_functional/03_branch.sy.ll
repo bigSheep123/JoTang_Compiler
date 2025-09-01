@@ -358,21 +358,26 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
-  br i1 true, label %.7, label %.8
+  %.12 = icmp ne i32 4, 0
+  br i1 %.12, label %.7, label %.8
 .7:
-  br i1 true, label %.14, label %.16
+  %.17 = icmp ne i32 5, 0
+  br i1 %.17, label %.14, label %.16
 .8:
   ret i32 1 
 .14:
-  br i1 false, label %.24, label %.22
+  %.23 = icmp eq i32 3, 2
+  br i1 %.23, label %.24, label %.22
 .15:
   ret i32 2 
 .16:
-  br i1 false, label %.14, label %.15
+  %.19 = icmp ne i32 0, 0
+  br i1 %.19, label %.14, label %.15
 .21:
   ret i32 3 
 .22:
-  br i1 false, label %.32, label %.30
+  %.31 = icmp ne i32 0, 0
+  br i1 %.31, label %.32, label %.30
 .24:
   br label %.21 
 .29:
@@ -380,11 +385,13 @@ define i32 @main(){
 .30:
   br label %.37 
 .32:
-  br i1 true, label %.29, label %.30
+  %.34 = icmp ne i32 5, 0
+  br i1 %.34, label %.29, label %.30
 .37:
   br label %.42 
 .41:
-  br i1 true, label %.46, label %.47
+  %.48 = icmp ne i32 3, 6
+  br i1 %.48, label %.46, label %.47
 .42:
   br label %.41 
 .46:

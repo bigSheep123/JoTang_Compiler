@@ -358,5 +358,14 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
-  ret i32 40 
+  %.2 = alloca i32
+  %.1 = alloca i32
+  store i32 10, i32* %.1
+  store i32 30, i32* %.2
+  %.7 = load i32, i32* %.1
+  %.11 = sub i32 %.7, -5
+  %.12 = load i32, i32* %.2
+  %.13 = add i32 %.11, %.12
+  %.14 = add i32 %.13, -5
+  ret i32 %.14 
 }

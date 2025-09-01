@@ -360,81 +360,133 @@ attributes #7 = { cold }
 @.G.parent = global [1005 x i32] zeroinitializer
 define i32 @_user_find(i32 %.4){
 .3:
-  %.10 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.4
+  %.5 = alloca i32
+  store i32 %.4, i32* %.5
+  %.9 = load i32, i32* %.5
+  %.10 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.9
   %.12 = load i32, i32* %.10
-  %.14 = icmp eq i32 %.12, %.4
+  %.13 = load i32, i32* %.5
+  %.14 = icmp eq i32 %.12, %.13
   br i1 %.14, label %.7, label %.8
 .7:
-  ret i32 %.4 
+  %.16 = load i32, i32* %.5
+  ret i32 %.16 
 .8:
-  %.19 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.4
+  %.18 = load i32, i32* %.5
+  %.19 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.18
   %.20 = load i32, i32* %.19
   %.21at0 = call i32 @_user_find(i32 %.20)
-  %.23 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.4
+  %.22 = load i32, i32* %.5
+  %.23 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.22
   store i32 %.21at0, i32* %.23
-  %.26 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.4
+  %.25 = load i32, i32* %.5
+  %.26 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.25
   %.27 = load i32, i32* %.26
   ret i32 %.27 
 }
 define void @_user_merge(i32 %.30, i32 %.33){
 .29:
-  %.39at1 = call i32 @_user_find(i32 %.30)
-  %.42at2 = call i32 @_user_find(i32 %.33)
-  %.48 = icmp ne i32 %.39at1, %.42at2
+  %.37 = alloca i32
+  %.36 = alloca i32
+  %.34 = alloca i32
+  %.31 = alloca i32
+  store i32 %.30, i32* %.31
+  store i32 %.33, i32* %.34
+  %.38 = load i32, i32* %.31
+  %.39at1 = call i32 @_user_find(i32 %.38)
+  store i32 %.39at1, i32* %.36
+  %.41 = load i32, i32* %.34
+  %.42at2 = call i32 @_user_find(i32 %.41)
+  store i32 %.42at2, i32* %.37
+  %.46 = load i32, i32* %.36
+  %.47 = load i32, i32* %.37
+  %.48 = icmp ne i32 %.46, %.47
   br i1 %.48, label %.44, label %.45
 .44:
-  %.52 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.42at2
-  store i32 %.39at1, i32* %.52
+  %.50 = load i32, i32* %.36
+  %.51 = load i32, i32* %.37
+  %.52 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.51
+  store i32 %.50, i32* %.52
   br label %.45 
 .45:
   ret void
 }
 define i32 @main(){
 .56:
+  %.105 = alloca i32
+  %.66 = alloca i32
+  %.65 = alloca i32
+  %.64 = alloca i32
+  %.61 = alloca i32
+  %.57 = alloca i32
   %.59at3 = call i32 @getint()
+  store i32 %.59at3, i32* %.57
   %.62at4 = call i32 @getint()
+  store i32 %.62at4, i32* %.61
+  store i32 0, i32* %.64
   br label %.68wc 
 .68wc:
-  %.138 = phi i32 [0, %.56], [%.82, %.69wloop.]
-  %.74 = icmp slt i32 %.138, %.59at3
+  %.72 = load i32, i32* %.64
+  %.73 = load i32, i32* %.57
+  %.74 = icmp slt i32 %.72, %.73
   br i1 %.74, label %.69wloop., label %.70wn
 .69wloop.:
-  %.78 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.138
-  store i32 %.138, i32* %.78
-  %.82 = add i32 %.138, 1
+  %.76 = load i32, i32* %.64
+  %.77 = load i32, i32* %.64
+  %.78 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.77
+  store i32 %.76, i32* %.78
+  %.80 = load i32, i32* %.64
+  %.82 = add i32 %.80, 1
+  store i32 %.82, i32* %.64
   br label %.68wc 
 .70wn:
+  store i32 0, i32* %.64
   br label %.86wc 
 .86wc:
-  %.139 = phi i32 [0, %.70wn], [%.102, %.87wloop.]
-  %.92 = icmp slt i32 %.139, %.62at4
+  %.90 = load i32, i32* %.64
+  %.91 = load i32, i32* %.61
+  %.92 = icmp slt i32 %.90, %.91
   br i1 %.92, label %.87wloop., label %.88wn
 .87wloop.:
   %.94at5 = call i32 @getint()
+  store i32 %.94at5, i32* %.65
   %.96at6 = call i32 @getint()
-  call void @_user_merge(i32 %.94at5, i32 %.96at6)
-  %.102 = add i32 %.139, 1
+  store i32 %.96at6, i32* %.66
+  %.98 = load i32, i32* %.65
+  %.99 = load i32, i32* %.66
+  call void @_user_merge(i32 %.98, i32 %.99)
+  %.101 = load i32, i32* %.64
+  %.102 = add i32 %.101, 1
+  store i32 %.102, i32* %.64
   br label %.86wc 
 .88wn:
+  store i32 0, i32* %.105
+  store i32 0, i32* %.64
   br label %.108wc 
 .108wc:
-  %.140 = phi i32 [0, %.88wn], [%.129, %.117]
-  %.136 = phi i32 [0, %.88wn], [%.137, %.117]
-  %.114 = icmp slt i32 %.140, %.59at3
+  %.112 = load i32, i32* %.64
+  %.113 = load i32, i32* %.57
+  %.114 = icmp slt i32 %.112, %.113
   br i1 %.114, label %.109wloop., label %.110wn
 .109wloop.:
-  %.119 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.140
+  %.118 = load i32, i32* %.64
+  %.119 = getelementptr inbounds [1005 x i32], [1005 x i32]* @.G.parent, i32 0, i32 %.118
   %.120 = load i32, i32* %.119
-  %.122 = icmp eq i32 %.120, %.140
+  %.121 = load i32, i32* %.64
+  %.122 = icmp eq i32 %.120, %.121
   br i1 %.122, label %.116, label %.117
 .110wn:
-  call void @putint(i32 %.136)
+  %.132 = load i32, i32* %.105
+  call void @putint(i32 %.132)
   ret i32 0 
 .116:
-  %.125 = add i32 %.136, 1
+  %.124 = load i32, i32* %.105
+  %.125 = add i32 %.124, 1
+  store i32 %.125, i32* %.105
   br label %.117 
 .117:
-  %.137 = phi i32 [%.136, %.109wloop.], [%.125, %.116]
-  %.129 = add i32 %.140, 1
+  %.128 = load i32, i32* %.64
+  %.129 = add i32 %.128, 1
+  store i32 %.129, i32* %.64
   br label %.108wc 
 }

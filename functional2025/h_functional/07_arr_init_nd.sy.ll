@@ -365,11 +365,14 @@ attributes #7 = { cold }
 define i32 @main(){
 .0:
   %.62 = alloca [2 x [3 x [4 x i32]]]
+  %.61 = alloca [3 x i32]
   %.53 = alloca [5 x [3 x i32]]
+  %.52 = alloca [5 x i32]
   %.43 = alloca [5 x [3 x i32]]
   %.34 = alloca [5 x [3 x i32]]
   %.12 = alloca [5 x [3 x i32]]
   %.4 = alloca [5 x [3 x i32]]
+  %.3 = alloca [5 x [3 x i32]]
   call void @llvm.memcpy.p0.p0.i32([5 x [3 x i32]]* %.4, [5 x [3 x i32]]* @.C..6, i32 60, i1 false)
   call void @llvm.memcpy.p0.p0.i32([5 x [3 x i32]]* %.12, [5 x [3 x i32]]* @.C..32, i32 60, i1 false)
   call void @llvm.memcpy.p0.p0.i32([5 x [3 x i32]]* %.34, [5 x [3 x i32]]* @.C..41, i32 60, i1 false)

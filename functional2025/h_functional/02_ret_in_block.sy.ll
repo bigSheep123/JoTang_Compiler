@@ -358,5 +358,47 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
-  ret i32 11 
+  %.27 = alloca i32
+  %.18 = alloca i32
+  %.7 = alloca i32
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 893, i32* %.1
+  store i32 716, i32* %.4
+  store i32 837, i32* %.7
+  %.10 = load i32, i32* %.7
+  %.12 = add i32 %.10, 128
+  store i32 %.12, i32* %.7
+  %.14 = load i32, i32* %.4
+  %.15 = load i32, i32* %.7
+  %.16 = add i32 %.14, %.15
+  store i32 %.16, i32* %.4
+  store i32 241, i32* %.18
+  %.21 = load i32, i32* %.7
+  %.22 = load i32, i32* %.18
+  %.23 = add i32 %.21, %.22
+  %.25 = sub i32 %.23, 412
+  store i32 %.25, i32* %.7
+  store i32 771, i32* %.27
+  %.30 = load i32, i32* %.18
+  %.31 = load i32, i32* %.27
+  %.32 = add i32 %.30, %.31
+  %.34 = sub i32 %.32, 18
+  store i32 %.34, i32* %.18
+  %.36 = load i32, i32* %.18
+  %.38 = add i32 %.36, 66
+  store i32 %.38, i32* %.27
+  %.40 = load i32, i32* %.18
+  %.41 = load i32, i32* %.7
+  %.42 = add i32 %.40, %.41
+  %.44 = sub i32 %.42, 33
+  store i32 %.44, i32* %.18
+  %.46 = load i32, i32* %.18
+  %.48 = sub i32 %.46, 55
+  store i32 %.48, i32* %.7
+  %.50 = load i32, i32* %.7
+  %.51 = load i32, i32* %.18
+  %.52 = add i32 %.50, %.51
+  %.54 = srem i32 %.52, 21
+  ret i32 %.54 
 }

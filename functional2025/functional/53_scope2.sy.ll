@@ -359,6 +359,10 @@ attributes #7 = { cold }
 @.G.k = global i32 zeroinitializer
 define i32 @main(){
 .1:
+  %.46 = alloca i32
+  %.38 = alloca i32
+  %.35 = alloca i32
+  %.14 = alloca i32
   store i32 3389, i32* @.G.k
   %.6 = load i32, i32* @.G.k
   %.8 = icmp slt i32 %.6, 10000
@@ -367,27 +371,42 @@ define i32 @main(){
   %.10 = load i32, i32* @.G.k
   %.12 = add i32 %.10, 1
   store i32 %.12, i32* @.G.k
+  store i32 112, i32* %.14
   br label %.17wc 
 .5:
   %.60 = load i32, i32* @.G.k
   ret i32 %.60 
 .17wc:
-  %.62 = phi i32 [112, %.4], [%.63, %.30]
-  %.23 = icmp sgt i32 %.62, 10
+  %.21 = load i32, i32* %.14
+  %.23 = icmp sgt i32 %.21, 10
   br i1 %.23, label %.18wloop., label %.19wn
 .18wloop.:
-  %.27 = sub i32 %.62, 88
-  %.33 = icmp slt i32 %.27, 1000
+  %.25 = load i32, i32* %.14
+  %.27 = sub i32 %.25, 88
+  store i32 %.27, i32* %.14
+  %.31 = load i32, i32* %.14
+  %.33 = icmp slt i32 %.31, 1000
   br i1 %.33, label %.29, label %.30
 .19wn:
-  call void @putint(i32 %.62)
+  %.56 = load i32, i32* %.14
+  call void @putint(i32 %.56)
   br label %.5 
 .29:
-  %.44 = sub i32 %.27, 10
-  %.50 = add i32 %.44, 11
-  %.52 = add i32 %.50, 11
+  store i32 9, i32* %.35
+  store i32 11, i32* %.38
+  store i32 10, i32* %.35
+  %.42 = load i32, i32* %.14
+  %.43 = load i32, i32* %.35
+  %.44 = sub i32 %.42, %.43
+  store i32 %.44, i32* %.14
+  store i32 11, i32* %.46
+  %.48 = load i32, i32* %.14
+  %.49 = load i32, i32* %.46
+  %.50 = add i32 %.48, %.49
+  %.51 = load i32, i32* %.38
+  %.52 = add i32 %.50, %.51
+  store i32 %.52, i32* %.14
   br label %.30 
 .30:
-  %.63 = phi i32 [%.27, %.18wloop.], [%.52, %.29]
   br label %.17wc 
 }

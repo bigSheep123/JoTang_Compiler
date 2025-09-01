@@ -358,26 +358,36 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_doubleWhile(){
 .0:
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 5, i32* %.1
+  store i32 7, i32* %.4
   br label %.7wc 
 .7wc:
-  %.42 = phi i32 [5, %.0], [%.17, %.21wn]
-  %.40 = phi i32 [7, %.0], [%.32, %.21wn]
-  %.13 = icmp slt i32 %.42, 100
+  %.11 = load i32, i32* %.1
+  %.13 = icmp slt i32 %.11, 100
   br i1 %.13, label %.8wloop., label %.9wn
 .8wloop.:
-  %.17 = add i32 %.42, 30
+  %.15 = load i32, i32* %.1
+  %.17 = add i32 %.15, 30
+  store i32 %.17, i32* %.1
   br label %.19wc 
 .9wn:
-  ret i32 %.40 
+  %.35 = load i32, i32* %.4
+  ret i32 %.35 
 .19wc:
-  %.41 = phi i32 [%.40, %.8wloop.], [%.28, %.20wloop.]
-  %.24 = icmp slt i32 %.41, 100
+  %.23 = load i32, i32* %.4
+  %.24 = icmp slt i32 %.23, 100
   br i1 %.24, label %.20wloop., label %.21wn
 .20wloop.:
-  %.28 = add i32 %.41, 6
+  %.26 = load i32, i32* %.4
+  %.28 = add i32 %.26, 6
+  store i32 %.28, i32* %.4
   br label %.19wc 
 .21wn:
-  %.32 = sub i32 %.41, 100
+  %.31 = load i32, i32* %.4
+  %.32 = sub i32 %.31, 100
+  store i32 %.32, i32* %.4
   br label %.7wc 
 }
 define i32 @main(){

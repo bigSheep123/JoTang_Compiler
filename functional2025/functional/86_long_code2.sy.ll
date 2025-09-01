@@ -359,6 +359,7 @@ attributes #7 = { cold }
 @.G.a = global [5 x [20000 x i32]] zeroinitializer
 define i32 @main(){
 .3:
+  %.10 = alloca i32
   %.7 = getelementptr inbounds [5 x [20000 x i32]], [5 x [20000 x i32]]* @.G.a, i32 0, i32 4, i32 19999
   store i32 1, i32* %.7
   %.12 = getelementptr inbounds [5 x [20000 x i32]], [5 x [20000 x i32]]* @.G.a, i32 0, i32 4, i32 19999
@@ -12360,5 +12361,7 @@ define i32 @main(){
   %.12008 = getelementptr inbounds [5 x [20000 x i32]], [5 x [20000 x i32]]* @.G.a, i32 0, i32 4, i32 19999
   %.12009 = load i32, i32* %.12008
   %.12010 = add i32 %.12007, %.12009
-  ret i32 %.12010 
+  store i32 %.12010, i32* %.10
+  %.12012 = load i32, i32* %.10
+  ret i32 %.12012 
 }

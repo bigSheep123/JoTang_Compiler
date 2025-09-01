@@ -362,6 +362,9 @@ define i32 @_user_defn(){
 }
 define i32 @main(){
 .3:
+  %.4 = alloca i32
   %.5at0 = call i32 @_user_defn()
-  ret i32 %.5at0 
+  store i32 %.5at0, i32* %.4
+  %.7 = load i32, i32* %.4
+  ret i32 %.7 
 }

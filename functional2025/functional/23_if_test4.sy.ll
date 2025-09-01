@@ -358,18 +358,29 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_if_ifElse_(){
 .0:
-  br i1 true, label %.7, label %.8
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 5, i32* %.1
+  store i32 10, i32* %.4
+  %.9 = load i32, i32* %.1
+  %.10 = icmp eq i32 %.9, 5
+  br i1 %.10, label %.7, label %.8
 .7:
-  br i1 true, label %.12, label %.13
+  %.14 = load i32, i32* %.4
+  %.15 = icmp eq i32 %.14, 10
+  br i1 %.15, label %.12, label %.13
 .8:
-  %.32 = phi i32 [5, %.0], [%.33, %.19]
-  ret i32 %.32 
+  %.27 = load i32, i32* %.1
+  ret i32 %.27 
 .12:
+  store i32 25, i32* %.1
   br label %.19 
 .13:
+  %.21 = load i32, i32* %.1
+  %.23 = add i32 %.21, 15
+  store i32 %.23, i32* %.1
   br label %.19 
 .19:
-  %.33 = phi i32 [20, %.13], [25, %.12]
   br label %.8 
 }
 define i32 @main(){

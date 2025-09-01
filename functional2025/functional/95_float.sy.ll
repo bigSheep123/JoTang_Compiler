@@ -374,35 +374,55 @@ attributes #7 = { cold }
 @.C..197 = constant [10 x float]  [float 0x3ff0000000000000, float 0x4000000000000000, float zeroinitializer, float zeroinitializer, float zeroinitializer, float zeroinitializer, float zeroinitializer, float zeroinitializer, float zeroinitializer, float zeroinitializer]
 define float @_user_float_abs(float %.38){
 .37:
-  %.46 = fcmp ult float %.38, 0x0
+  %.39 = alloca float
+  store float %.38, float* %.39
+  %.43 = load float, float* %.39
+  %.45 = sitofp i32 0 to float
+  %.46 = fcmp ult float %.43, %.45
   br i1 %.46, label %.41, label %.42
 .41:
-  %.49 = fsub float 0x0, %.38
+  %.48 = load float, float* %.39
+  %.49 = fsub float 0x0, %.48
   ret float %.49 
 .42:
-  ret float %.38 
+  %.51 = load float, float* %.39
+  ret float %.51 
 }
 define float @_user_circle_area(i32 %.54){
 .53:
-  %.58 = sitofp i32 %.54 to float
+  %.55 = alloca i32
+  store i32 %.54, i32* %.55
+  %.57 = load i32, i32* %.55
+  %.58 = sitofp i32 %.57 to float
   %.59 = fmul float 0x400921fb60000000, %.58
-  %.61 = sitofp i32 %.54 to float
+  %.60 = load i32, i32* %.55
+  %.61 = sitofp i32 %.60 to float
   %.62 = fmul float %.59, %.61
-  %.65 = mul i32 %.54, %.54
+  %.63 = load i32, i32* %.55
+  %.64 = load i32, i32* %.55
+  %.65 = mul i32 %.63, %.64
   %.66 = sitofp i32 %.65 to float
   %.67 = fmul float %.66, 0x400921fb60000000
   %.68 = fadd float %.62, %.67
-  %.70 = fdiv float %.68, 0x4000000000000000
+  %.69 = sitofp i32 2 to float
+  %.70 = fdiv float %.68, %.69
   ret float %.70 
 }
 define i32 @_user_float_eq(float %.73, float %.76){
 .72:
-  %.83 = fsub float %.73, %.76
+  %.77 = alloca float
+  %.74 = alloca float
+  store float %.73, float* %.74
+  store float %.76, float* %.77
+  %.81 = load float, float* %.74
+  %.82 = load float, float* %.77
+  %.83 = fsub float %.81, %.82
   %.84at0 = call float @_user_float_abs(float %.83)
   %.85 = fcmp ult float %.84at0, 0x3eb0c6f7a0000000
   br i1 %.85, label %.79, label %.80
 .79:
-  ret i32 1 
+  %.90 = fptosi float 0x3ff0000000000000 to i32
+  ret i32 %.90 
 .80:
   ret i32 0 
 }
@@ -425,7 +445,10 @@ define void @_user_ok(){
 }
 define void @_user_assert(i32 %.113){
 .112:
-  %.119 = icmp eq i32 %.113, 0
+  %.114 = alloca i32
+  store i32 %.113, i32* %.114
+  %.118 = load i32, i32* %.114
+  %.119 = icmp eq i32 %.118, 0
   br i1 %.119, label %.116, label %.117
 .116:
   call void @_user_error()
@@ -438,7 +461,10 @@ define void @_user_assert(i32 %.113){
 }
 define void @_user_assert_not(i32 %.128){
 .127:
-  %.134 = icmp ne i32 %.128, 0
+  %.129 = alloca i32
+  store i32 %.128, i32* %.129
+  %.133 = load i32, i32* %.129
+  %.134 = icmp ne i32 %.133, 0
   br i1 %.134, label %.131, label %.132
 .131:
   call void @_user_error()
@@ -451,20 +477,28 @@ define void @_user_assert_not(i32 %.128){
 }
 define i32 @main(){
 .142:
+  %.223 = alloca float
+  %.217 = alloca float
+  %.213 = alloca float
+  %.201 = alloca i32
   %.195 = alloca [10 x float]
+  %.193 = alloca i32
+  %.191 = alloca i32
   %.143at14 = call i32 @_user_float_eq(float 0x3fb4000000000000, float 0xc0e01d0000000000)
   call void @_user_assert_not(i32 %.143at14)
   %.145at16 = call i32 @_user_float_eq(float 0x4057c21fc0000000, float 0x4041475ce0000000)
   call void @_user_assert_not(i32 %.145at16)
   %.147at18 = call i32 @_user_float_eq(float 0x4041475ce0000000, float 0x4041475ce0000000)
   call void @_user_assert(i32 %.147at18)
-  %.150at20 = call float @_user_circle_area(i32 5)
+  %.149 = fptosi float 0x4016000000000000 to i32
+  %.150at20 = call float @_user_circle_area(i32 %.149)
   %.151at21 = call float @_user_circle_area(i32 5)
   %.152at22 = call i32 @_user_float_eq(float %.150at20, float %.151at21)
   call void @_user_assert(i32 %.152at22)
   %.154at24 = call i32 @_user_float_eq(float 0x406d200000000000, float 0x40affe0000000000)
   call void @_user_assert_not(i32 %.154at24)
-  br i1 true, label %.156, label %.157
+  %.159 = fcmp une float 0x3ff8000000000000, 0x0
+  br i1 %.159, label %.156, label %.157
 .156:
   call void @_user_ok()
   br label %.157 
@@ -474,52 +508,74 @@ define i32 @main(){
   call void @_user_ok()
   br label %.170 
 .170:
-  br i1 false, label %.175, label %.173
+  %.174 = fcmp une float 0x0, 0x0
+  br i1 %.174, label %.175, label %.173
 .172:
   call void @_user_error()
   br label %.173 
 .173:
-  br i1 false, label %.181, label %.183
+  %.184 = icmp ne i32 0, 0
+  br i1 %.184, label %.181, label %.183
 .175:
-  br i1 true, label %.172, label %.173
+  %.177 = icmp ne i32 3, 0
+  br i1 %.177, label %.172, label %.173
 .181:
   call void @_user_ok()
   br label %.182 
 .182:
+  store i32 1, i32* %.191
+  store i32 0, i32* %.193
   call void @llvm.memcpy.p0.p0.i32([10 x float]* %.195, [10 x float]* @.C..197, i32 40, i1 false)
   %.202 = getelementptr inbounds [10 x float], [10 x float]* %.195, i32 0, i32 0
   %.204at30 = call i32 @getfarray(float* %.202)
+  store i32 %.204at30, i32* %.201
   br label %.206wc 
 .183:
-  br i1 true, label %.181, label %.182
+  %.187 = fcmp une float 0x3fd3333340000000, 0x0
+  br i1 %.187, label %.181, label %.182
 .206wc:
-  %.263 = phi i32 [0, %.182], [%.254, %.207wloop.]
-  %.262 = phi i32 [1, %.182], [%.251, %.207wloop.]
-  %.211 = icmp slt i32 %.262, 1000000000
+  %.210 = load i32, i32* %.191
+  %.211 = icmp slt i32 %.210, 1000000000
   br i1 %.211, label %.207wloop., label %.208wn
 .207wloop.:
   %.215at31 = call float @getfloat()
-  %.219 = fmul float 0x400921fb60000000, %.215at31
-  %.221 = fmul float %.219, %.215at31
-  %.225 = fptosi float %.215at31 to i32
+  store float %.215at31, float* %.213
+  %.218 = load float, float* %.213
+  %.219 = fmul float 0x400921fb60000000, %.218
+  %.220 = load float, float* %.213
+  %.221 = fmul float %.219, %.220
+  store float %.221, float* %.217
+  %.224 = load float, float* %.213
+  %.225 = fptosi float %.224 to i32
   %.226at32 = call float @_user_circle_area(i32 %.225)
-  %.229 = getelementptr inbounds [10 x float], [10 x float]* %.195, i32 0, i32 %.263
+  store float %.226at32, float* %.223
+  %.228 = load i32, i32* %.193
+  %.229 = getelementptr inbounds [10 x float], [10 x float]* %.195, i32 0, i32 %.228
   %.230 = load float, float* %.229
-  %.232 = fadd float %.230, %.215at31
-  %.234 = getelementptr inbounds [10 x float], [10 x float]* %.195, i32 0, i32 %.263
+  %.231 = load float, float* %.213
+  %.232 = fadd float %.230, %.231
+  %.233 = load i32, i32* %.193
+  %.234 = getelementptr inbounds [10 x float], [10 x float]* %.195, i32 0, i32 %.233
   store float %.232, float* %.234
-  call void @putfloat(float %.221)
+  %.236 = load float, float* %.217
+  call void @putfloat(float %.236)
   call void @putch(i32 32)
-  %.242 = fptosi float %.226at32 to i32
+  %.241 = load float, float* %.223
+  %.242 = fptosi float %.241 to i32
   call void @putint(i32 %.242)
   call void @putch(i32 10)
-  %.249 = sitofp i32 %.262 to float
+  %.246 = load i32, i32* %.191
+  %.249 = sitofp i32 %.246 to float
   %.250 = fmul float %.249, 0x4024000000000000
   %.251 = fptosi float %.250 to i32
-  %.254 = add i32 %.263, 1
+  store i32 %.251, i32* %.191
+  %.253 = load i32, i32* %.193
+  %.254 = add i32 %.253, 1
+  store i32 %.254, i32* %.193
   br label %.206wc 
 .208wn:
+  %.257 = load i32, i32* %.201
   %.258 = getelementptr inbounds [10 x float], [10 x float]* %.195, i32 0, i32 0
-  call void @putfarray(i32 %.204at30, float* %.258)
+  call void @putfarray(i32 %.257, float* %.258)
   ret i32 0 
 }

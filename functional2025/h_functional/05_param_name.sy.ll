@@ -358,7 +358,10 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_f(i32 %.1){
 .0:
-  %.6 = mul i32 %.1, 2
+  %.2 = alloca i32
+  store i32 %.1, i32* %.2
+  %.4 = load i32, i32* %.2
+  %.6 = mul i32 %.4, 2
   ret i32 %.6 
 }
 define i32 @main(){

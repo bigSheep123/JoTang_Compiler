@@ -373,26 +373,34 @@ define i32 @_user_next_char(){
 }
 define i32 @_user_is_space(i32 %.16){
 .15:
-  %.23 = icmp eq i32 %.16, 32
+  %.17 = alloca i32
+  store i32 %.16, i32* %.17
+  %.22 = load i32, i32* %.17
+  %.23 = icmp eq i32 %.22, 32
   br i1 %.23, label %.19, label %.21
 .19:
   ret i32 1 
 .20:
   ret i32 0 
 .21:
-  %.27 = icmp eq i32 %.16, 10
+  %.25 = load i32, i32* %.17
+  %.27 = icmp eq i32 %.25, 10
   br i1 %.27, label %.19, label %.20
 }
 define i32 @_user_is_num(i32 %.32){
 .31:
-  %.39 = icmp sge i32 %.32, 48
+  %.33 = alloca i32
+  store i32 %.32, i32* %.33
+  %.37 = load i32, i32* %.33
+  %.39 = icmp sge i32 %.37, 48
   br i1 %.39, label %.40, label %.36
 .35:
   ret i32 1 
 .36:
   ret i32 0 
 .40:
-  %.44 = icmp sle i32 %.32, 57
+  %.42 = load i32, i32* %.33
+  %.44 = icmp sle i32 %.42, 57
   br i1 %.44, label %.35, label %.36
 }
 define i32 @_user_next_token(){
@@ -455,103 +463,163 @@ define i32 @_user_panic(){
 }
 define i32 @_user_get_op_prec(i32 %.111){
 .110:
-  %.119 = icmp eq i32 %.111, 43
+  %.112 = alloca i32
+  store i32 %.111, i32* %.112
+  %.117 = load i32, i32* %.112
+  %.119 = icmp eq i32 %.117, 43
   br i1 %.119, label %.114, label %.116
 .114:
   ret i32 10 
 .115:
-  %.131 = icmp eq i32 %.111, 42
+  %.129 = load i32, i32* %.112
+  %.131 = icmp eq i32 %.129, 42
   br i1 %.131, label %.126, label %.128
 .116:
-  %.123 = icmp eq i32 %.111, 45
+  %.121 = load i32, i32* %.112
+  %.123 = icmp eq i32 %.121, 45
   br i1 %.123, label %.114, label %.115
 .126:
   ret i32 20 
 .127:
   ret i32 0 
 .128:
-  %.136 = icmp eq i32 %.111, 47
+  %.134 = load i32, i32* %.112
+  %.136 = icmp eq i32 %.134, 47
   br i1 %.136, label %.126, label %.133
 .133:
-  %.140 = icmp eq i32 %.111, 37
+  %.138 = load i32, i32* %.112
+  %.140 = icmp eq i32 %.138, 37
   br i1 %.140, label %.126, label %.127
 }
 define void @_user_stack_push(i32* %.146, i32 %.149){
 .145:
-  %.153 = getelementptr inbounds i32, i32* %.146, i32 0
+  %.150 = alloca i32
+  %.147 = alloca i32*
+  store i32* %.146, i32** %.147
+  store i32 %.149, i32* %.150
+  %.152 = load i32*, i32** %.147
+  %.153 = getelementptr inbounds i32, i32* %.152, i32 0
   %.154 = load i32, i32* %.153
   %.155 = add i32 %.154, 1
-  %.157 = getelementptr inbounds i32, i32* %.146, i32 0
+  %.156 = load i32*, i32** %.147
+  %.157 = getelementptr inbounds i32, i32* %.156, i32 0
   store i32 %.155, i32* %.157
-  %.161 = getelementptr inbounds i32, i32* %.146, i32 0
+  %.159 = load i32, i32* %.150
+  %.160 = load i32*, i32** %.147
+  %.161 = getelementptr inbounds i32, i32* %.160, i32 0
   %.162 = load i32, i32* %.161
-  %.164 = getelementptr inbounds i32, i32* %.146, i32 %.162
-  store i32 %.149, i32* %.164
+  %.163 = load i32*, i32** %.147
+  %.164 = getelementptr inbounds i32, i32* %.163, i32 %.162
+  store i32 %.159, i32* %.164
   ret void
 }
 define i32 @_user_stack_pop(i32* %.168){
 .167:
-  %.173 = getelementptr inbounds i32, i32* %.168, i32 0
+  %.171 = alloca i32
+  %.169 = alloca i32*
+  store i32* %.168, i32** %.169
+  %.172 = load i32*, i32** %.169
+  %.173 = getelementptr inbounds i32, i32* %.172, i32 0
   %.174 = load i32, i32* %.173
-  %.176 = getelementptr inbounds i32, i32* %.168, i32 %.174
+  %.175 = load i32*, i32** %.169
+  %.176 = getelementptr inbounds i32, i32* %.175, i32 %.174
   %.177 = load i32, i32* %.176
-  %.180 = getelementptr inbounds i32, i32* %.168, i32 0
+  store i32 %.177, i32* %.171
+  %.179 = load i32*, i32** %.169
+  %.180 = getelementptr inbounds i32, i32* %.179, i32 0
   %.181 = load i32, i32* %.180
   %.182 = sub i32 %.181, 1
-  %.184 = getelementptr inbounds i32, i32* %.168, i32 0
+  %.183 = load i32*, i32** %.169
+  %.184 = getelementptr inbounds i32, i32* %.183, i32 0
   store i32 %.182, i32* %.184
-  ret i32 %.177 
+  %.186 = load i32, i32* %.171
+  ret i32 %.186 
 }
 define i32 @_user_stack_peek(i32* %.189){
 .188:
-  %.193 = getelementptr inbounds i32, i32* %.189, i32 0
+  %.190 = alloca i32*
+  store i32* %.189, i32** %.190
+  %.192 = load i32*, i32** %.190
+  %.193 = getelementptr inbounds i32, i32* %.192, i32 0
   %.194 = load i32, i32* %.193
-  %.196 = getelementptr inbounds i32, i32* %.189, i32 %.194
+  %.195 = load i32*, i32** %.190
+  %.196 = getelementptr inbounds i32, i32* %.195, i32 %.194
   %.197 = load i32, i32* %.196
   ret i32 %.197 
 }
 define i32 @_user_stack_size(i32* %.200){
 .199:
-  %.204 = getelementptr inbounds i32, i32* %.200, i32 0
+  %.201 = alloca i32*
+  store i32* %.200, i32** %.201
+  %.203 = load i32*, i32** %.201
+  %.204 = getelementptr inbounds i32, i32* %.203, i32 0
   %.205 = load i32, i32* %.204
   ret i32 %.205 
 }
 define i32 @_user_eval_op(i32 %.208, i32 %.211, i32 %.214){
 .207:
-  %.220 = icmp eq i32 %.208, 43
+  %.215 = alloca i32
+  %.212 = alloca i32
+  %.209 = alloca i32
+  store i32 %.208, i32* %.209
+  store i32 %.211, i32* %.212
+  store i32 %.214, i32* %.215
+  %.219 = load i32, i32* %.209
+  %.220 = icmp eq i32 %.219, 43
   br i1 %.220, label %.217, label %.218
 .217:
-  %.224 = add i32 %.211, %.214
+  %.222 = load i32, i32* %.212
+  %.223 = load i32, i32* %.215
+  %.224 = add i32 %.222, %.223
   ret i32 %.224 
 .218:
-  %.229 = icmp eq i32 %.208, 45
+  %.228 = load i32, i32* %.209
+  %.229 = icmp eq i32 %.228, 45
   br i1 %.229, label %.226, label %.227
 .226:
-  %.233 = sub i32 %.211, %.214
+  %.231 = load i32, i32* %.212
+  %.232 = load i32, i32* %.215
+  %.233 = sub i32 %.231, %.232
   ret i32 %.233 
 .227:
-  %.238 = icmp eq i32 %.208, 42
+  %.237 = load i32, i32* %.209
+  %.238 = icmp eq i32 %.237, 42
   br i1 %.238, label %.235, label %.236
 .235:
-  %.242 = mul i32 %.211, %.214
+  %.240 = load i32, i32* %.212
+  %.241 = load i32, i32* %.215
+  %.242 = mul i32 %.240, %.241
   ret i32 %.242 
 .236:
-  %.247 = icmp eq i32 %.208, 47
+  %.246 = load i32, i32* %.209
+  %.247 = icmp eq i32 %.246, 47
   br i1 %.247, label %.244, label %.245
 .244:
-  %.251 = sdiv i32 %.211, %.214
+  %.249 = load i32, i32* %.212
+  %.250 = load i32, i32* %.215
+  %.251 = sdiv i32 %.249, %.250
   ret i32 %.251 
 .245:
-  %.256 = icmp eq i32 %.208, 37
+  %.255 = load i32, i32* %.209
+  %.256 = icmp eq i32 %.255, 37
   br i1 %.256, label %.253, label %.254
 .253:
-  %.260 = srem i32 %.211, %.214
+  %.258 = load i32, i32* %.212
+  %.259 = load i32, i32* %.215
+  %.260 = srem i32 %.258, %.259
   ret i32 %.260 
 .254:
   ret i32 0 
 }
 define i32 @_user_eval(){
 .263:
+  %.373 = alloca i32
+  %.369 = alloca i32
+  %.365 = alloca i32
+  %.330 = alloca i32
+  %.326 = alloca i32
+  %.322 = alloca i32
+  %.295 = alloca i32
   %.273 = alloca [256 x i32]
   %.265 = alloca [256 x i32]
   call void @llvm.memcpy.p0.p0.i32([256 x i32]* %.265, [256 x i32]* @.C..267, i32 1024, i1 false)
@@ -574,7 +642,9 @@ define i32 @_user_eval(){
   br i1 %.293, label %.289wloop., label %.290wn
 .289wloop.:
   %.296 = load i32, i32* @.G.other
-  %.301at17 = call i32 @_user_get_op_prec(i32 %.296)
+  store i32 %.296, i32* %.295
+  %.300 = load i32, i32* %.295
+  %.301at17 = call i32 @_user_get_op_prec(i32 %.300)
   %.302 = icmp eq i32 %.301at17, 0
   br i1 %.302, label %.298, label %.299
 .290wn:
@@ -593,17 +663,24 @@ define i32 @_user_eval(){
 .307wloop.:
   %.323 = getelementptr inbounds [256 x i32], [256 x i32]* %.273, i32 0, i32 0
   %.324at23 = call i32 @_user_stack_pop(i32* %.323)
+  store i32 %.324at23, i32* %.322
   %.327 = getelementptr inbounds [256 x i32], [256 x i32]* %.265, i32 0, i32 0
   %.328at24 = call i32 @_user_stack_pop(i32* %.327)
+  store i32 %.328at24, i32* %.326
   %.331 = getelementptr inbounds [256 x i32], [256 x i32]* %.265, i32 0, i32 0
   %.332at25 = call i32 @_user_stack_pop(i32* %.331)
+  store i32 %.332at25, i32* %.330
   %.334 = getelementptr inbounds [256 x i32], [256 x i32]* %.265, i32 0, i32 0
-  %.338at26 = call i32 @_user_eval_op(i32 %.324at23, i32 %.332at25, i32 %.328at24)
+  %.335 = load i32, i32* %.322
+  %.336 = load i32, i32* %.330
+  %.337 = load i32, i32* %.326
+  %.338at26 = call i32 @_user_eval_op(i32 %.335, i32 %.336, i32 %.337)
   call void @_user_stack_push(i32* %.334, i32 %.338at26)
   br label %.306wc 
 .308wn:
   %.341 = getelementptr inbounds [256 x i32], [256 x i32]* %.273, i32 0, i32 0
-  call void @_user_stack_push(i32* %.341, i32 %.296)
+  %.342 = load i32, i32* %.295
+  call void @_user_stack_push(i32* %.341, i32 %.342)
   %.346 = load i32, i32* @.G.cur_token
   %.347 = icmp ne i32 %.346, 0
   br i1 %.347, label %.344, label %.345
@@ -611,7 +688,8 @@ define i32 @_user_eval(){
   %.315 = getelementptr inbounds [256 x i32], [256 x i32]* %.273, i32 0, i32 0
   %.316at20 = call i32 @_user_stack_peek(i32* %.315)
   %.317at21 = call i32 @_user_get_op_prec(i32 %.316at20)
-  %.319at22 = call i32 @_user_get_op_prec(i32 %.296)
+  %.318 = load i32, i32* %.295
+  %.319at22 = call i32 @_user_get_op_prec(i32 %.318)
   %.320 = icmp sge i32 %.317at21, %.319at22
   br i1 %.320, label %.307wloop., label %.308wn
 .344:
@@ -631,12 +709,18 @@ define i32 @_user_eval(){
 .358wloop.:
   %.366 = getelementptr inbounds [256 x i32], [256 x i32]* %.273, i32 0, i32 0
   %.367at34 = call i32 @_user_stack_pop(i32* %.366)
+  store i32 %.367at34, i32* %.365
   %.370 = getelementptr inbounds [256 x i32], [256 x i32]* %.265, i32 0, i32 0
   %.371at35 = call i32 @_user_stack_pop(i32* %.370)
+  store i32 %.371at35, i32* %.369
   %.374 = getelementptr inbounds [256 x i32], [256 x i32]* %.265, i32 0, i32 0
   %.375at36 = call i32 @_user_stack_pop(i32* %.374)
+  store i32 %.375at36, i32* %.373
   %.377 = getelementptr inbounds [256 x i32], [256 x i32]* %.265, i32 0, i32 0
-  %.381at37 = call i32 @_user_eval_op(i32 %.367at34, i32 %.375at36, i32 %.371at35)
+  %.378 = load i32, i32* %.365
+  %.379 = load i32, i32* %.373
+  %.380 = load i32, i32* %.369
+  %.381at37 = call i32 @_user_eval_op(i32 %.378, i32 %.379, i32 %.380)
   call void @_user_stack_push(i32* %.377, i32 %.381at37)
   br label %.357wc 
 .359wn:
@@ -646,19 +730,23 @@ define i32 @_user_eval(){
 }
 define i32 @main(){
 .387:
+  %.388 = alloca i32
   %.390at40 = call i32 @getint()
+  store i32 %.390at40, i32* %.388
   %.392at41 = call i32 @getch()
   %.393at42 = call i32 @_user_next_token()
   br label %.394wc 
 .394wc:
-  %.411 = phi i32 [%.390at40, %.387], [%.406, %.395wloop.]
-  %.399 = icmp ne i32 %.411, 0
+  %.398 = load i32, i32* %.388
+  %.399 = icmp ne i32 %.398, 0
   br i1 %.399, label %.395wloop., label %.396wn
 .395wloop.:
   %.401at43 = call i32 @_user_eval()
   call void @putint(i32 %.401at43)
   call void @putch(i32 10)
-  %.406 = sub i32 %.411, 1
+  %.405 = load i32, i32* %.388
+  %.406 = sub i32 %.405, 1
+  store i32 %.406, i32* %.388
   br label %.394wc 
 .396wn:
   ret i32 0 

@@ -358,44 +358,72 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @_user_get_one(i32 %.1){
 .0:
+  %.2 = alloca i32
+  store i32 %.1, i32* %.2
   ret i32 1 
 }
 define i32 @_user_deepWhileBr(i32 %.7, i32 %.10){
 .6:
-  %.16 = add i32 %.7, %.10
+  %.45 = alloca i32
+  %.26 = alloca i32
+  %.13 = alloca i32
+  %.11 = alloca i32
+  %.8 = alloca i32
+  store i32 %.7, i32* %.8
+  store i32 %.10, i32* %.11
+  %.14 = load i32, i32* %.8
+  %.15 = load i32, i32* %.11
+  %.16 = add i32 %.14, %.15
+  store i32 %.16, i32* %.13
   br label %.18wc 
 .18wc:
-  %.76 = phi i32 [%.16, %.6], [%.77, %.30]
-  %.24 = icmp slt i32 %.76, 75
+  %.22 = load i32, i32* %.13
+  %.24 = icmp slt i32 %.22, 75
   br i1 %.24, label %.19wloop., label %.20wn
 .19wloop.:
-  %.33 = icmp slt i32 %.76, 100
+  store i32 42, i32* %.26
+  %.31 = load i32, i32* %.13
+  %.33 = icmp slt i32 %.31, 100
   br i1 %.33, label %.29, label %.30
 .20wn:
-  ret i32 %.76 
+  %.63 = load i32, i32* %.13
+  ret i32 %.63 
 .29:
-  %.37 = add i32 %.76, 42
-  %.43 = icmp sgt i32 %.37, 99
+  %.35 = load i32, i32* %.13
+  %.36 = load i32, i32* %.26
+  %.37 = add i32 %.35, %.36
+  store i32 %.37, i32* %.13
+  %.41 = load i32, i32* %.13
+  %.43 = icmp sgt i32 %.41, 99
   br i1 %.43, label %.39, label %.40
 .30:
-  %.77 = phi i32 [%.76, %.19wloop.], [%.78, %.40]
   br label %.18wc 
 .39:
+  %.46 = load i32, i32* %.26
+  %.48 = mul i32 %.46, 2
+  store i32 %.48, i32* %.45
   %.53at0 = call i32 @_user_get_one(i32 0)
   %.54 = icmp eq i32 %.53at0, 1
   br i1 %.54, label %.50, label %.51
 .40:
-  %.78 = phi i32 [%.37, %.29], [%.79, %.51]
   br label %.30 
 .50:
+  %.56 = load i32, i32* %.45
+  %.57 = mul i32 %.56, 2
+  store i32 %.57, i32* %.13
   br label %.51 
 .51:
-  %.79 = phi i32 [%.37, %.39], [168, %.50]
   br label %.40 
 }
 define i32 @main(){
 .65:
-  %.70at1 = call i32 @_user_deepWhileBr(i32 2, i32 2)
-  call void @putint(i32 %.70at1)
+  %.66 = alloca i32
+  store i32 2, i32* %.66
+  %.68 = load i32, i32* %.66
+  %.69 = load i32, i32* %.66
+  %.70at1 = call i32 @_user_deepWhileBr(i32 %.68, i32 %.69)
+  store i32 %.70at1, i32* %.66
+  %.72 = load i32, i32* %.66
+  call void @putint(i32 %.72)
   ret i32 0 
 }

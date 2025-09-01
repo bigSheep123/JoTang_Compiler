@@ -358,90 +358,118 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
+  %.76 = alloca i32
+  %.34 = alloca i32
+  %.24 = alloca i32
+  %.14 = alloca i32
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 0, i32* %.1
+  store i32 0, i32* %.4
   br label %.6wc 
 .6wc:
-  %.130 = phi i32 [0, %.0], [%.131, %.18wn]
-  %.129 = phi i32 [0, %.0], [%.120, %.18wn]
-  %.12 = icmp slt i32 %.129, 20
+  %.10 = load i32, i32* %.4
+  %.12 = icmp slt i32 %.10, 20
   br i1 %.12, label %.7wloop., label %.8wn
 .7wloop.:
+  store i32 0, i32* %.14
   br label %.16wc 
 .8wn:
-  ret i32 %.130 
+  %.123 = load i32, i32* %.1
+  ret i32 %.123 
 .16wc:
-  %.131 = phi i32 [%.130, %.7wloop.], [%.132, %.28wn]
-  %.128 = phi i32 [0, %.7wloop.], [%.116, %.28wn]
-  %.22 = icmp slt i32 %.128, 10
+  %.20 = load i32, i32* %.14
+  %.22 = icmp slt i32 %.20, 10
   br i1 %.22, label %.17wloop., label %.18wn
 .17wloop.:
+  store i32 0, i32* %.24
   br label %.26wc 
 .18wn:
-  %.120 = add i32 %.129, 1
+  %.119 = load i32, i32* %.4
+  %.120 = add i32 %.119, 1
+  store i32 %.120, i32* %.4
   br label %.6wc 
 .26wc:
-  %.132 = phi i32 [%.131, %.17wloop.], [%.133, %.99wn]
-  %.127 = phi i32 [0, %.17wloop.], [%.112, %.99wn]
-  %.32 = icmp slt i32 %.127, 5
+  %.30 = load i32, i32* %.24
+  %.32 = icmp slt i32 %.30, 5
   br i1 %.32, label %.27wloop., label %.28wn
 .27wloop.:
+  store i32 0, i32* %.34
   br label %.36wc 
 .28wn:
-  %.116 = add i32 %.128, 1
+  %.115 = load i32, i32* %.14
+  %.116 = add i32 %.115, 1
+  store i32 %.116, i32* %.14
   br label %.16wc 
 .36wc:
-  %.133 = phi i32 [%.132, %.27wloop.], [%.94, %.80wn]
-  %.126 = phi i32 [0, %.27wloop.], [%.91, %.80wn]
-  %.42 = icmp slt i32 %.126, 3
+  %.40 = load i32, i32* %.34
+  %.42 = icmp slt i32 %.40, 3
   br i1 %.42, label %.37wloop., label %.38wn
 .37wloop.:
-  %.48 = add i32 %.126, 1
+  %.46 = load i32, i32* %.34
+  %.48 = add i32 %.46, 1
   %.49 = icmp sge i32 %.48, 3
   br i1 %.49, label %.44, label %.45
 .38wn:
   br label %.97wc 
 .44:
-  %.54 = icmp ne i32 %.126, 0
+  %.53 = load i32, i32* %.34
+  %.54 = icmp ne i32 %.53, 0
   br i1 %.54, label %.51, label %.52
 .45:
+  store i32 0, i32* %.76
   br label %.78wc 
 .51:
-  %.60 = icmp ne i32 %.126, 0
+  %.59 = load i32, i32* %.34
+  %.60 = icmp ne i32 %.59, 0
   br i1 %.60, label %.56, label %.58
 .52:
   br label %.45 
 .56:
-  %.69 = sub i32 %.126, -1
+  %.67 = load i32, i32* %.34
+  %.69 = sub i32 %.67, -1
   %.70 = icmp sge i32 %.69, 3
   br i1 %.70, label %.65, label %.66
 .57:
   br label %.52 
 .58:
-  %.63 = icmp eq i32 %.126, 0
+  %.62 = load i32, i32* %.34
+  %.63 = icmp eq i32 %.62, 0
   br i1 %.63, label %.56, label %.57
 .65:
   br label %.38wn 
 .66:
   br label %.57 
 .78wc:
-  %.125 = phi i32 [0, %.45], [%.87, %.79wloop.]
-  %.84 = icmp slt i32 %.125, 2
+  %.82 = load i32, i32* %.76
+  %.84 = icmp slt i32 %.82, 2
   br i1 %.84, label %.79wloop., label %.80wn
 .79wloop.:
-  %.87 = add i32 %.125, 1
+  %.86 = load i32, i32* %.76
+  %.87 = add i32 %.86, 1
+  store i32 %.87, i32* %.76
   br label %.78wc 
 .80wn:
-  %.91 = add i32 %.126, 1
-  %.94 = add i32 %.133, 1
+  %.90 = load i32, i32* %.34
+  %.91 = add i32 %.90, 1
+  store i32 %.91, i32* %.34
+  %.93 = load i32, i32* %.1
+  %.94 = add i32 %.93, 1
+  store i32 %.94, i32* %.1
   br label %.36wc 
 .97wc:
-  br i1 true, label %.98wloop., label %.99wn
+  %.101 = icmp ne i32 1, 0
+  br i1 %.101, label %.98wloop., label %.99wn
 .98wloop.:
   br label %.103wc 
 .99wn:
-  %.112 = add i32 %.127, 1
+  %.111 = load i32, i32* %.24
+  %.112 = add i32 %.111, 1
+  store i32 %.112, i32* %.24
   br label %.26wc 
 .103wc:
-  br i1 true, label %.104wloop., label %.105wn
+  %.107 = icmp ne i32 1, 0
+  br i1 %.107, label %.104wloop., label %.105wn
 .104wloop.:
   br label %.105wn 
 .105wn:

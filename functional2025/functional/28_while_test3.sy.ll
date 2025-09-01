@@ -362,23 +362,35 @@ attributes #7 = { cold }
 @.G.e = global i32 zeroinitializer
 define i32 @_user_EightWhile(){
 .4:
+  %.14 = alloca i32
+  %.9 = alloca i32
+  %.8 = alloca i32
+  %.5 = alloca i32
+  store i32 5, i32* %.5
+  store i32 6, i32* %.8
+  store i32 7, i32* %.9
+  store i32 10, i32* %.14
   br label %.17wc 
 .17wc:
-  %.164 = phi i32 [5, %.4], [%.27, %.31wn]
-  %.162 = phi i32 [6, %.4], [%.128, %.31wn]
-  %.159 = phi i32 [7, %.4], [%.160, %.31wn]
-  %.155 = phi i32 [10, %.4], [%.156, %.31wn]
-  %.23 = icmp slt i32 %.164, 20
+  %.21 = load i32, i32* %.5
+  %.23 = icmp slt i32 %.21, 20
   br i1 %.23, label %.18wloop., label %.19wn
 .18wloop.:
-  %.27 = add i32 %.164, 3
+  %.25 = load i32, i32* %.5
+  %.27 = add i32 %.25, 3
+  store i32 %.27, i32* %.5
   br label %.29wc 
 .19wn:
-  %.134 = add i32 %.162, %.155
-  %.135 = add i32 %.164, %.134
-  %.137 = add i32 %.135, %.159
+  %.131 = load i32, i32* %.5
+  %.132 = load i32, i32* %.8
+  %.133 = load i32, i32* %.14
+  %.134 = add i32 %.132, %.133
+  %.135 = add i32 %.131, %.134
+  %.136 = load i32, i32* %.9
+  %.137 = add i32 %.135, %.136
   %.138 = load i32, i32* @.G.e
-  %.140 = add i32 %.138, %.155
+  %.139 = load i32, i32* %.14
+  %.140 = add i32 %.138, %.139
   %.141 = load i32, i32* @.G.g
   %.142 = sub i32 %.140, %.141
   %.143 = load i32, i32* @.G.h
@@ -386,37 +398,46 @@ define i32 @_user_EightWhile(){
   %.145 = sub i32 %.137, %.144
   ret i32 %.145 
 .29wc:
-  %.163 = phi i32 [%.162, %.18wloop.], [%.38, %.42wn]
-  %.160 = phi i32 [%.159, %.18wloop.], [%.124, %.42wn]
-  %.156 = phi i32 [%.155, %.18wloop.], [%.157, %.42wn]
-  %.34 = icmp slt i32 %.163, 10
+  %.33 = load i32, i32* %.8
+  %.34 = icmp slt i32 %.33, 10
   br i1 %.34, label %.30wloop., label %.31wn
 .30wloop.:
-  %.38 = add i32 %.163, 1
+  %.36 = load i32, i32* %.8
+  %.38 = add i32 %.36, 1
+  store i32 %.38, i32* %.8
   br label %.40wc 
 .31wn:
-  %.128 = sub i32 %.163, 2
+  %.127 = load i32, i32* %.8
+  %.128 = sub i32 %.127, 2
+  store i32 %.128, i32* %.8
   br label %.17wc 
 .40wc:
-  %.161 = phi i32 [%.160, %.30wloop.], [%.48, %.52wn]
-  %.157 = phi i32 [%.156, %.30wloop.], [%.120, %.52wn]
-  %.45 = icmp eq i32 %.161, 7
+  %.44 = load i32, i32* %.9
+  %.45 = icmp eq i32 %.44, 7
   br i1 %.45, label %.41wloop., label %.42wn
 .41wloop.:
-  %.48 = sub i32 %.161, 1
+  %.47 = load i32, i32* %.9
+  %.48 = sub i32 %.47, 1
+  store i32 %.48, i32* %.9
   br label %.50wc 
 .42wn:
-  %.124 = add i32 %.161, 1
+  %.123 = load i32, i32* %.9
+  %.124 = add i32 %.123, 1
+  store i32 %.124, i32* %.9
   br label %.29wc 
 .50wc:
-  %.158 = phi i32 [%.157, %.41wloop.], [%.58, %.62wn]
-  %.55 = icmp slt i32 %.158, 20
+  %.54 = load i32, i32* %.14
+  %.55 = icmp slt i32 %.54, 20
   br i1 %.55, label %.51wloop., label %.52wn
 .51wloop.:
-  %.58 = add i32 %.158, 3
+  %.57 = load i32, i32* %.14
+  %.58 = add i32 %.57, 3
+  store i32 %.58, i32* %.14
   br label %.60wc 
 .52wn:
-  %.120 = sub i32 %.158, 1
+  %.119 = load i32, i32* %.14
+  %.120 = sub i32 %.119, 1
+  store i32 %.120, i32* %.14
   br label %.40wc 
 .60wc:
   %.64 = load i32, i32* @.G.e

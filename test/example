@@ -1,0 +1,39 @@
+// fact.c
+int fact(int n, int acc) {
+    if (n == 0)
+        return acc;
+    return fact(n - 1, acc * n);  // 尾递归
+}
+
+// 未优化
+define i32 @_user_fact(i32 %.1, i32 %.4){
+.0:
+  %.11 = icmp eq i32 %.1, 0
+  br i1 %.11, label %.7, label %.8
+.7:
+  ret i32 %.4 
+.8:
+  %.17 = sub i32 %.1, 1
+  %.20 = mul i32 %.4, %.1
+  %.21at0 = call i32 @_user_fact(i32 %.17, i32 %.20)
+  ret i32 %.21at0 
+}
+
+// Tail 优化
+define i32 @_user_fact(i32 %.1, i32 %.4){
+.23:
+  br label %.0 
+.0:
+  %.26 = phi i32 [%.4, %.23], [%.20, %.8]
+  %.25 = phi i32 [%.1, %.23], [%.17, %.8]
+  %.11 = icmp eq i32 %.25, 0
+  br i1 %.11, label %.7, label %.8
+.7:
+  ret i32 %.26 
+.8:
+  %.17 = sub i32 %.25, 1
+  %.20 = mul i32 %.26, %.25
+  br label %.0 
+}
+
+

@@ -366,77 +366,115 @@ attributes #7 = { cold }
 @.G.EPSILON = global float zeroinitializer
 define float @_user_my_fabs(float %.14){
 .13:
-  %.22 = fcmp ugt float %.14, 0x0
+  %.15 = alloca float
+  store float %.14, float* %.15
+  %.19 = load float, float* %.15
+  %.21 = sitofp i32 0 to float
+  %.22 = fcmp ugt float %.19, %.21
   br i1 %.22, label %.17, label %.18
 .17:
-  ret float %.14 
+  %.24 = load float, float* %.15
+  ret float %.24 
 .18:
-  %.28 = fsub float 0x0, %.14
+  %.26 = load float, float* %.15
+  %.28 = fsub float 0x0, %.26
   ret float %.28 
 }
 define float @_user_p(float %.31){
 .30:
-  %.37 = fmul float 0x4008000000000000, %.31
-  %.41 = fmul float 0x4010000000000000, %.31
-  %.43 = fmul float %.41, %.31
-  %.45 = fmul float %.43, %.31
+  %.32 = alloca float
+  store float %.31, float* %.32
+  %.35 = load float, float* %.32
+  %.36 = sitofp i32 3 to float
+  %.37 = fmul float %.36, %.35
+  %.39 = load float, float* %.32
+  %.40 = sitofp i32 4 to float
+  %.41 = fmul float %.40, %.39
+  %.42 = load float, float* %.32
+  %.43 = fmul float %.41, %.42
+  %.44 = load float, float* %.32
+  %.45 = fmul float %.43, %.44
   %.46 = fsub float %.37, %.45
   ret float %.46 
 }
 define float @_user_my_sin_impl(float %.49){
 .48:
-  %.55at0 = call float @_user_my_fabs(float %.49)
+  %.50 = alloca float
+  store float %.49, float* %.50
+  %.54 = load float, float* %.50
+  %.55at0 = call float @_user_my_fabs(float %.54)
   %.56 = fcmp ule float %.55at0, 0x3eb0c6f7a0000000
   br i1 %.56, label %.52, label %.53
 .52:
-  ret float %.49 
+  %.58 = load float, float* %.50
+  ret float %.58 
 .53:
-  %.62 = fdiv float %.49, 0x4008000000000000
+  %.60 = load float, float* %.50
+  %.62 = fdiv float %.60, 0x4008000000000000
   %.63at1 = call float @_user_my_sin_impl(float %.62)
   %.64at2 = call float @_user_p(float %.63at1)
   ret float %.64at2 
 }
 define float @_user_my_sin(float %.67){
 .66:
-  %.74 = fcmp ugt float %.67, 0x401921fb60000000
+  %.80 = alloca i32
+  %.68 = alloca float
+  store float %.67, float* %.68
+  %.73 = load float, float* %.68
+  %.74 = fcmp ugt float %.73, 0x401921fb60000000
   br i1 %.74, label %.70, label %.72
 .70:
-  %.82 = fdiv float %.67, 0x401921fb60000000
+  %.81 = load float, float* %.68
+  %.82 = fdiv float %.81, 0x401921fb60000000
   %.83 = fptosi float %.82 to i32
-  %.87 = sitofp i32 %.83 to float
+  store i32 %.83, i32* %.80
+  %.85 = load float, float* %.68
+  %.86 = load i32, i32* %.80
+  %.87 = sitofp i32 %.86 to float
   %.88 = fmul float %.87, 0x401921fb60000000
-  %.89 = fsub float %.67, %.88
+  %.89 = fsub float %.85, %.88
+  store float %.89, float* %.68
   br label %.71 
 .71:
-  %.361 = phi float [%.67, %.72], [%.89, %.70]
-  %.95 = fcmp ugt float %.361, 0x400921fb60000000
+  %.94 = load float, float* %.68
+  %.95 = fcmp ugt float %.94, 0x400921fb60000000
   br i1 %.95, label %.92, label %.93
 .72:
-  %.78 = fcmp ult float %.67, 0xc01921fb60000000
+  %.76 = load float, float* %.68
+  %.78 = fcmp ult float %.76, 0xc01921fb60000000
   br i1 %.78, label %.70, label %.71
 .92:
-  %.98 = fsub float %.361, 0x401921fb60000000
+  %.97 = load float, float* %.68
+  %.98 = fsub float %.97, 0x401921fb60000000
+  store float %.98, float* %.68
   br label %.93 
 .93:
-  %.362 = phi float [%.361, %.71], [%.98, %.92]
-  %.105 = fcmp ult float %.362, 0xc00921fb60000000
+  %.103 = load float, float* %.68
+  %.105 = fcmp ult float %.103, 0xc00921fb60000000
   br i1 %.105, label %.101, label %.102
 .101:
-  %.108 = fadd float %.362, 0x401921fb60000000
+  %.107 = load float, float* %.68
+  %.108 = fadd float %.107, 0x401921fb60000000
+  store float %.108, float* %.68
   br label %.102 
 .102:
-  %.363 = phi float [%.362, %.93], [%.108, %.101]
-  %.112at3 = call float @_user_my_sin_impl(float %.363)
+  %.111 = load float, float* %.68
+  %.112at3 = call float @_user_my_sin_impl(float %.111)
   ret float %.112at3 
 }
 define float @_user_my_cos(float %.115){
 .114:
-  %.121 = fadd float %.115, 0x3ff921fb60000000
+  %.116 = alloca float
+  store float %.115, float* %.116
+  %.118 = load float, float* %.116
+  %.121 = fadd float %.118, 0x3ff921fb60000000
   %.122at4 = call float @_user_my_sin(float %.121)
   ret float %.122at4 
 }
 define i32 @_user_read_image(){
 .124:
+  %.170 = alloca i32
+  %.160 = alloca i32
   %.129at5 = call i32 @getch()
   %.131 = icmp ne i32 %.129at5, 80
   br i1 %.131, label %.125, label %.127
@@ -457,6 +495,7 @@ define i32 @_user_read_image(){
 .145:
   ret i32 -1 
 .146:
+  store i32 0, i32* %.160
   br label %.162wc 
 .147:
   %.152 = load i32, i32* @.G.height
@@ -467,83 +506,138 @@ define i32 @_user_read_image(){
   %.157 = icmp ne i32 %.155at9, 255
   br i1 %.157, label %.145, label %.146
 .162wc:
-  %.366 = phi i32 [0, %.146], [%.193, %.174wn]
+  %.166 = load i32, i32* %.160
   %.167 = load i32, i32* @.G.height
-  %.168 = icmp slt i32 %.366, %.167
+  %.168 = icmp slt i32 %.166, %.167
   br i1 %.168, label %.163wloop., label %.164wn
 .163wloop.:
+  store i32 0, i32* %.170
   br label %.172wc 
 .164wn:
   ret i32 0 
 .172wc:
-  %.365 = phi i32 [0, %.163wloop.], [%.189, %.173wloop.]
+  %.176 = load i32, i32* %.170
   %.177 = load i32, i32* @.G.width
-  %.178 = icmp slt i32 %.365, %.177
+  %.178 = icmp slt i32 %.176, %.177
   br i1 %.178, label %.173wloop., label %.174wn
 .173wloop.:
   %.180at10 = call i32 @getint()
+  %.181 = load i32, i32* %.160
   %.182 = load i32, i32* @.G.width
-  %.183 = mul i32 %.366, %.182
-  %.185 = add i32 %.183, %.365
+  %.183 = mul i32 %.181, %.182
+  %.184 = load i32, i32* %.170
+  %.185 = add i32 %.183, %.184
   %.186 = getelementptr inbounds [1048576 x i32], [1048576 x i32]* @.G.image, i32 0, i32 %.185
   store i32 %.180at10, i32* %.186
-  %.189 = add i32 %.365, 1
+  %.188 = load i32, i32* %.170
+  %.189 = add i32 %.188, 1
+  store i32 %.189, i32* %.170
   br label %.172wc 
 .174wn:
-  %.193 = add i32 %.366, 1
+  %.192 = load i32, i32* %.160
+  %.193 = add i32 %.192, 1
+  store i32 %.193, i32* %.160
   br label %.162wc 
 }
 define i32 @_user_rotate(i32 %.198, i32 %.201, float %.204){
 .197:
-  %.209at11 = call float @_user_my_sin(float %.204)
-  %.213at12 = call float @_user_my_cos(float %.204)
+  %.248 = alloca i32
+  %.233 = alloca i32
+  %.228 = alloca i32
+  %.223 = alloca i32
+  %.219 = alloca i32
+  %.215 = alloca i32
+  %.211 = alloca float
+  %.207 = alloca float
+  %.205 = alloca float
+  %.202 = alloca i32
+  %.199 = alloca i32
+  store i32 %.198, i32* %.199
+  store i32 %.201, i32* %.202
+  store float %.204, float* %.205
+  %.208 = load float, float* %.205
+  %.209at11 = call float @_user_my_sin(float %.208)
+  store float %.209at11, float* %.207
+  %.212 = load float, float* %.205
+  %.213at12 = call float @_user_my_cos(float %.212)
+  store float %.213at12, float* %.211
   %.216 = load i32, i32* @.G.width
   %.217 = sdiv i32 %.216, 2
+  store i32 %.217, i32* %.215
   %.220 = load i32, i32* @.G.height
   %.221 = sdiv i32 %.220, 2
-  %.226 = sub i32 %.198, %.217
-  %.231 = sub i32 %.201, %.221
-  %.236 = sitofp i32 %.226 to float
-  %.237 = fmul float %.236, %.213at12
-  %.240 = sitofp i32 %.231 to float
-  %.241 = fmul float %.240, %.209at11
+  store i32 %.221, i32* %.219
+  %.224 = load i32, i32* %.199
+  %.225 = load i32, i32* %.215
+  %.226 = sub i32 %.224, %.225
+  store i32 %.226, i32* %.223
+  %.229 = load i32, i32* %.202
+  %.230 = load i32, i32* %.219
+  %.231 = sub i32 %.229, %.230
+  store i32 %.231, i32* %.228
+  %.234 = load i32, i32* %.223
+  %.235 = load float, float* %.211
+  %.236 = sitofp i32 %.234 to float
+  %.237 = fmul float %.236, %.235
+  %.238 = load i32, i32* %.228
+  %.239 = load float, float* %.207
+  %.240 = sitofp i32 %.238 to float
+  %.241 = fmul float %.240, %.239
   %.242 = fsub float %.237, %.241
-  %.244 = sitofp i32 %.217 to float
+  %.243 = load i32, i32* %.215
+  %.244 = sitofp i32 %.243 to float
   %.245 = fadd float %.242, %.244
   %.246 = fptosi float %.245 to i32
-  %.251 = sitofp i32 %.226 to float
-  %.252 = fmul float %.251, %.209at11
-  %.255 = sitofp i32 %.231 to float
-  %.256 = fmul float %.255, %.213at12
+  store i32 %.246, i32* %.233
+  %.249 = load i32, i32* %.223
+  %.250 = load float, float* %.207
+  %.251 = sitofp i32 %.249 to float
+  %.252 = fmul float %.251, %.250
+  %.253 = load i32, i32* %.228
+  %.254 = load float, float* %.211
+  %.255 = sitofp i32 %.253 to float
+  %.256 = fmul float %.255, %.254
   %.257 = fadd float %.252, %.256
-  %.259 = sitofp i32 %.221 to float
+  %.258 = load i32, i32* %.219
+  %.259 = sitofp i32 %.258 to float
   %.260 = fadd float %.257, %.259
   %.261 = fptosi float %.260 to i32
-  %.267 = icmp slt i32 %.246, 0
+  store i32 %.261, i32* %.248
+  %.266 = load i32, i32* %.233
+  %.267 = icmp slt i32 %.266, 0
   br i1 %.267, label %.263, label %.265
 .263:
   ret i32 0 
 .264:
+  %.283 = load i32, i32* %.248
   %.284 = load i32, i32* @.G.width
-  %.285 = mul i32 %.261, %.284
-  %.287 = add i32 %.285, %.246
+  %.285 = mul i32 %.283, %.284
+  %.286 = load i32, i32* %.233
+  %.287 = add i32 %.285, %.286
   %.288 = getelementptr inbounds [1048576 x i32], [1048576 x i32]* @.G.image, i32 0, i32 %.287
   %.289 = load i32, i32* %.288
   ret i32 %.289 
 .265:
+  %.270 = load i32, i32* %.233
   %.271 = load i32, i32* @.G.width
-  %.272 = icmp sge i32 %.246, %.271
+  %.272 = icmp sge i32 %.270, %.271
   br i1 %.272, label %.263, label %.269
 .269:
-  %.276 = icmp slt i32 %.261, 0
+  %.275 = load i32, i32* %.248
+  %.276 = icmp slt i32 %.275, 0
   br i1 %.276, label %.263, label %.274
 .274:
+  %.278 = load i32, i32* %.248
   %.279 = load i32, i32* @.G.height
-  %.280 = icmp sge i32 %.261, %.279
+  %.280 = icmp sge i32 %.278, %.279
   br i1 %.280, label %.263, label %.264
 }
 define void @_user_write_pgm(float %.292){
 .291:
+  %.320 = alloca i32
+  %.310 = alloca i32
+  %.293 = alloca float
+  store float %.292, float* %.293
   call void @putch(i32 80)
   call void @putch(i32 50)
   call void @putch(i32 10)
@@ -555,35 +649,46 @@ define void @_user_write_pgm(float %.292){
   call void @putch(i32 32)
   call void @putint(i32 255)
   call void @putch(i32 10)
+  store i32 0, i32* %.310
   br label %.312wc 
 .312wc:
-  %.369 = phi i32 [0, %.291], [%.342, %.324wn]
+  %.316 = load i32, i32* %.310
   %.317 = load i32, i32* @.G.height
-  %.318 = icmp slt i32 %.369, %.317
+  %.318 = icmp slt i32 %.316, %.317
   br i1 %.318, label %.313wloop., label %.314wn
 .313wloop.:
+  store i32 0, i32* %.320
   br label %.322wc 
 .314wn:
   ret void
 .322wc:
-  %.368 = phi i32 [0, %.313wloop.], [%.337, %.323wloop.]
+  %.326 = load i32, i32* %.320
   %.327 = load i32, i32* @.G.width
-  %.328 = icmp slt i32 %.368, %.327
+  %.328 = icmp slt i32 %.326, %.327
   br i1 %.328, label %.323wloop., label %.324wn
 .323wloop.:
-  %.333at22 = call i32 @_user_rotate(i32 %.368, i32 %.369, float %.292)
+  %.330 = load i32, i32* %.320
+  %.331 = load i32, i32* %.310
+  %.332 = load float, float* %.293
+  %.333at22 = call i32 @_user_rotate(i32 %.330, i32 %.331, float %.332)
   call void @putint(i32 %.333at22)
   call void @putch(i32 32)
-  %.337 = add i32 %.368, 1
+  %.336 = load i32, i32* %.320
+  %.337 = add i32 %.336, 1
+  store i32 %.337, i32* %.320
   br label %.322wc 
 .324wn:
   call void @putch(i32 10)
-  %.342 = add i32 %.369, 1
+  %.341 = load i32, i32* %.310
+  %.342 = add i32 %.341, 1
+  store i32 %.342, i32* %.310
   br label %.312wc 
 }
 define i32 @main(){
 .346:
+  %.347 = alloca float
   %.349at26 = call float @getfloat()
+  store float %.349at26, float* %.347
   %.351at27 = call i32 @getch()
   %.354at28 = call i32 @_user_read_image()
   %.355 = icmp slt i32 %.354at28, 0
@@ -591,6 +696,7 @@ define i32 @main(){
 .352:
   ret i32 -1 
 .353:
-  call void @_user_write_pgm(float %.349at26)
+  %.358 = load float, float* %.347
+  call void @_user_write_pgm(float %.358)
   ret i32 0 
 }

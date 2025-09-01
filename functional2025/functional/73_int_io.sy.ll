@@ -359,73 +359,99 @@ attributes #7 = { cold }
 @.G.ascii_0 = global i32 zeroinitializer
 define i32 @_user_my_getint(){
 .2:
+  %.6 = alloca i32
+  %.3 = alloca i32
+  store i32 0, i32* %.3
   br label %.7wc 
 .7wc:
-  %.129 = phi i32 [undef, %.2], [%.16, %.18]
-  br i1 true, label %.8wloop., label %.9wn
+  %.12 = icmp ne i32 1, 0
+  br i1 %.12, label %.8wloop., label %.9wn
 .8wloop.:
   %.15at0 = call i32 @getch()
   %.16 = sub i32 %.15at0, 48
-  %.22 = icmp slt i32 %.16, 0
+  store i32 %.16, i32* %.6
+  %.21 = load i32, i32* %.6
+  %.22 = icmp slt i32 %.21, 0
   br i1 %.22, label %.18, label %.20
 .9wn:
-  %.130 = phi i32 [%.129, %.7wc], [%.16, %.19]
+  %.30 = load i32, i32* %.6
+  store i32 %.30, i32* %.3
   br label %.32wc 
 .18:
   br label %.7wc 
 .19:
   br label %.9wn 
 .20:
-  %.26 = icmp sgt i32 %.16, 9
+  %.24 = load i32, i32* %.6
+  %.26 = icmp sgt i32 %.24, 9
   br i1 %.26, label %.18, label %.19
 .32wc:
-  %.131 = phi i32 [%.130, %.9wn], [%.54, %.56]
-  br i1 true, label %.33wloop., label %.34wn
+  %.36 = icmp ne i32 1, 0
+  br i1 %.36, label %.33wloop., label %.34wn
 .33wloop.:
   %.38at1 = call i32 @getch()
   %.39 = sub i32 %.38at1, 48
-  %.44 = icmp sge i32 %.39, 0
+  store i32 %.39, i32* %.6
+  %.43 = load i32, i32* %.6
+  %.44 = icmp sge i32 %.43, 0
   br i1 %.44, label %.45, label %.42
 .34wn:
-  ret i32 %.131 
+  %.60 = load i32, i32* %.3
+  ret i32 %.60 
 .41:
-  %.52 = mul i32 %.131, 10
-  %.54 = add i32 %.52, %.39
+  %.50 = load i32, i32* %.3
+  %.52 = mul i32 %.50, 10
+  %.53 = load i32, i32* %.6
+  %.54 = add i32 %.52, %.53
+  store i32 %.54, i32* %.3
   br label %.56 
 .42:
   br label %.34wn 
 .45:
-  %.48 = icmp sle i32 %.39, 9
+  %.47 = load i32, i32* %.6
+  %.48 = icmp sle i32 %.47, 9
   br i1 %.48, label %.41, label %.42
 .56:
   br label %.32wc 
 }
 define void @_user_my_putint(i32 %.63){
 .62:
+  %.68 = alloca i32
   %.67 = alloca [16 x i32]
+  %.64 = alloca i32
+  store i32 %.63, i32* %.64
+  store i32 0, i32* %.68
   br label %.70wc 
 .70wc:
-  %.135 = phi i32 [%.63, %.62], [%.84, %.71wloop.]
-  %.133 = phi i32 [0, %.62], [%.87, %.71wloop.]
-  %.75 = icmp sgt i32 %.135, 0
+  %.74 = load i32, i32* %.64
+  %.75 = icmp sgt i32 %.74, 0
   br i1 %.75, label %.71wloop., label %.72wn
 .71wloop.:
-  %.78 = srem i32 %.135, 10
+  %.77 = load i32, i32* %.64
+  %.78 = srem i32 %.77, 10
   %.79 = add i32 %.78, 48
-  %.81 = getelementptr inbounds [16 x i32], [16 x i32]* %.67, i32 0, i32 %.133
+  %.80 = load i32, i32* %.68
+  %.81 = getelementptr inbounds [16 x i32], [16 x i32]* %.67, i32 0, i32 %.80
   store i32 %.79, i32* %.81
-  %.84 = sdiv i32 %.135, 10
-  %.87 = add i32 %.133, 1
+  %.83 = load i32, i32* %.64
+  %.84 = sdiv i32 %.83, 10
+  store i32 %.84, i32* %.64
+  %.86 = load i32, i32* %.68
+  %.87 = add i32 %.86, 1
+  store i32 %.87, i32* %.68
   br label %.70wc 
 .72wn:
   br label %.90wc 
 .90wc:
-  %.134 = phi i32 [%.133, %.72wn], [%.98, %.91wloop.]
-  %.95 = icmp sgt i32 %.134, 0
+  %.94 = load i32, i32* %.68
+  %.95 = icmp sgt i32 %.94, 0
   br i1 %.95, label %.91wloop., label %.92wn
 .91wloop.:
-  %.98 = sub i32 %.134, 1
-  %.101 = getelementptr inbounds [16 x i32], [16 x i32]* %.67, i32 0, i32 %.98
+  %.97 = load i32, i32* %.68
+  %.98 = sub i32 %.97, 1
+  store i32 %.98, i32* %.68
+  %.100 = load i32, i32* %.68
+  %.101 = getelementptr inbounds [16 x i32], [16 x i32]* %.67, i32 0, i32 %.100
   %.102 = load i32, i32* %.101
   call void @putch(i32 %.102)
   br label %.90wc 
@@ -434,17 +460,24 @@ define void @_user_my_putint(i32 %.63){
 }
 define i32 @main(){
 .107:
+  %.118 = alloca i32
+  %.108 = alloca i32
   %.109at3 = call i32 @_user_my_getint()
+  store i32 %.109at3, i32* %.108
   br label %.111wc 
 .111wc:
-  %.136 = phi i32 [%.109at3, %.107], [%.125, %.112wloop.]
-  %.116 = icmp sgt i32 %.136, 0
+  %.115 = load i32, i32* %.108
+  %.116 = icmp sgt i32 %.115, 0
   br i1 %.116, label %.112wloop., label %.113wn
 .112wloop.:
   %.119at4 = call i32 @_user_my_getint()
-  call void @_user_my_putint(i32 %.119at4)
+  store i32 %.119at4, i32* %.118
+  %.121 = load i32, i32* %.118
+  call void @_user_my_putint(i32 %.121)
   call void @putch(i32 10)
-  %.125 = sub i32 %.136, 1
+  %.124 = load i32, i32* %.108
+  %.125 = sub i32 %.124, 1
+  store i32 %.125, i32* %.108
   br label %.111wc 
 .113wn:
   ret i32 0 

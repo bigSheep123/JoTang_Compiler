@@ -361,181 +361,266 @@ attributes #7 = { cold }
 @.G.N = global i32 zeroinitializer
 define i32 @_user_mul(float* %.4, float* %.7, float* %.10, float* %.13, float* %.16, float* %.19, float* %.22, float* %.25, float* %.28){
 .3:
-  %.35 = getelementptr inbounds float, float* %.4, i32 0
+  %.31 = alloca i32
+  %.29 = alloca float*
+  %.26 = alloca float*
+  %.23 = alloca float*
+  %.20 = alloca float*
+  %.17 = alloca float*
+  %.14 = alloca float*
+  %.11 = alloca float*
+  %.8 = alloca float*
+  %.5 = alloca float*
+  store float* %.4, float** %.5
+  store float* %.7, float** %.8
+  store float* %.10, float** %.11
+  store float* %.13, float** %.14
+  store float* %.16, float** %.17
+  store float* %.19, float** %.20
+  store float* %.22, float** %.23
+  store float* %.25, float** %.26
+  store float* %.28, float** %.29
+  store i32 0, i32* %.31
+  %.34 = load float*, float** %.5
+  %.35 = getelementptr inbounds float, float* %.34, i32 0
   %.36 = load float, float* %.35
-  %.38 = getelementptr inbounds float, float* %.13, i32 0
+  %.37 = load float*, float** %.14
+  %.38 = getelementptr inbounds float, float* %.37, i32 0
   %.39 = load float, float* %.38
   %.40 = fmul float %.36, %.39
-  %.43 = getelementptr inbounds float, float* %.4, i32 1
+  %.42 = load float*, float** %.5
+  %.43 = getelementptr inbounds float, float* %.42, i32 1
   %.44 = load float, float* %.43
-  %.46 = getelementptr inbounds float, float* %.16, i32 0
+  %.45 = load float*, float** %.17
+  %.46 = getelementptr inbounds float, float* %.45, i32 0
   %.47 = load float, float* %.46
   %.48 = fmul float %.44, %.47
   %.49 = fadd float %.40, %.48
-  %.52 = getelementptr inbounds float, float* %.4, i32 2
+  %.51 = load float*, float** %.5
+  %.52 = getelementptr inbounds float, float* %.51, i32 2
   %.53 = load float, float* %.52
-  %.55 = getelementptr inbounds float, float* %.19, i32 0
+  %.54 = load float*, float** %.20
+  %.55 = getelementptr inbounds float, float* %.54, i32 0
   %.56 = load float, float* %.55
   %.57 = fmul float %.53, %.56
   %.58 = fadd float %.49, %.57
-  %.60 = getelementptr inbounds float, float* %.22, i32 0
+  %.59 = load float*, float** %.23
+  %.60 = getelementptr inbounds float, float* %.59, i32 0
   store float %.58, float* %.60
-  %.63 = getelementptr inbounds float, float* %.4, i32 0
+  %.62 = load float*, float** %.5
+  %.63 = getelementptr inbounds float, float* %.62, i32 0
   %.64 = load float, float* %.63
-  %.66 = getelementptr inbounds float, float* %.13, i32 1
+  %.65 = load float*, float** %.14
+  %.66 = getelementptr inbounds float, float* %.65, i32 1
   %.67 = load float, float* %.66
   %.68 = fmul float %.64, %.67
-  %.70 = getelementptr inbounds float, float* %.4, i32 1
+  %.69 = load float*, float** %.5
+  %.70 = getelementptr inbounds float, float* %.69, i32 1
   %.71 = load float, float* %.70
-  %.73 = getelementptr inbounds float, float* %.16, i32 1
+  %.72 = load float*, float** %.17
+  %.73 = getelementptr inbounds float, float* %.72, i32 1
   %.74 = load float, float* %.73
   %.75 = fmul float %.71, %.74
   %.76 = fadd float %.68, %.75
-  %.78 = getelementptr inbounds float, float* %.4, i32 2
+  %.77 = load float*, float** %.5
+  %.78 = getelementptr inbounds float, float* %.77, i32 2
   %.79 = load float, float* %.78
-  %.81 = getelementptr inbounds float, float* %.19, i32 1
+  %.80 = load float*, float** %.20
+  %.81 = getelementptr inbounds float, float* %.80, i32 1
   %.82 = load float, float* %.81
   %.83 = fmul float %.79, %.82
   %.84 = fadd float %.76, %.83
-  %.86 = getelementptr inbounds float, float* %.22, i32 1
+  %.85 = load float*, float** %.23
+  %.86 = getelementptr inbounds float, float* %.85, i32 1
   store float %.84, float* %.86
-  %.89 = getelementptr inbounds float, float* %.4, i32 0
+  %.88 = load float*, float** %.5
+  %.89 = getelementptr inbounds float, float* %.88, i32 0
   %.90 = load float, float* %.89
-  %.92 = getelementptr inbounds float, float* %.13, i32 2
+  %.91 = load float*, float** %.14
+  %.92 = getelementptr inbounds float, float* %.91, i32 2
   %.93 = load float, float* %.92
   %.94 = fmul float %.90, %.93
-  %.96 = getelementptr inbounds float, float* %.4, i32 1
+  %.95 = load float*, float** %.5
+  %.96 = getelementptr inbounds float, float* %.95, i32 1
   %.97 = load float, float* %.96
-  %.99 = getelementptr inbounds float, float* %.16, i32 2
+  %.98 = load float*, float** %.17
+  %.99 = getelementptr inbounds float, float* %.98, i32 2
   %.100 = load float, float* %.99
   %.101 = fmul float %.97, %.100
   %.102 = fadd float %.94, %.101
-  %.104 = getelementptr inbounds float, float* %.4, i32 2
+  %.103 = load float*, float** %.5
+  %.104 = getelementptr inbounds float, float* %.103, i32 2
   %.105 = load float, float* %.104
-  %.107 = getelementptr inbounds float, float* %.19, i32 2
+  %.106 = load float*, float** %.20
+  %.107 = getelementptr inbounds float, float* %.106, i32 2
   %.108 = load float, float* %.107
   %.109 = fmul float %.105, %.108
   %.110 = fadd float %.102, %.109
-  %.112 = getelementptr inbounds float, float* %.22, i32 2
+  %.111 = load float*, float** %.23
+  %.112 = getelementptr inbounds float, float* %.111, i32 2
   store float %.110, float* %.112
-  %.115 = getelementptr inbounds float, float* %.7, i32 0
+  %.114 = load float*, float** %.8
+  %.115 = getelementptr inbounds float, float* %.114, i32 0
   %.116 = load float, float* %.115
-  %.118 = getelementptr inbounds float, float* %.13, i32 0
+  %.117 = load float*, float** %.14
+  %.118 = getelementptr inbounds float, float* %.117, i32 0
   %.119 = load float, float* %.118
   %.120 = fmul float %.116, %.119
-  %.122 = getelementptr inbounds float, float* %.7, i32 1
+  %.121 = load float*, float** %.8
+  %.122 = getelementptr inbounds float, float* %.121, i32 1
   %.123 = load float, float* %.122
-  %.125 = getelementptr inbounds float, float* %.16, i32 0
+  %.124 = load float*, float** %.17
+  %.125 = getelementptr inbounds float, float* %.124, i32 0
   %.126 = load float, float* %.125
   %.127 = fmul float %.123, %.126
   %.128 = fadd float %.120, %.127
-  %.130 = getelementptr inbounds float, float* %.7, i32 2
+  %.129 = load float*, float** %.8
+  %.130 = getelementptr inbounds float, float* %.129, i32 2
   %.131 = load float, float* %.130
-  %.133 = getelementptr inbounds float, float* %.19, i32 0
+  %.132 = load float*, float** %.20
+  %.133 = getelementptr inbounds float, float* %.132, i32 0
   %.134 = load float, float* %.133
   %.135 = fmul float %.131, %.134
   %.136 = fadd float %.128, %.135
-  %.138 = getelementptr inbounds float, float* %.25, i32 0
+  %.137 = load float*, float** %.26
+  %.138 = getelementptr inbounds float, float* %.137, i32 0
   store float %.136, float* %.138
-  %.141 = getelementptr inbounds float, float* %.7, i32 0
+  %.140 = load float*, float** %.8
+  %.141 = getelementptr inbounds float, float* %.140, i32 0
   %.142 = load float, float* %.141
-  %.144 = getelementptr inbounds float, float* %.13, i32 1
+  %.143 = load float*, float** %.14
+  %.144 = getelementptr inbounds float, float* %.143, i32 1
   %.145 = load float, float* %.144
   %.146 = fmul float %.142, %.145
-  %.148 = getelementptr inbounds float, float* %.7, i32 1
+  %.147 = load float*, float** %.8
+  %.148 = getelementptr inbounds float, float* %.147, i32 1
   %.149 = load float, float* %.148
-  %.151 = getelementptr inbounds float, float* %.16, i32 1
+  %.150 = load float*, float** %.17
+  %.151 = getelementptr inbounds float, float* %.150, i32 1
   %.152 = load float, float* %.151
   %.153 = fmul float %.149, %.152
   %.154 = fadd float %.146, %.153
-  %.156 = getelementptr inbounds float, float* %.7, i32 2
+  %.155 = load float*, float** %.8
+  %.156 = getelementptr inbounds float, float* %.155, i32 2
   %.157 = load float, float* %.156
-  %.159 = getelementptr inbounds float, float* %.19, i32 1
+  %.158 = load float*, float** %.20
+  %.159 = getelementptr inbounds float, float* %.158, i32 1
   %.160 = load float, float* %.159
   %.161 = fmul float %.157, %.160
   %.162 = fadd float %.154, %.161
-  %.164 = getelementptr inbounds float, float* %.25, i32 1
+  %.163 = load float*, float** %.26
+  %.164 = getelementptr inbounds float, float* %.163, i32 1
   store float %.162, float* %.164
-  %.167 = getelementptr inbounds float, float* %.7, i32 0
+  %.166 = load float*, float** %.8
+  %.167 = getelementptr inbounds float, float* %.166, i32 0
   %.168 = load float, float* %.167
-  %.170 = getelementptr inbounds float, float* %.13, i32 2
+  %.169 = load float*, float** %.14
+  %.170 = getelementptr inbounds float, float* %.169, i32 2
   %.171 = load float, float* %.170
   %.172 = fmul float %.168, %.171
-  %.174 = getelementptr inbounds float, float* %.7, i32 1
+  %.173 = load float*, float** %.8
+  %.174 = getelementptr inbounds float, float* %.173, i32 1
   %.175 = load float, float* %.174
-  %.177 = getelementptr inbounds float, float* %.16, i32 2
+  %.176 = load float*, float** %.17
+  %.177 = getelementptr inbounds float, float* %.176, i32 2
   %.178 = load float, float* %.177
   %.179 = fmul float %.175, %.178
   %.180 = fadd float %.172, %.179
-  %.182 = getelementptr inbounds float, float* %.7, i32 2
+  %.181 = load float*, float** %.8
+  %.182 = getelementptr inbounds float, float* %.181, i32 2
   %.183 = load float, float* %.182
-  %.185 = getelementptr inbounds float, float* %.19, i32 2
+  %.184 = load float*, float** %.20
+  %.185 = getelementptr inbounds float, float* %.184, i32 2
   %.186 = load float, float* %.185
   %.187 = fmul float %.183, %.186
   %.188 = fadd float %.180, %.187
-  %.190 = getelementptr inbounds float, float* %.25, i32 2
+  %.189 = load float*, float** %.26
+  %.190 = getelementptr inbounds float, float* %.189, i32 2
   store float %.188, float* %.190
-  %.193 = getelementptr inbounds float, float* %.10, i32 0
+  %.192 = load float*, float** %.11
+  %.193 = getelementptr inbounds float, float* %.192, i32 0
   %.194 = load float, float* %.193
-  %.196 = getelementptr inbounds float, float* %.13, i32 0
+  %.195 = load float*, float** %.14
+  %.196 = getelementptr inbounds float, float* %.195, i32 0
   %.197 = load float, float* %.196
   %.198 = fmul float %.194, %.197
-  %.200 = getelementptr inbounds float, float* %.10, i32 1
+  %.199 = load float*, float** %.11
+  %.200 = getelementptr inbounds float, float* %.199, i32 1
   %.201 = load float, float* %.200
-  %.203 = getelementptr inbounds float, float* %.16, i32 0
+  %.202 = load float*, float** %.17
+  %.203 = getelementptr inbounds float, float* %.202, i32 0
   %.204 = load float, float* %.203
   %.205 = fmul float %.201, %.204
   %.206 = fadd float %.198, %.205
-  %.208 = getelementptr inbounds float, float* %.10, i32 2
+  %.207 = load float*, float** %.11
+  %.208 = getelementptr inbounds float, float* %.207, i32 2
   %.209 = load float, float* %.208
-  %.211 = getelementptr inbounds float, float* %.19, i32 0
+  %.210 = load float*, float** %.20
+  %.211 = getelementptr inbounds float, float* %.210, i32 0
   %.212 = load float, float* %.211
   %.213 = fmul float %.209, %.212
   %.214 = fadd float %.206, %.213
-  %.216 = getelementptr inbounds float, float* %.28, i32 0
+  %.215 = load float*, float** %.29
+  %.216 = getelementptr inbounds float, float* %.215, i32 0
   store float %.214, float* %.216
-  %.219 = getelementptr inbounds float, float* %.10, i32 0
+  %.218 = load float*, float** %.11
+  %.219 = getelementptr inbounds float, float* %.218, i32 0
   %.220 = load float, float* %.219
-  %.222 = getelementptr inbounds float, float* %.13, i32 1
+  %.221 = load float*, float** %.14
+  %.222 = getelementptr inbounds float, float* %.221, i32 1
   %.223 = load float, float* %.222
   %.224 = fmul float %.220, %.223
-  %.226 = getelementptr inbounds float, float* %.10, i32 1
+  %.225 = load float*, float** %.11
+  %.226 = getelementptr inbounds float, float* %.225, i32 1
   %.227 = load float, float* %.226
-  %.229 = getelementptr inbounds float, float* %.16, i32 1
+  %.228 = load float*, float** %.17
+  %.229 = getelementptr inbounds float, float* %.228, i32 1
   %.230 = load float, float* %.229
   %.231 = fmul float %.227, %.230
   %.232 = fadd float %.224, %.231
-  %.234 = getelementptr inbounds float, float* %.10, i32 2
+  %.233 = load float*, float** %.11
+  %.234 = getelementptr inbounds float, float* %.233, i32 2
   %.235 = load float, float* %.234
-  %.237 = getelementptr inbounds float, float* %.19, i32 1
+  %.236 = load float*, float** %.20
+  %.237 = getelementptr inbounds float, float* %.236, i32 1
   %.238 = load float, float* %.237
   %.239 = fmul float %.235, %.238
   %.240 = fadd float %.232, %.239
-  %.242 = getelementptr inbounds float, float* %.28, i32 1
+  %.241 = load float*, float** %.29
+  %.242 = getelementptr inbounds float, float* %.241, i32 1
   store float %.240, float* %.242
-  %.245 = getelementptr inbounds float, float* %.10, i32 0
+  %.244 = load float*, float** %.11
+  %.245 = getelementptr inbounds float, float* %.244, i32 0
   %.246 = load float, float* %.245
-  %.248 = getelementptr inbounds float, float* %.13, i32 2
+  %.247 = load float*, float** %.14
+  %.248 = getelementptr inbounds float, float* %.247, i32 2
   %.249 = load float, float* %.248
   %.250 = fmul float %.246, %.249
-  %.252 = getelementptr inbounds float, float* %.10, i32 1
+  %.251 = load float*, float** %.11
+  %.252 = getelementptr inbounds float, float* %.251, i32 1
   %.253 = load float, float* %.252
-  %.255 = getelementptr inbounds float, float* %.16, i32 2
+  %.254 = load float*, float** %.17
+  %.255 = getelementptr inbounds float, float* %.254, i32 2
   %.256 = load float, float* %.255
   %.257 = fmul float %.253, %.256
   %.258 = fadd float %.250, %.257
-  %.260 = getelementptr inbounds float, float* %.10, i32 2
+  %.259 = load float*, float** %.11
+  %.260 = getelementptr inbounds float, float* %.259, i32 2
   %.261 = load float, float* %.260
-  %.263 = getelementptr inbounds float, float* %.19, i32 2
+  %.262 = load float*, float** %.20
+  %.263 = getelementptr inbounds float, float* %.262, i32 2
   %.264 = load float, float* %.263
   %.265 = fmul float %.261, %.264
   %.266 = fadd float %.258, %.265
-  %.268 = getelementptr inbounds float, float* %.28, i32 2
+  %.267 = load float*, float** %.29
+  %.268 = getelementptr inbounds float, float* %.267, i32 2
   store float %.266, float* %.268
   ret i32 0 
 }
 define i32 @main(){
 .271:
+  %.341 = alloca i32
+  %.286 = alloca i32
   %.285 = alloca [3 x float]
   %.284 = alloca [3 x float]
   %.283 = alloca [6 x float]
@@ -548,32 +633,47 @@ define i32 @main(){
   store i32 3, i32* @.G.N
   store i32 3, i32* @.G.M
   store i32 3, i32* @.G.L
+  store i32 0, i32* %.286
   br label %.288wc 
 .288wc:
-  %.414 = phi i32 [0, %.271], [%.327, %.289wloop.]
+  %.292 = load i32, i32* %.286
   %.293 = load i32, i32* @.G.M
-  %.294 = icmp slt i32 %.414, %.293
+  %.294 = icmp slt i32 %.292, %.293
   br i1 %.294, label %.289wloop., label %.290wn
 .289wloop.:
-  %.298 = getelementptr inbounds [3 x float], [3 x float]* %.276, i32 0, i32 %.414
-  %.299 = sitofp i32 %.414 to float
+  %.296 = load i32, i32* %.286
+  %.297 = load i32, i32* %.286
+  %.298 = getelementptr inbounds [3 x float], [3 x float]* %.276, i32 0, i32 %.297
+  %.299 = sitofp i32 %.296 to float
   store float %.299, float* %.298
-  %.303 = getelementptr inbounds [3 x float], [3 x float]* %.277, i32 0, i32 %.414
-  %.304 = sitofp i32 %.414 to float
+  %.301 = load i32, i32* %.286
+  %.302 = load i32, i32* %.286
+  %.303 = getelementptr inbounds [3 x float], [3 x float]* %.277, i32 0, i32 %.302
+  %.304 = sitofp i32 %.301 to float
   store float %.304, float* %.303
-  %.308 = getelementptr inbounds [3 x float], [3 x float]* %.278, i32 0, i32 %.414
-  %.309 = sitofp i32 %.414 to float
+  %.306 = load i32, i32* %.286
+  %.307 = load i32, i32* %.286
+  %.308 = getelementptr inbounds [3 x float], [3 x float]* %.278, i32 0, i32 %.307
+  %.309 = sitofp i32 %.306 to float
   store float %.309, float* %.308
-  %.313 = getelementptr inbounds [3 x float], [3 x float]* %.279, i32 0, i32 %.414
-  %.314 = sitofp i32 %.414 to float
+  %.311 = load i32, i32* %.286
+  %.312 = load i32, i32* %.286
+  %.313 = getelementptr inbounds [3 x float], [3 x float]* %.279, i32 0, i32 %.312
+  %.314 = sitofp i32 %.311 to float
   store float %.314, float* %.313
-  %.318 = getelementptr inbounds [3 x float], [3 x float]* %.280, i32 0, i32 %.414
-  %.319 = sitofp i32 %.414 to float
+  %.316 = load i32, i32* %.286
+  %.317 = load i32, i32* %.286
+  %.318 = getelementptr inbounds [3 x float], [3 x float]* %.280, i32 0, i32 %.317
+  %.319 = sitofp i32 %.316 to float
   store float %.319, float* %.318
-  %.323 = getelementptr inbounds [3 x float], [3 x float]* %.281, i32 0, i32 %.414
-  %.324 = sitofp i32 %.414 to float
+  %.321 = load i32, i32* %.286
+  %.322 = load i32, i32* %.286
+  %.323 = getelementptr inbounds [3 x float], [3 x float]* %.281, i32 0, i32 %.322
+  %.324 = sitofp i32 %.321 to float
   store float %.324, float* %.323
-  %.327 = add i32 %.414, 1
+  %.326 = load i32, i32* %.286
+  %.327 = add i32 %.326, 1
+  store i32 %.327, i32* %.286
   br label %.288wc 
 .290wn:
   %.330 = getelementptr inbounds [3 x float], [3 x float]* %.276, i32 0, i32 0
@@ -586,50 +686,74 @@ define i32 @main(){
   %.337 = getelementptr inbounds [3 x float], [3 x float]* %.284, i32 0, i32 0
   %.338 = getelementptr inbounds [3 x float], [3 x float]* %.285, i32 0, i32 0
   %.339at0 = call i32 @_user_mul(float* %.330, float* %.331, float* %.332, float* %.333, float* %.334, float* %.335, float* %.336, float* %.337, float* %.338)
+  store i32 %.339at0, i32* %.286
   br label %.342wc 
 .342wc:
-  %.415 = phi i32 [%.339at0, %.290wn], [%.359, %.343wloop.]
+  %.346 = load i32, i32* %.286
   %.347 = load i32, i32* @.G.N
-  %.348 = icmp slt i32 %.415, %.347
+  %.348 = icmp slt i32 %.346, %.347
   br i1 %.348, label %.343wloop., label %.344wn
 .343wloop.:
-  %.351 = getelementptr inbounds [6 x float], [6 x float]* %.283, i32 0, i32 %.415
+  %.350 = load i32, i32* %.286
+  %.351 = getelementptr inbounds [6 x float], [6 x float]* %.283, i32 0, i32 %.350
   %.352 = load float, float* %.351
   %.353 = fptosi float %.352 to i32
-  call void @putint(i32 %.353)
-  %.359 = add i32 %.415, 1
+  store i32 %.353, i32* %.341
+  %.355 = load i32, i32* %.341
+  call void @putint(i32 %.355)
+  %.358 = load i32, i32* %.286
+  %.359 = add i32 %.358, 1
+  store i32 %.359, i32* %.286
   br label %.342wc 
 .344wn:
-  call void @putch(i32 10)
+  store i32 10, i32* %.341
+  store i32 0, i32* %.286
+  %.365 = load i32, i32* %.341
+  call void @putch(i32 %.365)
   br label %.368wc 
 .368wc:
-  %.416 = phi i32 [0, %.344wn], [%.384, %.369wloop.]
+  %.372 = load i32, i32* %.286
   %.373 = load i32, i32* @.G.N
-  %.374 = icmp slt i32 %.416, %.373
+  %.374 = icmp slt i32 %.372, %.373
   br i1 %.374, label %.369wloop., label %.370wn
 .369wloop.:
-  %.377 = getelementptr inbounds [3 x float], [3 x float]* %.284, i32 0, i32 %.416
+  %.376 = load i32, i32* %.286
+  %.377 = getelementptr inbounds [3 x float], [3 x float]* %.284, i32 0, i32 %.376
   %.378 = load float, float* %.377
   %.379 = fptosi float %.378 to i32
-  call void @putint(i32 %.379)
-  %.384 = add i32 %.416, 1
+  store i32 %.379, i32* %.341
+  %.381 = load i32, i32* %.341
+  call void @putint(i32 %.381)
+  %.383 = load i32, i32* %.286
+  %.384 = add i32 %.383, 1
+  store i32 %.384, i32* %.286
   br label %.368wc 
 .370wn:
-  call void @putch(i32 10)
+  store i32 10, i32* %.341
+  store i32 0, i32* %.286
+  %.389 = load i32, i32* %.341
+  call void @putch(i32 %.389)
   br label %.391wc 
 .391wc:
-  %.417 = phi i32 [0, %.370wn], [%.407, %.392wloop.]
+  %.395 = load i32, i32* %.286
   %.396 = load i32, i32* @.G.N
-  %.397 = icmp slt i32 %.417, %.396
+  %.397 = icmp slt i32 %.395, %.396
   br i1 %.397, label %.392wloop., label %.393wn
 .392wloop.:
-  %.400 = getelementptr inbounds [3 x float], [3 x float]* %.285, i32 0, i32 %.417
+  %.399 = load i32, i32* %.286
+  %.400 = getelementptr inbounds [3 x float], [3 x float]* %.285, i32 0, i32 %.399
   %.401 = load float, float* %.400
   %.402 = fptosi float %.401 to i32
-  call void @putint(i32 %.402)
-  %.407 = add i32 %.417, 1
+  store i32 %.402, i32* %.341
+  %.404 = load i32, i32* %.341
+  call void @putint(i32 %.404)
+  %.406 = load i32, i32* %.286
+  %.407 = add i32 %.406, 1
+  store i32 %.407, i32* %.286
   br label %.391wc 
 .393wn:
-  call void @putch(i32 10)
+  store i32 10, i32* %.341
+  %.411 = load i32, i32* %.341
+  call void @putch(i32 %.411)
   ret i32 0 
 }

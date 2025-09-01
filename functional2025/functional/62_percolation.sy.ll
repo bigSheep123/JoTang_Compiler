@@ -360,161 +360,240 @@ attributes #7 = { cold }
 @.G.n = global i32 zeroinitializer
 define void @_user_init(i32 %.4){
 .3:
+  %.7 = alloca i32
+  %.5 = alloca i32
+  store i32 %.4, i32* %.5
+  store i32 1, i32* %.7
   br label %.10wc 
 .10wc:
-  %.287 = phi i32 [1, %.3], [%.27, %.11wloop.]
-  %.17 = mul i32 %.4, %.4
+  %.14 = load i32, i32* %.7
+  %.15 = load i32, i32* %.5
+  %.16 = load i32, i32* %.5
+  %.17 = mul i32 %.15, %.16
   %.18 = add i32 %.17, 1
-  %.19 = icmp sle i32 %.287, %.18
+  %.19 = icmp sle i32 %.14, %.18
   br i1 %.19, label %.11wloop., label %.12wn
 .11wloop.:
-  %.24 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.287
+  %.23 = load i32, i32* %.7
+  %.24 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.23
   store i32 -1, i32* %.24
-  %.27 = add i32 %.287, 1
+  %.26 = load i32, i32* %.7
+  %.27 = add i32 %.26, 1
+  store i32 %.27, i32* %.7
   br label %.10wc 
 .12wn:
   ret void
 }
 define i32 @_user_findfa(i32 %.32){
 .31:
-  %.38 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.32
+  %.33 = alloca i32
+  store i32 %.32, i32* %.33
+  %.37 = load i32, i32* %.33
+  %.38 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.37
   %.39 = load i32, i32* %.38
-  %.41 = icmp eq i32 %.39, %.32
+  %.40 = load i32, i32* %.33
+  %.41 = icmp eq i32 %.39, %.40
   br i1 %.41, label %.35, label %.36
 .35:
-  ret i32 %.32 
+  %.43 = load i32, i32* %.33
+  ret i32 %.43 
 .36:
-  %.46 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.32
+  %.45 = load i32, i32* %.33
+  %.46 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.45
   %.47 = load i32, i32* %.46
   %.48at0 = call i32 @_user_findfa(i32 %.47)
-  %.50 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.32
+  %.49 = load i32, i32* %.33
+  %.50 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.49
   store i32 %.48at0, i32* %.50
-  %.53 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.32
+  %.52 = load i32, i32* %.33
+  %.53 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.52
   %.54 = load i32, i32* %.53
   ret i32 %.54 
 }
 define void @_user_mmerge(i32 %.57, i32 %.60){
 .56:
-  %.65at1 = call i32 @_user_findfa(i32 %.57)
-  %.69at2 = call i32 @_user_findfa(i32 %.60)
-  %.75 = icmp ne i32 %.65at1, %.69at2
+  %.67 = alloca i32
+  %.63 = alloca i32
+  %.61 = alloca i32
+  %.58 = alloca i32
+  store i32 %.57, i32* %.58
+  store i32 %.60, i32* %.61
+  %.64 = load i32, i32* %.58
+  %.65at1 = call i32 @_user_findfa(i32 %.64)
+  store i32 %.65at1, i32* %.63
+  %.68 = load i32, i32* %.61
+  %.69at2 = call i32 @_user_findfa(i32 %.68)
+  store i32 %.69at2, i32* %.67
+  %.73 = load i32, i32* %.63
+  %.74 = load i32, i32* %.67
+  %.75 = icmp ne i32 %.73, %.74
   br i1 %.75, label %.71, label %.72
 .71:
-  %.79 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.65at1
-  store i32 %.69at2, i32* %.79
+  %.77 = load i32, i32* %.67
+  %.78 = load i32, i32* %.63
+  %.79 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.78
+  store i32 %.77, i32* %.79
   br label %.72 
 .72:
   ret void
 }
 define i32 @main(){
 .83:
+  %.262 = alloca i32
+  %.133 = alloca i32
+  %.109 = alloca i32
+  %.105 = alloca i32
+  %.103 = alloca i32
+  %.87 = alloca i32
+  %.86 = alloca i32
+  %.85 = alloca i32
+  %.84 = alloca i32
+  store i32 1, i32* %.84
   br label %.89wc 
 .89wc:
-  %.289 = phi i32 [1, %.83], [%.97, %.278]
-  %.94 = icmp ne i32 %.289, 0
+  %.93 = load i32, i32* %.84
+  %.94 = icmp ne i32 %.93, 0
   br i1 %.94, label %.90wloop., label %.91wn
 .90wloop.:
-  %.97 = sub i32 %.289, 1
+  %.96 = load i32, i32* %.84
+  %.97 = sub i32 %.96, 1
+  store i32 %.97, i32* %.84
   store i32 4, i32* @.G.n
+  store i32 10, i32* %.85
+  store i32 0, i32* %.103
+  store i32 0, i32* %.105
   %.107 = load i32, i32* @.G.n
   call void @_user_init(i32 %.107)
   %.110 = load i32, i32* @.G.n
   %.111 = load i32, i32* @.G.n
   %.112 = mul i32 %.110, %.111
   %.113 = add i32 %.112, 1
+  store i32 %.113, i32* %.109
   br label %.115wc 
 .91wn:
   ret i32 0 
 .115wc:
-  %.293 = phi i32 [0, %.90wloop.], [%.274, %.129]
-  %.290 = phi i32 [0, %.90wloop.], [%.291, %.129]
-  %.121 = icmp slt i32 %.293, 10
+  %.119 = load i32, i32* %.103
+  %.120 = load i32, i32* %.85
+  %.121 = icmp slt i32 %.119, %.120
   br i1 %.121, label %.116wloop., label %.117wn
 .116wloop.:
   %.124at4 = call i32 @getint()
+  store i32 %.124at4, i32* %.86
   %.126at5 = call i32 @getint()
-  %.131 = icmp eq i32 %.290, 0
+  store i32 %.126at5, i32* %.87
+  %.130 = load i32, i32* %.105
+  %.131 = icmp eq i32 %.130, 0
   br i1 %.131, label %.128, label %.129
 .117wn:
-  %.280 = icmp eq i32 %.290, 0
+  %.279 = load i32, i32* %.105
+  %.280 = icmp eq i32 %.279, 0
   br i1 %.280, label %.277, label %.278
 .128:
   %.134 = load i32, i32* @.G.n
-  %.136 = sub i32 %.124at4, 1
+  %.135 = load i32, i32* %.86
+  %.136 = sub i32 %.135, 1
   %.137 = mul i32 %.134, %.136
-  %.139 = add i32 %.137, %.126at5
-  %.143 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.139
-  store i32 %.139, i32* %.143
-  %.148 = icmp eq i32 %.124at4, 1
+  %.138 = load i32, i32* %.87
+  %.139 = add i32 %.137, %.138
+  store i32 %.139, i32* %.133
+  %.141 = load i32, i32* %.133
+  %.142 = load i32, i32* %.133
+  %.143 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.142
+  store i32 %.141, i32* %.143
+  %.147 = load i32, i32* %.86
+  %.148 = icmp eq i32 %.147, 1
   br i1 %.148, label %.145, label %.146
 .129:
-  %.291 = phi i32 [%.290, %.116wloop.], [%.292, %.244]
-  %.274 = add i32 %.293, 1
+  %.273 = load i32, i32* %.103
+  %.274 = add i32 %.273, 1
+  store i32 %.274, i32* %.103
   br label %.115wc 
 .145:
   %.150 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 0
   store i32 0, i32* %.150
-  call void @_user_mmerge(i32 %.139, i32 0)
+  %.152 = load i32, i32* %.133
+  call void @_user_mmerge(i32 %.152, i32 0)
   br label %.146 
 .146:
+  %.157 = load i32, i32* %.86
   %.158 = load i32, i32* @.G.n
-  %.159 = icmp eq i32 %.124at4, %.158
+  %.159 = icmp eq i32 %.157, %.158
   br i1 %.159, label %.155, label %.156
 .155:
-  %.163 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.113
-  store i32 %.113, i32* %.163
-  call void @_user_mmerge(i32 %.139, i32 %.113)
+  %.161 = load i32, i32* %.109
+  %.162 = load i32, i32* %.109
+  %.163 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.162
+  store i32 %.161, i32* %.163
+  %.165 = load i32, i32* %.133
+  %.166 = load i32, i32* %.109
+  call void @_user_mmerge(i32 %.165, i32 %.166)
   br label %.156 
 .156:
+  %.171 = load i32, i32* %.87
   %.172 = load i32, i32* @.G.n
-  %.173 = icmp slt i32 %.126at5, %.172
+  %.173 = icmp slt i32 %.171, %.172
   br i1 %.173, label %.174, label %.170
 .169:
-  %.184 = add i32 %.139, 1
-  call void @_user_mmerge(i32 %.139, i32 %.184)
+  %.182 = load i32, i32* %.133
+  %.183 = load i32, i32* %.133
+  %.184 = add i32 %.183, 1
+  call void @_user_mmerge(i32 %.182, i32 %.184)
   br label %.170 
 .170:
-  %.190 = icmp sgt i32 %.126at5, 1
+  %.189 = load i32, i32* %.87
+  %.190 = icmp sgt i32 %.189, 1
   br i1 %.190, label %.191, label %.188
 .174:
-  %.177 = add i32 %.139, 1
+  %.176 = load i32, i32* %.133
+  %.177 = add i32 %.176, 1
   %.178 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.177
   %.179 = load i32, i32* %.178
   %.180 = icmp ne i32 %.179, -1
   br i1 %.180, label %.169, label %.170
 .187:
-  %.201 = sub i32 %.139, 1
-  call void @_user_mmerge(i32 %.139, i32 %.201)
+  %.199 = load i32, i32* %.133
+  %.200 = load i32, i32* %.133
+  %.201 = sub i32 %.200, 1
+  call void @_user_mmerge(i32 %.199, i32 %.201)
   br label %.188 
 .188:
+  %.206 = load i32, i32* %.86
   %.207 = load i32, i32* @.G.n
-  %.208 = icmp slt i32 %.124at4, %.207
+  %.208 = icmp slt i32 %.206, %.207
   br i1 %.208, label %.209, label %.205
 .191:
-  %.194 = sub i32 %.139, 1
+  %.193 = load i32, i32* %.133
+  %.194 = sub i32 %.193, 1
   %.195 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.194
   %.196 = load i32, i32* %.195
   %.197 = icmp ne i32 %.196, -1
   br i1 %.197, label %.187, label %.188
 .204:
+  %.218 = load i32, i32* %.133
+  %.219 = load i32, i32* %.133
   %.220 = load i32, i32* @.G.n
-  %.221 = add i32 %.139, %.220
-  call void @_user_mmerge(i32 %.139, i32 %.221)
+  %.221 = add i32 %.219, %.220
+  call void @_user_mmerge(i32 %.218, i32 %.221)
   br label %.205 
 .205:
-  %.227 = icmp sgt i32 %.124at4, 1
+  %.226 = load i32, i32* %.86
+  %.227 = icmp sgt i32 %.226, 1
   br i1 %.227, label %.228, label %.225
 .209:
+  %.211 = load i32, i32* %.133
   %.212 = load i32, i32* @.G.n
-  %.213 = add i32 %.139, %.212
+  %.213 = add i32 %.211, %.212
   %.214 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.213
   %.215 = load i32, i32* %.214
   %.216 = icmp ne i32 %.215, -1
   br i1 %.216, label %.204, label %.205
 .224:
+  %.237 = load i32, i32* %.133
+  %.238 = load i32, i32* %.133
   %.239 = load i32, i32* @.G.n
-  %.240 = sub i32 %.139, %.239
-  call void @_user_mmerge(i32 %.139, i32 %.240)
+  %.240 = sub i32 %.238, %.239
+  call void @_user_mmerge(i32 %.237, i32 %.240)
   br label %.225 
 .225:
   %.245 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 0
@@ -522,28 +601,34 @@ define i32 @main(){
   %.247 = icmp ne i32 %.246, -1
   br i1 %.247, label %.248, label %.244
 .228:
+  %.230 = load i32, i32* %.133
   %.231 = load i32, i32* @.G.n
-  %.232 = sub i32 %.139, %.231
+  %.232 = sub i32 %.230, %.231
   %.233 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.232
   %.234 = load i32, i32* %.233
   %.235 = icmp ne i32 %.234, -1
   br i1 %.235, label %.224, label %.225
 .243:
-  %.264 = add i32 %.293, 1
-  call void @putint(i32 %.264)
+  store i32 1, i32* %.105
+  %.263 = load i32, i32* %.103
+  %.264 = add i32 %.263, 1
+  store i32 %.264, i32* %.262
+  %.266 = load i32, i32* %.262
+  call void @putint(i32 %.266)
   call void @putch(i32 10)
   br label %.244 
 .244:
-  %.292 = phi i32 [%.290, %.225], [%.290, %.248], [%.290, %.254], [1, %.243]
   br label %.129 
 .248:
-  %.251 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.113
+  %.250 = load i32, i32* %.109
+  %.251 = getelementptr inbounds [110 x i32], [110 x i32]* @.G.array, i32 0, i32 %.250
   %.252 = load i32, i32* %.251
   %.253 = icmp ne i32 %.252, -1
   br i1 %.253, label %.254, label %.244
 .254:
   %.256at12 = call i32 @_user_findfa(i32 0)
-  %.258at13 = call i32 @_user_findfa(i32 %.113)
+  %.257 = load i32, i32* %.109
+  %.258at13 = call i32 @_user_findfa(i32 %.257)
   %.259 = icmp eq i32 %.256at12, %.258at13
   br i1 %.259, label %.243, label %.244
 .277:

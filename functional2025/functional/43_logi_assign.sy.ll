@@ -360,6 +360,7 @@ attributes #7 = { cold }
 @.G.b = global i32 zeroinitializer
 define i32 @main(){
 .2:
+  %.8 = alloca i32
   %.4at0 = call i32 @getint()
   store i32 %.4at0, i32* @.G.a
   %.6at1 = call i32 @getint()
@@ -369,14 +370,16 @@ define i32 @main(){
   %.13 = icmp eq i32 %.11, %.12
   br i1 %.13, label %.14, label %.10
 .9:
+  store i32 1, i32* %.8
   br label %.22 
 .10:
+  store i32 0, i32* %.8
   br label %.22 
 .14:
   %.16 = load i32, i32* @.G.a
   %.18 = icmp ne i32 %.16, 3
   br i1 %.18, label %.9, label %.10
 .22:
-  %.29 = phi i32 [0, %.10], [1, %.9]
-  ret i32 %.29 
+  %.27 = load i32, i32* %.8
+  ret i32 %.27 
 }

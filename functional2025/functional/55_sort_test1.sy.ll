@@ -359,53 +359,81 @@ attributes #7 = { cold }
 @.G.n = global i32 zeroinitializer
 define i32 @_user_bubblesort(i32* %.2){
 .1:
+  %.44 = alloca i32
+  %.6 = alloca i32
+  %.5 = alloca i32
+  %.3 = alloca i32*
+  store i32* %.2, i32** %.3
+  store i32 0, i32* %.5
   br label %.9wc 
 .9wc:
-  %.137 = phi i32 [0, %.1], [%.71, %.22wn]
+  %.13 = load i32, i32* %.5
   %.14 = load i32, i32* @.G.n
   %.16 = sub i32 %.14, 1
-  %.17 = icmp slt i32 %.137, %.16
+  %.17 = icmp slt i32 %.13, %.16
   br i1 %.17, label %.10wloop., label %.11wn
 .10wloop.:
+  store i32 0, i32* %.6
   br label %.20wc 
 .11wn:
   ret i32 0 
 .20wc:
-  %.136 = phi i32 [0, %.10wloop.], [%.67, %.32]
+  %.24 = load i32, i32* %.6
   %.25 = load i32, i32* @.G.n
-  %.27 = sub i32 %.25, %.137
+  %.26 = load i32, i32* %.5
+  %.27 = sub i32 %.25, %.26
   %.28 = sub i32 %.27, 1
-  %.29 = icmp slt i32 %.136, %.28
+  %.29 = icmp slt i32 %.24, %.28
   br i1 %.29, label %.21wloop., label %.22wn
 .21wloop.:
-  %.35 = getelementptr inbounds i32, i32* %.2, i32 %.136
+  %.33 = load i32, i32* %.6
+  %.34 = load i32*, i32** %.3
+  %.35 = getelementptr inbounds i32, i32* %.34, i32 %.33
   %.36 = load i32, i32* %.35
-  %.38 = add i32 %.136, 1
-  %.40 = getelementptr inbounds i32, i32* %.2, i32 %.38
+  %.37 = load i32, i32* %.6
+  %.38 = add i32 %.37, 1
+  %.39 = load i32*, i32** %.3
+  %.40 = getelementptr inbounds i32, i32* %.39, i32 %.38
   %.41 = load i32, i32* %.40
   %.42 = icmp sgt i32 %.36, %.41
   br i1 %.42, label %.31, label %.32
 .22wn:
-  %.71 = add i32 %.137, 1
+  %.70 = load i32, i32* %.5
+  %.71 = add i32 %.70, 1
+  store i32 %.71, i32* %.5
   br label %.9wc 
 .31:
-  %.46 = add i32 %.136, 1
-  %.48 = getelementptr inbounds i32, i32* %.2, i32 %.46
+  %.45 = load i32, i32* %.6
+  %.46 = add i32 %.45, 1
+  %.47 = load i32*, i32** %.3
+  %.48 = getelementptr inbounds i32, i32* %.47, i32 %.46
   %.49 = load i32, i32* %.48
-  %.53 = getelementptr inbounds i32, i32* %.2, i32 %.136
+  store i32 %.49, i32* %.44
+  %.51 = load i32, i32* %.6
+  %.52 = load i32*, i32** %.3
+  %.53 = getelementptr inbounds i32, i32* %.52, i32 %.51
   %.54 = load i32, i32* %.53
-  %.56 = add i32 %.136, 1
-  %.58 = getelementptr inbounds i32, i32* %.2, i32 %.56
+  %.55 = load i32, i32* %.6
+  %.56 = add i32 %.55, 1
+  %.57 = load i32*, i32** %.3
+  %.58 = getelementptr inbounds i32, i32* %.57, i32 %.56
   store i32 %.54, i32* %.58
-  %.63 = getelementptr inbounds i32, i32* %.2, i32 %.136
-  store i32 %.49, i32* %.63
+  %.60 = load i32, i32* %.44
+  %.61 = load i32, i32* %.6
+  %.62 = load i32*, i32** %.3
+  %.63 = getelementptr inbounds i32, i32* %.62, i32 %.61
+  store i32 %.60, i32* %.63
   br label %.32 
 .32:
-  %.67 = add i32 %.136, 1
+  %.66 = load i32, i32* %.6
+  %.67 = add i32 %.66, 1
+  store i32 %.67, i32* %.6
   br label %.20wc 
 }
 define i32 @main(){
 .75:
+  %.119 = alloca i32
+  %.107 = alloca i32
   %.78 = alloca [10 x i32]
   store i32 10, i32* @.G.n
   %.80 = getelementptr inbounds [10 x i32], [10 x i32]* %.78, i32 0, i32 0
@@ -430,18 +458,26 @@ define i32 @main(){
   store i32 8, i32* %.105
   %.108 = getelementptr inbounds [10 x i32], [10 x i32]* %.78, i32 0, i32 0
   %.109at0 = call i32 @_user_bubblesort(i32* %.108)
+  store i32 %.109at0, i32* %.107
   br label %.111wc 
 .111wc:
-  %.140 = phi i32 [%.109at0, %.75], [%.132, %.112wloop.]
+  %.115 = load i32, i32* %.107
   %.116 = load i32, i32* @.G.n
-  %.117 = icmp slt i32 %.140, %.116
+  %.117 = icmp slt i32 %.115, %.116
   br i1 %.117, label %.112wloop., label %.113wn
 .112wloop.:
-  %.121 = getelementptr inbounds [10 x i32], [10 x i32]* %.78, i32 0, i32 %.140
+  %.120 = load i32, i32* %.107
+  %.121 = getelementptr inbounds [10 x i32], [10 x i32]* %.78, i32 0, i32 %.120
   %.122 = load i32, i32* %.121
-  call void @putint(i32 %.122)
-  call void @putch(i32 10)
-  %.132 = add i32 %.140, 1
+  store i32 %.122, i32* %.119
+  %.124 = load i32, i32* %.119
+  call void @putint(i32 %.124)
+  store i32 10, i32* %.119
+  %.128 = load i32, i32* %.119
+  call void @putch(i32 %.128)
+  %.131 = load i32, i32* %.107
+  %.132 = add i32 %.131, 1
+  store i32 %.132, i32* %.107
   br label %.111wc 
 .113wn:
   ret i32 0 

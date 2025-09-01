@@ -362,17 +362,25 @@ attributes #7 = { cold }
 @.C..181 = constant [4 x [4 x i32]]  [[4 x i32]  [i32 0, i32 1, i32 1, i32 1], [4 x i32]  [i32 1, i32 0, i32 1, i32 0], [4 x i32]  [i32 1, i32 1, i32 0, i32 1], [4 x i32]  [i32 1, i32 0, i32 1, i32 0]]
 define void @_user_printSolution(i32* %.7){
 .6:
+  %.10 = alloca i32
+  %.8 = alloca i32*
+  store i32* %.7, i32** %.8
+  store i32 0, i32* %.10
   br label %.13wc 
 .13wc:
-  %.218 = phi i32 [0, %.6], [%.30, %.14wloop.]
-  %.18 = icmp slt i32 %.218, 4
+  %.17 = load i32, i32* %.10
+  %.18 = icmp slt i32 %.17, 4
   br i1 %.18, label %.14wloop., label %.15wn
 .14wloop.:
-  %.22 = getelementptr inbounds i32, i32* %.7, i32 %.218
+  %.20 = load i32, i32* %.10
+  %.21 = load i32*, i32** %.8
+  %.22 = getelementptr inbounds i32, i32* %.21, i32 %.20
   %.23 = load i32, i32* %.22
   call void @putint(i32 %.23)
   call void @putch(i32 32)
-  %.30 = add i32 %.218, 1
+  %.28 = load i32, i32* %.10
+  %.30 = add i32 %.28, 1
+  store i32 %.30, i32* %.10
   br label %.13wc 
 .15wn:
   call void @putch(i32 10)
@@ -393,65 +401,107 @@ define void @_user_printMessage(){
 }
 define i32 @_user_isSafe([4 x i32]* %.54, i32* %.57){
 .53:
+  %.69 = alloca i32
+  %.60 = alloca i32
+  %.58 = alloca i32*
+  %.55 = alloca [4 x i32]*
+  store [4 x i32]* %.54, [4 x i32]** %.55
+  store i32* %.57, i32** %.58
+  store i32 0, i32* %.60
   br label %.62wc 
 .62wc:
-  %.222 = phi i32 [0, %.53], [%.106, %.75wn]
-  %.67 = icmp slt i32 %.222, 4
+  %.66 = load i32, i32* %.60
+  %.67 = icmp slt i32 %.66, 4
   br i1 %.67, label %.63wloop., label %.64wn
 .63wloop.:
-  %.71 = add i32 %.222, 1
+  %.70 = load i32, i32* %.60
+  %.71 = add i32 %.70, 1
+  store i32 %.71, i32* %.69
   br label %.73wc 
 .64wn:
   ret i32 1 
 .73wc:
-  %.221 = phi i32 [%.71, %.63wloop.], [%.102, %.81]
-  %.78 = icmp slt i32 %.221, 4
+  %.77 = load i32, i32* %.69
+  %.78 = icmp slt i32 %.77, 4
   br i1 %.78, label %.74wloop., label %.75wn
 .74wloop.:
-  %.85 = getelementptr inbounds [4 x i32], [4 x i32]* %.54, i32 %.222, i32 %.221
+  %.82 = load i32, i32* %.60
+  %.83 = load i32, i32* %.69
+  %.84 = load [4 x i32]*, [4 x i32]** %.55
+  %.85 = getelementptr inbounds [4 x i32], [4 x i32]* %.84, i32 %.82, i32 %.83
   %.86 = load i32, i32* %.85
   %.87 = icmp ne i32 %.86, 0
   br i1 %.87, label %.88, label %.81
 .75wn:
-  %.106 = add i32 %.222, 1
+  %.105 = load i32, i32* %.60
+  %.106 = add i32 %.105, 1
+  store i32 %.106, i32* %.60
   br label %.62wc 
 .80:
   ret i32 0 
 .81:
-  %.102 = add i32 %.221, 1
+  %.101 = load i32, i32* %.69
+  %.102 = add i32 %.101, 1
+  store i32 %.102, i32* %.69
   br label %.73wc 
 .88:
-  %.92 = getelementptr inbounds i32, i32* %.57, i32 %.221
+  %.90 = load i32, i32* %.69
+  %.91 = load i32*, i32** %.58
+  %.92 = getelementptr inbounds i32, i32* %.91, i32 %.90
   %.93 = load i32, i32* %.92
-  %.96 = getelementptr inbounds i32, i32* %.57, i32 %.222
+  %.94 = load i32, i32* %.60
+  %.95 = load i32*, i32** %.58
+  %.96 = getelementptr inbounds i32, i32* %.95, i32 %.94
   %.97 = load i32, i32* %.96
   %.98 = icmp eq i32 %.93, %.97
   br i1 %.98, label %.80, label %.81
 }
 define i32 @_user_graphColoring([4 x i32]* %.111, i32 %.114, i32 %.117, i32* %.120){
 .110:
-  %.126 = icmp eq i32 %.117, 4
+  %.139 = alloca i32
+  %.121 = alloca i32*
+  %.118 = alloca i32
+  %.115 = alloca i32
+  %.112 = alloca [4 x i32]*
+  store [4 x i32]* %.111, [4 x i32]** %.112
+  store i32 %.114, i32* %.115
+  store i32 %.117, i32* %.118
+  store i32* %.120, i32** %.121
+  %.125 = load i32, i32* %.118
+  %.126 = icmp eq i32 %.125, 4
   br i1 %.126, label %.123, label %.124
 .123:
-  %.132at12 = call i32 @_user_isSafe([4 x i32]* %.111, i32* %.120)
+  %.130 = load [4 x i32]*, [4 x i32]** %.112
+  %.131 = load i32*, i32** %.121
+  %.132at12 = call i32 @_user_isSafe([4 x i32]* %.130, i32* %.131)
   %.133 = icmp ne i32 %.132at12, 0
   br i1 %.133, label %.128, label %.129
 .124:
+  store i32 1, i32* %.139
   br label %.141wc 
 .128:
-  call void @_user_printSolution(i32* %.120)
+  %.135 = load i32*, i32** %.121
+  call void @_user_printSolution(i32* %.135)
   ret i32 1 
 .129:
   ret i32 0 
 .141wc:
-  %.224 = phi i32 [1, %.124], [%.170, %.155]
-  %.147 = icmp sle i32 %.224, %.114
+  %.145 = load i32, i32* %.139
+  %.146 = load i32, i32* %.115
+  %.147 = icmp sle i32 %.145, %.146
   br i1 %.147, label %.142wloop., label %.143wn
 .142wloop.:
-  %.152 = getelementptr inbounds i32, i32* %.120, i32 %.117
-  store i32 %.224, i32* %.152
-  %.159 = add i32 %.117, 1
-  %.161at14 = call i32 @_user_graphColoring([4 x i32]* %.111, i32 %.114, i32 %.159, i32* %.120)
+  %.149 = load i32, i32* %.139
+  %.150 = load i32, i32* %.118
+  %.151 = load i32*, i32** %.121
+  %.152 = getelementptr inbounds i32, i32* %.151, i32 %.150
+  store i32 %.149, i32* %.152
+  %.156 = load [4 x i32]*, [4 x i32]** %.112
+  %.157 = load i32, i32* %.115
+  %.158 = load i32, i32* %.118
+  %.159 = add i32 %.158, 1
+  %.160 = load i32*, i32** %.121
+  %.161at14 = call i32 @_user_graphColoring([4 x i32]* %.156, i32 %.157, i32 %.159, i32* %.160)
   %.162 = icmp ne i32 %.161at14, 0
   br i1 %.162, label %.154, label %.155
 .143wn:
@@ -459,30 +509,42 @@ define i32 @_user_graphColoring([4 x i32]* %.111, i32 %.114, i32 %.117, i32* %.1
 .154:
   ret i32 1 
 .155:
-  %.167 = getelementptr inbounds i32, i32* %.120, i32 %.117
+  %.165 = load i32, i32* %.118
+  %.166 = load i32*, i32** %.121
+  %.167 = getelementptr inbounds i32, i32* %.166, i32 %.165
   store i32 0, i32* %.167
-  %.170 = add i32 %.224, 1
+  %.169 = load i32, i32* %.139
+  %.170 = add i32 %.169, 1
+  store i32 %.170, i32* %.139
   br label %.141wc 
 }
 define i32 @main(){
 .174:
+  %.191 = alloca i32
   %.190 = alloca [4 x i32]
+  %.187 = alloca i32
   %.175 = alloca [4 x [4 x i32]]
   call void @llvm.memcpy.p0.p0.i32([4 x [4 x i32]]* %.175, [4 x [4 x i32]]* @.C..181, i32 64, i1 false)
+  store i32 3, i32* %.187
+  store i32 0, i32* %.191
   br label %.193wc 
 .193wc:
-  %.225 = phi i32 [0, %.174], [%.204, %.194wloop.]
-  %.198 = icmp slt i32 %.225, 4
+  %.197 = load i32, i32* %.191
+  %.198 = icmp slt i32 %.197, 4
   br i1 %.198, label %.194wloop., label %.195wn
 .194wloop.:
-  %.201 = getelementptr inbounds [4 x i32], [4 x i32]* %.190, i32 0, i32 %.225
+  %.200 = load i32, i32* %.191
+  %.201 = getelementptr inbounds [4 x i32], [4 x i32]* %.190, i32 0, i32 %.200
   store i32 0, i32* %.201
-  %.204 = add i32 %.225, 1
+  %.203 = load i32, i32* %.191
+  %.204 = add i32 %.203, 1
+  store i32 %.204, i32* %.191
   br label %.193wc 
 .195wn:
   %.209 = getelementptr inbounds [4 x [4 x i32]], [4 x [4 x i32]]* %.175, i32 0, i32 0
+  %.210 = load i32, i32* %.187
   %.211 = getelementptr inbounds [4 x i32], [4 x i32]* %.190, i32 0, i32 0
-  %.212at15 = call i32 @_user_graphColoring([4 x i32]* %.209, i32 3, i32 0, i32* %.211)
+  %.212at15 = call i32 @_user_graphColoring([4 x i32]* %.209, i32 %.210, i32 0, i32* %.211)
   %.213 = icmp eq i32 %.212at15, 0
   br i1 %.213, label %.207, label %.208
 .207:

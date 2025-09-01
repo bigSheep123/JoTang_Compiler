@@ -363,6 +363,8 @@ attributes #7 = { cold }
 @.G.e = global i32 4
 define i32 @main(){
 .9:
+  %.10 = alloca i32
+  store i32 0, i32* %.10
   %.15 = load i32, i32* @.G.a
   %.16 = load i32, i32* @.G.b
   %.17 = mul i32 %.15, %.16
@@ -374,11 +376,13 @@ define i32 @main(){
   %.23 = icmp eq i32 %.19, %.22
   br i1 %.23, label %.24, label %.14
 .12:
+  store i32 1, i32* %.10
   br label %.13 
 .13:
-  %.57 = phi i32 [0, %.14], [1, %.12]
-  call void @putint(i32 %.57)
-  ret i32 %.57 
+  %.52 = load i32, i32* %.10
+  call void @putint(i32 %.52)
+  %.55 = load i32, i32* %.10
+  ret i32 %.55 
 .14:
   %.38 = load i32, i32* @.G.a
   %.39 = load i32, i32* @.G.b

@@ -359,5 +359,9 @@ attributes #7 = { cold }
 @.G.a = global i32 zeroinitializer
 define i32 @main(){
 .2:
-  ret i32 -8 
+  %.3 = alloca i32
+  store i32 2, i32* %.3
+  %.6 = load i32, i32* %.3
+  %.7 = sub i32 %.6, 10
+  ret i32 %.7 
 }

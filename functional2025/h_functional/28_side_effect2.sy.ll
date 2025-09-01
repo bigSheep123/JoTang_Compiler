@@ -360,280 +360,363 @@ attributes #7 = { cold }
 @.G.array = global [20 x i32] zeroinitializer
 define i32 @_user_f(i32 %.5, i32 %.8){
 .4:
+  %.9 = alloca i32
+  %.6 = alloca i32
+  store i32 %.5, i32* %.6
+  store i32 %.8, i32* %.9
   %.11 = load i32, i32* @.G.sum
   %.13 = add i32 %.11, 1
   store i32 %.13, i32* @.G.sum
-  %.20 = icmp sge i32 %.5, %.8
+  %.18 = load i32, i32* %.6
+  %.19 = load i32, i32* %.9
+  %.20 = icmp sge i32 %.18, %.19
   br i1 %.20, label %.15, label %.17
 .15:
   ret i32 0 
 .16:
-  %.27 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.5
+  %.26 = load i32, i32* %.6
+  %.27 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.26
   store i32 1, i32* %.27
-  %.32 = icmp eq i32 %.5, 0
+  %.31 = load i32, i32* %.6
+  %.32 = icmp eq i32 %.31, 0
   br i1 %.32, label %.29, label %.30
 .17:
-  %.23 = icmp sge i32 %.5, 20
+  %.22 = load i32, i32* %.6
+  %.23 = icmp sge i32 %.22, 20
   br i1 %.23, label %.15, label %.16
 .29:
   %.34 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 0
   %.35 = load i32, i32* %.34
   ret i32 %.35 
 .30:
-  %.38 = sub i32 %.5, 1
+  %.37 = load i32, i32* %.6
+  %.38 = sub i32 %.37, 1
   %.39 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.38
   %.40 = load i32, i32* %.39
   ret i32 %.40 
 }
 define i32 @_user_g(i32 %.43, i32 %.46){
 .42:
+  %.47 = alloca i32
+  %.44 = alloca i32
+  store i32 %.43, i32* %.44
+  store i32 %.46, i32* %.47
   %.49 = load i32, i32* @.G.sum
   %.51 = add i32 %.49, 2
   store i32 %.51, i32* @.G.sum
-  %.58 = icmp sge i32 %.43, %.46
+  %.56 = load i32, i32* %.44
+  %.57 = load i32, i32* %.47
+  %.58 = icmp sge i32 %.56, %.57
   br i1 %.58, label %.53, label %.55
 .53:
   ret i32 1 
 .54:
-  %.65 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.43
+  %.64 = load i32, i32* %.44
+  %.65 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.64
   store i32 0, i32* %.65
-  %.70 = icmp eq i32 %.43, 0
+  %.69 = load i32, i32* %.44
+  %.70 = icmp eq i32 %.69, 0
   br i1 %.70, label %.67, label %.68
 .55:
-  %.61 = icmp sge i32 %.43, 20
+  %.60 = load i32, i32* %.44
+  %.61 = icmp sge i32 %.60, 20
   br i1 %.61, label %.53, label %.54
 .67:
   %.72 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 0
   %.73 = load i32, i32* %.72
   ret i32 %.73 
 .68:
-  %.76 = sub i32 %.43, 1
+  %.75 = load i32, i32* %.44
+  %.76 = sub i32 %.75, 1
   %.77 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.76
   %.78 = load i32, i32* %.77
   ret i32 %.78 
 }
 define i32 @_user_h(i32 %.81){
 .80:
+  %.82 = alloca i32
+  store i32 %.81, i32* %.82
   %.84 = load i32, i32* @.G.sum
   %.86 = add i32 %.84, 3
   store i32 %.86, i32* @.G.sum
-  %.92 = icmp slt i32 %.81, 0
+  %.91 = load i32, i32* %.82
+  %.92 = icmp slt i32 %.91, 0
   br i1 %.92, label %.88, label %.90
 .88:
   ret i32 0 
 .89:
-  %.99 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.81
+  %.98 = load i32, i32* %.82
+  %.99 = getelementptr inbounds [20 x i32], [20 x i32]* @.G.array, i32 0, i32 %.98
   %.100 = load i32, i32* %.99
   ret i32 %.100 
 .90:
-  %.95 = icmp sge i32 %.81, 20
+  %.94 = load i32, i32* %.82
+  %.95 = icmp sge i32 %.94, 20
   br i1 %.95, label %.88, label %.89
 }
 define i32 @main(){
 .102:
+  %.367 = alloca i32
+  %.103 = alloca i32
+  store i32 0, i32* %.103
   br label %.105wc 
 .105wc:
-  %.500 = phi i32 [0, %.102], [%.231, %.113]
-  %.110 = icmp slt i32 %.500, 20
+  %.109 = load i32, i32* %.103
+  %.110 = icmp slt i32 %.109, 20
   br i1 %.110, label %.106wloop., label %.107wn
 .106wloop.:
-  %.115at0 = call i32 @_user_f(i32 0, i32 %.500)
+  %.114 = load i32, i32* %.103
+  %.115at0 = call i32 @_user_f(i32 0, i32 %.114)
   %.116 = icmp ne i32 %.115at0, 0
   br i1 %.116, label %.117, label %.113
 .107wn:
+  store i32 0, i32* %.103
   br label %.235wc 
 .112:
   br label %.113 
 .113:
-  %.231 = add i32 %.500, 1
+  %.230 = load i32, i32* %.103
+  %.231 = add i32 %.230, 1
+  store i32 %.231, i32* %.103
   br label %.105wc 
 .117:
-  %.120at1 = call i32 @_user_f(i32 1, i32 %.500)
+  %.119 = load i32, i32* %.103
+  %.120at1 = call i32 @_user_f(i32 1, i32 %.119)
   %.121 = icmp ne i32 %.120at1, 0
   br i1 %.121, label %.122, label %.113
 .122:
-  %.125at2 = call i32 @_user_f(i32 2, i32 %.500)
+  %.124 = load i32, i32* %.103
+  %.125at2 = call i32 @_user_f(i32 2, i32 %.124)
   %.126 = icmp ne i32 %.125at2, 0
   br i1 %.126, label %.127, label %.113
 .127:
-  %.130at3 = call i32 @_user_f(i32 3, i32 %.500)
+  %.129 = load i32, i32* %.103
+  %.130at3 = call i32 @_user_f(i32 3, i32 %.129)
   %.131 = icmp ne i32 %.130at3, 0
   br i1 %.131, label %.132, label %.113
 .132:
-  %.136at4 = call i32 @_user_f(i32 4, i32 %.500)
+  %.135 = load i32, i32* %.103
+  %.136at4 = call i32 @_user_f(i32 4, i32 %.135)
   %.137 = icmp ne i32 %.136at4, 0
   br i1 %.137, label %.138, label %.113
 .138:
-  %.142at5 = call i32 @_user_f(i32 5, i32 %.500)
+  %.141 = load i32, i32* %.103
+  %.142at5 = call i32 @_user_f(i32 5, i32 %.141)
   %.143 = icmp ne i32 %.142at5, 0
   br i1 %.143, label %.144, label %.113
 .144:
-  %.148at6 = call i32 @_user_f(i32 6, i32 %.500)
+  %.147 = load i32, i32* %.103
+  %.148at6 = call i32 @_user_f(i32 6, i32 %.147)
   %.149 = icmp ne i32 %.148at6, 0
   br i1 %.149, label %.150, label %.113
 .150:
-  %.154at7 = call i32 @_user_f(i32 7, i32 %.500)
+  %.153 = load i32, i32* %.103
+  %.154at7 = call i32 @_user_f(i32 7, i32 %.153)
   %.155 = icmp ne i32 %.154at7, 0
   br i1 %.155, label %.156, label %.113
 .156:
-  %.160at8 = call i32 @_user_f(i32 8, i32 %.500)
+  %.159 = load i32, i32* %.103
+  %.160at8 = call i32 @_user_f(i32 8, i32 %.159)
   %.161 = icmp ne i32 %.160at8, 0
   br i1 %.161, label %.162, label %.113
 .162:
-  %.166at9 = call i32 @_user_f(i32 9, i32 %.500)
+  %.165 = load i32, i32* %.103
+  %.166at9 = call i32 @_user_f(i32 9, i32 %.165)
   %.167 = icmp ne i32 %.166at9, 0
   br i1 %.167, label %.168, label %.113
 .168:
-  %.172at10 = call i32 @_user_f(i32 10, i32 %.500)
+  %.171 = load i32, i32* %.103
+  %.172at10 = call i32 @_user_f(i32 10, i32 %.171)
   %.173 = icmp ne i32 %.172at10, 0
   br i1 %.173, label %.174, label %.113
 .174:
-  %.178at11 = call i32 @_user_f(i32 11, i32 %.500)
+  %.177 = load i32, i32* %.103
+  %.178at11 = call i32 @_user_f(i32 11, i32 %.177)
   %.179 = icmp ne i32 %.178at11, 0
   br i1 %.179, label %.180, label %.113
 .180:
-  %.184at12 = call i32 @_user_f(i32 12, i32 %.500)
+  %.183 = load i32, i32* %.103
+  %.184at12 = call i32 @_user_f(i32 12, i32 %.183)
   %.185 = icmp ne i32 %.184at12, 0
   br i1 %.185, label %.186, label %.113
 .186:
-  %.190at13 = call i32 @_user_f(i32 13, i32 %.500)
+  %.189 = load i32, i32* %.103
+  %.190at13 = call i32 @_user_f(i32 13, i32 %.189)
   %.191 = icmp ne i32 %.190at13, 0
   br i1 %.191, label %.192, label %.113
 .192:
-  %.196at14 = call i32 @_user_f(i32 14, i32 %.500)
+  %.195 = load i32, i32* %.103
+  %.196at14 = call i32 @_user_f(i32 14, i32 %.195)
   %.197 = icmp ne i32 %.196at14, 0
   br i1 %.197, label %.198, label %.113
 .198:
-  %.202at15 = call i32 @_user_f(i32 15, i32 %.500)
+  %.201 = load i32, i32* %.103
+  %.202at15 = call i32 @_user_f(i32 15, i32 %.201)
   %.203 = icmp ne i32 %.202at15, 0
   br i1 %.203, label %.204, label %.113
 .204:
-  %.208at16 = call i32 @_user_f(i32 16, i32 %.500)
+  %.207 = load i32, i32* %.103
+  %.208at16 = call i32 @_user_f(i32 16, i32 %.207)
   %.209 = icmp ne i32 %.208at16, 0
   br i1 %.209, label %.210, label %.113
 .210:
-  %.214at17 = call i32 @_user_f(i32 17, i32 %.500)
+  %.213 = load i32, i32* %.103
+  %.214at17 = call i32 @_user_f(i32 17, i32 %.213)
   %.215 = icmp ne i32 %.214at17, 0
   br i1 %.215, label %.216, label %.113
 .216:
-  %.220at18 = call i32 @_user_f(i32 18, i32 %.500)
+  %.219 = load i32, i32* %.103
+  %.220at18 = call i32 @_user_f(i32 18, i32 %.219)
   %.221 = icmp ne i32 %.220at18, 0
   br i1 %.221, label %.222, label %.113
 .222:
-  %.226at19 = call i32 @_user_f(i32 19, i32 %.500)
+  %.225 = load i32, i32* %.103
+  %.226at19 = call i32 @_user_f(i32 19, i32 %.225)
   %.227 = icmp ne i32 %.226at19, 0
   br i1 %.227, label %.112, label %.113
 .235wc:
-  %.501 = phi i32 [0, %.107wn], [%.345, %.243]
-  %.240 = icmp slt i32 %.501, 20
+  %.239 = load i32, i32* %.103
+  %.240 = icmp slt i32 %.239, 20
   br i1 %.240, label %.236wloop., label %.237wn
 .236wloop.:
-  %.246at20 = call i32 @_user_g(i32 0, i32 %.501)
+  %.245 = load i32, i32* %.103
+  %.246at20 = call i32 @_user_g(i32 0, i32 %.245)
   %.247 = icmp ne i32 %.246at20, 0
   br i1 %.247, label %.242, label %.244
 .237wn:
+  store i32 1, i32* %.103
   br label %.349wc 
 .242:
   br label %.243 
 .243:
-  %.345 = add i32 %.501, 1
+  %.344 = load i32, i32* %.103
+  %.345 = add i32 %.344, 1
+  store i32 %.345, i32* %.103
   br label %.235wc 
 .244:
-  %.251at21 = call i32 @_user_g(i32 1, i32 %.501)
+  %.250 = load i32, i32* %.103
+  %.251at21 = call i32 @_user_g(i32 1, i32 %.250)
   %.252 = icmp ne i32 %.251at21, 0
   br i1 %.252, label %.242, label %.249
 .249:
-  %.256at22 = call i32 @_user_g(i32 2, i32 %.501)
+  %.255 = load i32, i32* %.103
+  %.256at22 = call i32 @_user_g(i32 2, i32 %.255)
   %.257 = icmp ne i32 %.256at22, 0
   br i1 %.257, label %.242, label %.254
 .254:
-  %.261at23 = call i32 @_user_g(i32 3, i32 %.501)
+  %.260 = load i32, i32* %.103
+  %.261at23 = call i32 @_user_g(i32 3, i32 %.260)
   %.262 = icmp ne i32 %.261at23, 0
   br i1 %.262, label %.242, label %.259
 .259:
-  %.266at24 = call i32 @_user_g(i32 4, i32 %.501)
+  %.265 = load i32, i32* %.103
+  %.266at24 = call i32 @_user_g(i32 4, i32 %.265)
   %.267 = icmp ne i32 %.266at24, 0
   br i1 %.267, label %.242, label %.264
 .264:
-  %.271at25 = call i32 @_user_g(i32 5, i32 %.501)
+  %.270 = load i32, i32* %.103
+  %.271at25 = call i32 @_user_g(i32 5, i32 %.270)
   %.272 = icmp ne i32 %.271at25, 0
   br i1 %.272, label %.242, label %.269
 .269:
-  %.276at26 = call i32 @_user_g(i32 6, i32 %.501)
+  %.275 = load i32, i32* %.103
+  %.276at26 = call i32 @_user_g(i32 6, i32 %.275)
   %.277 = icmp ne i32 %.276at26, 0
   br i1 %.277, label %.242, label %.274
 .274:
-  %.281at27 = call i32 @_user_g(i32 7, i32 %.501)
+  %.280 = load i32, i32* %.103
+  %.281at27 = call i32 @_user_g(i32 7, i32 %.280)
   %.282 = icmp ne i32 %.281at27, 0
   br i1 %.282, label %.242, label %.279
 .279:
-  %.286at28 = call i32 @_user_g(i32 8, i32 %.501)
+  %.285 = load i32, i32* %.103
+  %.286at28 = call i32 @_user_g(i32 8, i32 %.285)
   %.287 = icmp ne i32 %.286at28, 0
   br i1 %.287, label %.242, label %.284
 .284:
-  %.291at29 = call i32 @_user_g(i32 9, i32 %.501)
+  %.290 = load i32, i32* %.103
+  %.291at29 = call i32 @_user_g(i32 9, i32 %.290)
   %.292 = icmp ne i32 %.291at29, 0
   br i1 %.292, label %.242, label %.289
 .289:
-  %.296at30 = call i32 @_user_g(i32 10, i32 %.501)
+  %.295 = load i32, i32* %.103
+  %.296at30 = call i32 @_user_g(i32 10, i32 %.295)
   %.297 = icmp ne i32 %.296at30, 0
   br i1 %.297, label %.242, label %.294
 .294:
-  %.301at31 = call i32 @_user_g(i32 11, i32 %.501)
+  %.300 = load i32, i32* %.103
+  %.301at31 = call i32 @_user_g(i32 11, i32 %.300)
   %.302 = icmp ne i32 %.301at31, 0
   br i1 %.302, label %.242, label %.299
 .299:
-  %.306at32 = call i32 @_user_g(i32 12, i32 %.501)
+  %.305 = load i32, i32* %.103
+  %.306at32 = call i32 @_user_g(i32 12, i32 %.305)
   %.307 = icmp ne i32 %.306at32, 0
   br i1 %.307, label %.242, label %.304
 .304:
-  %.311at33 = call i32 @_user_g(i32 13, i32 %.501)
+  %.310 = load i32, i32* %.103
+  %.311at33 = call i32 @_user_g(i32 13, i32 %.310)
   %.312 = icmp ne i32 %.311at33, 0
   br i1 %.312, label %.242, label %.309
 .309:
-  %.316at34 = call i32 @_user_g(i32 14, i32 %.501)
+  %.315 = load i32, i32* %.103
+  %.316at34 = call i32 @_user_g(i32 14, i32 %.315)
   %.317 = icmp ne i32 %.316at34, 0
   br i1 %.317, label %.242, label %.314
 .314:
-  %.321at35 = call i32 @_user_g(i32 15, i32 %.501)
+  %.320 = load i32, i32* %.103
+  %.321at35 = call i32 @_user_g(i32 15, i32 %.320)
   %.322 = icmp ne i32 %.321at35, 0
   br i1 %.322, label %.242, label %.319
 .319:
-  %.326at36 = call i32 @_user_g(i32 16, i32 %.501)
+  %.325 = load i32, i32* %.103
+  %.326at36 = call i32 @_user_g(i32 16, i32 %.325)
   %.327 = icmp ne i32 %.326at36, 0
   br i1 %.327, label %.242, label %.324
 .324:
-  %.331at37 = call i32 @_user_g(i32 17, i32 %.501)
+  %.330 = load i32, i32* %.103
+  %.331at37 = call i32 @_user_g(i32 17, i32 %.330)
   %.332 = icmp ne i32 %.331at37, 0
   br i1 %.332, label %.242, label %.329
 .329:
-  %.336at38 = call i32 @_user_g(i32 18, i32 %.501)
+  %.335 = load i32, i32* %.103
+  %.336at38 = call i32 @_user_g(i32 18, i32 %.335)
   %.337 = icmp ne i32 %.336at38, 0
   br i1 %.337, label %.242, label %.334
 .334:
-  %.340at39 = call i32 @_user_g(i32 19, i32 %.501)
+  %.339 = load i32, i32* %.103
+  %.340at39 = call i32 @_user_g(i32 19, i32 %.339)
   %.341 = icmp ne i32 %.340at39, 0
   br i1 %.341, label %.242, label %.243
 .349wc:
-  %.502 = phi i32 [1, %.237wn], [%.364, %.350wloop.]
-  %.354 = icmp slt i32 %.502, 20
+  %.353 = load i32, i32* %.103
+  %.354 = icmp slt i32 %.353, 20
   br i1 %.354, label %.355, label %.351wn
 .350wloop.:
-  %.364 = add i32 %.502, 1
+  %.363 = load i32, i32* %.103
+  %.364 = add i32 %.363, 1
+  store i32 %.364, i32* %.103
   br label %.349wc 
 .351wn:
+  store i32 0, i32* %.367
   %.372at41 = call i32 @_user_h(i32 0)
   %.373 = icmp ne i32 %.372at41, 0
   br i1 %.373, label %.374, label %.371
 .355:
-  %.358 = sub i32 %.502, 1
-  %.360at40 = call i32 @_user_f(i32 %.358, i32 %.502)
+  %.357 = load i32, i32* %.103
+  %.358 = sub i32 %.357, 1
+  %.359 = load i32, i32* %.103
+  %.360at40 = call i32 @_user_f(i32 %.358, i32 %.359)
   %.361 = icmp ne i32 %.360at40, 0
   br i1 %.361, label %.350wloop., label %.351wn
 .369:
+  store i32 1, i32* %.367
   br label %.370 
 .370:
   %.388 = load i32, i32* @.G.sum
+  %.389 = load i32, i32* %.367
+  %.390 = add i32 %.388, %.389
+  store i32 0, i32* %.367
   %.395at45 = call i32 @_user_h(i32 4)
   %.396 = icmp eq i32 %.395at45, 0
   br i1 %.396, label %.392, label %.394
@@ -650,9 +733,13 @@ define i32 @main(){
   %.384 = icmp ne i32 %.383at44, 0
   br i1 %.384, label %.369, label %.370
 .392:
+  store i32 1, i32* %.367
   br label %.393 
 .393:
   %.415 = load i32, i32* @.G.sum
+  %.416 = load i32, i32* %.367
+  %.417 = mul i32 %.415, %.416
+  store i32 0, i32* %.367
   %.422at50 = call i32 @_user_h(i32 9)
   %.423 = icmp ne i32 %.422at50, 0
   br i1 %.423, label %.424, label %.421
@@ -673,9 +760,13 @@ define i32 @main(){
   %.408 = icmp ne i32 %.407at48, 0
   br i1 %.408, label %.392, label %.398
 .419:
+  store i32 1, i32* %.367
   br label %.420 
 .420:
   %.450 = load i32, i32* @.G.sum
+  %.451 = load i32, i32* %.367
+  %.452 = sub i32 %.450, %.451
+  store i32 0, i32* %.367
   %.457at57 = call i32 @_user_h(i32 0)
   %.458 = icmp ne i32 %.457at57, 0
   br i1 %.458, label %.459, label %.456
@@ -704,11 +795,12 @@ define i32 @main(){
   %.446 = icmp ne i32 %.445at56, 0
   br i1 %.446, label %.419, label %.420
 .454:
+  store i32 1, i32* %.367
   br label %.455 
 .455:
-  %.499 = phi i32 [0, %.476], [1, %.454]
   %.489 = load i32, i32* @.G.sum
-  %.491 = add i32 %.489, %.499
+  %.490 = load i32, i32* %.367
+  %.491 = add i32 %.489, %.490
   call void @putint(i32 %.491)
   ret i32 0 
 .456:

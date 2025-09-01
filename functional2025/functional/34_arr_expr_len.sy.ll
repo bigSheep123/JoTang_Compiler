@@ -359,18 +359,27 @@ attributes #7 = { cold }
 @.G.arr = global [6 x i32]  [i32 1, i32 2, i32 33, i32 4, i32 5, i32 6]
 define i32 @main(){
 .13:
+  %.16 = alloca i32
+  %.14 = alloca i32
+  store i32 0, i32* %.14
+  store i32 0, i32* %.16
   br label %.18wc 
 .18wc:
-  %.38 = phi i32 [0, %.13], [%.32, %.19wloop.]
-  %.37 = phi i32 [0, %.13], [%.29, %.19wloop.]
-  %.23 = icmp slt i32 %.38, 6
+  %.22 = load i32, i32* %.14
+  %.23 = icmp slt i32 %.22, 6
   br i1 %.23, label %.19wloop., label %.20wn
 .19wloop.:
-  %.27 = getelementptr inbounds [6 x i32], [6 x i32]* @.G.arr, i32 0, i32 %.38
+  %.25 = load i32, i32* %.16
+  %.26 = load i32, i32* %.14
+  %.27 = getelementptr inbounds [6 x i32], [6 x i32]* @.G.arr, i32 0, i32 %.26
   %.28 = load i32, i32* %.27
-  %.29 = add i32 %.37, %.28
-  %.32 = add i32 %.38, 1
+  %.29 = add i32 %.25, %.28
+  store i32 %.29, i32* %.16
+  %.31 = load i32, i32* %.14
+  %.32 = add i32 %.31, 1
+  store i32 %.32, i32* %.14
   br label %.18wc 
 .20wn:
-  ret i32 %.37 
+  %.35 = load i32, i32* %.16
+  ret i32 %.35 
 }

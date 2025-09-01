@@ -361,96 +361,152 @@ attributes #7 = { cold }
 @.C..163 = constant [1 x [2 x i32]]  [[2 x i32]  [i32 -1, i32 zeroinitializer]]
 define void @_user_inc_impl(i32* %.4, i32 %.7){
 .3:
-  %.14 = icmp eq i32 %.7, 0
+  %.8 = alloca i32
+  %.5 = alloca i32*
+  store i32* %.4, i32** %.5
+  store i32 %.7, i32* %.8
+  %.12 = load i32, i32* %.8
+  %.14 = icmp eq i32 %.12, 0
   br i1 %.14, label %.10, label %.11
 .10:
-  %.17 = getelementptr inbounds i32, i32* %.4, i32 0
+  %.16 = load i32*, i32** %.5
+  %.17 = getelementptr inbounds i32, i32* %.16, i32 0
   %.18 = load i32, i32* %.17
   %.19 = add i32 %.18, 1
-  %.21 = getelementptr inbounds i32, i32* %.4, i32 0
+  %.20 = load i32*, i32** %.5
+  %.21 = getelementptr inbounds i32, i32* %.20, i32 0
   store i32 %.19, i32* %.21
   br label %.23 
 .11:
-  %.26 = getelementptr inbounds i32, i32* %.4, i32 0
+  %.25 = load i32*, i32** %.5
+  %.26 = getelementptr inbounds i32, i32* %.25, i32 0
   %.27 = load i32, i32* %.26
   %.29 = mul i32 %.27, 2
-  %.31 = getelementptr inbounds i32, i32* %.4, i32 0
+  %.30 = load i32*, i32** %.5
+  %.31 = getelementptr inbounds i32, i32* %.30, i32 0
   store i32 %.29, i32* %.31
-  %.35 = sub i32 %.7, 1
-  call void @_user_inc_impl(i32* %.4, i32 %.35)
+  %.33 = load i32*, i32** %.5
+  %.34 = load i32, i32* %.8
+  %.35 = sub i32 %.34, 1
+  call void @_user_inc_impl(i32* %.33, i32 %.35)
   br label %.23 
 .23:
   ret void
 }
 define void @_user_inc(i32* %.40){
 .39:
+  %.41 = alloca i32*
+  store i32* %.40, i32** %.41
+  %.43 = load i32*, i32** %.41
   %.44 = getelementptr inbounds [1 x i32], [1 x i32]* @.G.k, i32 0, i32 0
   %.45 = load i32, i32* %.44
-  call void @_user_inc_impl(i32* %.40, i32 %.45)
+  call void @_user_inc_impl(i32* %.43, i32 %.45)
   ret void
 }
 define void @_user_add_impl(i32* %.49, i32* %.52, i32 %.55){
 .48:
-  %.61 = icmp eq i32 %.55, 0
+  %.56 = alloca i32
+  %.53 = alloca i32*
+  %.50 = alloca i32*
+  store i32* %.49, i32** %.50
+  store i32* %.52, i32** %.53
+  store i32 %.55, i32* %.56
+  %.60 = load i32, i32* %.56
+  %.61 = icmp eq i32 %.60, 0
   br i1 %.61, label %.58, label %.59
 .58:
-  %.64 = getelementptr inbounds i32, i32* %.49, i32 0
+  %.63 = load i32*, i32** %.50
+  %.64 = getelementptr inbounds i32, i32* %.63, i32 0
   %.65 = load i32, i32* %.64
-  %.67 = getelementptr inbounds i32, i32* %.52, i32 0
+  %.66 = load i32*, i32** %.53
+  %.67 = getelementptr inbounds i32, i32* %.66, i32 0
   %.68 = load i32, i32* %.67
   %.69 = add i32 %.65, %.68
-  %.71 = getelementptr inbounds i32, i32* %.49, i32 0
+  %.70 = load i32*, i32** %.50
+  %.71 = getelementptr inbounds i32, i32* %.70, i32 0
   store i32 %.69, i32* %.71
   br label %.73 
 .59:
-  %.76 = getelementptr inbounds i32, i32* %.49, i32 0
+  %.75 = load i32*, i32** %.50
+  %.76 = getelementptr inbounds i32, i32* %.75, i32 0
   %.77 = load i32, i32* %.76
   %.78 = mul i32 %.77, 2
-  %.80 = getelementptr inbounds i32, i32* %.49, i32 0
+  %.79 = load i32*, i32** %.50
+  %.80 = getelementptr inbounds i32, i32* %.79, i32 0
   store i32 %.78, i32* %.80
-  %.85 = sub i32 %.55, 1
-  call void @_user_add_impl(i32* %.49, i32* %.52, i32 %.85)
+  %.82 = load i32*, i32** %.50
+  %.83 = load i32*, i32** %.53
+  %.84 = load i32, i32* %.56
+  %.85 = sub i32 %.84, 1
+  call void @_user_add_impl(i32* %.82, i32* %.83, i32 %.85)
   br label %.73 
 .73:
   ret void
 }
 define void @_user_add(i32* %.90, i32* %.93){
 .89:
+  %.94 = alloca i32*
+  %.91 = alloca i32*
+  store i32* %.90, i32** %.91
+  store i32* %.93, i32** %.94
+  %.96 = load i32*, i32** %.91
+  %.97 = load i32*, i32** %.94
   %.98 = getelementptr inbounds [1 x i32], [1 x i32]* @.G.k, i32 0, i32 0
   %.99 = load i32, i32* %.98
-  call void @_user_add_impl(i32* %.90, i32* %.93, i32 %.99)
+  call void @_user_add_impl(i32* %.96, i32* %.97, i32 %.99)
   ret void
 }
 define void @_user_sub_impl(i32* %.103, i32* %.106, i32 %.109){
 .102:
-  %.115 = icmp eq i32 %.109, 0
+  %.110 = alloca i32
+  %.107 = alloca i32*
+  %.104 = alloca i32*
+  store i32* %.103, i32** %.104
+  store i32* %.106, i32** %.107
+  store i32 %.109, i32* %.110
+  %.114 = load i32, i32* %.110
+  %.115 = icmp eq i32 %.114, 0
   br i1 %.115, label %.112, label %.113
 .112:
-  %.118 = getelementptr inbounds i32, i32* %.103, i32 0
+  %.117 = load i32*, i32** %.104
+  %.118 = getelementptr inbounds i32, i32* %.117, i32 0
   %.119 = load i32, i32* %.118
-  %.121 = getelementptr inbounds i32, i32* %.106, i32 0
+  %.120 = load i32*, i32** %.107
+  %.121 = getelementptr inbounds i32, i32* %.120, i32 0
   %.122 = load i32, i32* %.121
   %.123 = sub i32 %.119, %.122
-  %.125 = getelementptr inbounds i32, i32* %.103, i32 0
+  %.124 = load i32*, i32** %.104
+  %.125 = getelementptr inbounds i32, i32* %.124, i32 0
   store i32 %.123, i32* %.125
   br label %.127 
 .113:
-  %.130 = getelementptr inbounds i32, i32* %.103, i32 0
+  %.129 = load i32*, i32** %.104
+  %.130 = getelementptr inbounds i32, i32* %.129, i32 0
   %.131 = load i32, i32* %.130
   %.132 = mul i32 %.131, 2
-  %.134 = getelementptr inbounds i32, i32* %.103, i32 0
+  %.133 = load i32*, i32** %.104
+  %.134 = getelementptr inbounds i32, i32* %.133, i32 0
   store i32 %.132, i32* %.134
-  %.139 = sub i32 %.109, 1
-  call void @_user_sub_impl(i32* %.103, i32* %.106, i32 %.139)
+  %.136 = load i32*, i32** %.104
+  %.137 = load i32*, i32** %.107
+  %.138 = load i32, i32* %.110
+  %.139 = sub i32 %.138, 1
+  call void @_user_sub_impl(i32* %.136, i32* %.137, i32 %.139)
   br label %.127 
 .127:
   ret void
 }
 define void @_user_sub(i32* %.144, i32* %.147){
 .143:
+  %.148 = alloca i32*
+  %.145 = alloca i32*
+  store i32* %.144, i32** %.145
+  store i32* %.147, i32** %.148
+  %.150 = load i32*, i32** %.145
+  %.151 = load i32*, i32** %.148
   %.152 = getelementptr inbounds [1 x i32], [1 x i32]* @.G.k, i32 0, i32 0
   %.153 = load i32, i32* %.152
-  call void @_user_sub_impl(i32* %.144, i32* %.147, i32 %.153)
+  call void @_user_sub_impl(i32* %.150, i32* %.151, i32 %.153)
   ret void
 }
 define i32 @main(){

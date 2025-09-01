@@ -360,18 +360,25 @@ attributes #7 = { cold }
 @.G.b = global i32 1
 define i32 @_user_inc_a(){
 .5:
+  %.6 = alloca i32
   %.7 = load i32, i32* @.G.a
-  %.10 = add i32 %.7, 1
-  store i32 %.10, i32* @.G.a
+  store i32 %.7, i32* %.6
+  %.9 = load i32, i32* %.6
+  %.10 = add i32 %.9, 1
+  store i32 %.10, i32* %.6
+  %.12 = load i32, i32* %.6
+  store i32 %.12, i32* @.G.a
   %.14 = load i32, i32* @.G.a
   ret i32 %.14 
 }
 define i32 @main(){
 .16:
+  %.17 = alloca i32
+  store i32 5, i32* %.17
   br label %.20wc 
 .20wc:
-  %.91 = phi i32 [5, %.16], [%.80, %.75]
-  %.25 = icmp sge i32 %.91, 0
+  %.24 = load i32, i32* %.17
+  %.25 = icmp sge i32 %.24, 0
   br i1 %.25, label %.21wloop., label %.22wn
 .21wloop.:
   %.29at0 = call i32 @_user_inc_a()
@@ -429,6 +436,8 @@ define i32 @main(){
   %.66 = icmp ne i32 %.65, 0
   br i1 %.66, label %.51, label %.52
 .75:
-  %.80 = sub i32 %.91, 1
+  %.79 = load i32, i32* %.17
+  %.80 = sub i32 %.79, 1
+  store i32 %.80, i32* %.17
   br label %.20wc 
 }

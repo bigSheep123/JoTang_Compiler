@@ -358,21 +358,31 @@ attributes #6 = { nounwind }
 attributes #7 = { cold }
 define i32 @main(){
 .0:
+  %.4 = alloca i32
+  %.1 = alloca i32
+  store i32 0, i32* %.1
+  store i32 0, i32* %.4
   br label %.6wc 
 .6wc:
-  %.33 = phi i32 [0, %.0], [%.27, %.15]
-  %.32 = phi i32 [0, %.0], [%.23, %.15]
-  %.12 = icmp slt i32 %.33, 100
+  %.10 = load i32, i32* %.1
+  %.12 = icmp slt i32 %.10, 100
   br i1 %.12, label %.7wloop., label %.8wn
 .7wloop.:
-  %.18 = icmp eq i32 %.33, 50
+  %.16 = load i32, i32* %.1
+  %.18 = icmp eq i32 %.16, 50
   br i1 %.18, label %.14, label %.15
 .8wn:
-  ret i32 %.32 
+  %.30 = load i32, i32* %.4
+  ret i32 %.30 
 .14:
   br label %.8wn 
 .15:
-  %.23 = add i32 %.32, %.33
-  %.27 = add i32 %.33, 1
+  %.21 = load i32, i32* %.4
+  %.22 = load i32, i32* %.1
+  %.23 = add i32 %.21, %.22
+  store i32 %.23, i32* %.4
+  %.25 = load i32, i32* %.1
+  %.27 = add i32 %.25, 1
+  store i32 %.27, i32* %.1
   br label %.6wc 
 }
