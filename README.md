@@ -11,29 +11,29 @@
 ### 实现TailE的参考思路
 1. test 文件夹下的 example 文件里面有一个给出的尾递归的简单样例，可以观察一下
 2. 收集尾递归调用点
-    在 collectTailCalls 里遍历函数所有 use，找到当前函数内部对自身的调用指令。
-    检查调用是否紧跟在一个 ret 指令前（即 return f(...)）。
-    检查返回值是否正好是调用结果（即真正的尾递归，而不是 return f(x)+1 这种情况）。
-    符合条件的 (CallInst*, RetInst*) 记录下来。
+    * 在 collectTailCalls 里遍历函数所有 use，找到当前函数内部对自身的调用指令。
+    * 检查调用是否紧跟在一个 ret 指令前（即 return f(...)）。
+    * 检查返回值是否正好是调用结果（即真正的尾递归，而不是 return f(x)+1 这种情况）。
+    * 符合条件的 (CallInst*, RetInst*) 记录下来。
 3. 建立新的入口 / 循环结构
-    在 AllocasRecord 中处理函数入口块
-        找出所有参数初始化前的 alloca 区域
-        把入口块一分为二：
-            allocBlock：保留所有 alloca，最后跳到新块
-            loopBlock：作为真正循环开始的地方
+    * 在 AllocasRecord 中处理函数入口块
+        * 找出所有参数初始化前的 alloca 区域
+        * 把入口块一分为二：
+            * allocBlock：保留所有 alloca，最后跳到新块
+            * loopBlock：作为真正循环开始的地方
 4. 参数改写为 Phi 节点
-    在 run 里，对函数的每一个参数创建一个 phi 节点
-    把原来参数的使用替换成 phi
-    phi 初始 incoming 值来自入口块（即原始实参）
+    * 在 run 里，对函数的每一个参数创建一个 phi 节点
+    * 把原来参数的使用替换成 phi
+    * phi 初始 incoming 值来自入口块（即原始实参）
 5. 改写尾调用为循环跳转
-    对每个尾递归调用 (call, ret)
-        提取调用参数，把它们作为新的 incoming 值加入对应 phi 节点
-        删除尾调用和 ret
-        插入 br loopBlock（无条件跳转回循环）
+    * 对每个尾递归调用 (call, ret)
+        * 提取调用参数，把它们作为新的 incoming 值加入对应 phi 节点
+        * 删除尾调用和 ret
+        * 插入 br loopBlock（无条件跳转回循环）
 6. 完成清理与标记
-    把 phi 节点插入 loopBlock 前端
-    格式化后保证 IR 合法
-    标记函数为非递归（func->isRecursive(false)）
+    * 把 phi 节点插入 loopBlock 前端
+    * 格式化后保证 IR 合法
+    * 标记函数为非递归（func->isRecursive(false)）
 
 小提示：
 1. include/lib/MyList.hpp 这个数据结构也是我们组织IR的一个关键核心点，里面的函数你会用到
