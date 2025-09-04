@@ -6,7 +6,7 @@
 
 ### 测试脚本
 1. test.ipynb 是测试脚本会将 functional2025中的 .sy 后缀文件生成对应的 .ll 文件来验证正确性
-2. 具体是怎么操作的了解一下, 其正确的输出为 ![test_output](assets/test_output.png)
+2. 具体是怎么操作的了解一下, 其正确的输出为: ![test_output](assets/test_output.png)
 
 ### 实现TailE的参考思路
 1. test 文件夹下的 example 文件里面有一个给出的尾递归的简单样例，可以观察一下
